@@ -131,9 +131,9 @@
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="BtIncluirProdutoCompra" min="-2" max="-2" attributes="0"/>
+                                          <Component id="BtIncluirProdutoTabela" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="BtRemoverProdutoCompra" min="-2" max="-2" attributes="0"/>
+                                          <Component id="BtRemoverProdutoTabela" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -307,8 +307,8 @@
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="BtIncluirProdutoCompra" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="BtRemoverProdutoCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtIncluirProdutoTabela" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtRemoverProdutoTabela" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="157" max="-2" attributes="0"/>
@@ -476,20 +476,20 @@
             <Property name="text" type="java.lang.String" value="Quantidade"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="BtIncluirProdutoCompra">
+        <Component class="javax.swing.JButton" name="BtIncluirProdutoTabela">
           <Properties>
             <Property name="text" type="java.lang.String" value="Incluir Produto na Compra"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtIncluirProdutoCompraActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtIncluirProdutoTabelaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="BtRemoverProdutoCompra">
+        <Component class="javax.swing.JButton" name="BtRemoverProdutoTabela">
           <Properties>
             <Property name="text" type="java.lang.String" value="Remover Produto"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtRemoverProdutoCompraActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtRemoverProdutoTabelaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="TfValorUnitario">

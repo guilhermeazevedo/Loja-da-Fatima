@@ -109,7 +109,13 @@ public class InterfaceRealizarOperacoes extends javax.swing.JDialog {
                         }
                     });
                 } else if (operacoes.getInestoque().equals("S")) {
-                    //tela mvto estoque
+                    final InterfaceOperacaoEstoque tela = new InterfaceOperacaoEstoque(getPrimeiratela(), true, operacoes);
+                    tela.setVisible(true);
+                    tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                        public void windowClosed(java.awt.event.WindowEvent evt) {
+
+                        }
+                    });
                 } else if (operacoes.getInfinanceiro().equals("S")) {
                     //tela mvto financeiro
                 }

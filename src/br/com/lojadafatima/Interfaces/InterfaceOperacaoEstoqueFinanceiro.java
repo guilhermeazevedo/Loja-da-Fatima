@@ -106,8 +106,8 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         }
         TfQuantidade = new JFormattedTextField(valor);
         jLabel11 = new javax.swing.JLabel();
-        BtIncluirProdutoCompra = new javax.swing.JButton();
-        BtRemoverProdutoCompra = new javax.swing.JButton();
+        BtIncluirProdutoTabela = new javax.swing.JButton();
+        BtRemoverProdutoTabela = new javax.swing.JButton();
         try{
             valor = new MaskFormatter("####.##");
         } catch(Exception ex){
@@ -254,17 +254,17 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
         jLabel11.setText("Quantidade");
 
-        BtIncluirProdutoCompra.setText("Incluir Produto na Compra");
-        BtIncluirProdutoCompra.addActionListener(new java.awt.event.ActionListener() {
+        BtIncluirProdutoTabela.setText("Incluir Produto na Compra");
+        BtIncluirProdutoTabela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtIncluirProdutoCompraActionPerformed(evt);
+                BtIncluirProdutoTabelaActionPerformed(evt);
             }
         });
 
-        BtRemoverProdutoCompra.setText("Remover Produto");
-        BtRemoverProdutoCompra.addActionListener(new java.awt.event.ActionListener() {
+        BtRemoverProdutoTabela.setText("Remover Produto");
+        BtRemoverProdutoTabela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtRemoverProdutoCompraActionPerformed(evt);
+                BtRemoverProdutoTabelaActionPerformed(evt);
             }
         });
 
@@ -457,9 +457,9 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                                                 .addGap(54, 54, 54)
                                                 .addComponent(jLabel14))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(BtIncluirProdutoCompra)
+                                        .addComponent(BtIncluirProdutoTabela)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtRemoverProdutoCompra))
+                                        .addComponent(BtRemoverProdutoTabela))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel7)
@@ -594,8 +594,8 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                     .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtIncluirProdutoCompra)
-                    .addComponent(BtRemoverProdutoCompra))
+                    .addComponent(BtIncluirProdutoTabela)
+                    .addComponent(BtRemoverProdutoTabela))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -761,7 +761,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_TfQuantidadeFocusLost
 
-    private void BtIncluirProdutoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirProdutoCompraActionPerformed
+    private void BtIncluirProdutoTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirProdutoTabelaActionPerformed
         boolean inclui = true;
         if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
             if (!TfValorProduto.getText().equals("    .  ")) {
@@ -797,21 +797,21 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Digite o valor unitario do produto e a quantidade corretamente!", "Informe os valores corretamente!", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Informe o produto a ser adicionado nesta compra!", "Informe o produto", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Informe o produto a ser adicionado nesta operacao!", "Informe o produto", JOptionPane.INFORMATION_MESSAGE);
             TfCodProduto.grabFocus();
         }
-    }//GEN-LAST:event_BtIncluirProdutoCompraActionPerformed
+    }//GEN-LAST:event_BtIncluirProdutoTabelaActionPerformed
 
-    private void BtRemoverProdutoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtRemoverProdutoCompraActionPerformed
+    private void BtRemoverProdutoTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtRemoverProdutoTabelaActionPerformed
         int linha = TbProdutos.getSelectedRow();
         if (linha > -1) {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover este produto da compra?", "Deseja remover?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover este produto da operacao?", "Deseja remover?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 DefaultTableModel tabela = (DefaultTableModel) TbProdutos.getModel();
                 tabela.removeRow(linha);
                 atualizavalortotal();
             }
         }
-    }//GEN-LAST:event_BtRemoverProdutoCompraActionPerformed
+    }//GEN-LAST:event_BtRemoverProdutoTabelaActionPerformed
 
     private void TfValorUnitarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfValorUnitarioFocusLost
         valida.FocusLostDeCamposFormatados(TfValorUnitario);
@@ -828,7 +828,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                 ClasseParcelas parcelas = new ClasseParcelas();
                 mvestoque.setCompravenda(prodcompravenda.getCompravenda());
                 mvestoque.setDtmvto(datas.retornadataehora());
-                mvestoque.setTpmvto("E");
+                mvestoque.setTpmvto(prodcompravenda.getCompravenda().getOperacao().getTpestoque());
                 for (int i = 0; i < TbProdutos.getRowCount(); i++) {
                     prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TbProdutos.getValueAt(i, 1).toString()));
                     prodcompravenda.setQuantidade(Float.parseFloat(TbProdutos.getValueAt(i, 3).toString()));
@@ -982,12 +982,12 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private javax.swing.JButton BtCancelar;
     private javax.swing.JButton BtGravar;
     private javax.swing.JButton BtIncluir;
-    private javax.swing.JButton BtIncluirProdutoCompra;
+    private javax.swing.JButton BtIncluirProdutoTabela;
     private javax.swing.JButton BtPesqCondicaoPgto;
     private javax.swing.JButton BtPesqFuncionario;
     private javax.swing.JButton BtPesqPessoa;
     private javax.swing.JButton BtPesqProduto;
-    private javax.swing.JButton BtRemoverProdutoCompra;
+    private javax.swing.JButton BtRemoverProdutoTabela;
     private javax.swing.JComboBox CbPessoa;
     private javax.swing.JLabel LbCodPessoa;
     private javax.swing.JLabel LbNomePessoa;

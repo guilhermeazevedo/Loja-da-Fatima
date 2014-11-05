@@ -11,7 +11,7 @@ import br.com.lojadafatima.Pessoa.ClasseFuncionario;
  * @author hp
  */
 public class ClasseCompraVenda {
-    
+
     ConexaoPostgre conn = new ConexaoPostgre();
     private int codigo;
     private String descricao;
@@ -20,15 +20,23 @@ public class ClasseCompraVenda {
     private ClasseFuncionario funcionario = new ClasseFuncionario();
     private ClasseCondicaoPagamento condicao = new ClasseCondicaoPagamento();
     private String data;
-    
-    public void incluir(){
+
+    public void incluir() {
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("COMPRA_VENDA", "CD_COMPRA_VENDA", "CD_OPERACAO", getOperacao().getCodigo()));
-        conn.incluirSQL("INSERT INTO bancoloja.\"COMPRA_VENDA\"(\n" +
-                        "            \"CD_COMPRA_VENDA\", \"CD_OPERACAO\", \"DS_COMPRA_VENDA\", \"CD_PESSOA\", \n" +
-                        "            \"CD_FUNCIONARIO\", \"CD_CONDICAO_PGTO\", \"DT_COMPRA_VENDA\")\n" +
-                        " VALUES ("+getCodigo()+", "+getOperacao().getCodigo()+", '"+getDescricao().toUpperCase()+"', "+getCodigopessoa()+", \n" +
-                        "         "+getFuncionario().getCodigo()+", "+getCondicao().getCodigo()+", '"+getData()+"')");
+        if (getCondicao().getCodigo() != 0) {
+            conn.incluirSQL("INSERT INTO bancoloja.\"COMPRA_VENDA\"(\n"
+                    + "            \"CD_COMPRA_VENDA\", \"CD_OPERACAO\", \"DS_COMPRA_VENDA\", \"CD_PESSOA\", \n"
+                    + "            \"CD_FUNCIONARIO\", \"CD_CONDICAO_PGTO\", \"DT_COMPRA_VENDA\")\n"
+                    + " VALUES (" + getCodigo() + ", " + getOperacao().getCodigo() + ", '" + getDescricao().toUpperCase() + "', " + getCodigopessoa() + ", \n"
+                    + "         " + getFuncionario().getCodigo() + ", " + getCondicao().getCodigo() + ", '" + getData() + "')");
+        } else {
+            conn.incluirSQL("INSERT INTO bancoloja.\"COMPRA_VENDA\"(\n"
+                    + "            \"CD_COMPRA_VENDA\", \"CD_OPERACAO\", \"DS_COMPRA_VENDA\", \"CD_PESSOA\", \n"
+                    + "            \"CD_FUNCIONARIO\", \"DT_COMPRA_VENDA\")\n"
+                    + " VALUES (" + getCodigo() + ", " + getOperacao().getCodigo() + ", '" + getDescricao().toUpperCase() + "', " + getCodigopessoa() + ", \n"
+                    + "         " + getFuncionario().getCodigo() + ", '" + getData() + "')");
+        }
     }
 
     public int getCodigo() {
@@ -86,5 +94,5 @@ public class ClasseCompraVenda {
     public void setData(String data) {
         this.data = data;
     }
-    
+
 }
