@@ -254,7 +254,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
         jLabel11.setText("Quantidade");
 
-        BtIncluirProdutoTabela.setText("Incluir Produto na Compra");
+        BtIncluirProdutoTabela.setText("Incluir Produto");
         BtIncluirProdutoTabela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtIncluirProdutoTabelaActionPerformed(evt);
@@ -607,9 +607,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

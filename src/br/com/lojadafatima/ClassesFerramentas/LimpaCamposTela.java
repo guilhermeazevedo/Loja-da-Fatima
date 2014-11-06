@@ -6,8 +6,10 @@
 
 package br.com.lojadafatima.ClassesFerramentas;
 
+import JNumberField.JNumberField;
 import java.awt.Component;
 import java.awt.Container;
+import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -36,6 +38,11 @@ public class LimpaCamposTela {
             if(component instanceof JFormattedTextField){
                 JFormattedTextField field = (JFormattedTextField) component;
                 field.setValue(null);
+            }
+            
+            if(component instanceof JNumberField){
+                JNumberField field = (JNumberField) component;
+                field.setValue(BigDecimal.valueOf(0));
             }
         }
     }

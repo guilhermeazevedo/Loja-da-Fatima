@@ -117,7 +117,13 @@ public class InterfaceRealizarOperacoes extends javax.swing.JDialog {
                         }
                     });
                 } else if (operacoes.getInfinanceiro().equals("S")) {
-                    //tela mvto financeiro
+                    final InterfaceOperacaoFinanceiro tela = new InterfaceOperacaoFinanceiro(getPrimeiratela(), true, operacoes);
+                    tela.setVisible(true);
+                    tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                        public void windowClosed(java.awt.event.WindowEvent evt) {
+
+                        }
+                    });
                 }
             }
         }

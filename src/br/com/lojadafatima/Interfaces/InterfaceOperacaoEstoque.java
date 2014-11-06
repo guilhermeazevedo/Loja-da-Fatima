@@ -229,7 +229,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
 
         jLabel11.setText("Quantidade");
 
-        BtIncluirProdutoTabela.setText("Incluir Produto na Compra");
+        BtIncluirProdutoTabela.setText("Incluir Produto");
         BtIncluirProdutoTabela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtIncluirProdutoTabelaActionPerformed(evt);
@@ -809,6 +809,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     public void enviardados(){
         prodcompravenda.getCompravenda().setData(datas.retornadataehora());
         prodcompravenda.getCompravenda().setDescricao(TfDescOperacao.getText());
+        prodcompravenda.getCompravenda().getCondicao().setCodigo(0);
         if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
             cliente.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
             prodcompravenda.getCompravenda().setCodigopessoa(cliente.retornacodigopessoacliente());

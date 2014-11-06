@@ -236,14 +236,12 @@
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="TfQtEstoqueMin" min="-2" pref="82" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="TfValor" min="-2" pref="65" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="TfValor" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="TfQtEstoqueMin" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
@@ -265,7 +263,6 @@
                                   <Component id="TfCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="TfDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="TfValor" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -325,20 +322,6 @@
                         <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o do Produto*"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JFormattedTextField" name="TfValor">
-                      <Events>
-                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TfValorFocusLost"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(valor);"/>
-                        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try{&#xd;&#xa;valor = new MaskFormatter(&quot;####.##&quot;);&#xd;&#xa;} catch(Exception ex){&#xd;&#xa;JOptionPane.showMessageDialog(null, &quot;Nao foi possivel montar mascara no campo de Valor&quot;);&#xd;&#xa;}"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel10">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="R$"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabel9">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Valor do Produto*"/>
@@ -348,15 +331,6 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Quantidade M&#xed;nima de Estoque*"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JFormattedTextField" name="TfQtEstoqueMin">
-                      <Events>
-                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TfQtEstoqueMinFocusLost"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(valor);"/>
-                        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try{&#xd;&#xa;valor = new MaskFormatter(&quot;####.##&quot;);&#xd;&#xa;} catch(Exception ex){&#xd;&#xa;JOptionPane.showMessageDialog(null, &quot;Nao foi possivel montar mascara no campo de Valor&quot;);&#xd;&#xa;}"/>
-                      </AuxValues>
                     </Component>
                     <Component class="javax.swing.JButton" name="BtCadTipoProduto">
                       <Properties>
@@ -543,6 +517,13 @@
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtRemoverEspecificActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="JNumberField.JNumberField" name="TfValor">
+                    </Component>
+                    <Component class="JNumberField.JNumberField" name="TfQtEstoqueMin">
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JNumberField.JNumberField(2);&#xd;&#xa;"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>

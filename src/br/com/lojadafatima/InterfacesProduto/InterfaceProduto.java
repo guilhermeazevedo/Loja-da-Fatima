@@ -10,6 +10,7 @@ import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesFornecedor;
 import br.com.lojadafatima.Produto.ClasseEspecificacaoProduto;
 import br.com.lojadafatima.Produto.ClasseFornecedoresProduto;
 import br.com.lojadafatima.Produto.ClasseProduto;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JFormattedTextField;
@@ -85,21 +86,8 @@ public class InterfaceProduto extends javax.swing.JDialog {
         TfCodigo = new javax.swing.JTextField();
         TfDescricao = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfValor = new JFormattedTextField(valor);
-        jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfQtEstoqueMin = new JFormattedTextField(valor);
         BtCadTipoProduto = new javax.swing.JButton();
         CbTipoProduto = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
@@ -115,6 +103,9 @@ public class InterfaceProduto extends javax.swing.JDialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         TbProduto = new javax.swing.JTable();
         BtRemoverEspecific = new javax.swing.JButton();
+        TfValor = new JNumberField.JNumberField();
+        TfQtEstoqueMin = new JNumberField.JNumberField(2);
+        ;
         PnFornecedor = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         TfCodFornecedor = new javax.swing.JTextField();
@@ -222,23 +213,9 @@ public class InterfaceProduto extends javax.swing.JDialog {
 
         jLabel5.setText("Descrição do Produto*");
 
-        TfValor.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TfValorFocusLost(evt);
-            }
-        });
-
-        jLabel10.setText("R$");
-
         jLabel9.setText("Valor do Produto*");
 
         jLabel12.setText("Quantidade Mínima de Estoque*");
-
-        TfQtEstoqueMin.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TfQtEstoqueMinFocusLost(evt);
-            }
-        });
 
         BtCadTipoProduto.setText("Cadastrar Tipo de Produto");
         BtCadTipoProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -403,13 +380,11 @@ public class InterfaceProduto extends javax.swing.JDialog {
                                     .addComponent(TfDescricao))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TfQtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PnProdutoLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel12)
+                            .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(TfValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(TfQtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         PnProdutoLayout.setVerticalGroup(
@@ -424,8 +399,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                    .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -859,14 +833,6 @@ public class InterfaceProduto extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtRemoverEspecificActionPerformed
 
-    private void TfValorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfValorFocusLost
-        valida.FocusLostDeCamposFormatados(TfValor);
-    }//GEN-LAST:event_TfValorFocusLost
-
-    private void TfQtEstoqueMinFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfQtEstoqueMinFocusLost
-        valida.FocusLostDeCamposFormatados(TfQtEstoqueMin);
-    }//GEN-LAST:event_TfQtEstoqueMinFocusLost
-
     private void BtAddFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtAddFornecedorActionPerformed
         if (!TfCodFornecedor.getText().equals("") && !TfFornecedor.getText().equals("")) {
             boolean inclui = true;
@@ -1049,9 +1015,8 @@ public class InterfaceProduto extends javax.swing.JDialog {
             especproduto.retornaproduto();
             TfCodigo.setText("" + especproduto.getProduto().getCodigo());
             TfDescricao.setText(especproduto.getProduto().getDescricao());
-            TfValor.setValue(valida.AdaptaValores(""+especproduto.getProduto().getValor(), 4));
-            JOptionPane.showMessageDialog(null, "v"+valida.AdaptaValores(""+especproduto.getProduto().getValor(), 4));
-            TfQtEstoqueMin.setText(valida.AdaptaValores("" + especproduto.getProduto().getEstoquemin(), 4));
+            TfValor.setValue(BigDecimal.valueOf(especproduto.getProduto().getValor()));
+            TfQtEstoqueMin.setValue(BigDecimal.valueOf(especproduto.getProduto().getEstoquemin()));
             if (CbTipoProduto.getSelectedItem() == null) {
                 preenche.PreencheJComboBox(CbTipoProduto, especproduto.getTipoproduto().buscartipoprodutocombobox());
             }
@@ -1138,10 +1103,9 @@ public class InterfaceProduto extends javax.swing.JDialog {
     private javax.swing.JTextField TfDescricao;
     private javax.swing.JTextField TfFornecedor;
     private javax.swing.JTextField TfPesquisa;
-    private javax.swing.JFormattedTextField TfQtEstoqueMin;
-    private javax.swing.JFormattedTextField TfValor;
+    private JNumberField.JNumberField TfQtEstoqueMin;
+    private JNumberField.JNumberField TfValor;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -1167,23 +1131,13 @@ public class InterfaceProduto extends javax.swing.JDialog {
             TfDescricao.grabFocus();
             return false;
         }
-        if (TfValor.getText().equals("    .  ")) {
+        if (TfValor.getValue() == BigDecimal.valueOf(0)) {
             JOptionPane.showMessageDialog(null, "Digite o valor do produto!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfValor.grabFocus();
             return false;
         }
-        if (!valida.CampoValorCorreto(TfValor.getText())) {
-            JOptionPane.showMessageDialog(null, "Digite o valor do produto corretamente!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
-            TfValor.grabFocus();
-            return false;
-        }
-        if (TfQtEstoqueMin.getText().equals("    .  ")) {
+        if (TfQtEstoqueMin.getValue() == BigDecimal.valueOf(0)) {
             JOptionPane.showMessageDialog(null, "Digite a quantidade minima do estoque do produto!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
-            TfQtEstoqueMin.grabFocus();
-            return false;
-        }
-        if (!valida.CampoValorCorreto(TfQtEstoqueMin.getText())) {
-            JOptionPane.showMessageDialog(null, "Digite a quantidade minima do estoque do produto corretamente!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfQtEstoqueMin.grabFocus();
             return false;
         }
@@ -1209,8 +1163,8 @@ public class InterfaceProduto extends javax.swing.JDialog {
 
     public void enviardados() {
         especproduto.getProduto().setDescricao(TfDescricao.getText());
-        especproduto.getProduto().setValor(Float.parseFloat(TfValor.getText()));
-        especproduto.getProduto().setEstoquemin(Float.parseFloat(TfQtEstoqueMin.getText()));
+        especproduto.getProduto().setValor(Float.parseFloat(TfValor.getValue().toString()));
+        especproduto.getProduto().setEstoquemin(Float.parseFloat(TfQtEstoqueMin.getValue().toString()));
         especproduto.getTipoproduto().setTipoproduto(CbTipoProduto.getSelectedItem().toString());
         especproduto.getTipoproduto().setCodigo(especproduto.getTipoproduto().retornacodigo());
     }

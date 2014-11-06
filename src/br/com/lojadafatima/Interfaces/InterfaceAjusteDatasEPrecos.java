@@ -9,6 +9,7 @@ import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,7 +41,7 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
 
         preenche.PreencherJtable(TbParcelas, getParcelas().buscaparcelasajuste());
         DecimalFormat df = new DecimalFormat("0.00");
-        TfValorTotal.setText(df.format(getParcelas().getConta().getTotal()).replace(",", "."));
+        TfValorTotal.setValue(BigDecimal.valueOf(getParcelas().getConta().getTotal()));
     }
 
     /**
@@ -57,8 +58,8 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         TbParcelas = new javax.swing.JTable();
         BtFinalizar = new javax.swing.JButton();
-        TfValorTotal = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        TfValorTotal = new JNumberField.JNumberField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ajuste de Datas e Preços de Parcelas - Software Loja da Fátima");
@@ -91,9 +92,9 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
             }
         });
 
-        TfValorTotal.setEditable(false);
+        jLabel2.setText("Valor Total:");
 
-        jLabel2.setText("Valor Total: R$");
+        TfValorTotal.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -111,7 +112,7 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -125,8 +126,8 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2)
+                        .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -171,7 +172,7 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtFinalizar;
     private javax.swing.JTable TbParcelas;
-    private javax.swing.JTextField TfValorTotal;
+    private JNumberField.JNumberField TfValorTotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -188,10 +189,8 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
                 return false;
             }
         }
-        JOptionPane.showMessageDialog(null, totalparcelas + " " + getParcelas().getConta().getTotal());
         DecimalFormat df = new DecimalFormat("0.00");
         totalparcelas = Float.parseFloat(df.format(totalparcelas).replace(",", "."));
-        JOptionPane.showMessageDialog(null, totalparcelas + " " + getParcelas().getConta().getTotal());
         if (totalparcelas == getParcelas().getConta().getTotal()) {
             return true;
         } else {
