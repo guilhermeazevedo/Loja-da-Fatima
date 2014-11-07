@@ -174,33 +174,4 @@ public class GerenciadorCamposBotoes {
             evt.consume();
         }
     }
-
-    public String AdaptaValores(String num, int casasesquerda) {
-        int casasnum = 0;
-        for (int i = 0; i < num.length(); i++) {
-            if (num.substring(i, i + 1).equals(".")) {
-                break;
-            } else {
-                casasnum++;
-            }
-        }
-        if (casasesquerda == casasnum) {
-            return num;
-        } else {
-            for (int i = 0; i < (casasesquerda - casasnum); i++) {
-                num = "0" + num;
-            }
-            return num;
-        }
-    }
-
-    public boolean CampoValorCorreto(String str) {
-        try{
-            float n = Float.parseFloat(str);
-            return true;
-        }catch(NumberFormatException ex){
-            return false;
-        }
-    }
-
 }

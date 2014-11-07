@@ -81,14 +81,10 @@
                                   <Component id="TfFuncao" alignment="0" min="-2" pref="216" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="TfSalario" min="-2" pref="87" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                          <Component id="TfSalario" min="-2" pref="98" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                                           <Component id="TfComissao" max="32767" attributes="0"/>
@@ -278,10 +274,9 @@
                               </Group>
                               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TfSalario" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TfComissao" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="TfComissao" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="TfSalario" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -779,20 +774,6 @@
                 <Property name="text" type="java.lang.String" value="Sal&#xe1;rio*"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel14">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="R$"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JFormattedTextField" name="TfSalario">
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TfSalarioFocusLost"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(valor);"/>
-                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try{&#xd;&#xa;valor = new MaskFormatter(&quot;####.##&quot;);&#xd;&#xa;} catch(Exception ex){&#xd;&#xa;JOptionPane.showMessageDialog(null, &quot;Nao foi possivel montar mascara no campo de Valor&quot;);&#xd;&#xa;}"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator2">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
@@ -824,15 +805,6 @@
                 <Property name="text" type="java.lang.String" value="Comiss&#xe3;o*"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="TfComissao">
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TfComissaoFocusLost"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(comissao);"/>
-                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try{&#xd;&#xa;comissao = new MaskFormatter(&quot;##.##&quot;);&#xd;&#xa;} catch(Exception ex){&#xd;&#xa;JOptionPane.showMessageDialog(null, &quot;Nao foi possivel montar mascara no campo de Valor&quot;);&#xd;&#xa;}"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel19">
               <Properties>
                 <Property name="text" type="java.lang.String" value="%"/>
@@ -842,6 +814,13 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Informa CPF Valido"/>
               </Properties>
+            </Component>
+            <Component class="JNumberField.JNumberField" name="TfComissao">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JNumberField.JNumberField(2);&#xd;&#xa;"/>
+              </AuxValues>
+            </Component>
+            <Component class="JNumberField.JNumberField" name="TfSalario">
             </Component>
           </SubComponents>
         </Container>

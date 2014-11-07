@@ -13,6 +13,7 @@ import br.com.lojadafatima.ClassesFerramentas.PermiteNumerosPontoBarra;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Pessoa.ClasseFuncionario;
 import java.awt.Color;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
@@ -132,13 +133,6 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         TfFuncao = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfSalario = new JFormattedTextField(valor);
         jSeparator2 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
         try{
@@ -154,14 +148,11 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         }
         TfCEP = new JFormattedTextField(cep);
         jLabel16 = new javax.swing.JLabel();
-        try{
-            comissao = new MaskFormatter("##.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfComissao = new JFormattedTextField(comissao);
         jLabel19 = new javax.swing.JLabel();
         LbCPFValido = new javax.swing.JLabel();
+        TfComissao = new JNumberField.JNumberField(2);
+        ;
+        TfSalario = new JNumberField.JNumberField();
         PnConsulta = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         CbPesquisa = new javax.swing.JComboBox();
@@ -472,14 +463,6 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
 
         jLabel8.setText("Salário*");
 
-        jLabel14.setText("R$");
-
-        TfSalario.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TfSalarioFocusLost(evt);
-            }
-        });
-
         jLabel9.setText("Data do Cadastro");
 
         TfDtCadastro.setEditable(false);
@@ -492,12 +475,6 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         });
 
         jLabel16.setText("Comissão*");
-
-        TfComissao.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TfComissaoFocusLost(evt);
-            }
-        });
 
         jLabel19.setText("%");
 
@@ -518,14 +495,11 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                             .addGroup(PnCadastroLayout.createSequentialGroup()
                                 .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
-                                    .addGroup(PnCadastroLayout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(38, 38, 38)
+                                    .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(44, 44, 44)
                                 .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel16)
-                                    .addComponent(TfComissao))))
+                                    .addComponent(TfComissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
@@ -669,10 +643,9 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                             .addComponent(jLabel16))
                         .addGap(3, 3, 3)
                         .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19)
                             .addComponent(TfComissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel19)))
+                            .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PnCadastroLayout.createSequentialGroup()
                         .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PnCadastroLayout.createSequentialGroup()
@@ -917,14 +890,14 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                                     + "Deseja importar os dados desta pessoa para criar um novo funcionario?\n"
                                     + "(Caso queira, o funcionario sera criado automaticamente com as informacoes contidas no sistema)", "O que deseja fazer?", JOptionPane.YES_NO_OPTION);
                             if (op == JOptionPane.YES_OPTION) {
-                                if (TfFuncao.getText().equals("") || TfSalario.getText().equals("") || TfComissao.getText().equals("")) {
+                                if (TfFuncao.getText().equals("") || TfSalario.getValue() == BigDecimal.valueOf(0) || TfComissao.getValue() == BigDecimal.valueOf(0)) {
                                     JOptionPane.showMessageDialog(null, "Primeiro digite os dados especificos de funcionario, depois disso digite o CPF novamente!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
                                     TfNrCPF.setText("");
                                     TfNrCPFKeyReleased(null);
                                 } else {
                                     funcionario.setFuncao(TfFuncao.getText());
-                                    funcionario.setComissao(Float.parseFloat(TfComissao.getText()));
-                                    funcionario.setSalario(Float.parseFloat(TfSalario.getText()));
+                                    funcionario.setComissao(Float.parseFloat(TfComissao.getValue().toString()));
+                                    funcionario.setSalario(Float.parseFloat(TfSalario.getValue().toString()));
                                     funcionario.importardadosnovofuncionario();
                                     JOptionPane.showMessageDialog(null, "Importacao dos dados realizada com sucesso!\n"
                                             + "Um novo funcionario esta gravado no sistema com as informacoes contidas no CPF da pessoa.\n"
@@ -977,10 +950,6 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_TfDtNascFocusLost
 
-    private void TfSalarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfSalarioFocusLost
-        valida.FocusLostDeCamposFormatados(TfSalario);
-    }//GEN-LAST:event_TfSalarioFocusLost
-
     private void TfNrTelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfNrTelefoneFocusLost
         valida.FocusLostDeCamposFormatados(TfNrTelefone);
     }//GEN-LAST:event_TfNrTelefoneFocusLost
@@ -988,10 +957,6 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
     private void TfCEPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCEPFocusLost
         valida.FocusLostDeCamposFormatados(TfCEP);
     }//GEN-LAST:event_TfCEPFocusLost
-
-    private void TfComissaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfComissaoFocusLost
-        valida.FocusLostDeCamposFormatados(TfComissao);
-    }//GEN-LAST:event_TfComissaoFocusLost
 
     private void TfNomeFisicaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfNomeFisicaKeyTyped
         valida.limitemaximo(evt, TfNomeFisica.getText(), 80);
@@ -1226,8 +1191,8 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             limpar.Limpar(PnCadastro);
             funcionario.retornafuncionario();
             TfFuncao.setText(funcionario.getFuncao());
-            TfSalario.setText(valida.AdaptaValores("" + funcionario.getSalario(), 4));
-            TfComissao.setText(valida.AdaptaValores("" + funcionario.getComissao(), 2));
+            TfSalario.setValue(BigDecimal.valueOf(funcionario.getSalario()));
+            TfComissao.setValue(BigDecimal.valueOf(funcionario.getComissao()));
             funcionario.getPessoafis().retornapessoafisica();
             TfCodigo.setText("" + funcionario.getCodigo() + "");
             TfDtCadastro.setText(funcionario.getPessoafis().getPessoa().getDatacadastro());
@@ -1303,7 +1268,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
     private javax.swing.JTextField TfBairro;
     private javax.swing.JFormattedTextField TfCEP;
     private javax.swing.JTextField TfCodigo;
-    private javax.swing.JFormattedTextField TfComissao;
+    private JNumberField.JNumberField TfComissao;
     private javax.swing.JTextField TfDsEmail;
     private javax.swing.JFormattedTextField TfDtCadastro;
     private javax.swing.JFormattedTextField TfDtNasc;
@@ -1315,7 +1280,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField TfNrTelefone;
     private javax.swing.JTextField TfNumero;
     private javax.swing.JTextField TfPesquisa;
-    private javax.swing.JFormattedTextField TfSalario;
+    private JNumberField.JNumberField TfSalario;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBtAddEmail;
     private javax.swing.JButton jBtAddTelefone;
@@ -1328,7 +1293,6 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -1399,24 +1363,13 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             TfFuncao.grabFocus();
             return false;
         }
-        if (TfComissao.getText().equals("  .  ")) {
+        if (TfComissao.getValue() == BigDecimal.valueOf(0)) {
             JOptionPane.showMessageDialog(null, "Digite a Comissao que o funcionario recebera!");
             TfComissao.grabFocus();
             return false;
         }
-
-        if (!valida.CampoValorCorreto(TfComissao.getText())) {
-            JOptionPane.showMessageDialog(null, "Digite a Comissao do funcionario corretamente!");
-            TfComissao.grabFocus();
-            return false;
-        }
-        if (TfSalario.getText().equals("    .  ")) {
+        if (TfSalario.getValue() == BigDecimal.valueOf(0)) {
             JOptionPane.showMessageDialog(null, "Digite o Salario que o funcionario recebera!");
-            TfSalario.grabFocus();
-            return false;
-        }
-        if (!valida.CampoValorCorreto(TfSalario.getText())) {
-            JOptionPane.showMessageDialog(null, "Digite o Salario do funcionario corretamente!");
             TfSalario.grabFocus();
             return false;
         }
@@ -1441,8 +1394,8 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         funcionario.getPessoafis().setRg(TfNrRG.getText());
         funcionario.getPessoafis().setDatanasc(TfDtNasc.getText());
         funcionario.setFuncao(TfFuncao.getText());
-        funcionario.setComissao(Float.parseFloat(TfComissao.getText()));
-        funcionario.setSalario(Float.parseFloat(TfSalario.getText()));
+        funcionario.setComissao(Float.parseFloat(TfComissao.getValue().toString()));
+        funcionario.setSalario(Float.parseFloat(TfSalario.getValue().toString()));
         if (RbMasculino.isSelected()) {
             funcionario.getPessoafis().setSexo("M");
         }

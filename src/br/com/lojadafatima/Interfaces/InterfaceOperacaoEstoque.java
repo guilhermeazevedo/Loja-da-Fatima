@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.lojadafatima.Interfaces;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
@@ -24,6 +23,7 @@ import br.com.lojadafatima.InterfacesPessoa.InterfaceFuncionario;
 import br.com.lojadafatima.InterfacesProduto.InterfaceProduto;
 import br.com.lojadafatima.Pessoa.ClasseCliente;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
+import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -42,7 +42,8 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     ClasseDatas datas = new ClasseDatas();
     LimpaCamposTela limpar = new LimpaCamposTela();
     private java.awt.Frame primeiratela;
-    
+    boolean estoqueok = false;
+
     public InterfaceOperacaoEstoque(java.awt.Frame telaorigem, boolean modal, ClasseOperacoes ope) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
@@ -98,12 +99,6 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
         TfProduto = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         BtCadProduto = new javax.swing.JButton();
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfQuantidade = new JFormattedTextField(valor);
         jLabel11 = new javax.swing.JLabel();
         BtIncluirProdutoTabela = new javax.swing.JButton();
         BtRemoverProdutoTabela = new javax.swing.JButton();
@@ -113,6 +108,8 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
         BtGravar = new javax.swing.JButton();
         BtIncluir = new javax.swing.JButton();
         BtCancelar = new javax.swing.JButton();
+        TfQuantidade = new JNumberField.JNumberField(2);
+        ;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Operação de Estoque - Software Loja da Fátima");
@@ -221,12 +218,6 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
             }
         });
 
-        TfQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TfQuantidadeFocusLost(evt);
-            }
-        });
-
         jLabel11.setText("Quantidade");
 
         BtIncluirProdutoTabela.setText("Incluir Produto");
@@ -304,6 +295,12 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
             .addComponent(BtGravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        TfQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfQuantidadeFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -361,12 +358,12 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                                                 .addComponent(BtCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(BtCadFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                     .addComponent(jLabel11)
-                    .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(BtIncluirProdutoTabela)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtRemoverProdutoTabela))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -612,14 +609,14 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
             prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
             if (prodcompravenda.getForneproduto().getProduto().eprodutoativo()) {
                 TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
-                TfQuantidade.setText("");
+                TfQuantidade.setValue(BigDecimal.valueOf(0));
             } else {
                 TfProduto.setText("");
-                TfQuantidade.setText("");
+                TfQuantidade.setValue(BigDecimal.valueOf(0));
             }
         } else {
             TfProduto.setText("");
-            TfQuantidade.setText("");
+            TfQuantidade.setValue(BigDecimal.valueOf(0));
         }
     }//GEN-LAST:event_TfCodProdutoKeyReleased
 
@@ -649,41 +646,40 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
         });
     }//GEN-LAST:event_BtCadProdutoActionPerformed
 
-    private void TfQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfQuantidadeFocusLost
-        valida.FocusLostDeCamposFormatados(TfQuantidade);
-    }//GEN-LAST:event_TfQuantidadeFocusLost
-
     private void BtIncluirProdutoTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirProdutoTabelaActionPerformed
         boolean inclui = true;
-        if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
-            if (valida.CampoValorCorreto(TfQuantidade.getText())) {
-                for (int i = 0; i < TbProdutos.getRowCount(); i++) {
-                    if (Integer.parseInt(TbProdutos.getValueAt(i, 1).toString()) == Integer.parseInt(TfCodProduto.getText())) {
-                        inclui = false;
-                        if (JOptionPane.showConfirmDialog(null, "Este produto ja foi adiconado a esta compra!\n"
-                            + "Deseja substituir a quantidade adquirida deste produto?", "Produto adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                        TbProdutos.setValueAt(TfQuantidade.getText(), i, 3);
+        TfQuantidadeFocusLost(null);
+        if (estoqueok) {
+            if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
+                if (TfQuantidade.getValue() != BigDecimal.valueOf(0)) {
+                    for (int i = 0; i < TbProdutos.getRowCount(); i++) {
+                        if (Integer.parseInt(TbProdutos.getValueAt(i, 1).toString()) == Integer.parseInt(TfCodProduto.getText())) {
+                            inclui = false;
+                            if (JOptionPane.showConfirmDialog(null, "Este produto ja foi adiconado a esta compra!\n"
+                                    + "Deseja substituir a quantidade adquirida deste produto?", "Produto adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                TbProdutos.setValueAt(TfQuantidade.getText(), i, 3);
+                            }
+                        }
                     }
+                    if (inclui) {
+                        DefaultTableModel tabela = (DefaultTableModel) TbProdutos.getModel();
+                        int linha = tabela.getRowCount();
+                        tabela.setNumRows(linha + 1);
+                        tabela.setValueAt(TfCodigo.getText(), linha, 0);
+                        tabela.setValueAt(TfCodProduto.getText(), linha, 1);
+                        tabela.setValueAt(TfProduto.getText(), linha, 2);
+                        tabela.setValueAt(TfQuantidade.getText(), linha, 3);
+                    }
+                    TfCodProduto.setText("");
+                    TfProduto.setText("");
+                    TfQuantidade.setValue(BigDecimal.valueOf(0));
+                } else {
+                    JOptionPane.showMessageDialog(null, "Digite a quantidade corretamente!", "Informe os valores corretamente!", JOptionPane.INFORMATION_MESSAGE);
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Informe o produto a ser adicionado nesta operacao!", "Informe o produto", JOptionPane.INFORMATION_MESSAGE);
+                TfCodProduto.grabFocus();
             }
-            if (inclui) {
-                DefaultTableModel tabela = (DefaultTableModel) TbProdutos.getModel();
-                int linha = tabela.getRowCount();
-                tabela.setNumRows(linha + 1);
-                tabela.setValueAt(TfCodigo.getText(), linha, 0);
-                tabela.setValueAt(TfCodProduto.getText(), linha, 1);
-                tabela.setValueAt(TfProduto.getText(), linha, 2);
-                tabela.setValueAt(TfQuantidade.getText(), linha, 3);
-            }
-            TfCodProduto.setText("");
-            TfProduto.setText("");
-            TfQuantidade.setText("");
-        } else {
-            JOptionPane.showMessageDialog(null, "Digite a quantidade corretamente!", "Informe os valores corretamente!", JOptionPane.INFORMATION_MESSAGE);
-        }
-        } else {
-            JOptionPane.showMessageDialog(null, "Informe o produto a ser adicionado nesta operacao!", "Informe o produto", JOptionPane.INFORMATION_MESSAGE);
-            TfCodProduto.grabFocus();
         }
     }//GEN-LAST:event_BtIncluirProdutoTabelaActionPerformed
 
@@ -709,13 +705,15 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                 mvestoque.setTpmvto(prodcompravenda.getCompravenda().getOperacao().getTpestoque());
                 for (int i = 0; i < TbProdutos.getRowCount(); i++) {
                     prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TbProdutos.getValueAt(i, 1).toString()));
-                    prodcompravenda.setQuantidade(Float.parseFloat(TbProdutos.getValueAt(i, 3).toString()));
+                    TfQuantidade.setText(TbProdutos.getValueAt(i, 3).toString());
+                    prodcompravenda.setQuantidade(Float.parseFloat(TfQuantidade.getValue().toString()));
                     prodcompravenda.setValorunit(0);
                     prodcompravenda.setValorprodut(0);
                     prodcompravenda.incluirprodutocompravenda();
 
                     mvestoque.getProduto().setCodigo(Integer.parseInt(TbProdutos.getValueAt(i, 1).toString()));
-                    mvestoque.setQtmvto(Float.parseFloat(TbProdutos.getValueAt(i, 3).toString()));
+                    TfQuantidade.setText(TbProdutos.getValueAt(i, 3).toString());
+                    mvestoque.setQtmvto(Float.parseFloat(TfQuantidade.getValue().toString()));
                     mvestoque.incluirmvto();
                 }
 
@@ -735,12 +733,28 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
 
     private void BtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCancelarActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar esta compra?\n"
-            + "(Caso sim, TODOS os dados digitados serao limpos da tela)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-        limpar.Limpar(jPanel1);
-        limpar.Limpar(TbProdutos);
-        valida.validacamposCancelar(jPanel1, PnBotoes);
+                + "(Caso sim, TODOS os dados digitados serao limpos da tela)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            limpar.Limpar(jPanel1);
+            limpar.Limpar(TbProdutos);
+            valida.validacamposCancelar(jPanel1, PnBotoes);
         }
     }//GEN-LAST:event_BtCancelarActionPerformed
+
+    private void TfQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfQuantidadeFocusLost
+        if (prodcompravenda.getCompravenda().getOperacao().getTpestoque().equals("S")) {
+            estoqueok = false;
+            if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
+                ClasseMvtoEstoque estoque = new ClasseMvtoEstoque();
+                estoque.getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
+                if (Float.parseFloat(TfQuantidade.getValue().toString()) > estoque.retornaestoqueatual()) {
+                    JOptionPane.showMessageDialog(null, "A quantidade digitada e maior que o estoque atual disponivel deste produto!\nEstoque atual: " + estoque.retornaestoqueatual(), "Estoque indiponivel", JOptionPane.INFORMATION_MESSAGE);
+                    TfQuantidade.setValue(BigDecimal.valueOf(0));
+                } else {
+                    estoqueok = true;
+                }
+            }
+        }
+    }//GEN-LAST:event_TfQuantidadeFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadFuncionario;
@@ -768,7 +782,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     private javax.swing.JTextField TfFuncionario;
     private javax.swing.JTextField TfPessoa;
     private javax.swing.JTextField TfProduto;
-    private javax.swing.JFormattedTextField TfQuantidade;
+    private JNumberField.JNumberField TfQuantidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -782,7 +796,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    public boolean camposobrigatoriospreenchidos(){
+    public boolean camposobrigatoriospreenchidos() {
         if (TfDescOperacao.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite a descricao desta operacao!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfDescOperacao.grabFocus();
@@ -805,8 +819,8 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
         }
         return true;
     }
-    
-    public void enviardados(){
+
+    public void enviardados() {
         prodcompravenda.getCompravenda().setData(datas.retornadataehora());
         prodcompravenda.getCompravenda().setDescricao(TfDescOperacao.getText());
         prodcompravenda.getCompravenda().getCondicao().setCodigo(0);
@@ -819,7 +833,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
         }
         prodcompravenda.getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TfCodFuncionario.getText()));
     }
-    
+
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }

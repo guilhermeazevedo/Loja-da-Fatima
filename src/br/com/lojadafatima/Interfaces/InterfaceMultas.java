@@ -9,6 +9,7 @@ package br.com.lojadafatima.Interfaces;
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.Financeiro.ClasseMulta;
 import java.awt.Frame;
+import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
@@ -32,7 +33,7 @@ public class InterfaceMultas extends javax.swing.JDialog {
         multa.getultimamulta();
         SpDiasAlerta.setValue(multa.getDiasalerta());
         SpDiasAcresc.setValue(multa.getDiasacresc());
-        TfPercMulta.setText(valida.AdaptaValores(""+multa.getPercent(), 3));
+        TfPercMulta.setValue(BigDecimal.valueOf(multa.getPercent()));
     }
 
     /**
@@ -52,16 +53,12 @@ public class InterfaceMultas extends javax.swing.JDialog {
         SpDiasAcresc = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        try{
-            percent = new MaskFormatter("###.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel localizar");
-        }
-        TfPercMulta = new JFormattedTextField(percent);
         jLabel6 = new javax.swing.JLabel();
         BtAlterar = new javax.swing.JButton();
         BtGravar = new javax.swing.JButton();
         BtCancelar = new javax.swing.JButton();
+        TfPercMulta = new JNumberField.JNumberField(2);
+        ;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,12 +73,6 @@ public class InterfaceMultas extends javax.swing.JDialog {
         jLabel4.setText("dias úteis passados da data de vencimento da conta.");
 
         jLabel5.setText("A PORCENTAGEM DE ACRÉSCIMO DA CONTA (porcentagem da multa), é de ");
-
-        TfPercMulta.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TfPercMultaFocusLost(evt);
-            }
-        });
 
         jLabel6.setText("%   sobre o valor da conta.");
 
@@ -158,8 +149,8 @@ public class InterfaceMultas extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(TfPercMulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(TfPercMulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(BtAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
@@ -183,10 +174,6 @@ public class InterfaceMultas extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TfPercMultaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfPercMultaFocusLost
-        valida.FocusLostDeCamposFormatados(TfPercMulta);
-    }//GEN-LAST:event_TfPercMultaFocusLost
-
     private void BtAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtAlterarActionPerformed
         valida.validacamposCadastrar(jPanel1, jPanel1);
     }//GEN-LAST:event_BtAlterarActionPerformed
@@ -196,7 +183,7 @@ public class InterfaceMultas extends javax.swing.JDialog {
         multa.getultimamulta();
         SpDiasAlerta.setValue(multa.getDiasalerta());
         SpDiasAcresc.setValue(multa.getDiasacresc());
-        TfPercMulta.setText(valida.AdaptaValores(""+multa.getPercent(), 3));
+        TfPercMulta.setValue(BigDecimal.valueOf(multa.getPercent()));
     }//GEN-LAST:event_BtCancelarActionPerformed
 
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
@@ -216,7 +203,7 @@ public class InterfaceMultas extends javax.swing.JDialog {
     private javax.swing.JButton BtGravar;
     private javax.swing.JSpinner SpDiasAcresc;
     private javax.swing.JSpinner SpDiasAlerta;
-    private javax.swing.JFormattedTextField TfPercMulta;
+    private JNumberField.JNumberField TfPercMulta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -243,7 +230,7 @@ public class InterfaceMultas extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "O numero de dias para o aviso ao usuario deve ser\nmenor que o dia de acrescimo do valor!", "Campos obrigatorios",JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        if(!valida.CampoValorCorreto(TfPercMulta.getText())){
+        if(TfPercMulta.getValue() == BigDecimal.valueOf(0)){
             JOptionPane.showMessageDialog(null, "Digite a porcentagem corretamente!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfPercMulta.grabFocus();
             return false;
@@ -254,7 +241,7 @@ public class InterfaceMultas extends javax.swing.JDialog {
     public void enviardados(){
         multa.setDiasalerta(Integer.parseInt(SpDiasAlerta.getValue().toString()));
         multa.setDiasacresc(Integer.parseInt(SpDiasAcresc.getValue().toString()));
-        multa.setPercent(Float.parseFloat(TfPercMulta.getText()));
+        multa.setPercent(Float.parseFloat(TfPercMulta.getValue().toString()));
     }
     
     public java.awt.Frame getPrimeiratela() {

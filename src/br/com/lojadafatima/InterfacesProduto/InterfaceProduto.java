@@ -2,7 +2,6 @@ package br.com.lojadafatima.InterfacesProduto;
 
 import br.com.lojadafatima.InterfacesPessoa.InterfaceFornecedor;
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
-import br.com.lojadafatima.ClassesFerramentas.JQuantidadeField;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;

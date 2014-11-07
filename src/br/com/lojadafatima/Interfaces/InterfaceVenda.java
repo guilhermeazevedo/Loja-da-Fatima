@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.lojadafatima.Interfaces;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
@@ -22,6 +21,7 @@ import br.com.lojadafatima.InterfacesPessoa.InterfaceFuncionario;
 import br.com.lojadafatima.InterfacesProduto.InterfaceProduto;
 import br.com.lojadafatima.Pessoa.ClasseCliente;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
+import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -32,7 +32,7 @@ import javax.swing.text.MaskFormatter;
  * @author hp
  */
 public class InterfaceVenda extends javax.swing.JDialog {
-    
+
     MaskFormatter data;
     MaskFormatter valor;
     private java.awt.Frame primeiratela;
@@ -41,12 +41,13 @@ public class InterfaceVenda extends javax.swing.JDialog {
     ClasseDatas datas = new ClasseDatas();
     LimpaCamposTela limpar = new LimpaCamposTela();
     ClasseCliente cliente = new ClasseCliente();
+    boolean estoqueok = false;
 
     /**
      * Creates new form InterfaceVenda
      */
     public InterfaceVenda(java.awt.Frame telaorigem, boolean modal) {
-        super (telaorigem, modal);
+        super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
         TfCodCliente.setDocument(new PermiteApenasNumeros());
@@ -102,11 +103,8 @@ public class InterfaceVenda extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         BtIncluirProdutoVenda = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbVenda = new javax.swing.JTable();
@@ -115,30 +113,11 @@ public class InterfaceVenda extends javax.swing.JDialog {
         BtGravar = new javax.swing.JButton();
         BtIncluir = new javax.swing.JButton();
         BtCancelar = new javax.swing.JButton();
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfQuantidade = new JFormattedTextField(valor);
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfValorUnitario = new JFormattedTextField(valor);
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfValorProduto = new JFormattedTextField(valor);
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfValorTotalVenda = new JFormattedTextField(valor);
+        TfQuantidade = new JNumberField.JNumberField(2);
+        ;
+        TfValorUnitario = new JNumberField.JNumberField();
+        TfValorProduto = new JNumberField.JNumberField();
+        TfValorTotalVenda = new JNumberField.JNumberField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Venda - Software Loja da Fátima");
@@ -259,15 +238,9 @@ public class InterfaceVenda extends javax.swing.JDialog {
 
         jLabel12.setText("Valor Unitário");
 
-        jLabel13.setText("R$");
-
         jLabel14.setText("Valor Total do Produto");
 
-        jLabel15.setText("R$");
-
         jLabel16.setText("Valor Total da Venda");
-
-        jLabel17.setText("R$");
 
         BtIncluirProdutoVenda.setText("Incluir Produto na Venda");
         BtIncluirProdutoVenda.addActionListener(new java.awt.event.ActionListener() {
@@ -352,10 +325,15 @@ public class InterfaceVenda extends javax.swing.JDialog {
                 TfQuantidadeFocusLost(evt);
             }
         });
+        TfQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TfQuantidadeKeyReleased(evt);
+            }
+        });
 
-        TfValorUnitario.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TfValorUnitarioFocusLost(evt);
+        TfValorUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TfValorUnitarioKeyReleased(evt);
             }
         });
 
@@ -414,37 +392,20 @@ public class InterfaceVenda extends javax.swing.JDialog {
                                         .addComponent(BtCadFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addComponent(PnBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(171, 171, 171)
-                                .addComponent(TfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(225, 225, 225)))
+                        .addGap(171, 171, 171)
+                        .addComponent(TfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtCadProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(56, 56, 56)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel16)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel17)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TfValorTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TfValorTotalVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11))
-                                .addGap(134, 134, 134)
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel11)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(BtIncluirProdutoVenda)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -460,21 +421,27 @@ public class InterfaceVenda extends javax.swing.JDialog {
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel9)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(TfCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(TfCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(BtPesqProduto)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(10, 10, 10)
-                                                .addComponent(jLabel12))
-                                            .addComponent(BtPesqProduto))))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel12)
+                                                    .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel10))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(50, 50, 50)
-                                        .addComponent(jLabel14)))))
-                        .addGap(0, 284, Short.MAX_VALUE)))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel14))))))
+                        .addGap(0, 271, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -538,13 +505,10 @@ public class InterfaceVenda extends javax.swing.JDialog {
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel17)
-                    .addComponent(TfValorTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfValorTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtIncluirProdutoVenda)
@@ -660,40 +624,22 @@ public class InterfaceVenda extends javax.swing.JDialog {
             prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
             if (prodcompravenda.getForneproduto().getProduto().eprodutoativo()) {
                 TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
-                TfValorUnitario.setText(valida.AdaptaValores("" + prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto(), 4));
-                TfQuantidade.setText("");
-                TfValorProduto.setText("");
+                TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto()));
+                TfQuantidade.setValue(BigDecimal.valueOf(0));
+                TfValorProduto.setValue(BigDecimal.valueOf(0));
             } else {
                 TfProduto.setText("");
-                TfValorUnitario.setText("");
-                TfQuantidade.setText("");
-                TfValorProduto.setText("");
+                TfValorUnitario.setValue(BigDecimal.valueOf(0));
+                TfQuantidade.setValue(BigDecimal.valueOf(0));
+                TfValorProduto.setValue(BigDecimal.valueOf(0));
             }
         } else {
             TfProduto.setText("");
-            TfValorUnitario.setText("");
-            TfQuantidade.setText("");
-            TfValorProduto.setText("");
+            TfValorUnitario.setValue(BigDecimal.valueOf(0));
+            TfQuantidade.setValue(BigDecimal.valueOf(0));
+            TfValorProduto.setValue(BigDecimal.valueOf(0));
         }
     }//GEN-LAST:event_TfCodProdutoKeyReleased
-
-    private void TfQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfQuantidadeFocusLost
-        valida.FocusLostDeCamposFormatados(TfQuantidade);
-        if (valida.CampoValorCorreto(TfQuantidade.getText())) {
-            if (valida.CampoValorCorreto(TfValorUnitario.getText())) {
-                TfValorProduto.setText(valida.AdaptaValores("" + Float.parseFloat(TfQuantidade.getText()) * Float.parseFloat(TfValorUnitario.getText()), 4));
-            } else {
-                TfValorProduto.setText("");
-            }
-        } else {
-            TfValorProduto.setText("");
-        }
-    }//GEN-LAST:event_TfQuantidadeFocusLost
-
-    private void TfValorUnitarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfValorUnitarioFocusLost
-        valida.FocusLostDeCamposFormatados(TfValorUnitario);
-        TfQuantidadeFocusLost(evt);
-    }//GEN-LAST:event_TfValorUnitarioFocusLost
 
     private void BtPesqProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqProdutoActionPerformed
         final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto());
@@ -723,42 +669,45 @@ public class InterfaceVenda extends javax.swing.JDialog {
 
     private void BtIncluirProdutoVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirProdutoVendaActionPerformed
         boolean inclui = true;
-        if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
-            if (!TfValorProduto.getText().equals("    .  ")) {
-                for (int i = 0; i < TbVenda.getRowCount(); i++) {
-                    if (Integer.parseInt(TbVenda.getValueAt(i, 1).toString()) == Integer.parseInt(TfCodProduto.getText())) {
-                        inclui = false;
-                        if (JOptionPane.showConfirmDialog(null, "Este produto ja foi adiconado a esta venda!\n"
-                                + "Deseja substituir a quantidade adquirida deste produto?", "Produto adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                            TbVenda.setValueAt(TfQuantidade.getText(), i, 3);
-                            TbVenda.setValueAt(TfValorUnitario.getText(), i, 4);
-                            TbVenda.setValueAt(TfValorProduto.getText(), i, 5);
+        TfQuantidadeFocusLost(null);
+        if (estoqueok) {
+            if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
+                if (TfValorProduto.getValue() != BigDecimal.valueOf(0)) {
+                    for (int i = 0; i < TbVenda.getRowCount(); i++) {
+                        if (Integer.parseInt(TbVenda.getValueAt(i, 1).toString()) == Integer.parseInt(TfCodProduto.getText())) {
+                            inclui = false;
+                            if (JOptionPane.showConfirmDialog(null, "Este produto ja foi adiconado a esta venda!\n"
+                                    + "Deseja substituir a quantidade adquirida deste produto?", "Produto adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                TbVenda.setValueAt(TfQuantidade.getText(), i, 3);
+                                TbVenda.setValueAt(TfValorUnitario.getText(), i, 4);
+                                TbVenda.setValueAt(TfValorProduto.getText(), i, 5);
+                            }
                         }
                     }
+                    if (inclui) {
+                        DefaultTableModel tabela = (DefaultTableModel) TbVenda.getModel();
+                        int linha = tabela.getRowCount();
+                        tabela.setNumRows(linha + 1);
+                        tabela.setValueAt(TfCodigo.getText(), linha, 0);
+                        tabela.setValueAt(TfCodProduto.getText(), linha, 1);
+                        tabela.setValueAt(TfProduto.getText(), linha, 2);
+                        tabela.setValueAt(TfQuantidade.getText(), linha, 3);
+                        tabela.setValueAt(TfValorUnitario.getText(), linha, 4);
+                        tabela.setValueAt(TfValorProduto.getText(), linha, 5);
+                    }
+                    TfCodProduto.setText("");
+                    TfProduto.setText("");
+                    TfQuantidade.setValue(BigDecimal.valueOf(0));
+                    TfValorUnitario.setValue(BigDecimal.valueOf(0));
+                    TfValorProduto.setValue(BigDecimal.valueOf(0));
+                    atualizavalortotal();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Digite o valor unitario do produto e a quantidade corretamente!", "Informe os valores corretamente!", JOptionPane.INFORMATION_MESSAGE);
                 }
-                if (inclui) {
-                    DefaultTableModel tabela = (DefaultTableModel) TbVenda.getModel();
-                    int linha = tabela.getRowCount();
-                    tabela.setNumRows(linha + 1);
-                    tabela.setValueAt(TfCodigo.getText(), linha, 0);
-                    tabela.setValueAt(TfCodProduto.getText(), linha, 1);
-                    tabela.setValueAt(TfProduto.getText(), linha, 2);
-                    tabela.setValueAt(TfQuantidade.getText(), linha, 3);
-                    tabela.setValueAt(TfValorUnitario.getText(), linha, 4);
-                    tabela.setValueAt(TfValorProduto.getText(), linha, 5);
-                }
-                TfCodProduto.setText("");
-                TfProduto.setText("");
-                TfQuantidade.setText("");
-                TfValorUnitario.setText("");
-                TfValorProduto.setText("");
-                atualizavalortotal();
             } else {
-                JOptionPane.showMessageDialog(null, "Digite o valor unitario do produto e a quantidade corretamente!", "Informe os valores corretamente!", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Informe o produto a ser adicionado nesta compra!", "Informe o produto", JOptionPane.INFORMATION_MESSAGE);
+                TfCodProduto.grabFocus();
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Informe o produto a ser adicionado nesta compra!", "Informe o produto", JOptionPane.INFORMATION_MESSAGE);
-            TfCodProduto.grabFocus();
         }
     }//GEN-LAST:event_BtIncluirProdutoVendaActionPerformed
 
@@ -776,19 +725,19 @@ public class InterfaceVenda extends javax.swing.JDialog {
     private void BtIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirActionPerformed
         TfData.setText(datas.retornaratartual());
         GeraCodigos geracodigos = new GeraCodigos();
-        TfCodigo.setText(""+geracodigos.gerasequencia("COMPRA_VENDA", "CD_COMPRA_VENDA", "CD_OPERACAO", 2));
+        TfCodigo.setText("" + geracodigos.gerasequencia("COMPRA_VENDA", "CD_COMPRA_VENDA", "CD_OPERACAO", 2));
         valida.validacamposCadastrar(jPanel1, PnBotoes);
     }//GEN-LAST:event_BtIncluirActionPerformed
 
     private void TfCodClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfCodClienteKeyReleased
-        if(!TfCodCliente.getText().equals("")){
+        if (!TfCodCliente.getText().equals("")) {
             cliente.setCodigo(Integer.parseInt(TfCodCliente.getText()));
-            if(cliente.eativo()){
+            if (cliente.eativo()) {
                 TfCliente.setText(cliente.retornanomecliente());
-            }else{
+            } else {
                 TfCliente.setText("");
             }
-        }else{
+        } else {
             TfCliente.setText("");
         }
     }//GEN-LAST:event_TfCodClienteKeyReleased
@@ -810,11 +759,11 @@ public class InterfaceVenda extends javax.swing.JDialog {
     }//GEN-LAST:event_BtPesqClienteActionPerformed
 
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
-        if(camposobrigatoriospreenchidos()){
+        if (camposobrigatoriospreenchidos()) {
             if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Gravar esta venda e de que todas as informacoes estao corretas?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 enviardados();
                 prodcompravenda.getCompravenda().incluir();
-                
+
                 ClasseMvtoEstoque mvestoque = new ClasseMvtoEstoque();
                 ClasseParcelas parcelas = new ClasseParcelas();
                 mvestoque.setCompravenda(prodcompravenda.getCompravenda());
@@ -822,21 +771,25 @@ public class InterfaceVenda extends javax.swing.JDialog {
                 mvestoque.setTpmvto("S");
                 for (int i = 0; i < TbVenda.getRowCount(); i++) {
                     prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TbVenda.getValueAt(i, 1).toString()));
-                    prodcompravenda.setQuantidade(Float.parseFloat(TbVenda.getValueAt(i, 3).toString()));
-                    prodcompravenda.setValorunit(Float.parseFloat(TbVenda.getValueAt(i, 4).toString()));
-                    prodcompravenda.setValorprodut(Float.parseFloat(TbVenda.getValueAt(i, 5).toString()));
+                    TfQuantidade.setText(TbVenda.getValueAt(i, 3).toString());
+                    prodcompravenda.setQuantidade(Float.parseFloat(TfQuantidade.getValue().toString()));
+                    TfValorUnitario.setText(TbVenda.getValueAt(i, 4).toString());
+                    prodcompravenda.setValorunit(Float.parseFloat(TfValorUnitario.getValue().toString()));
+                    TfValorProduto.setText(TbVenda.getValueAt(i, 5).toString());
+                    prodcompravenda.setValorprodut(Float.parseFloat(TfValorProduto.getValue().toString()));
                     prodcompravenda.incluirprodutocompravenda();
 
                     mvestoque.getProduto().setCodigo(Integer.parseInt(TbVenda.getValueAt(i, 1).toString()));
-                    mvestoque.setQtmvto(Float.parseFloat(TbVenda.getValueAt(i, 3).toString()));
+                    TfQuantidade.setText(TbVenda.getValueAt(i, 3).toString());
+                    mvestoque.setQtmvto(Float.parseFloat(TfQuantidade.getValue().toString()));
                     mvestoque.incluirmvto();
                 }
                 parcelas.getConta().setCompravenda(prodcompravenda.getCompravenda());
                 parcelas.getConta().setCondicao(prodcompravenda.getCompravenda().getCondicao());
                 parcelas.getConta().setOperacao(prodcompravenda.getCompravenda().getOperacao());
-                parcelas.getConta().setDescricao("REFERENTE A VENDA NUMERO "+TfCodigo.getText()+", CLIENTE: "+TfCliente.getText());
+                parcelas.getConta().setDescricao("REFERENTE A VENDA NUMERO " + TfCodigo.getText() + ", CLIENTE: " + TfCliente.getText());
                 parcelas.getConta().setDtconta(TfData.getText());
-                parcelas.getConta().setTotal(Float.parseFloat(TfValorTotalVenda.getText()));
+                parcelas.getConta().setTotal(Float.parseFloat(TfValorTotalVenda.getValue().toString()));
                 parcelas.getConta().incluir();
 
                 parcelas.gerarparcelas();
@@ -865,6 +818,28 @@ public class InterfaceVenda extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtCancelarActionPerformed
 
+    private void TfQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfQuantidadeKeyReleased
+        TfValorProduto.setValue(TfQuantidade.getValue().multiply(TfValorUnitario.getValue()));
+    }//GEN-LAST:event_TfQuantidadeKeyReleased
+
+    private void TfValorUnitarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorUnitarioKeyReleased
+        TfQuantidadeKeyReleased(evt);
+    }//GEN-LAST:event_TfValorUnitarioKeyReleased
+
+    private void TfQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfQuantidadeFocusLost
+        estoqueok = false;
+        if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
+            ClasseMvtoEstoque estoque = new ClasseMvtoEstoque();
+            estoque.getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
+            if (Float.parseFloat(TfQuantidade.getValue().toString()) > estoque.retornaestoqueatual()) {
+                JOptionPane.showMessageDialog(null, "A quantidade digitada e maior que o estoque atual disponivel deste produto!\nEstoque atual: "+estoque.retornaestoqueatual(), "Estoque indiponivel", JOptionPane.INFORMATION_MESSAGE);
+                TfValorProduto.setValue(BigDecimal.valueOf(0));
+            } else {
+                estoqueok = true;
+            }
+        }
+    }//GEN-LAST:event_TfQuantidadeFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadCliente;
@@ -892,19 +867,16 @@ public class InterfaceVenda extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField TfData;
     private javax.swing.JTextField TfFuncionario;
     private javax.swing.JTextField TfProduto;
-    private javax.swing.JFormattedTextField TfQuantidade;
-    private javax.swing.JFormattedTextField TfValorProduto;
-    private javax.swing.JFormattedTextField TfValorTotalVenda;
-    private javax.swing.JFormattedTextField TfValorUnitario;
+    private JNumberField.JNumberField TfQuantidade;
+    private JNumberField.JNumberField TfValorProduto;
+    private JNumberField.JNumberField TfValorTotalVenda;
+    private JNumberField.JNumberField TfValorUnitario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -918,47 +890,48 @@ public class InterfaceVenda extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
-    public boolean camposobrigatoriospreenchidos(){
-        if(TfCodFuncionario.getText().equals("") && TfFuncionario.getText().equals("")){
+    public boolean camposobrigatoriospreenchidos() {
+        if (TfCodFuncionario.getText().equals("") && TfFuncionario.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Informe qual funcionario realizou o atendimento nesta venda!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodFuncionario.grabFocus();
             return false;
         }
-        if(TfCodCliente.getText().equals("") && TfCliente.getText().equals("")){
+        if (TfCodCliente.getText().equals("") && TfCliente.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Informe qual cliente esta realizando a venda!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodCliente.grabFocus();
             return false;
         }
-        if(TfCodCondicaoPgto.getText().equals("") && TfCondicaoPgto.getText().equals("")){
+        if (TfCodCondicaoPgto.getText().equals("") && TfCondicaoPgto.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Informe qual a condicao de pagamento escolhida pelo cliente!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodCondicaoPgto.grabFocus();
             return false;
         }
-        if(TbVenda.getRowCount() == 0){
+        if (TbVenda.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Insira os produtos escolhidos pelo cliente nesta venda!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodProduto.grabFocus();
             return false;
         }
         return true;
     }
-    
-    public void enviardados(){
+
+    public void enviardados() {
         prodcompravenda.getCompravenda().setData(datas.retornadataehora());
-        prodcompravenda.getCompravenda().setDescricao("VENDA NUMERO: "+TfCodigo.getText());
+        prodcompravenda.getCompravenda().setDescricao("VENDA NUMERO: " + TfCodigo.getText());
         cliente.setCodigo(Integer.parseInt(TfCodCliente.getText()));
         prodcompravenda.getCompravenda().setCodigopessoa(cliente.retornacodigopessoacliente());
         prodcompravenda.getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TfCodFuncionario.getText()));
         prodcompravenda.getCompravenda().getOperacao().setCodigo(2);
     }
-    
+
     public void atualizavalortotal() {
         float valor = 0;
         for (int i = 0; i < TbVenda.getRowCount(); i++) {
-            valor = valor + Float.parseFloat(TbVenda.getValueAt(i, 5).toString());
+            TfValorTotalVenda.setText(TbVenda.getValueAt(i, 5).toString());
+            valor = valor + Float.parseFloat(TfValorTotalVenda.getValue().toString());
         }
-        TfValorTotalVenda.setText(valida.AdaptaValores("" + valor, 4));
+        TfValorTotalVenda.setValue(BigDecimal.valueOf(valor));
     }
-    
+
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }

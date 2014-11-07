@@ -25,6 +25,7 @@ import br.com.lojadafatima.InterfacesPessoa.InterfaceFuncionario;
 import br.com.lojadafatima.InterfacesProduto.InterfaceProduto;
 import br.com.lojadafatima.Pessoa.ClasseCliente;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
+import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -44,6 +45,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     ClasseDatas datas = new ClasseDatas();
     LimpaCamposTela limpar = new LimpaCamposTela();
     ClasseCliente cliente = new ClasseCliente();
+    boolean estoqueok = false;
 
     public InterfaceOperacaoEstoqueFinanceiro(java.awt.Frame telaorigem, boolean modal, ClasseOperacoes ope) {
         super(telaorigem, modal);
@@ -99,38 +101,11 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         TfProduto = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         BtCadProduto = new javax.swing.JButton();
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfQuantidade = new JFormattedTextField(valor);
         jLabel11 = new javax.swing.JLabel();
         BtIncluirProdutoTabela = new javax.swing.JButton();
         BtRemoverProdutoTabela = new javax.swing.JButton();
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfValorUnitario = new JFormattedTextField(valor);
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfValorProduto = new JFormattedTextField(valor);
         jLabel14 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfValorTotalCompra = new JFormattedTextField(valor);
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbProdutos = new javax.swing.JTable();
@@ -147,6 +122,11 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         TfPessoa = new javax.swing.JTextField();
         LbNomePessoa = new javax.swing.JLabel();
         BtCadPessoa = new javax.swing.JButton();
+        TfQuantidade = new JNumberField.JNumberField(2);
+        ;
+        TfValorUnitario = new JNumberField.JNumberField();
+        TfValorProduto = new JNumberField.JNumberField();
+        TfValorTotalOperacao = new JNumberField.JNumberField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Operação de Estoque e Financeiro - Software Loja da Fátima");
@@ -246,12 +226,6 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
             }
         });
 
-        TfQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TfQuantidadeFocusLost(evt);
-            }
-        });
-
         jLabel11.setText("Quantidade");
 
         BtIncluirProdutoTabela.setText("Incluir Produto");
@@ -268,26 +242,9 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
             }
         });
 
-        TfValorUnitario.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TfValorUnitarioFocusLost(evt);
-            }
-        });
-
         jLabel12.setText("Valor Unitário");
 
-        jLabel13.setText("R$");
-
-        jLabel15.setText("R$");
-
-        TfValorProduto.setEditable(false);
-        TfValorProduto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
-
         jLabel14.setText("Valor Total do Produto");
-
-        jLabel17.setText("R$");
-
-        TfValorTotalCompra.setEditable(false);
 
         jLabel16.setText("Valor Total da Compra");
 
@@ -387,6 +344,27 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
             }
         });
 
+        TfQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfQuantidadeFocusLost(evt);
+            }
+        });
+        TfQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TfQuantidadeKeyReleased(evt);
+            }
+        });
+
+        TfValorUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TfValorUnitarioKeyReleased(evt);
+            }
+        });
+
+        TfValorProduto.setEditable(false);
+
+        TfValorTotalOperacao.setEditable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -419,60 +397,18 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(171, 171, 171)
+                                .addComponent(TfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(93, 93, 93)
-                                        .addComponent(jLabel13)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(171, 171, 171)
-                                        .addComponent(TfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel16)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel17)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(TfValorTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(17, 17, 17))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(BtCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addGap(51, 51, 51)
-                                        .addComponent(jLabel12)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(55, 55, 55)
-                                                .addComponent(jLabel15)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(54, 54, 54)
-                                                .addComponent(jLabel14))))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(BtIncluirProdutoTabela)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtRemoverProdutoTabela))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel9)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(TfCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(BtPesqProduto)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel10)))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(BtCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(TfValorTotalOperacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(17, 17, 17))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -512,7 +448,41 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtCadPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                        .addComponent(BtCadPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(BtIncluirProdutoTabela)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(BtRemoverProdutoTabela))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel9))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel10))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel11)
+                                                .addGap(51, 51, 51)
+                                                .addComponent(jLabel12))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(TfCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(BtPesqProduto))
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(29, 29, 29)
+                                                        .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGap(61, 61, 61)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel14)
+                                            .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(51, 51, 51))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -585,13 +555,10 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
+                    .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
                     .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17)
-                    .addComponent(TfValorTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TfValorTotalOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtIncluirProdutoTabela)
@@ -703,19 +670,19 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
             prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
             if (prodcompravenda.getForneproduto().getProduto().eprodutoativo()) {
                 TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
-                TfValorUnitario.setText(valida.AdaptaValores("" + prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto(), 4));
-                TfQuantidade.setText("");
-                TfValorProduto.setText("");
+                TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto()));
+                TfQuantidade.setValue(BigDecimal.valueOf(0));
+                TfValorProduto.setValue(BigDecimal.valueOf(0));
             } else {
                 TfProduto.setText("");
-                TfValorUnitario.setText("");
-                TfQuantidade.setText("");
+                TfValorUnitario.setValue(BigDecimal.valueOf(0));
+                TfQuantidade.setValue(BigDecimal.valueOf(0));
                 TfValorProduto.setText("");
             }
         } else {
             TfProduto.setText("");
-            TfValorUnitario.setText("");
-            TfQuantidade.setText("");
+            TfValorUnitario.setValue(BigDecimal.valueOf(0));
+            TfQuantidade.setValue(BigDecimal.valueOf(0));
             TfValorProduto.setText("");
         }
     }//GEN-LAST:event_TfCodProdutoKeyReleased
@@ -746,57 +713,47 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         });
     }//GEN-LAST:event_BtCadProdutoActionPerformed
 
-    private void TfQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfQuantidadeFocusLost
-        valida.FocusLostDeCamposFormatados(TfQuantidade);
-        if (valida.CampoValorCorreto(TfQuantidade.getText())) {
-            if (valida.CampoValorCorreto(TfValorUnitario.getText())) {
-                TfValorProduto.setText(valida.AdaptaValores("" + Float.parseFloat(TfQuantidade.getText()) * Float.parseFloat(TfValorUnitario.getText()), 4));
-            } else {
-                TfValorProduto.setText("");
-            }
-        } else {
-            TfValorProduto.setText("");
-        }
-    }//GEN-LAST:event_TfQuantidadeFocusLost
-
     private void BtIncluirProdutoTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirProdutoTabelaActionPerformed
         boolean inclui = true;
-        if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
-            if (!TfValorProduto.getText().equals("    .  ")) {
-                for (int i = 0; i < TbProdutos.getRowCount(); i++) {
-                    if (Integer.parseInt(TbProdutos.getValueAt(i, 1).toString()) == Integer.parseInt(TfCodProduto.getText())) {
-                        inclui = false;
-                        if (JOptionPane.showConfirmDialog(null, "Este produto ja foi adiconado a esta compra!\n"
-                                + "Deseja substituir a quantidade adquirida deste produto?", "Produto adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                            TbProdutos.setValueAt(TfQuantidade.getText(), i, 3);
-                            TbProdutos.setValueAt(TfValorUnitario.getText(), i, 4);
-                            TbProdutos.setValueAt(TfValorProduto.getText(), i, 5);
+        TfQuantidadeFocusLost(null);
+        if (estoqueok) {
+            if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
+                if (TfValorProduto.getValue() != BigDecimal.valueOf(0)) {
+                    for (int i = 0; i < TbProdutos.getRowCount(); i++) {
+                        if (Integer.parseInt(TbProdutos.getValueAt(i, 1).toString()) == Integer.parseInt(TfCodProduto.getText())) {
+                            inclui = false;
+                            if (JOptionPane.showConfirmDialog(null, "Este produto ja foi adiconado a esta compra!\n"
+                                    + "Deseja substituir a quantidade adquirida deste produto?", "Produto adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                TbProdutos.setValueAt(TfQuantidade.getText(), i, 3);
+                                TbProdutos.setValueAt(TfValorUnitario.getText(), i, 4);
+                                TbProdutos.setValueAt(TfValorProduto.getText(), i, 5);
+                            }
                         }
                     }
+                    if (inclui) {
+                        DefaultTableModel tabela = (DefaultTableModel) TbProdutos.getModel();
+                        int linha = tabela.getRowCount();
+                        tabela.setNumRows(linha + 1);
+                        tabela.setValueAt(TfCodigo.getText(), linha, 0);
+                        tabela.setValueAt(TfCodProduto.getText(), linha, 1);
+                        tabela.setValueAt(TfProduto.getText(), linha, 2);
+                        tabela.setValueAt(TfQuantidade.getText(), linha, 3);
+                        tabela.setValueAt(TfValorUnitario.getText(), linha, 4);
+                        tabela.setValueAt(TfValorProduto.getText(), linha, 5);
+                    }
+                    TfCodProduto.setText("");
+                    TfProduto.setText("");
+                    TfQuantidade.setValue(BigDecimal.valueOf(0));
+                    TfValorUnitario.setValue(BigDecimal.valueOf(0));
+                    TfValorProduto.setValue(BigDecimal.valueOf(0));
+                    atualizavalortotal();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Digite o valor unitario do produto e a quantidade corretamente!", "Informe os valores corretamente!", JOptionPane.INFORMATION_MESSAGE);
                 }
-                if (inclui) {
-                    DefaultTableModel tabela = (DefaultTableModel) TbProdutos.getModel();
-                    int linha = tabela.getRowCount();
-                    tabela.setNumRows(linha + 1);
-                    tabela.setValueAt(TfCodigo.getText(), linha, 0);
-                    tabela.setValueAt(TfCodProduto.getText(), linha, 1);
-                    tabela.setValueAt(TfProduto.getText(), linha, 2);
-                    tabela.setValueAt(TfQuantidade.getText(), linha, 3);
-                    tabela.setValueAt(TfValorUnitario.getText(), linha, 4);
-                    tabela.setValueAt(TfValorProduto.getText(), linha, 5);
-                }
-                TfCodProduto.setText("");
-                TfProduto.setText("");
-                TfQuantidade.setText("");
-                TfValorUnitario.setText("");
-                TfValorProduto.setText("");
-                atualizavalortotal();
             } else {
-                JOptionPane.showMessageDialog(null, "Digite o valor unitario do produto e a quantidade corretamente!", "Informe os valores corretamente!", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Informe o produto a ser adicionado nesta operacao!", "Informe o produto", JOptionPane.INFORMATION_MESSAGE);
+                TfCodProduto.grabFocus();
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Informe o produto a ser adicionado nesta operacao!", "Informe o produto", JOptionPane.INFORMATION_MESSAGE);
-            TfCodProduto.grabFocus();
         }
     }//GEN-LAST:event_BtIncluirProdutoTabelaActionPerformed
 
@@ -811,11 +768,6 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtRemoverProdutoTabelaActionPerformed
 
-    private void TfValorUnitarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfValorUnitarioFocusLost
-        valida.FocusLostDeCamposFormatados(TfValorUnitario);
-        TfQuantidadeFocusLost(evt);
-    }//GEN-LAST:event_TfValorUnitarioFocusLost
-
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
         if (camposobrigatoriospreenchidos()) {
             if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Gravar esta operacao e de que todas as informacoes estao corretas?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -829,13 +781,17 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                 mvestoque.setTpmvto(prodcompravenda.getCompravenda().getOperacao().getTpestoque());
                 for (int i = 0; i < TbProdutos.getRowCount(); i++) {
                     prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TbProdutos.getValueAt(i, 1).toString()));
-                    prodcompravenda.setQuantidade(Float.parseFloat(TbProdutos.getValueAt(i, 3).toString()));
-                    prodcompravenda.setValorunit(Float.parseFloat(TbProdutos.getValueAt(i, 4).toString()));
-                    prodcompravenda.setValorprodut(Float.parseFloat(TbProdutos.getValueAt(i, 5).toString()));
+                    TfQuantidade.setText(TbProdutos.getValueAt(i, 3).toString());
+                    prodcompravenda.setQuantidade(Float.parseFloat(TfQuantidade.getValue().toString()));
+                    TfValorUnitario.setText(TbProdutos.getValueAt(i, 4).toString());
+                    prodcompravenda.setValorunit(Float.parseFloat(TfValorUnitario.getValue().toString()));
+                    TfValorProduto.setText(TbProdutos.getValueAt(i, 5).toString());
+                    prodcompravenda.setValorprodut(Float.parseFloat(TfValorProduto.getValue().toString()));
                     prodcompravenda.incluirprodutocompravenda();
 
                     mvestoque.getProduto().setCodigo(Integer.parseInt(TbProdutos.getValueAt(i, 1).toString()));
-                    mvestoque.setQtmvto(Float.parseFloat(TbProdutos.getValueAt(i, 3).toString()));
+                    TfQuantidade.setText(TbProdutos.getValueAt(i, 3).toString());
+                    mvestoque.setQtmvto(Float.parseFloat(TfQuantidade.getValue().toString()));
                     mvestoque.incluirmvto();
                 }
                 parcelas.getConta().setCompravenda(prodcompravenda.getCompravenda());
@@ -843,7 +799,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                 parcelas.getConta().setOperacao(prodcompravenda.getCompravenda().getOperacao());
                 parcelas.getConta().setDescricao("REFERENTE A COMPRA, CODIGO DA NOTA DO FORNECEDOR: " + TfDescOperacao.getText());
                 parcelas.getConta().setDtconta(TfData.getText());
-                parcelas.getConta().setTotal(Float.parseFloat(TfValorTotalCompra.getText()));
+                parcelas.getConta().setTotal(Float.parseFloat(TfValorTotalOperacao.getValue().toString()));
                 parcelas.getConta().incluir();
 
                 parcelas.gerarparcelas();
@@ -971,6 +927,30 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         TfCodPessoaKeyReleased(null);
     }//GEN-LAST:event_CbPessoaActionPerformed
 
+    private void TfQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfQuantidadeKeyReleased
+        TfValorProduto.setValue(TfQuantidade.getValue().multiply(TfValorUnitario.getValue()));
+    }//GEN-LAST:event_TfQuantidadeKeyReleased
+
+    private void TfValorUnitarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorUnitarioKeyReleased
+        TfQuantidadeKeyReleased(evt);
+    }//GEN-LAST:event_TfValorUnitarioKeyReleased
+
+    private void TfQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfQuantidadeFocusLost
+        if (prodcompravenda.getCompravenda().getOperacao().getTpestoque().equals("S")) {
+            estoqueok = false;
+            if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
+                ClasseMvtoEstoque estoque = new ClasseMvtoEstoque();
+                estoque.getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
+                if (Float.parseFloat(TfQuantidade.getValue().toString()) > estoque.retornaestoqueatual()) {
+                    JOptionPane.showMessageDialog(null, "A quantidade digitada e maior que o estoque atual disponivel deste produto!\nEstoque atual: " + estoque.retornaestoqueatual(), "Estoque indiponivel", JOptionPane.INFORMATION_MESSAGE);
+                    TfValorProduto.setValue(BigDecimal.valueOf(0));
+                } else {
+                    estoqueok = true;
+                }
+            }
+        }
+    }//GEN-LAST:event_TfQuantidadeFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadCondicaoPgto;
@@ -1002,19 +982,16 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private javax.swing.JTextField TfFuncionario;
     private javax.swing.JTextField TfPessoa;
     private javax.swing.JTextField TfProduto;
-    private javax.swing.JFormattedTextField TfQuantidade;
-    private javax.swing.JFormattedTextField TfValorProduto;
-    private javax.swing.JFormattedTextField TfValorTotalCompra;
-    private javax.swing.JFormattedTextField TfValorUnitario;
+    private JNumberField.JNumberField TfQuantidade;
+    private JNumberField.JNumberField TfValorProduto;
+    private JNumberField.JNumberField TfValorTotalOperacao;
+    private JNumberField.JNumberField TfValorUnitario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1031,9 +1008,10 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     public void atualizavalortotal() {
         float valor = 0;
         for (int i = 0; i < TbProdutos.getRowCount(); i++) {
-            valor = valor + Float.parseFloat(TbProdutos.getValueAt(i, 5).toString());
+            TfValorTotalOperacao.setText(TbProdutos.getValueAt(i, 5).toString());
+            valor = valor + Float.parseFloat(TfValorTotalOperacao.getValue().toString());
         }
-        TfValorTotalCompra.setText(valida.AdaptaValores("" + valor, 4));
+        TfValorTotalOperacao.setValue(BigDecimal.valueOf(valor));
     }
 
     public boolean camposobrigatoriospreenchidos() {

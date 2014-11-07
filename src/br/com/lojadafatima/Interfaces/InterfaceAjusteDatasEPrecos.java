@@ -183,7 +183,7 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
         GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
         float totalparcelas = 0;
         for (int i = 0; i < TbParcelas.getRowCount(); i++) {
-            if (valida.CampoValorCorreto(TbParcelas.getValueAt(i, 2).toString())) {
+            if (CampoValorCorreto(TbParcelas.getValueAt(i, 2).toString())) {
                 totalparcelas = totalparcelas + Float.parseFloat(TbParcelas.getValueAt(i, 2).toString());
             } else {
                 return false;
@@ -223,6 +223,15 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
             }
         }
         return true;
+    }
+
+    public boolean CampoValorCorreto(String str) {
+        try {
+            float n = Float.parseFloat(str);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
     }
 
     public java.awt.Frame getPrimeiratela() {

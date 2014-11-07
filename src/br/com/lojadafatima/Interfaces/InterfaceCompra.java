@@ -21,6 +21,7 @@ import br.com.lojadafatima.InterfacesPessoa.InterfaceFornecedor;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceFuncionario;
 import br.com.lojadafatima.InterfacesProduto.InterfaceProduto;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
+import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -102,29 +103,8 @@ public class InterfaceCompra extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfValorUnitario = new JFormattedTextField(valor);
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfValorProduto = new JFormattedTextField(valor);
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfValorTotalCompra = new JFormattedTextField(valor);
         BtIncluirProdutoCompra = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbCompra = new javax.swing.JTable();
@@ -135,12 +115,11 @@ public class InterfaceCompra extends javax.swing.JDialog {
         BtCancelar = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         TfDescNotaCompra = new javax.swing.JTextField();
-        try{
-            valor = new MaskFormatter("####.##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfQuantidade = new JFormattedTextField(valor);
+        TfQuantidade = new JNumberField.JNumberField(2);
+        ;
+        TfValorProduto = new JNumberField.JNumberField();
+        TfValorUnitario = new JNumberField.JNumberField();
+        TfValorTotalCompra = new JNumberField.JNumberField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Compra - Software Loja da Fátima");
@@ -261,25 +240,9 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
         jLabel12.setText("Valor Unitário");
 
-        jLabel13.setText("R$");
-
-        TfValorUnitario.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TfValorUnitarioFocusLost(evt);
-            }
-        });
-
         jLabel14.setText("Valor Total do Produto");
 
-        jLabel15.setText("R$");
-
-        TfValorProduto.setEditable(false);
-
         jLabel16.setText("Valor Total da Compra");
-
-        jLabel17.setText("R$");
-
-        TfValorTotalCompra.setEditable(false);
 
         BtIncluirProdutoCompra.setText("Incluir Produto na Compra");
         BtIncluirProdutoCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -364,11 +327,21 @@ public class InterfaceCompra extends javax.swing.JDialog {
             }
         });
 
-        TfQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TfQuantidadeFocusLost(evt);
+        TfQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TfQuantidadeKeyReleased(evt);
             }
         });
+
+        TfValorProduto.setEditable(false);
+
+        TfValorUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TfValorUnitarioKeyReleased(evt);
+            }
+        });
+
+        TfValorTotalCompra.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -424,42 +397,23 @@ public class InterfaceCompra extends javax.swing.JDialog {
                                         .addComponent(BtCadFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addComponent(PnBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(171, 171, 171)
-                                .addComponent(TfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(227, 227, 227)))
+                        .addGap(171, 171, 171)
+                        .addComponent(TfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtCadProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel16)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel17)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TfValorTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(TfValorTotalCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(17, 17, 17))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(51, 51, 51)
-                                .addComponent(jLabel12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(55, 55, 55)
-                                        .addComponent(jLabel15)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(54, 54, 54)
-                                        .addComponent(jLabel14))))
+                                .addComponent(jLabel12))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(BtIncluirProdutoCompra)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -473,16 +427,25 @@ public class InterfaceCompra extends javax.swing.JDialog {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel7)
-                                    .addComponent(jLabel9)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(TfCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtPesqProduto)))
+                                    .addComponent(jLabel9))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jLabel10))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TfCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(BtPesqProduto))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(80, 80, 80)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel14))))))
+                        .addGap(0, 220, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -548,13 +511,10 @@ public class InterfaceCompra extends javax.swing.JDialog {
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
+                    .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17)
-                    .addComponent(TfValorTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfValorTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtIncluirProdutoCompra)
@@ -580,11 +540,6 @@ public class InterfaceCompra extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void TfValorUnitarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfValorUnitarioFocusLost
-        valida.FocusLostDeCamposFormatados(TfValorUnitario);
-        TfQuantidadeFocusLost(evt);
-    }//GEN-LAST:event_TfValorUnitarioFocusLost
 
     private void BtCadFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadFuncionarioActionPerformed
         final InterfaceFuncionario tela = new InterfaceFuncionario(getPrimeiratela(), true);
@@ -709,20 +664,20 @@ public class InterfaceCompra extends javax.swing.JDialog {
             prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
             if (prodcompravenda.getForneproduto().getProduto().eprodutoativo()) {
                 TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
-                TfValorUnitario.setText(valida.AdaptaValores("" + prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto(), 4));
-                TfQuantidade.setText("");
-                TfValorProduto.setText("");
+                TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto()));
+                TfQuantidade.setValue(BigDecimal.valueOf(0));
+                TfValorProduto.setValue(BigDecimal.valueOf(0));
             } else {
                 TfProduto.setText("");
-                TfValorUnitario.setText("");
-                TfQuantidade.setText("");
-                TfValorProduto.setText("");
+                TfValorUnitario.setValue(BigDecimal.valueOf(0));
+                TfQuantidade.setValue(BigDecimal.valueOf(0));
+                TfValorProduto.setValue(BigDecimal.valueOf(0));
             }
         } else {
             TfProduto.setText("");
-            TfValorUnitario.setText("");
-            TfQuantidade.setText("");
-            TfValorProduto.setText("");
+            TfValorUnitario.setValue(BigDecimal.valueOf(0));
+            TfQuantidade.setValue(BigDecimal.valueOf(0));
+            TfValorProduto.setValue(BigDecimal.valueOf(0));
         }
     }//GEN-LAST:event_TfCodProdutoKeyReleased
 
@@ -742,23 +697,10 @@ public class InterfaceCompra extends javax.swing.JDialog {
         });
     }//GEN-LAST:event_BtPesqProdutoActionPerformed
 
-    private void TfQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfQuantidadeFocusLost
-        valida.FocusLostDeCamposFormatados(TfQuantidade);
-        if (valida.CampoValorCorreto(TfQuantidade.getText())) {
-            if (valida.CampoValorCorreto(TfValorUnitario.getText())) {
-                TfValorProduto.setText(valida.AdaptaValores("" + Float.parseFloat(TfQuantidade.getText()) * Float.parseFloat(TfValorUnitario.getText()), 4));
-            } else {
-                TfValorProduto.setText("");
-            }
-        } else {
-            TfValorProduto.setText("");
-        }
-    }//GEN-LAST:event_TfQuantidadeFocusLost
-
     private void BtIncluirProdutoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirProdutoCompraActionPerformed
         boolean inclui = true;
         if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
-            if (!TfValorProduto.getText().equals("    .  ")) {
+            if (TfValorProduto.getValue() != BigDecimal.valueOf(0)) {
                 for (int i = 0; i < TbCompra.getRowCount(); i++) {
                     if (Integer.parseInt(TbCompra.getValueAt(i, 1).toString()) == Integer.parseInt(TfCodProduto.getText())) {
                         inclui = false;
@@ -783,9 +725,9 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 }
                 TfCodProduto.setText("");
                 TfProduto.setText("");
-                TfQuantidade.setText("");
-                TfValorUnitario.setText("");
-                TfValorProduto.setText("");
+                TfQuantidade.setValue(BigDecimal.valueOf(0));
+                TfValorUnitario.setValue(BigDecimal.valueOf(0));
+                TfValorProduto.setValue(BigDecimal.valueOf(0));
                 atualizavalortotal();
             } else {
                 JOptionPane.showMessageDialog(null, "Digite o valor unitario do produto e a quantidade corretamente!", "Informe os valores corretamente!", JOptionPane.INFORMATION_MESSAGE);
@@ -837,13 +779,17 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 mvestoque.setTpmvto("E");
                 for (int i = 0; i < TbCompra.getRowCount(); i++) {
                     prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TbCompra.getValueAt(i, 1).toString()));
-                    prodcompravenda.setQuantidade(Float.parseFloat(TbCompra.getValueAt(i, 3).toString()));
-                    prodcompravenda.setValorunit(Float.parseFloat(TbCompra.getValueAt(i, 4).toString()));
-                    prodcompravenda.setValorprodut(Float.parseFloat(TbCompra.getValueAt(i, 5).toString()));
+                    TfQuantidade.setText(TbCompra.getValueAt(i, 3).toString());
+                    prodcompravenda.setQuantidade(Float.parseFloat(TfQuantidade.getValue().toString()));
+                    TfValorUnitario.setText(TbCompra.getValueAt(i, 4).toString());
+                    prodcompravenda.setValorunit(Float.parseFloat(TfValorUnitario.getValue().toString()));
+                    TfValorProduto.setText(TbCompra.getValueAt(i, 5).toString());
+                    prodcompravenda.setValorprodut(Float.parseFloat(TfValorProduto.getValue().toString()));
                     prodcompravenda.incluirprodutocompravenda();
 
                     mvestoque.getProduto().setCodigo(Integer.parseInt(TbCompra.getValueAt(i, 1).toString()));
-                    mvestoque.setQtmvto(Float.parseFloat(TbCompra.getValueAt(i, 3).toString()));
+                    TfQuantidade.setText(TbCompra.getValueAt(i, 3).toString());
+                    mvestoque.setQtmvto(Float.parseFloat(TfQuantidade.getValue().toString()));
                     mvestoque.incluirmvto();
                 }
                 parcelas.getConta().setCompravenda(prodcompravenda.getCompravenda());
@@ -851,7 +797,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 parcelas.getConta().setOperacao(prodcompravenda.getCompravenda().getOperacao());
                 parcelas.getConta().setDescricao("REFERENTE A COMPRA, CODIGO DA NOTA DO FORNECEDOR: " + TfDescNotaCompra.getText());
                 parcelas.getConta().setDtconta(TfData.getText());
-                parcelas.getConta().setTotal(Float.parseFloat(TfValorTotalCompra.getText()));
+                parcelas.getConta().setTotal(Float.parseFloat(TfValorTotalCompra.getValue().toString()));
                 parcelas.getConta().incluir();
 
                 parcelas.gerarparcelas();
@@ -879,6 +825,14 @@ public class InterfaceCompra extends javax.swing.JDialog {
             valida.validacamposCancelar(jPanel1, PnBotoes);
         }
     }//GEN-LAST:event_BtCancelarActionPerformed
+
+    private void TfQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfQuantidadeKeyReleased
+        TfValorProduto.setValue(TfQuantidade.getValue().multiply(TfValorUnitario.getValue()));
+    }//GEN-LAST:event_TfQuantidadeKeyReleased
+
+    private void TfValorUnitarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorUnitarioKeyReleased
+        TfQuantidadeKeyReleased(evt);
+    }//GEN-LAST:event_TfValorUnitarioKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -908,19 +862,16 @@ public class InterfaceCompra extends javax.swing.JDialog {
     private javax.swing.JTextField TfFornecedor;
     private javax.swing.JTextField TfFuncionario;
     private javax.swing.JTextField TfProduto;
-    private javax.swing.JFormattedTextField TfQuantidade;
-    private javax.swing.JFormattedTextField TfValorProduto;
-    private javax.swing.JFormattedTextField TfValorTotalCompra;
-    private javax.swing.JFormattedTextField TfValorUnitario;
+    private JNumberField.JNumberField TfQuantidade;
+    private JNumberField.JNumberField TfValorProduto;
+    private JNumberField.JNumberField TfValorTotalCompra;
+    private JNumberField.JNumberField TfValorUnitario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -938,9 +889,10 @@ public class InterfaceCompra extends javax.swing.JDialog {
     public void atualizavalortotal() {
         float valor = 0;
         for (int i = 0; i < TbCompra.getRowCount(); i++) {
-            valor = valor + Float.parseFloat(TbCompra.getValueAt(i, 5).toString());
+            TfValorTotalCompra.setText(TbCompra.getValueAt(i, 5).toString());
+            valor = valor + Float.parseFloat(TfValorTotalCompra.getValue().toString());
         }
-        TfValorTotalCompra.setText(valida.AdaptaValores("" + valor, 4));
+        TfValorTotalCompra.setValue(BigDecimal.valueOf(valor));
     }
 
     public boolean camposobrigatoriospreenchidos() {
