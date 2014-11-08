@@ -39,6 +39,12 @@ public class ClasseFormaPagamento {
                         "FROM bancoloja.\"CAD_FORMA_PGTO\"");
         return conn.resultset;
     }
+    
+    public ResultSet retornaformapgtocombobox(){
+        conn.executeSQL("SELECT \"DS_FORMA_PGTO\"\n" +
+                        "FROM bancoloja.\"CAD_FORMA_PGTO\"");
+        return conn.resultset;
+    }
 
     public int getCodigo() {
         return codigo;

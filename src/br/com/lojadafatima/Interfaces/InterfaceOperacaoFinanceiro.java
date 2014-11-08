@@ -14,7 +14,13 @@ import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseOperacoes;
 import br.com.lojadafatima.Financeiro.ClasseContasPagarReceber;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
+import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCliente;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCondicaoPgto;
+import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesFornecedor;
+import br.com.lojadafatima.InterfacesPessoa.InterfaceCliente;
+import br.com.lojadafatima.InterfacesPessoa.InterfaceFornecedor;
+import br.com.lojadafatima.Pessoa.ClasseCliente;
+import br.com.lojadafatima.Pessoa.ClasseFornecedor;
 import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -32,6 +38,8 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
     MaskFormatter data, valor;
     ClasseDatas datas = new ClasseDatas();
     private java.awt.Frame primeiratela;
+    ClasseCliente cliente = new ClasseCliente();
+    ClasseFornecedor fornecedor = new ClasseFornecedor();
 
     public InterfaceOperacaoFinanceiro(java.awt.Frame telaorigem, boolean modal, ClasseOperacoes ope) {
         super(telaorigem, modal);
@@ -77,6 +85,14 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
         BtGravar = new javax.swing.JButton();
         BtIncluir = new javax.swing.JButton();
         BtCancelar = new javax.swing.JButton();
+        TfCodPessoa = new javax.swing.JTextField();
+        LbCodPessoa = new javax.swing.JLabel();
+        CbPessoa = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
+        LbNomePessoa = new javax.swing.JLabel();
+        BtPesqPessoa = new javax.swing.JButton();
+        TfPessoa = new javax.swing.JTextField();
+        BtCadPessoa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Operação de Financeiro - Software Loja da Fátima");
@@ -126,6 +142,12 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
 
         jLabel16.setText("Valor Total da Operacao");
 
+        TfValorTotal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TfValorTotalKeyTyped(evt);
+            }
+        });
+
         BtGravar.setText("Gravar");
         BtGravar.setName("Gravar"); // NOI18N
         BtGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -168,6 +190,41 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
             .addComponent(BtGravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        TfCodPessoa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TfCodPessoaKeyReleased(evt);
+            }
+        });
+
+        LbCodPessoa.setText("Cód. Pessoa");
+
+        CbPessoa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente", "Fornecedor" }));
+        CbPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbPessoaActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Quem esta envolvido nesta operacao?");
+
+        LbNomePessoa.setText("Nome/Nome Fantasia");
+
+        BtPesqPessoa.setText("Pesquisar");
+        BtPesqPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtPesqPessoaActionPerformed(evt);
+            }
+        });
+
+        TfPessoa.setEditable(false);
+
+        BtCadPessoa.setText("Cadastrar Cliente");
+        BtCadPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtCadPessoaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -175,36 +232,58 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PnBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TfCodCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtPesqCondicaoPgto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtCadCondicaoPgto))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(55, 55, 55)
                                 .addComponent(jLabel2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel18)
+                                    .addComponent(TfDescOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel16)
+                            .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(6, 6, 6)
-                                        .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(TfCodCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(BtPesqCondicaoPgto))
                                     .addComponent(jLabel7))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
-                                    .addComponent(jLabel18)
-                                    .addComponent(TfDescOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel16)
-                            .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(TfCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(BtCadCondicaoPgto)))))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(PnBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LbCodPessoa)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(CbPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(TfCodPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtPesqPessoa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(LbNomePessoa)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtCadPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -221,6 +300,20 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
                     .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TfDescOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CbPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LbCodPessoa)
+                    .addComponent(LbNomePessoa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TfCodPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtPesqPessoa)
+                    .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtCadPessoa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
@@ -230,13 +323,13 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
                     .addComponent(BtPesqCondicaoPgto)
                     .addComponent(TfCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtCadCondicaoPgto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PnBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -249,9 +342,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -333,24 +424,128 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtCancelarActionPerformed
 
+    private void TfCodPessoaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfCodPessoaKeyReleased
+        if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
+            if (!TfCodPessoa.getText().equals("")) {
+                cliente.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
+                if (cliente.eativo()) {
+                    TfPessoa.setText(cliente.retornanomecliente());
+                } else {
+                    TfPessoa.setText("");
+                }
+            } else {
+                TfPessoa.setText("");
+            }
+        } else {
+            if (!TfCodPessoa.getText().equals("")) {
+                fornecedor.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
+                if (fornecedor.efornecedorativo()) {
+                    fornecedor.getPessoajur().getPessoa().setCodigo(fornecedor.retornacodigopessoafornecedor());
+                    TfPessoa.setText(fornecedor.getPessoajur().retornanomeporCodigo());
+                } else {
+                    TfPessoa.setText("");
+                }
+            } else {
+                TfPessoa.setText("");
+            }
+        }
+    }//GEN-LAST:event_TfCodPessoaKeyReleased
+
+    private void CbPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbPessoaActionPerformed
+        if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
+            LbCodPessoa.setText("Cód. Cliente");
+            LbNomePessoa.setText("Cliente");
+            BtCadPessoa.setText("Cadastrar Cliente");
+        } else {
+            LbCodPessoa.setText("Cód. Fornecedor");
+            LbNomePessoa.setText("Fornecedor");
+            BtCadPessoa.setText("Cadastrar Fornecedor");
+        }
+        TfCodPessoaKeyReleased(null);
+    }//GEN-LAST:event_CbPessoaActionPerformed
+
+    private void BtPesqPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqPessoaActionPerformed
+        if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
+            final ConsulSimplesCliente tela = new ConsulSimplesCliente(getPrimeiratela(), true, cliente);
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+                    if (cliente.getCodigo() != 0) {
+                        TfCodPessoa.setText("" + cliente.getCodigo());
+                        TfCodPessoaKeyReleased(null);
+                    } else {
+                        TfCodPessoa.setText("");
+                        TfPessoa.setText("");
+                    }
+                }
+            });
+        } else {
+            final ConsulSimplesFornecedor tela = new ConsulSimplesFornecedor(getPrimeiratela(), true, fornecedor);
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+                    if (fornecedor.getCodigo() != 0) {
+                        TfCodPessoa.setText("" + fornecedor.getCodigo());
+                        TfCodPessoaKeyReleased(null);
+                    } else {
+                        TfCodPessoa.setText("");
+                        TfPessoa.setText("");
+                    }
+                }
+            });
+        }
+    }//GEN-LAST:event_BtPesqPessoaActionPerformed
+
+    private void BtCadPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadPessoaActionPerformed
+        if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
+            final InterfaceCliente tela = new InterfaceCliente(getPrimeiratela(), true);
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+
+                }
+            });
+        } else {
+            final InterfaceFornecedor tela = new InterfaceFornecedor(getPrimeiratela(), true);
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+
+                }
+            });
+        }
+    }//GEN-LAST:event_BtCadPessoaActionPerformed
+
+    private void TfValorTotalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorTotalKeyTyped
+        valida.limitemaximo(evt, TfValorTotal.getText(), 13);
+    }//GEN-LAST:event_TfValorTotalKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadCondicaoPgto;
+    private javax.swing.JButton BtCadPessoa;
     private javax.swing.JButton BtCancelar;
     private javax.swing.JButton BtGravar;
     private javax.swing.JButton BtIncluir;
     private javax.swing.JButton BtPesqCondicaoPgto;
+    private javax.swing.JButton BtPesqPessoa;
+    private javax.swing.JComboBox CbPessoa;
+    private javax.swing.JLabel LbCodPessoa;
+    private javax.swing.JLabel LbNomePessoa;
     private javax.swing.JPanel PnBotoes;
     private javax.swing.JTextField TfCodCondicaoPgto;
+    private javax.swing.JTextField TfCodPessoa;
     private javax.swing.JTextField TfCodigo;
     private javax.swing.JTextField TfCondicaoPgto;
     private javax.swing.JFormattedTextField TfData;
     private javax.swing.JTextField TfDescOperacao;
+    private javax.swing.JTextField TfPessoa;
     private JNumberField.JNumberField TfValorTotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -381,6 +576,21 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
         parcelas.getConta().setDescricao("REFERENTE A " + TfDescOperacao.getText());
         parcelas.getConta().setDtconta(TfData.getText());
         parcelas.getConta().setTotal(Float.parseFloat(TfValorTotal.getValue().toString()));
+        if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
+            if(!TfCodPessoa.getText().equals("") && !TfPessoa.getText().equals("")){
+                cliente.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
+                parcelas.getConta().setCodigopessoa(cliente.retornacodigopessoacliente());
+            }else{
+                parcelas.getConta().setCodigopessoa(0);
+            }
+        } else {
+            if(!TfCodPessoa.getText().equals("") && !TfPessoa.getText().equals("")){
+                fornecedor.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
+                parcelas.getConta().setCodigopessoa(fornecedor.retornacodigopessoafornecedor());
+            }else{
+                parcelas.getConta().setCodigopessoa(0);
+            }
+        }
     }
 
     public java.awt.Frame getPrimeiratela() {

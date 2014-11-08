@@ -39,80 +39,36 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        TbPagarConta = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TbFornecedores = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        CbPesqFornecedor = new javax.swing.JComboBox();
-        TfPesqFornecedor = new javax.swing.JTextField();
-        BtPesqFornecedor = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        TbContas = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        TbParcelas = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        TbPagarConta3 = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        TbFornecedores3 = new javax.swing.JTable();
+        jLabel31 = new javax.swing.JLabel();
+        CbPesqFornecedor3 = new javax.swing.JComboBox();
+        TfPesqFornecedor3 = new javax.swing.JTextField();
+        BtPesqFornecedor4 = new javax.swing.JButton();
+        jLabel32 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        TbContas3 = new javax.swing.JTable();
+        jLabel33 = new javax.swing.JLabel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        TbParcelas3 = new javax.swing.JTable();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
         try{
             valor = new MaskFormatter("###,##");
         } catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
         }
-        TfValorPagar = new JFormattedTextField(valor);
-        jLabel6 = new javax.swing.JLabel();
-        CbCondicaoPgto = new javax.swing.JComboBox();
-        BtPagar = new javax.swing.JButton();
-        PnNovaConta = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        TfCodigo = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        TfDescNotaCompra = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        TfCodFuncionario = new javax.swing.JTextField();
-        BtPesqFuncionario = new javax.swing.JButton();
-        TfFuncionario = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        BtCadFuncionario = new javax.swing.JButton();
-        TfCodFornecedor = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        BtPesqFornecedor1 = new javax.swing.JButton();
-        TfFornecedor = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        BtCadFornecedor = new javax.swing.JButton();
-        TfCodFormaPgto = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        BtPesqFormaPgto = new javax.swing.JButton();
-        TfFormaPgto = new javax.swing.JTextField();
-        BtCadFormaPgto = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        try{
-            data = new MaskFormatter("##/##/####");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Data");
-        }
-        TfData = new JFormattedTextField(data);
-        try{
-            valor = new MaskFormatter("###,##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfValorTotal = new JFormattedTextField(valor);
-        jLabel17 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        SpDiaVencimento = new javax.swing.JSpinner();
-        PnBotoes = new javax.swing.JPanel();
-        BtGravar = new javax.swing.JButton();
-        BtIncluir = new javax.swing.JButton();
-        BtCancelar = new javax.swing.JButton();
+        TfValorPagar3 = new JFormattedTextField(valor);
+        jLabel36 = new javax.swing.JLabel();
+        CbCondicaoPgto3 = new javax.swing.JComboBox();
+        BtPagar3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Contas à Pagar - Software Loja da Fátima");
         setResizable(false);
 
-        TbFornecedores.setModel(new javax.swing.table.DefaultTableModel(
+        TbFornecedores3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -128,17 +84,17 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(TbFornecedores);
+        jScrollPane10.setViewportView(TbFornecedores3);
 
-        jLabel3.setText("Buscar Fornecedor");
+        jLabel31.setText("Buscar Fornecedor");
 
-        CbPesqFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos os Fornecedores", "Código do Fornecedor", "Nome Fantasia do Fornecedor", "CNPJ" }));
+        CbPesqFornecedor3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos os Fornecedores", "Código do Fornecedor", "Nome Fantasia do Fornecedor", "CNPJ" }));
 
-        BtPesqFornecedor.setText("Pesquisar");
+        BtPesqFornecedor4.setText("Pesquisar");
 
-        jLabel1.setText("Contas com o Fornecedor:");
+        jLabel32.setText("Contas com o Fornecedor:");
 
-        TbContas.setModel(new javax.swing.table.DefaultTableModel(
+        TbContas3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -154,14 +110,14 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(TbContas);
-        if (TbContas.getColumnModel().getColumnCount() > 0) {
-            TbContas.getColumnModel().getColumn(0).setResizable(false);
+        jScrollPane11.setViewportView(TbContas3);
+        if (TbContas3.getColumnModel().getColumnCount() > 0) {
+            TbContas3.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jLabel2.setText("Parcelas da Conta:");
+        jLabel33.setText("Parcelas da Conta:");
 
-        TbParcelas.setModel(new javax.swing.table.DefaultTableModel(
+        TbParcelas3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -177,296 +133,86 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(TbParcelas);
+        jScrollPane12.setViewportView(TbParcelas3);
 
-        jLabel4.setText("Valor à Pagar");
+        jLabel34.setText("Valor à Pagar");
 
-        jLabel5.setText("R$");
+        jLabel35.setText("R$");
 
-        jLabel6.setText("Condição de Pagamento");
+        jLabel36.setText("Condição de Pagamento");
 
-        BtPagar.setText("Pagar");
+        BtPagar3.setText("Pagar");
 
-        javax.swing.GroupLayout TbPagarContaLayout = new javax.swing.GroupLayout(TbPagarConta);
-        TbPagarConta.setLayout(TbPagarContaLayout);
-        TbPagarContaLayout.setHorizontalGroup(
-            TbPagarContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TbPagarContaLayout.createSequentialGroup()
+        javax.swing.GroupLayout TbPagarConta3Layout = new javax.swing.GroupLayout(TbPagarConta3);
+        TbPagarConta3.setLayout(TbPagarConta3Layout);
+        TbPagarConta3Layout.setHorizontalGroup(
+            TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TbPagarConta3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(TbPagarContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
-                    .addGroup(TbPagarContaLayout.createSequentialGroup()
-                        .addComponent(CbPesqFornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                    .addGroup(TbPagarConta3Layout.createSequentialGroup()
+                        .addComponent(CbPesqFornecedor3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfPesqFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TfPesqFornecedor3, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtPesqFornecedor))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
-                    .addGroup(TbPagarContaLayout.createSequentialGroup()
-                        .addGroup(TbPagarContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addGroup(TbPagarContaLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                        .addComponent(BtPesqFornecedor4))
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                    .addGroup(TbPagarConta3Layout.createSequentialGroup()
+                        .addGroup(TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel31)
+                            .addComponent(jLabel32)
+                            .addComponent(jLabel33)
+                            .addGroup(TbPagarConta3Layout.createSequentialGroup()
+                                .addComponent(jLabel34)
                                 .addGap(40, 40, 40)
-                                .addComponent(jLabel6))
-                            .addGroup(TbPagarContaLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addComponent(jLabel36))
+                            .addGroup(TbPagarConta3Layout.createSequentialGroup()
+                                .addComponent(jLabel35)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfValorPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TfValorPagar3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(CbCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CbCondicaoPgto3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(BtPagar3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        TbPagarContaLayout.setVerticalGroup(
-            TbPagarContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TbPagarContaLayout.createSequentialGroup()
+        TbPagarConta3Layout.setVerticalGroup(
+            TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TbPagarConta3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
+                .addComponent(jLabel31)
                 .addGap(3, 3, 3)
-                .addGroup(TbPagarContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbPesqFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfPesqFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesqFornecedor))
+                .addGroup(TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CbPesqFornecedor3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfPesqFornecedor3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtPesqFornecedor4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(jLabel32)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addComponent(jLabel33)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(TbPagarContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6))
+                .addGroup(TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34)
+                    .addComponent(jLabel36))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(TbPagarContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(TfValorPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CbCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPagar))
+                .addGroup(TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel35)
+                    .addComponent(TfValorPagar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CbCondicaoPgto3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtPagar3))
                 .addGap(302, 302, 302))
         );
 
-        jTabbedPane1.addTab("Pagar Conta", TbPagarConta);
-
-        jLabel7.setText("Código");
-
-        TfCodigo.setEditable(false);
-
-        jLabel8.setText("Descrição da Nota");
-
-        jLabel9.setText("Cód. Funcionário");
-
-        BtPesqFuncionario.setText("Pesquisar");
-
-        TfFuncionario.setEditable(false);
-
-        jLabel10.setText("Funcionário");
-
-        BtCadFuncionario.setText("Cadastrar Funcionário");
-
-        jLabel11.setText("Cód. Fornecedor");
-
-        BtPesqFornecedor1.setText("Pesquisar");
-
-        TfFornecedor.setEditable(false);
-
-        jLabel12.setText("Fornecedor");
-
-        BtCadFornecedor.setText("Cadastrar Fornecedor");
-
-        jLabel13.setText("Cód. Forma de Pagamento");
-
-        BtPesqFormaPgto.setText("Pesquisar");
-
-        TfFormaPgto.setEditable(false);
-
-        BtCadFormaPgto.setText("Cadastrar Forma de Pagamento");
-
-        jLabel14.setText("Forma de Pagamento");
-
-        jLabel15.setText("Data");
-
-        jLabel16.setText("Valor Total");
-
-        TfData.setEditable(false);
-
-        jLabel17.setText("R$");
-
-        jLabel19.setText("Dia do Mês para Vencimento");
-
-        BtGravar.setText("Gravar");
-
-        BtIncluir.setText("Nova Conta");
-
-        BtCancelar.setText("Cancelar");
-
-        javax.swing.GroupLayout PnBotoesLayout = new javax.swing.GroupLayout(PnBotoes);
-        PnBotoes.setLayout(PnBotoesLayout);
-        PnBotoesLayout.setHorizontalGroup(
-            PnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnBotoesLayout.createSequentialGroup()
-                .addComponent(BtIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(258, 258, 258)
-                .addComponent(BtGravar, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(BtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        PnBotoesLayout.setVerticalGroup(
-            PnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BtIncluir, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-            .addComponent(BtGravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(BtCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout PnNovaContaLayout = new javax.swing.GroupLayout(PnNovaConta);
-        PnNovaConta.setLayout(PnNovaContaLayout);
-        PnNovaContaLayout.setHorizontalGroup(
-            PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnNovaContaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PnNovaContaLayout.createSequentialGroup()
-                        .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel13))
-                        .addGap(474, 491, Short.MAX_VALUE))
-                    .addGroup(PnNovaContaLayout.createSequentialGroup()
-                        .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TfDescNotaCompra)
-                            .addGroup(PnNovaContaLayout.createSequentialGroup()
-                                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addGroup(PnNovaContaLayout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(57, 57, 57)
-                                        .addComponent(jLabel15))
-                                    .addGroup(PnNovaContaLayout.createSequentialGroup()
-                                        .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(PnNovaContaLayout.createSequentialGroup()
-                                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(PnNovaContaLayout.createSequentialGroup()
-                                            .addComponent(jLabel17)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(TfValorTotal))
-                                        .addComponent(TfCodFormaPgto, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(TfCodFornecedor, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(TfCodFuncionario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel16))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PnNovaContaLayout.createSequentialGroup()
-                                        .addComponent(BtPesqFormaPgto)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TfFormaPgto)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtCadFormaPgto))
-                                    .addGroup(PnNovaContaLayout.createSequentialGroup()
-                                        .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(BtPesqFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(BtPesqFornecedor1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(PnNovaContaLayout.createSequentialGroup()
-                                                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(TfFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                                                    .addComponent(TfFornecedor))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(BtCadFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(BtCadFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                            .addGroup(PnNovaContaLayout.createSequentialGroup()
-                                                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel14)
-                                                    .addComponent(jLabel10)
-                                                    .addComponent(jLabel12))
-                                                .addGap(0, 0, Short.MAX_VALUE))))
-                                    .addGroup(PnNovaContaLayout.createSequentialGroup()
-                                        .addGap(26, 26, 26)
-                                        .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel19)
-                                            .addComponent(SpDiaVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addContainerGap())))
-            .addComponent(PnBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        PnNovaContaLayout.setVerticalGroup(
-            PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnNovaContaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TfDescNotaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesqFuncionario)
-                    .addComponent(TfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtCadFuncionario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfCodFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesqFornecedor1)
-                    .addComponent(TfFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtCadFornecedor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfCodFormaPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesqFormaPgto)
-                    .addComponent(TfFormaPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtCadFormaPgto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PnNovaContaLayout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PnNovaContaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(PnNovaContaLayout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SpDiaVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
-                .addComponent(PnBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(205, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Nova Conta", PnNovaConta);
+        jTabbedPane1.addTab("Pagar Conta", TbPagarConta3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -474,7 +220,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,59 +233,82 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtCadFormaPgto;
-    private javax.swing.JButton BtCadFornecedor;
-    private javax.swing.JButton BtCadFuncionario;
-    private javax.swing.JButton BtCancelar;
-    private javax.swing.JButton BtGravar;
-    private javax.swing.JButton BtIncluir;
     private javax.swing.JButton BtPagar;
-    private javax.swing.JButton BtPesqFormaPgto;
+    private javax.swing.JButton BtPagar1;
+    private javax.swing.JButton BtPagar2;
+    private javax.swing.JButton BtPagar3;
     private javax.swing.JButton BtPesqFornecedor;
-    private javax.swing.JButton BtPesqFornecedor1;
-    private javax.swing.JButton BtPesqFuncionario;
+    private javax.swing.JButton BtPesqFornecedor2;
+    private javax.swing.JButton BtPesqFornecedor3;
+    private javax.swing.JButton BtPesqFornecedor4;
     private javax.swing.JComboBox CbCondicaoPgto;
+    private javax.swing.JComboBox CbCondicaoPgto1;
+    private javax.swing.JComboBox CbCondicaoPgto2;
+    private javax.swing.JComboBox CbCondicaoPgto3;
     private javax.swing.JComboBox CbPesqFornecedor;
-    private javax.swing.JPanel PnBotoes;
-    private javax.swing.JPanel PnNovaConta;
-    private javax.swing.JSpinner SpDiaVencimento;
+    private javax.swing.JComboBox CbPesqFornecedor1;
+    private javax.swing.JComboBox CbPesqFornecedor2;
+    private javax.swing.JComboBox CbPesqFornecedor3;
     private javax.swing.JTable TbContas;
+    private javax.swing.JTable TbContas1;
+    private javax.swing.JTable TbContas2;
+    private javax.swing.JTable TbContas3;
     private javax.swing.JTable TbFornecedores;
+    private javax.swing.JTable TbFornecedores1;
+    private javax.swing.JTable TbFornecedores2;
+    private javax.swing.JTable TbFornecedores3;
     private javax.swing.JPanel TbPagarConta;
+    private javax.swing.JPanel TbPagarConta1;
+    private javax.swing.JPanel TbPagarConta2;
+    private javax.swing.JPanel TbPagarConta3;
     private javax.swing.JTable TbParcelas;
-    private javax.swing.JTextField TfCodFormaPgto;
-    private javax.swing.JTextField TfCodFornecedor;
-    private javax.swing.JTextField TfCodFuncionario;
-    private javax.swing.JTextField TfCodigo;
-    private javax.swing.JFormattedTextField TfData;
-    private javax.swing.JTextField TfDescNotaCompra;
-    private javax.swing.JTextField TfFormaPgto;
-    private javax.swing.JTextField TfFornecedor;
-    private javax.swing.JTextField TfFuncionario;
+    private javax.swing.JTable TbParcelas1;
+    private javax.swing.JTable TbParcelas2;
+    private javax.swing.JTable TbParcelas3;
     private javax.swing.JTextField TfPesqFornecedor;
+    private javax.swing.JTextField TfPesqFornecedor1;
+    private javax.swing.JTextField TfPesqFornecedor2;
+    private javax.swing.JTextField TfPesqFornecedor3;
     private javax.swing.JFormattedTextField TfValorPagar;
-    private javax.swing.JFormattedTextField TfValorTotal;
+    private javax.swing.JFormattedTextField TfValorPagar1;
+    private javax.swing.JFormattedTextField TfValorPagar2;
+    private javax.swing.JFormattedTextField TfValorPagar3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 

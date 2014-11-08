@@ -336,6 +336,18 @@ public class InterfaceProduto extends javax.swing.JDialog {
             }
         });
 
+        TfValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TfValorKeyTyped(evt);
+            }
+        });
+
+        TfQtEstoqueMin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TfQtEstoqueMinKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout PnProdutoLayout = new javax.swing.GroupLayout(PnProduto);
         PnProduto.setLayout(PnProdutoLayout);
         PnProdutoLayout.setHorizontalGroup(
@@ -1066,6 +1078,14 @@ public class InterfaceProduto extends javax.swing.JDialog {
     private void TfDescricaoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfDescricaoKeyPressed
         valida.limitemaximo(evt, TfDescricao.getText(), 70);
     }//GEN-LAST:event_TfDescricaoKeyPressed
+
+    private void TfValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorKeyTyped
+        valida.limitemaximo(evt, TfValor.getText(), 13);
+    }//GEN-LAST:event_TfValorKeyTyped
+
+    private void TfQtEstoqueMinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfQtEstoqueMinKeyTyped
+        valida.limitemaximo(evt, TfQtEstoqueMin.getText(), 10);
+    }//GEN-LAST:event_TfQtEstoqueMinKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

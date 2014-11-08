@@ -519,8 +519,14 @@
                       </Events>
                     </Component>
                     <Component class="JNumberField.JNumberField" name="TfValor">
+                      <Events>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TfValorKeyTyped"/>
+                      </Events>
                     </Component>
                     <Component class="JNumberField.JNumberField" name="TfQtEstoqueMin">
+                      <Events>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TfQtEstoqueMinKeyTyped"/>
+                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JNumberField.JNumberField(2);&#xd;&#xa;"/>
                       </AuxValues>

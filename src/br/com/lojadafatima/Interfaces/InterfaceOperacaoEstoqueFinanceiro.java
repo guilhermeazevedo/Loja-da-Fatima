@@ -353,11 +353,17 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfQuantidadeKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TfQuantidadeKeyTyped(evt);
+            }
         });
 
         TfValorUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfValorUnitarioKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TfValorUnitarioKeyTyped(evt);
             }
         });
 
@@ -800,6 +806,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                 parcelas.getConta().setDescricao("REFERENTE A COMPRA, CODIGO DA NOTA DO FORNECEDOR: " + TfDescOperacao.getText());
                 parcelas.getConta().setDtconta(TfData.getText());
                 parcelas.getConta().setTotal(Float.parseFloat(TfValorTotalOperacao.getValue().toString()));
+                parcelas.getConta().setCodigopessoa(prodcompravenda.getCompravenda().getCodigopessoa());
                 parcelas.getConta().incluir();
 
                 parcelas.gerarparcelas();
@@ -950,6 +957,14 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_TfQuantidadeFocusLost
+
+    private void TfQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfQuantidadeKeyTyped
+        valida.limitemaximo(evt, TfQuantidade.getText(), 10);
+    }//GEN-LAST:event_TfQuantidadeKeyTyped
+
+    private void TfValorUnitarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorUnitarioKeyTyped
+        valida.limitemaximo(evt, TfValorUnitario.getText(), 13);
+    }//GEN-LAST:event_TfValorUnitarioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

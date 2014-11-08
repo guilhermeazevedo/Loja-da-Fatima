@@ -300,6 +300,11 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                 TfQuantidadeFocusLost(evt);
             }
         });
+        TfQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TfQuantidadeKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -755,6 +760,10 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_TfQuantidadeFocusLost
+
+    private void TfQuantidadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfQuantidadeKeyTyped
+        valida.limitemaximo(evt, TfQuantidade.getText(), 10);
+    }//GEN-LAST:event_TfQuantidadeKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadFuncionario;

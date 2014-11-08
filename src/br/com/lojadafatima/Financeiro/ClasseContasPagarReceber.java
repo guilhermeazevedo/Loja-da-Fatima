@@ -15,6 +15,7 @@ public class ClasseContasPagarReceber {
     private int codigo;
     private ClasseCompraVenda compravenda = new ClasseCompraVenda();
     private String descricao;
+    private int codigopessoa;
     private ClasseOperacoes operacao = new ClasseOperacoes();
     private ClasseCondicaoPagamento condicao = new ClasseCondicaoPagamento();
     private ClasseMulta multa = new ClasseMulta();
@@ -28,18 +29,20 @@ public class ClasseContasPagarReceber {
         getMulta().getultimamulta();
         if (getCompravenda().getCodigo() == 0) {
             conn.executeSQL("INSERT INTO bancoloja.\"CONTAS_PAGAR_RECEBER\"(\n"
-                    + "            \"CD_CONTA\", \"CD_OPERACAO\", \n"
+                    + "            \"CD_CONTA\", \"CD_OPERACAO\", \"CD_PESSOA\",\n"
                     + "            \"DS_CONTA\", \"CD_CONDICAO_PGTO\", \"CD_MULTA\", \"VL_TOTAL\", \"DT_CONTA\", \"SITUACAO\")\n"
-                    + "VALUES (" + getCodigo() + ", " + getOperacao().getCodigo() + ", \n"
+                    + "VALUES (" + getCodigo() + ", " + getOperacao().getCodigo() + ", "+getCodigopessoa()+",\n"
                     + "        '" + getDescricao() + "', " + getCondicao().getCodigo() + ", " + getMulta().getCodigo() + ", "+getTotal()+", '"+getDtconta()+"', 'A')");
         } else {
             conn.executeSQL("INSERT INTO bancoloja.\"CONTAS_PAGAR_RECEBER\"(\n"
-                    + "            \"CD_CONTA\", \"CD_OPERACAO\", \"CD_COMPRA_VENDA\", \"CD_OPERACAO_COMPRA_VENDA\", \n"
+                    + "            \"CD_CONTA\", \"CD_OPERACAO\", \"CD_COMPRA_VENDA\", \"CD_OPERACAO_COMPRA_VENDA\", \"CD_PESSOA\",\n"
                     + "            \"DS_CONTA\", \"CD_CONDICAO_PGTO\", \"CD_MULTA\", \"VL_TOTAL\", \"DT_CONTA\", \"SITUACAO\")\n"
-                    + "VALUES (" + getCodigo() + ", " + getOperacao().getCodigo() + ", " + getCompravenda().getCodigo() + ", " + getCompravenda().getOperacao().getCodigo() + ", \n"
+                    + "VALUES (" + getCodigo() + ", " + getOperacao().getCodigo() + ", " + getCompravenda().getCodigo() + ", " + getCompravenda().getOperacao().getCodigo() + ", "+getCodigopessoa()+",\n"
                     + "        '" + getDescricao() + "', " + getCondicao().getCodigo() + ", " + getMulta().getCodigo() + ", "+getTotal()+", '"+getDtconta()+"', 'A')");
         }
     }
+    
+    
 
     public int getCodigo() {
         return codigo;
@@ -111,6 +114,14 @@ public class ClasseContasPagarReceber {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    public int getCodigopessoa() {
+        return codigopessoa;
+    }
+
+    public void setCodigopessoa(int codigopessoa) {
+        this.codigopessoa = codigopessoa;
     }
 
 }

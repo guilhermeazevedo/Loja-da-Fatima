@@ -480,6 +480,18 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
 
         LbCPFValido.setText("Informa CPF Valido");
 
+        TfComissao.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TfComissaoKeyTyped(evt);
+            }
+        });
+
+        TfSalario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TfSalarioKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout PnCadastroLayout = new javax.swing.GroupLayout(PnCadastro);
         PnCadastro.setLayout(PnCadastroLayout);
         PnCadastroLayout.setHorizontalGroup(
@@ -1240,6 +1252,14 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             LbCPFValido.setForeground(Color.red);
         }
     }//GEN-LAST:event_TfNrCPFKeyReleased
+
+    private void TfSalarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfSalarioKeyTyped
+        valida.limitemaximo(evt, TfSalario.getText(), 13);
+    }//GEN-LAST:event_TfSalarioKeyTyped
+
+    private void TfComissaoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfComissaoKeyTyped
+        valida.limitemaximo(evt, TfComissao.getText(), 10);
+    }//GEN-LAST:event_TfComissaoKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtAlterar;
