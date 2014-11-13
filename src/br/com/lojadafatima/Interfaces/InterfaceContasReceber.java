@@ -76,6 +76,8 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbClientes = new javax.swing.JTable();
@@ -94,6 +96,14 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         BtPagar = new javax.swing.JButton();
         TfValor = new JNumberField.JNumberField();
         BtCadFormaPgto = new javax.swing.JButton();
+
+        jMenuItem1.setText("Extornar parcela");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Contas à Receber - Software Loja da Fátima");
@@ -186,6 +196,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        TbParcelas.setComponentPopupMenu(jPopupMenu1);
         TbParcelas.getTableHeader().setReorderingAllowed(false);
         TbParcelas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -436,6 +447,25 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         });
     }//GEN-LAST:event_BtCadFormaPgtoActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if(TbParcelas.getSelectedRow() > -1){
+            if(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 5).toString().equals("PAGA")){
+                if(JOptionPane.showConfirmDialog(null, "Deseja realmente extornar esta parcela?\n"
+                                                     + "(Fazendo isso voce estara retirando do caixa o valor pago nesta parcela)", "Deseja extornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                    parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
+                    parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
+                    parcelas.extornarparcela();
+                    ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
+                    mvtocaixa.setParcela(parcelas);
+                    mvtocaixa.setTpmvto("S");
+                    mvtocaixa.setVlmvto(parcelas.getVlpagar());
+                    mvtocaixa.incluir();
+                    TbContasMouseReleased(null);
+                }
+            }
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadFormaPgto;
@@ -452,7 +482,9 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

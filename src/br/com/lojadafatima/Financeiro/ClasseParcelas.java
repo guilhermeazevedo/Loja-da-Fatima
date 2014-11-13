@@ -152,6 +152,13 @@ public class ClasseParcelas {
                         "            "+getVlpagar()+", "+getCodigoreparcela()+", "+getConta().getCodigo()+", \n" +
                         "            "+getConta().getOperacao().getCodigo()+")");
     }
+    
+    public void extornarparcela(){
+        conn.executeSQL("UPDATE bancoloja.\"PARCELAS\"\n" +
+                        "   SET \"CD_FORMA_PGTO\" = NULL, \"DT_PAGO\" = NULL, \"VL_PAGAR\" = "+getVlpagar()+", \"VL_PAGO\" = NULL\n" +
+                        " WHERE \"CD_PARCELA\" = "+getCodigo()+" AND \"CD_CONTA\" = "+getConta().getCodigo()+" AND \"CD_OPERACAO\" = "+getConta().getOperacao().getCodigo());
+        atualizasituacaoconta();
+    }
 
     public int getCodigo() {
         return codigo;
