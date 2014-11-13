@@ -9,6 +9,9 @@ package br.com.lojadafatima.Financeiro;
 import br.com.lojadafatima.ClassesFerramentas.GeraCodigos;
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,6 +47,17 @@ public class ClasseFormaPagamento {
         conn.executeSQL("SELECT \"DS_FORMA_PGTO\"\n" +
                         "FROM bancoloja.\"CAD_FORMA_PGTO\"");
         return conn.resultset;
+    }
+    
+    public int retornacodigo(){
+        conn.executeSQL("SELECT \"CD_FORMA_PGTO\" FROM bancoloja.\"CAD_FORMA_PGTO\"\n" +
+                        "WHERE \"DS_FORMA_PGTO\" = '"+getFormapgto()+"'");
+        try {
+            conn.resultset.first();
+            return conn.resultset.getInt(1);
+        } catch (SQLException ex) {
+            return 0;
+        }
     }
 
     public int getCodigo() {

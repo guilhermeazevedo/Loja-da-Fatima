@@ -163,6 +163,18 @@ public class ClassePessoaJuridica {
         }
         return "";
     }
+    
+    public boolean epessoajuridica(){
+        conn.executeSQL("SELECT \"CD_PESSOA_JUR\" FROM bancoloja.\"CAD_PESSOA_JURIDICA\"\n" +
+                        "WHERE \"NM_FANTASIA\" = '"+getNomefantasia()+"'");
+        try {
+            conn.resultset.first();
+            getPessoa().setCodigo(conn.resultset.getInt(1));
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
 
     public ClassePessoa getPessoa() {
         return pessoa;

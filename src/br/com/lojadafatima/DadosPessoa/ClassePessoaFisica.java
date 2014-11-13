@@ -8,6 +8,8 @@ package br.com.lojadafatima.DadosPessoa;
 
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -157,6 +159,18 @@ public class ClassePessoaFisica {
             getPessoa().getEndereco().getCidade().getEstado().setEstado(conn.resultset.getString(12));
         } catch (SQLException ex) {
             
+        }
+    }
+    
+    public boolean epessoafisica(){
+        conn.executeSQL("SELECT \"CD_PESSOA_FIS\" FROM bancoloja.\"CAD_PESSOA_FISICA\"\n" +
+                        "WHERE \"NM_PESSOA\" = '"+getNome()+"'");
+        try {
+            conn.resultset.first();
+            getPessoa().setCodigo(conn.resultset.getInt(1));
+            return true;
+        } catch (SQLException ex) {
+            return false;
         }
     }
 

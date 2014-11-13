@@ -33,7 +33,10 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" pref="565" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" min="-2" pref="609" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -43,21 +46,19 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="CbPesqCliente" pref="257" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="TfPesqCliente" min="-2" pref="366" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="BtPesqCliente" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane1" alignment="0" pref="714" max="32767" attributes="0"/>
                       <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                       <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="CbPesqCliente" min="-2" pref="343" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="BtPesqCliente" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -69,9 +70,14 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="TfValor" min="-2" pref="99" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="CbFormaPgto" min="-2" pref="297" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="BtPagar" min="-2" pref="81" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="BtPagar" min="-2" pref="99" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="CbFormaPgto" min="-2" pref="297" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="BtCadFormaPgto" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -89,7 +95,6 @@
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="CbPesqCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="TfPesqCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="BtPesqCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -110,10 +115,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="CbFormaPgto" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="BtPagar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="TfValor" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtCadFormaPgto" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="234" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="BtPagar" min="-2" pref="46" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -129,19 +136,13 @@
             <Component class="javax.swing.JTable" name="TbClientes">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="0">
-                    <Column editable="false" title="C&#xf3;digo" type="java.lang.Object"/>
-                    <Column editable="false" title="Cliente" type="java.lang.Object"/>
+                  <Table columnCount="2" rowCount="0">
+                    <Column editable="false" title="Nome/Nome Fantasia" type="java.lang.Object"/>
                     <Column editable="false" title="CPF/CNPJ" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -158,6 +159,9 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TbClientesMouseReleased"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -170,22 +174,17 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="5">
-                <StringItem index="0" value="Clientes com Contas em Aberto"/>
-                <StringItem index="1" value="Clientes com Contas Vencidas"/>
-                <StringItem index="2" value="Todos os Clientes"/>
-                <StringItem index="3" value="C&#xf3;digo do Cliente"/>
-                <StringItem index="4" value="Nome do Cliente"/>
+                <StringItem index="0" value="Pessoas com Contas em Aberto"/>
+                <StringItem index="1" value="Pessoas com Contas Vencidas"/>
+                <StringItem index="2" value="Listar apenas Clientes com Contas em Aberto"/>
+                <StringItem index="3" value="Listar apenas Clientes com Contas Vencidas"/>
+                <StringItem index="4" value="Listar todos os Clientes"/>
               </StringArray>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CbPesqClienteActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="TfPesqCliente">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="BtPesqCliente">
           <Properties>
@@ -212,11 +211,11 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="7" rowCount="0">
                     <Column editable="false" title="C&#xf3;digo da Conta" type="java.lang.Object"/>
-                    <Column editable="false" title="Cliente" type="java.lang.Object"/>
-                    <Column editable="false" title="Funcion&#xe1;rio" type="java.lang.Object"/>
+                    <Column editable="false" title="Operacao" type="java.lang.Object"/>
+                    <Column editable="false" title="Pessoa" type="java.lang.Object"/>
                     <Column editable="false" title="Condicao de Pagamento" type="java.lang.Object"/>
                     <Column editable="false" title="Data" type="java.lang.Object"/>
-                    <Column editable="false" title="Valor Total da Venda" type="java.lang.Object"/>
+                    <Column editable="false" title="Valor Total" type="java.lang.Object"/>
                     <Column editable="false" title="Situa&#xe7;&#xe3;o" type="java.lang.Object"/>
                   </Table>
                 </Property>
@@ -263,6 +262,9 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TbContasMouseReleased"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -283,12 +285,12 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="7" rowCount="0">
                     <Column editable="false" title="N&#xba; Parcela" type="java.lang.Object"/>
-                    <Column editable="false" title="Condi&#xe7;&#xe3;o de Pagamento" type="java.lang.Object"/>
                     <Column editable="false" title="Valor &#xe0; Pagar(R$)" type="java.lang.Object"/>
                     <Column editable="false" title="Valor Pago(R$)" type="java.lang.Object"/>
                     <Column editable="false" title="Data &#xe0; Pagar" type="java.lang.Object"/>
                     <Column editable="false" title="Data Pago" type="java.lang.Object"/>
                     <Column editable="false" title="Situa&#xe7;&#xe3;o" type="java.lang.Object"/>
+                    <Column editable="false" title="Reparcela da Parcela Numero" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -334,6 +336,9 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TbParcelasMouseReleased"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -358,10 +363,21 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Pagar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtPagarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="JNumberField.JNumberField" name="TfValor">
           <Events>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TfValorKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="BtCadFormaPgto">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cadastrar Forma de Pagamento"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtCadFormaPgtoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

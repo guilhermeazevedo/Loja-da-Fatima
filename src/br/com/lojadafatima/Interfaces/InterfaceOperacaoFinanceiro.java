@@ -567,6 +567,11 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
             TfValorTotal.grabFocus();
             return false;
         }
+        if(parcelas.getConta().getOperacao().getTpfinanceiro().equals("E") && TfCodPessoa.getText().equals("") && TfPessoa.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Digite a Pessoa que fara parte desta conta a receber!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            TfCodPessoa.grabFocus();
+            return false;
+        }
         return true;
     }
     

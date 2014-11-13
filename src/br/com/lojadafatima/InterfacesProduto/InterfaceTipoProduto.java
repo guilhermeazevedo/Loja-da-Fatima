@@ -50,7 +50,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnItAlterar = new javax.swing.JMenuItem();
+        MnItCarregarDados = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         TfCodigo = new javax.swing.JTextField();
@@ -74,13 +74,13 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
         BtCadTabela = new javax.swing.JButton();
 
-        MnItAlterar.setText("Alterar Tipo de Produto");
-        MnItAlterar.addActionListener(new java.awt.event.ActionListener() {
+        MnItCarregarDados.setText("Carregar dados");
+        MnItCarregarDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnItAlterarActionPerformed(evt);
+                MnItCarregarDadosActionPerformed(evt);
             }
         });
-        jPopupMenu1.add(MnItAlterar);
+        jPopupMenu1.add(MnItCarregarDados);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tipo de Produto - Software Loja da Fátima");
@@ -366,7 +366,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         TbConsulta.setEnabled(false);
     }//GEN-LAST:event_BtIncluirActionPerformed
 
-    private void MnItAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnItAlterarActionPerformed
+    private void MnItCarregarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnItCarregarDadosActionPerformed
         int index = TbConsulta.getSelectedRow();
         if (index > -1) {
             TfCodigo.setText(TbConsulta.getValueAt(index, 0).toString());
@@ -374,12 +374,12 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
             TfTipoProduto.setText(TbConsulta.getValueAt(index, 1).toString());
             preenche.PreencherJtable(TbCarcTipoProduto, tipoproduto.buscartabelasdotipoproduto());
         }
-    }//GEN-LAST:event_MnItAlterarActionPerformed
+    }//GEN-LAST:event_MnItCarregarDadosActionPerformed
 
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
         if (!TfTipoProduto.getText().equals("")) {
             if (TbCarcTipoProduto.getRowCount() >= 1) {
-                if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja gravar os dados deste tipo de produto?","Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja gravar os dados deste tipo de produto?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     tipoproduto.setTipoproduto(TfTipoProduto.getText());
                     if (TfCodigo.getText().equals("")) {
                         tipoproduto.incluir();
@@ -433,9 +433,9 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
                 tam2[2] = 200;
                 preenche.FormataJtable(TbCaracteristicas, tam2);
                 preenche.PreencheJtableSEL(TbCaracteristicas, tipoproduto.getTabela().buscartabelascomboolean());
-                for(int i = 0; i < TbCarcTipoProduto.getRowCount(); i++){
-                    for(int j = 0; j < TbCaracteristicas.getRowCount(); j++){
-                        if(Integer.parseInt(TbCaracteristicas.getValueAt(j, 1).toString()) == Integer.parseInt(TbCarcTipoProduto.getValueAt(i, 0).toString())){
+                for (int i = 0; i < TbCarcTipoProduto.getRowCount(); i++) {
+                    for (int j = 0; j < TbCaracteristicas.getRowCount(); j++) {
+                        if (Integer.parseInt(TbCaracteristicas.getValueAt(j, 1).toString()) == Integer.parseInt(TbCarcTipoProduto.getValueAt(i, 0).toString())) {
                             TbCaracteristicas.setValueAt((true), j, 0);
                         }
                     }
@@ -460,6 +460,13 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 preenche.PreencheJtableSEL(TbCaracteristicas, tipoproduto.getTabela().buscartabelascomboolean());
+                for (int i = 0; i < TbCarcTipoProduto.getRowCount(); i++) {
+                    for (int j = 0; j < TbCaracteristicas.getRowCount(); j++) {
+                        if (Integer.parseInt(TbCaracteristicas.getValueAt(j, 1).toString()) == Integer.parseInt(TbCarcTipoProduto.getValueAt(i, 0).toString())) {
+                            TbCaracteristicas.setValueAt((true), j, 0);
+                        }
+                    }
+                }
             }
         });
     }//GEN-LAST:event_BtCadTabelaActionPerformed
@@ -487,23 +494,23 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
     }//GEN-LAST:event_BtExcluirActionPerformed
 
     private void TbCaracteristicasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbCaracteristicasMouseReleased
-        if(TbCaracteristicas.getSelectedRow() > -1){
+        if (TbCaracteristicas.getSelectedRow() > -1) {
             DefaultTableModel tabela = (DefaultTableModel) TbCarcTipoProduto.getModel();
             boolean sel = (Boolean) TbCaracteristicas.getValueAt(TbCaracteristicas.getSelectedRow(), 0);
-            if(sel){
+            if (sel) {
                 boolean inclui = true;
-                for(int i = 0; i < tabela.getRowCount(); i++){
-                    if(Integer.parseInt(tabela.getValueAt(i, 0).toString()) == Integer.parseInt(TbCaracteristicas.getValueAt(TbCaracteristicas.getSelectedRow(), 1).toString())){
+                for (int i = 0; i < tabela.getRowCount(); i++) {
+                    if (Integer.parseInt(tabela.getValueAt(i, 0).toString()) == Integer.parseInt(TbCaracteristicas.getValueAt(TbCaracteristicas.getSelectedRow(), 1).toString())) {
                         inclui = false;
                     }
                 }
-                if(inclui){
+                if (inclui) {
                     int linhas = tabela.getRowCount();
                     tabela.setNumRows(linhas + 1);
                     tabela.setValueAt(TbCaracteristicas.getValueAt(TbCaracteristicas.getSelectedRow(), 1), linhas, 0);
                     tabela.setValueAt(TbCaracteristicas.getValueAt(TbCaracteristicas.getSelectedRow(), 2), linhas, 1);
                 }
-            }else{
+            } else {
                 for (int i = 0; i < tabela.getRowCount(); i++) {
                     if (Integer.parseInt(tabela.getValueAt(i, 0).toString()) == Integer.parseInt(TbCaracteristicas.getValueAt(TbCaracteristicas.getSelectedRow(), 1).toString())) {
                         tabela.removeRow(i);
@@ -521,7 +528,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
     private javax.swing.JButton BtExcluir;
     private javax.swing.JButton BtGravar;
     private javax.swing.JButton BtIncluir;
-    private javax.swing.JMenuItem MnItAlterar;
+    private javax.swing.JMenuItem MnItCarregarDados;
     private javax.swing.JPanel PnBotoes;
     private javax.swing.JTable TbCaracteristicas;
     private javax.swing.JTable TbCarcTipoProduto;

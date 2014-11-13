@@ -8,12 +8,12 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="MnItAlterar">
+        <MenuItem class="javax.swing.JMenuItem" name="MnItCarregarDados">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Alterar Tipo de Produto"/>
+            <Property name="text" type="java.lang.String" value="Carregar dados"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnItAlterarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnItCarregarDadosActionPerformed"/>
           </Events>
         </MenuItem>
       </SubComponents>
