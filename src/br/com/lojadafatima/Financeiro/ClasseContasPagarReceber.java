@@ -5,6 +5,9 @@ import br.com.lojadafatima.CompraVendaOperacoes.ClasseCompraVenda;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseOperacoes;
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -164,6 +167,17 @@ public class ClasseContasPagarReceber {
         conn.executeSQL("UPDATE bancoloja.\"CONTAS_PAGAR_RECEBER\"\n" +
                         "   SET \"SITUACAO\" = 'A'\n" +
                         " WHERE \"CD_CONTA\" = "+getCodigo()+" AND \"CD_OPERACAO\" = "+getOperacao().getCodigo());
+    }
+    
+    public String retornadescricaodaconta(){
+        conn.executeSQL("SELECT \"DS_CONTA\" FROM bancoloja.\"CONTAS_PAGAR_RECEBER\"\n" +
+                        "WHERE \"CD_CONTA\" = "+getCodigo()+" AND \"CD_OPERACAO\" = "+getOperacao().getCodigo());
+        try {
+            conn.resultset.first();
+            return conn.resultset.getString(1);
+        } catch (SQLException ex) {
+            return "";
+        }
     }
 
     public int getCodigo() {

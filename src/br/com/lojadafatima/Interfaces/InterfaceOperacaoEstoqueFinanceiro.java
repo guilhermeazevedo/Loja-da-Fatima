@@ -803,7 +803,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                 parcelas.getConta().setCompravenda(prodcompravenda.getCompravenda());
                 parcelas.getConta().setCondicao(prodcompravenda.getCompravenda().getCondicao());
                 parcelas.getConta().setOperacao(prodcompravenda.getCompravenda().getOperacao());
-                parcelas.getConta().setDescricao("REFERENTE A COMPRA, CODIGO DA NOTA DO FORNECEDOR: " + TfDescOperacao.getText());
+                parcelas.getConta().setDescricao(prodcompravenda.getCompravenda().getDescricao());
                 parcelas.getConta().setDtconta(TfData.getText());
                 parcelas.getConta().setTotal(Float.parseFloat(TfValorTotalOperacao.getValue().toString()));
                 parcelas.getConta().setCodigopessoa(prodcompravenda.getCompravenda().getCodigopessoa());
@@ -1060,7 +1060,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
     public void enviardados() {
         prodcompravenda.getCompravenda().setData(datas.retornadataehora());
-        prodcompravenda.getCompravenda().setDescricao(TfDescOperacao.getText());
+        prodcompravenda.getCompravenda().setDescricao(prodcompravenda.getCompravenda().getOperacao().getDescricao()+" NRO. "+TfCodigo.getText()+" - "+TfDescOperacao.getText());
         if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
             cliente.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
             prodcompravenda.getCompravenda().setCodigopessoa(cliente.retornacodigopessoacliente());

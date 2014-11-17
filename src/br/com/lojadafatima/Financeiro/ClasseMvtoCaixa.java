@@ -19,6 +19,7 @@ public class ClasseMvtoCaixa {
     
     ConexaoPostgre conn = new ConexaoPostgre();
     private int codigo;
+    private String dsmvto;
     private String tpmvto;
     private ClasseParcelas parcela = new ClasseParcelas();
     private String datamvto;
@@ -38,9 +39,9 @@ public class ClasseMvtoCaixa {
             setVlatual(getVlantes() - getVlmvto());
         }
         conn.executeSQL("INSERT INTO bancoloja.\"MOV_CAIXA\"(\n" +
-                        "            \"CD_MVTO\", \"TP_MVTO\", \"CD_PARCELA\", \"CD_CONTA\", \"CD_OPERACAO\", \n" +
+                        "            \"CD_MVTO\", \"DS_MVTO\", \"TP_MVTO\", \"CD_PARCELA\", \"CD_CONTA\", \"CD_OPERACAO\", \n" +
                         "            \"DT_MVTO\", \"VL_ANTES\", \"VL_MVTO\", \"VL_ATUAL\")\n" +
-                        "    VALUES ("+getCodigo()+", '"+getTpmvto()+"', "+getParcela().getCodigo()+", "+getParcela().getConta().getCodigo()+", "+getParcela().getConta().getOperacao().getCodigo()+", \n" +
+                        "    VALUES ("+getCodigo()+", '"+getDsmvto()+"', '"+getTpmvto()+"', "+getParcela().getCodigo()+", "+getParcela().getConta().getCodigo()+", "+getParcela().getConta().getOperacao().getCodigo()+", \n" +
                         "            '"+getDatamvto()+"', "+getVlantes()+", "+getVlmvto()+", "+getVlatual()+");");
     }
     
@@ -109,5 +110,13 @@ public class ClasseMvtoCaixa {
 
     public void setVlatual(float vlatual) {
         this.vlatual = vlatual;
+    }
+
+    public String getDsmvto() {
+        return dsmvto;
+    }
+
+    public void setDsmvto(String dsmvto) {
+        this.dsmvto = dsmvto;
     }
 }

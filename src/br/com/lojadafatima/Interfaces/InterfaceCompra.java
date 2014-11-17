@@ -941,7 +941,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
     public void enviardados() {
         prodcompravenda.getCompravenda().setData(datas.retornadataehora());
-        prodcompravenda.getCompravenda().setDescricao(TfDescNotaCompra.getText());
+        prodcompravenda.getCompravenda().setDescricao("COMPRA NRO. "+TfCodigo.getText()+" JUNTO AO FORNECEDOR "+TfFornecedor.getText()+" - "+TfDescNotaCompra.getText());
         prodcompravenda.getForneproduto().getFornecedor().setCodigo(Integer.parseInt(TfCodFornecedor.getText()));
         prodcompravenda.getCompravenda().setCodigopessoa(prodcompravenda.getForneproduto().getFornecedor().retornacodigopessoafornecedor());
         prodcompravenda.getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TfCodFuncionario.getText()));

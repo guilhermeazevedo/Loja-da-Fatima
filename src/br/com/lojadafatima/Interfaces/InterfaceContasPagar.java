@@ -6,6 +6,9 @@
 
 package br.com.lojadafatima.Interfaces;
 
+import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.Preenche;
+import br.com.lojadafatima.Financeiro.ClasseParcelas;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
@@ -16,9 +19,10 @@ import javax.swing.text.MaskFormatter;
  */
 public class InterfaceContasPagar extends javax.swing.JDialog {
     
-    MaskFormatter valor;
-    MaskFormatter data;
     private java.awt.Frame primeiratela;
+    Preenche preenche = new Preenche();
+    LimpaCamposTela limpar = new LimpaCamposTela();
+    ClasseParcelas parcelas = new ClasseParcelas();
 
     /**
      * Creates new form InterfaceContasPagar
@@ -27,6 +31,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         super (telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        preenche.PreencheJComboBox(CbFormaPgto, parcelas.getFormapgto().retornaformapgtocombobox());
     }
 
     /**
@@ -38,193 +43,152 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        TbPagarConta3 = new javax.swing.JPanel();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        TbFornecedores3 = new javax.swing.JTable();
-        jLabel31 = new javax.swing.JLabel();
-        CbPesqFornecedor3 = new javax.swing.JComboBox();
-        TfPesqFornecedor3 = new javax.swing.JTextField();
-        BtPesqFornecedor4 = new javax.swing.JButton();
-        jLabel32 = new javax.swing.JLabel();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        TbContas3 = new javax.swing.JTable();
-        jLabel33 = new javax.swing.JLabel();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        TbParcelas3 = new javax.swing.JTable();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        try{
-            valor = new MaskFormatter("###,##");
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Nao foi possivel montar mascara no campo de Valor");
-        }
-        TfValorPagar3 = new JFormattedTextField(valor);
-        jLabel36 = new javax.swing.JLabel();
-        CbCondicaoPgto3 = new javax.swing.JComboBox();
-        BtPagar3 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        CbPesqContas = new javax.swing.JComboBox();
+        BtPesqContas = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TbContas = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TbParcelas = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        TfValor = new JNumberField.JNumberField();
+        jLabel3 = new javax.swing.JLabel();
+        CbFormaPgto = new javax.swing.JComboBox();
+        BtCadFormaPgto = new javax.swing.JButton();
+        BtPagar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Contas à Pagar - Software Loja da Fátima");
         setResizable(false);
 
-        TbFornecedores3.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel7.setText("Buscar Contas:");
+
+        CbPesqContas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todas as Contas Abertas", "Todas as Contas Vencidas", "Todas as Contas" }));
+
+        BtPesqContas.setText("Pesquisar");
+
+        TbContas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código", "Fornecedor", "CNPJ"
+                "Codigo da Conta", "Operacao", "Pessoa", "Condicao de Pagamento", "Data", "Valor Total (R$)", "Situacao"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane10.setViewportView(TbFornecedores3);
+        TbContas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(TbContas);
 
-        jLabel31.setText("Buscar Fornecedor");
+        jLabel1.setText("Parcelas da Conta:");
 
-        CbPesqFornecedor3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos os Fornecedores", "Código do Fornecedor", "Nome Fantasia do Fornecedor", "CNPJ" }));
-
-        BtPesqFornecedor4.setText("Pesquisar");
-
-        jLabel32.setText("Contas com o Fornecedor:");
-
-        TbContas3.setModel(new javax.swing.table.DefaultTableModel(
+        TbParcelas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código", "Descrição da Nota", "Fornecedor", "Funcionário", "Forma de Pagamento", "Data", "Valor Total da Compra", "Situação"
+                "Nro. Parcela", "Valor a Pagar (R$)", "Valor Pago (R$)", "Data a Pagar", "Data Pago", "Situacao", "Reparcela da Parcela Nro."
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane11.setViewportView(TbContas3);
-        if (TbContas3.getColumnModel().getColumnCount() > 0) {
-            TbContas3.getColumnModel().getColumn(0).setResizable(false);
-        }
+        TbParcelas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(TbParcelas);
 
-        jLabel33.setText("Parcelas da Conta:");
+        jLabel2.setText("Valor a Pagar");
 
-        TbParcelas3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jLabel3.setText("Forma de Pagamento");
 
-            },
-            new String [] {
-                "Nº Parcela", "Condição de Pagamento", "Valor à Pagar(R$)", "Valor Pago(R$)", "Data à Pagar", "Data Pago", "Situação"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
+        BtCadFormaPgto.setText("Cadastrar Forma de Pagamento");
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane12.setViewportView(TbParcelas3);
+        BtPagar.setText("Pagar");
 
-        jLabel34.setText("Valor à Pagar");
-
-        jLabel35.setText("R$");
-
-        jLabel36.setText("Condição de Pagamento");
-
-        BtPagar3.setText("Pagar");
-
-        javax.swing.GroupLayout TbPagarConta3Layout = new javax.swing.GroupLayout(TbPagarConta3);
-        TbPagarConta3.setLayout(TbPagarConta3Layout);
-        TbPagarConta3Layout.setHorizontalGroup(
-            TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TbPagarConta3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
-                    .addGroup(TbPagarConta3Layout.createSequentialGroup()
-                        .addComponent(CbPesqFornecedor3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfPesqFornecedor3, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtPesqFornecedor4))
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
-                    .addGroup(TbPagarConta3Layout.createSequentialGroup()
-                        .addGroup(TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel31)
-                            .addComponent(jLabel32)
-                            .addComponent(jLabel33)
-                            .addGroup(TbPagarConta3Layout.createSequentialGroup()
-                                .addComponent(jLabel34)
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel36))
-                            .addGroup(TbPagarConta3Layout.createSequentialGroup()
-                                .addComponent(jLabel35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(CbPesqContas, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfValorPagar3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(CbCondicaoPgto3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtPesqContas))
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BtPagar3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(CbFormaPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(BtCadFormaPgto))
+                                    .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 121, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        TbPagarConta3Layout.setVerticalGroup(
-            TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TbPagarConta3Layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel31)
-                .addGap(3, 3, 3)
-                .addGroup(TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbPesqFornecedor3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfPesqFornecedor3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesqFornecedor4))
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CbPesqContas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtPesqContas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel32)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CbFormaPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtCadFormaPgto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel34)
-                    .addComponent(jLabel36))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(TbPagarConta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel35)
-                    .addComponent(TfValorPagar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CbCondicaoPgto3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPagar3))
-                .addGap(302, 302, 302))
+                .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jTabbedPane1.addTab("Pagar Conta", TbPagarConta3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 25, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -233,83 +197,21 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtCadFormaPgto;
     private javax.swing.JButton BtPagar;
-    private javax.swing.JButton BtPagar1;
-    private javax.swing.JButton BtPagar2;
-    private javax.swing.JButton BtPagar3;
-    private javax.swing.JButton BtPesqFornecedor;
-    private javax.swing.JButton BtPesqFornecedor2;
-    private javax.swing.JButton BtPesqFornecedor3;
-    private javax.swing.JButton BtPesqFornecedor4;
-    private javax.swing.JComboBox CbCondicaoPgto;
-    private javax.swing.JComboBox CbCondicaoPgto1;
-    private javax.swing.JComboBox CbCondicaoPgto2;
-    private javax.swing.JComboBox CbCondicaoPgto3;
-    private javax.swing.JComboBox CbPesqFornecedor;
-    private javax.swing.JComboBox CbPesqFornecedor1;
-    private javax.swing.JComboBox CbPesqFornecedor2;
-    private javax.swing.JComboBox CbPesqFornecedor3;
+    private javax.swing.JButton BtPesqContas;
+    private javax.swing.JComboBox CbFormaPgto;
+    private javax.swing.JComboBox CbPesqContas;
     private javax.swing.JTable TbContas;
-    private javax.swing.JTable TbContas1;
-    private javax.swing.JTable TbContas2;
-    private javax.swing.JTable TbContas3;
-    private javax.swing.JTable TbFornecedores;
-    private javax.swing.JTable TbFornecedores1;
-    private javax.swing.JTable TbFornecedores2;
-    private javax.swing.JTable TbFornecedores3;
-    private javax.swing.JPanel TbPagarConta;
-    private javax.swing.JPanel TbPagarConta1;
-    private javax.swing.JPanel TbPagarConta2;
-    private javax.swing.JPanel TbPagarConta3;
     private javax.swing.JTable TbParcelas;
-    private javax.swing.JTable TbParcelas1;
-    private javax.swing.JTable TbParcelas2;
-    private javax.swing.JTable TbParcelas3;
-    private javax.swing.JTextField TfPesqFornecedor;
-    private javax.swing.JTextField TfPesqFornecedor1;
-    private javax.swing.JTextField TfPesqFornecedor2;
-    private javax.swing.JTextField TfPesqFornecedor3;
-    private javax.swing.JFormattedTextField TfValorPagar;
-    private javax.swing.JFormattedTextField TfValorPagar1;
-    private javax.swing.JFormattedTextField TfValorPagar2;
-    private javax.swing.JFormattedTextField TfValorPagar3;
+    private JNumberField.JNumberField TfValor;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane11;
-    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 
     /**

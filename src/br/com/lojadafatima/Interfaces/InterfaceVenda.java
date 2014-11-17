@@ -793,7 +793,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
                 parcelas.getConta().setCompravenda(prodcompravenda.getCompravenda());
                 parcelas.getConta().setCondicao(prodcompravenda.getCompravenda().getCondicao());
                 parcelas.getConta().setOperacao(prodcompravenda.getCompravenda().getOperacao());
-                parcelas.getConta().setDescricao("REFERENTE A VENDA NUMERO " + TfCodigo.getText() + ", CLIENTE: " + TfCliente.getText());
+                parcelas.getConta().setDescricao(prodcompravenda.getCompravenda().getDescricao());
                 parcelas.getConta().setDtconta(TfData.getText());
                 parcelas.getConta().setTotal(Float.parseFloat(TfValorTotalVenda.getValue().toString()));
                 parcelas.getConta().setCodigopessoa(prodcompravenda.getCompravenda().getCodigopessoa());
@@ -931,7 +931,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
 
     public void enviardados() {
         prodcompravenda.getCompravenda().setData(datas.retornadataehora());
-        prodcompravenda.getCompravenda().setDescricao("VENDA NUMERO: " + TfCodigo.getText());
+        prodcompravenda.getCompravenda().setDescricao("VENDA DE NRO. " + TfCodigo.getText()+" AO CLIENTE "+TfCliente.getText());
         cliente.setCodigo(Integer.parseInt(TfCodCliente.getText()));
         prodcompravenda.getCompravenda().setCodigopessoa(cliente.retornacodigopessoacliente());
         prodcompravenda.getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TfCodFuncionario.getText()));

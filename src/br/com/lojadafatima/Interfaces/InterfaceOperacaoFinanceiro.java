@@ -578,7 +578,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
     public void enviardados() {
         parcelas.getConta().getCompravenda().setCodigo(0);
         parcelas.getConta().getCondicao().setCodigo(Integer.parseInt(TfCodCondicaoPgto.getText()));
-        parcelas.getConta().setDescricao("REFERENTE A " + TfDescOperacao.getText());
+        parcelas.getConta().setDescricao(parcelas.getConta().getOperacao().getDescricao() + " NRO. "+TfCodigo.getText()+" - "+TfDescOperacao.getText());
         parcelas.getConta().setDtconta(TfData.getText());
         parcelas.getConta().setTotal(Float.parseFloat(TfValorTotal.getValue().toString()));
         if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {

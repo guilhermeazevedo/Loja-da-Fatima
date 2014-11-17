@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -117,17 +118,26 @@ public class ClasseParcelas {
     }
     
     public void gerarreparcela(){
-        int ultimaparcela = 0;
+        setDtpagar(proximadatapagar());
         setCodigoreparcela(getCodigo());
-        conn.executeSQL("SELECT MAX(\"CD_PARCELA\") FROM bancoloja.\"PARCELAS\"\n" +
-                        "WHERE \"CD_CONTA\" = "+getConta().getCodigo()+" AND \"CD_OPERACAO\" = "+getConta().getOperacao().getCodigo());
-        try {
-            conn.resultset.first();
-            ultimaparcela = conn.resultset.getInt(1);
-            setCodigo(ultimaparcela + 1);
-        } catch (SQLException ex) {
-        }
-        
+        conn.executeSQL("INSERT INTO bancoloja.\"PARCELAS\"(\n" +
+                        "            \"CD_PARCELA\", \"CD_CONTA\", \"CD_OPERACAO\", \"DT_PAGAR\", \n" +
+                        "            \"VL_PAGAR\", \"CD_PARCELA_REPARCELA\", \"CD_CONTA_REPARCELA\", \n" +
+                        "            \"CD_OPERACAO_REPARCELA\")\n" +
+                        "    VALUES ("+(retornanumeroultimaparcela()+1)+", "+getConta().getCodigo()+", "+getConta().getOperacao().getCodigo()+", '"+getDtpagar()+"', \n" +
+                        "            "+getVlpagar()+", "+getCodigoreparcela()+", "+getConta().getCodigo()+", \n" +
+                        "            "+getConta().getOperacao().getCodigo()+")");
+    }
+    
+    public void extornarparcela(){
+        setDtpagar(proximadatapagar());
+        conn.executeSQL("UPDATE bancoloja.\"PARCELAS\"\n" +
+                        "   SET \"CD_FORMA_PGTO\" = NULL, \"DT_PAGO\" = NULL, \"DT_PAGAR\" = '"+getDtpagar()+"', \"VL_PAGAR\" = "+getVlpagar()+", \"VL_PAGO\" = NULL\n" +
+                        " WHERE \"CD_PARCELA\" = "+getCodigo()+" AND \"CD_CONTA\" = "+getConta().getCodigo()+" AND \"CD_OPERACAO\" = "+getConta().getOperacao().getCodigo());
+        atualizasituacaoconta();
+    }
+    
+    public String proximadatapagar(){
         conn.executeSQL("SELECT \"CD_CONDICAO_PGTO\" FROM bancoloja.\"CONTAS_PAGAR_RECEBER\"\n" +
                         "WHERE \"CD_CONTA\" = "+getConta().getCodigo()+" AND \"CD_OPERACAO\" = "+getConta().getOperacao().getCodigo());
         try {
@@ -138,26 +148,24 @@ public class ClasseParcelas {
         }
         ClasseDatas datas = new ClasseDatas();
         conn.executeSQL("SELECT TO_CHAR(\"DT_PAGAR\", 'MM/DD/YYYY') FROM bancoloja.\"PARCELAS\"\n" +
-                        "WHERE \"CD_PARCELA\" = "+ultimaparcela+" AND \"CD_CONTA\" = "+getConta().getCodigo()+" AND \"CD_OPERACAO\" = "+getConta().getOperacao().getCodigo());
+                        "WHERE \"CD_PARCELA\" = "+retornanumeroultimaparcela()+" AND \"CD_CONTA\" = "+getConta().getCodigo()+" AND \"CD_OPERACAO\" = "+getConta().getOperacao().getCodigo());
         try {
             conn.resultset.first();
-            setDtpagar(datas.retornasoma(conn.resultset.getString(1), getConta().getCondicao().getIntervalodias()));
+            return datas.retornasoma(conn.resultset.getString(1), getConta().getCondicao().getIntervalodias());
         } catch (SQLException ex) {
+            return "";
         }
-        conn.executeSQL("INSERT INTO bancoloja.\"PARCELAS\"(\n" +
-                        "            \"CD_PARCELA\", \"CD_CONTA\", \"CD_OPERACAO\", \"DT_PAGAR\", \n" +
-                        "            \"VL_PAGAR\", \"CD_PARCELA_REPARCELA\", \"CD_CONTA_REPARCELA\", \n" +
-                        "            \"CD_OPERACAO_REPARCELA\")\n" +
-                        "    VALUES ("+getCodigo()+", "+getConta().getCodigo()+", "+getConta().getOperacao().getCodigo()+", '"+getDtpagar()+"', \n" +
-                        "            "+getVlpagar()+", "+getCodigoreparcela()+", "+getConta().getCodigo()+", \n" +
-                        "            "+getConta().getOperacao().getCodigo()+")");
     }
     
-    public void extornarparcela(){
-        conn.executeSQL("UPDATE bancoloja.\"PARCELAS\"\n" +
-                        "   SET \"CD_FORMA_PGTO\" = NULL, \"DT_PAGO\" = NULL, \"VL_PAGAR\" = "+getVlpagar()+", \"VL_PAGO\" = NULL\n" +
-                        " WHERE \"CD_PARCELA\" = "+getCodigo()+" AND \"CD_CONTA\" = "+getConta().getCodigo()+" AND \"CD_OPERACAO\" = "+getConta().getOperacao().getCodigo());
-        atualizasituacaoconta();
+    public int retornanumeroultimaparcela(){
+        conn.executeSQL("SELECT MAX(\"CD_PARCELA\") FROM bancoloja.\"PARCELAS\"\n" +
+                        "WHERE \"CD_CONTA\" = "+getConta().getCodigo()+" AND \"CD_OPERACAO\" = "+getConta().getOperacao().getCodigo());
+        try {
+            conn.resultset.first();
+            return conn.resultset.getInt(1);
+        } catch (SQLException ex) {
+            return 0;
+        }
     }
 
     public int getCodigo() {

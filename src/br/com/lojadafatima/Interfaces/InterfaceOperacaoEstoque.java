@@ -831,7 +831,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
 
     public void enviardados() {
         prodcompravenda.getCompravenda().setData(datas.retornadataehora());
-        prodcompravenda.getCompravenda().setDescricao(TfDescOperacao.getText());
+        prodcompravenda.getCompravenda().setDescricao(prodcompravenda.getCompravenda().getOperacao().getDescricao()+" NRO. " +TfCodigo.getText()+" - "+TfDescOperacao.getText());
         prodcompravenda.getCompravenda().getCondicao().setCodigo(0);
         if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
             cliente.setCodigo(Integer.parseInt(TfCodPessoa.getText()));

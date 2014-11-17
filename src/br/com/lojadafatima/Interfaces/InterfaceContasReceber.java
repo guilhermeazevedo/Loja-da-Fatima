@@ -42,7 +42,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         int[] tam = new int[2];
         tam[0] = 200;
         tam[1] = 100;
-        preenche.FormataJtable(TbClientes, tam);
+        preenche.FormataJtable(TbPessoas, tam);
 
         int[] tam2 = new int[7];
         tam2[0] = 70;
@@ -80,10 +80,10 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TbClientes = new javax.swing.JTable();
+        TbPessoas = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        CbPesqCliente = new javax.swing.JComboBox();
-        BtPesqCliente = new javax.swing.JButton();
+        CbPesqPessoa = new javax.swing.JComboBox();
+        BtPesqPessoa = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TbContas = new javax.swing.JTable();
@@ -109,7 +109,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         setTitle("Contas à Receber - Software Loja da Fátima");
         setResizable(false);
 
-        TbClientes.setModel(new javax.swing.table.DefaultTableModel(
+        TbPessoas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -125,31 +125,31 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        TbClientes.getTableHeader().setReorderingAllowed(false);
-        TbClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        TbPessoas.getTableHeader().setReorderingAllowed(false);
+        TbPessoas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                TbClientesMouseReleased(evt);
+                TbPessoasMouseReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(TbClientes);
+        jScrollPane1.setViewportView(TbPessoas);
 
-        jLabel3.setText("Buscar Clientes");
+        jLabel3.setText("Buscar Pessoas");
 
-        CbPesqCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pessoas com Contas em Aberto", "Pessoas com Contas Vencidas", "Listar apenas Clientes com Contas em Aberto", "Listar apenas Clientes com Contas Vencidas", "Listar todos os Clientes" }));
-        CbPesqCliente.addActionListener(new java.awt.event.ActionListener() {
+        CbPesqPessoa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pessoas com Contas em Aberto", "Pessoas com Contas Vencidas", "Listar apenas Clientes com Contas em Aberto", "Listar apenas Clientes com Contas Vencidas", "Listar todos os Clientes" }));
+        CbPesqPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CbPesqClienteActionPerformed(evt);
+                CbPesqPessoaActionPerformed(evt);
             }
         });
 
-        BtPesqCliente.setText("Pesquisar");
-        BtPesqCliente.addActionListener(new java.awt.event.ActionListener() {
+        BtPesqPessoa.setText("Pesquisar");
+        BtPesqPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtPesqClienteActionPerformed(evt);
+                BtPesqPessoaActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Contas do Cliente:");
+        jLabel1.setText("Contas da Pessoa:");
 
         TbContas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -245,9 +245,9 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(CbPesqCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CbPesqPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtPesqCliente))
+                                .addComponent(BtPesqPessoa))
                             .addComponent(jLabel3)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
@@ -259,11 +259,11 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                                 .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(CbFormaPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtCadFormaPgto)))))
+                                        .addComponent(BtCadFormaPgto))
+                                    .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -274,8 +274,8 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                 .addComponent(jLabel3)
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbPesqCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesqCliente))
+                    .addComponent(CbPesqPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtPesqPessoa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -295,8 +295,8 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                     .addComponent(CbFormaPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtCadFormaPgto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(177, 177, 177))
         );
 
@@ -319,50 +319,50 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CbPesqClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbPesqClienteActionPerformed
+    private void CbPesqPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbPesqPessoaActionPerformed
 
-    }//GEN-LAST:event_CbPesqClienteActionPerformed
+    }//GEN-LAST:event_CbPesqPessoaActionPerformed
 
-    private void BtPesqClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqClienteActionPerformed
-        limpar.Limpar(TbClientes);
+    private void BtPesqPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqPessoaActionPerformed
+        limpar.Limpar(TbPessoas);
         limpar.Limpar(TbContas);
         limpar.Limpar(TbParcelas);
-        switch (CbPesqCliente.getSelectedIndex()) {
+        switch (CbPesqPessoa.getSelectedIndex()) {
             case 0: {
-                preenche.PreencherJtable(TbClientes, parcelas.getConta().contasreceberaberto());
+                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberaberto());
                 break;
             }
             case 1: {
-                preenche.PreencherJtable(TbClientes, parcelas.getConta().contasrecebervencidas());
+                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasrecebervencidas());
                 break;
             }
             case 2: {
-                preenche.PreencherJtable(TbClientes, parcelas.getConta().contasreceberclientesaberto());
+                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberclientesaberto());
                 break;
             }
             case 3: {
-                preenche.PreencherJtable(TbClientes, parcelas.getConta().contasreceberclientesvencido());
+                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberclientesvencido());
                 break;
             }
             case 4: {
-                preenche.PreencherJtable(TbClientes, parcelas.getConta().listarclientes());
+                preenche.PreencherJtable(TbPessoas, parcelas.getConta().listarclientes());
                 break;
             }
         }
-    }//GEN-LAST:event_BtPesqClienteActionPerformed
+    }//GEN-LAST:event_BtPesqPessoaActionPerformed
 
     private void TfValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorKeyTyped
         valida.limitemaximo(evt, TfValor.getText(), 13);
     }//GEN-LAST:event_TfValorKeyTyped
 
-    private void TbClientesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbClientesMouseReleased
-        if (TbClientes.getSelectedRow() > -1) {
+    private void TbPessoasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbPessoasMouseReleased
+        if (TbPessoas.getSelectedRow() > -1) {
             limpar.Limpar(TbParcelas);
             limpar.Limpar(TbContas);
             ClassePessoaFisica fisica = new ClassePessoaFisica();
             ClassePessoaJuridica juridica = new ClassePessoaJuridica();
-            fisica.setNome(TbClientes.getValueAt(TbClientes.getSelectedRow(), 0).toString());
-            juridica.setNomefantasia(TbClientes.getValueAt(TbClientes.getSelectedRow(), 0).toString());
+            fisica.setNome(TbPessoas.getValueAt(TbPessoas.getSelectedRow(), 0).toString());
+            juridica.setNomefantasia(TbPessoas.getValueAt(TbPessoas.getSelectedRow(), 0).toString());
             if (fisica.epessoafisica()) {
                 parcelas.getConta().setCodigopessoa(fisica.getPessoa().getCodigo());
             } else if (juridica.epessoajuridica()) {
@@ -370,7 +370,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
             }
             preenche.PreencherJtable(TbContas, parcelas.getConta().contaspessoa());
         }
-    }//GEN-LAST:event_TbClientesMouseReleased
+    }//GEN-LAST:event_TbPessoasMouseReleased
 
     private void TbContasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbContasMouseReleased
         if (TbContas.getSelectedRow() > -1) {
@@ -407,6 +407,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                         mvtocaixa.setParcela(parcelas);
                         mvtocaixa.setTpmvto("E");
                         mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
+                        mvtocaixa.setDsmvto("PAGAMENTO DA PARCELA NRO. "+mvtocaixa.getParcela().getCodigo()+" - "+parcelas.getConta().retornadescricaodaconta());
                         mvtocaixa.incluir();
                         TbContasMouseReleased(null);
                     }
@@ -422,6 +423,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                     mvtocaixa.setParcela(parcelas);
                     mvtocaixa.setTpmvto("E");
                     mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
+                    mvtocaixa.setDsmvto("PAGAMENTO PARCIAL DA PARCELA NRO. "+mvtocaixa.getParcela().getCodigo()+" - "+parcelas.getConta().retornadescricaodaconta());
                     mvtocaixa.incluir();
                     parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString()) - Float.parseFloat(TfValor.getValue().toString()));
                     parcelas.gerarreparcela();
@@ -459,6 +461,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                     mvtocaixa.setParcela(parcelas);
                     mvtocaixa.setTpmvto("S");
                     mvtocaixa.setVlmvto(parcelas.getVlpagar());
+                    mvtocaixa.setDsmvto("EXTORNO DA PARCELA NRO. "+mvtocaixa.getParcela().getCodigo()+" - "+parcelas.getConta().retornadescricaodaconta());
                     mvtocaixa.incluir();
                     TbContasMouseReleased(null);
                 }
@@ -470,12 +473,12 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadFormaPgto;
     private javax.swing.JButton BtPagar;
-    private javax.swing.JButton BtPesqCliente;
+    private javax.swing.JButton BtPesqPessoa;
     private javax.swing.JComboBox CbFormaPgto;
-    private javax.swing.JComboBox CbPesqCliente;
-    private javax.swing.JTable TbClientes;
+    private javax.swing.JComboBox CbPesqPessoa;
     private javax.swing.JTable TbContas;
     private javax.swing.JTable TbParcelas;
+    private javax.swing.JTable TbPessoas;
     private JNumberField.JNumberField TfValor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

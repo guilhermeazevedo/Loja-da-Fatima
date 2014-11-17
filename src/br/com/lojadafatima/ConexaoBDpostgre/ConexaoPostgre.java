@@ -79,7 +79,7 @@ public class ConexaoPostgre {
             retorno = 1;
             metaData = resultset.getMetaData();
         } catch (SQLException sqlex) {
-            //System.out.println(sqlex);
+            //System.out.println(sqlex +"\n"+sql);
         }
     }
 
