@@ -6,9 +6,12 @@
 
 package br.com.lojadafatima.Interfaces;
 
+import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
+import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
+import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
@@ -23,6 +26,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     Preenche preenche = new Preenche();
     LimpaCamposTela limpar = new LimpaCamposTela();
     ClasseParcelas parcelas = new ClasseParcelas();
+    GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
 
     /**
      * Creates new form InterfaceContasPagar
@@ -31,6 +35,25 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         super (telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        int[] tam2 = new int[7];
+        tam2[0] = 70;
+        tam2[1] = 70;
+        tam2[2] = 70;
+        tam2[3] = 70;
+        tam2[4] = 70;
+        tam2[5] = 70;
+        tam2[6] = 70;
+        preenche.FormataJtable(TbContas, tam2);
+
+        int[] tam3 = new int[7];
+        tam3[0] = 20;
+        tam3[1] = 70;
+        tam3[2] = 70;
+        tam3[3] = 70;
+        tam3[4] = 70;
+        tam3[5] = 70;
+        tam3[6] = 70;
+        preenche.FormataJtable(TbParcelas, tam3);
         preenche.PreencheJComboBox(CbFormaPgto, parcelas.getFormapgto().retornaformapgtocombobox());
     }
 
@@ -43,6 +66,8 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         CbPesqContas = new javax.swing.JComboBox();
@@ -59,15 +84,28 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         BtCadFormaPgto = new javax.swing.JButton();
         BtPagar = new javax.swing.JButton();
 
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Contas à Pagar - Software Loja da Fátima");
         setResizable(false);
 
         jLabel7.setText("Buscar Contas:");
 
-        CbPesqContas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todas as Contas Abertas", "Todas as Contas Vencidas", "Todas as Contas" }));
+        CbPesqContas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todas as Contas Abertas", "Todas as Contas Vencidas", "Todas as Contas do Mes", "Todas as Contas do Mes Anterior", "Todas as Contas Do Ano Atual", "Todas as Contas" }));
 
         BtPesqContas.setText("Pesquisar");
+        BtPesqContas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtPesqContasActionPerformed(evt);
+            }
+        });
 
         TbContas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -86,6 +124,11 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
             }
         });
         TbContas.getTableHeader().setReorderingAllowed(false);
+        TbContas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                TbContasMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(TbContas);
 
         jLabel1.setText("Parcelas da Conta:");
@@ -106,16 +149,38 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        TbParcelas.setComponentPopupMenu(jPopupMenu1);
         TbParcelas.getTableHeader().setReorderingAllowed(false);
+        TbParcelas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                TbParcelasMouseReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(TbParcelas);
 
         jLabel2.setText("Valor a Pagar");
 
+        TfValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TfValorKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Forma de Pagamento");
 
         BtCadFormaPgto.setText("Cadastrar Forma de Pagamento");
+        BtCadFormaPgto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtCadFormaPgtoActionPerformed(evt);
+            }
+        });
 
         BtPagar.setText("Pagar");
+        BtPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtPagarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,9 +220,9 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbPesqContas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesqContas))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtPesqContas)
+                    .addComponent(CbPesqContas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -195,6 +260,136 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtPesqContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqContasActionPerformed
+        limpar.Limpar(TbContas);
+        limpar.Limpar(TbParcelas);
+        switch (CbPesqContas.getSelectedIndex()) {
+            case 0: {
+                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagaraberta());
+                break;
+            }
+            case 1: {
+                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagarvencidas());
+                break;
+            }
+            case 2: {
+                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagardomes());
+                break;
+            }
+            case 3: {
+                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagardomesanterior());
+                break;
+            }
+            case 4: {
+                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagardoano());
+                break;
+            }
+            case 5: {
+                preenche.PreencherJtable(TbContas, parcelas.getConta().todascontaspagar());
+                break;
+            }
+        }
+    }//GEN-LAST:event_BtPesqContasActionPerformed
+
+    private void TfValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorKeyTyped
+        valida.limitemaximo(evt, TfValor.getText(), 13);
+    }//GEN-LAST:event_TfValorKeyTyped
+
+    private void TbContasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbContasMouseReleased
+        if (TbContas.getSelectedRow() > -1) {
+            limpar.Limpar(TbParcelas);
+            parcelas.getConta().setCodigo(Integer.parseInt(TbContas.getValueAt(TbContas.getSelectedRow(), 0).toString()));
+            parcelas.getConta().getOperacao().setDescricao(TbContas.getValueAt(TbContas.getSelectedRow(), 1).toString());
+            parcelas.getConta().getOperacao().setCodigo(parcelas.getConta().getOperacao().retornacodigooperacao());
+            preenche.PreencherJtable(TbParcelas, parcelas.retornaparcelas());
+        }
+    }//GEN-LAST:event_TbContasMouseReleased
+
+    private void TbParcelasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbParcelasMouseReleased
+        if (TbParcelas.getSelectedRow() > -1) {
+            if (TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 5).toString().equals("PAGA")) {
+                TfValor.setEnabled(false);
+            } else {
+                TfValor.setEnabled(true);
+                TfValor.setText(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString());
+            }
+        }
+    }//GEN-LAST:event_TbParcelasMouseReleased
+
+    private void BtCadFormaPgtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadFormaPgtoActionPerformed
+        final InterfaceFormaPagto tela = new InterfaceFormaPagto(getPrimeiratela(), true);
+        tela.setVisible(true);
+        tela.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                preenche.PreencheJComboBox(CbFormaPgto, parcelas.getFormapgto().retornaformapgtocombobox());
+            }
+        });
+    }//GEN-LAST:event_BtCadFormaPgtoActionPerformed
+
+    private void BtPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPagarActionPerformed
+        if (TbParcelas.getSelectedRow() > -1 && TfValor.getValue() != BigDecimal.valueOf(0)) {
+            if (CbFormaPgto.getSelectedItem() != null) {
+                if (Float.parseFloat(TfValor.getValue().toString()) >= Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString())) {
+                    if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja realizar o pagamento desta parcela?", "Deseja pagar esta parcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
+                        parcelas.setVlpago(Float.parseFloat(TfValor.getValue().toString()));
+                        parcelas.getFormapgto().setFormapgto(CbFormaPgto.getSelectedItem().toString());
+                        parcelas.getFormapgto().setCodigo(parcelas.getFormapgto().retornacodigo());
+                        parcelas.pagaparcela();
+                        ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
+                        mvtocaixa.setParcela(parcelas);
+                        mvtocaixa.setTpmvto("S");
+                        mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
+                        mvtocaixa.setDsmvto("PAGAMENTO DA PARCELA NRO. "+mvtocaixa.getParcela().getCodigo()+" - "+parcelas.getConta().retornadescricaodaconta());
+                        mvtocaixa.incluir();
+                        TbContasMouseReleased(null);
+                    }
+                } else if (JOptionPane.showConfirmDialog(null, "Tem certeza que este e o valor correto?\n(Caso for pago essa quantia, seja gerado uma parcela a mais para\nesta conta com o valor restante a ser pago pela pessoa)", "Deseja gerar uma reparcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
+                    parcelas.setVlpago(Float.parseFloat(TfValor.getValue().toString()));
+                    parcelas.getFormapgto().setFormapgto(CbFormaPgto.getSelectedItem().toString());
+                    parcelas.getFormapgto().setCodigo(parcelas.getFormapgto().retornacodigo());
+                    parcelas.pagaparcela();
+                    ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
+                    mvtocaixa.setParcela(parcelas);
+                    mvtocaixa.setTpmvto("S");
+                    mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
+                    mvtocaixa.setDsmvto("PAGAMENTO PARCIAL DA PARCELA NRO. "+mvtocaixa.getParcela().getCodigo()+" - "+parcelas.getConta().retornadescricaodaconta());
+                    mvtocaixa.incluir();
+                    parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString()) - Float.parseFloat(TfValor.getValue().toString()));
+                    parcelas.gerarreparcela();
+                    TbContasMouseReleased(null);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione ou insira a Forma de Pagamento escolhida pela pessoa!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+                CbFormaPgto.grabFocus();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione a Parcela que sera paga e o valor correto a ser pago!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            TfValor.grabFocus();
+        }
+    }//GEN-LAST:event_BtPagarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if(TbParcelas.getSelectedRow() > -1){
+            if(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 5).toString().equals("PAGA")){
+                if(JOptionPane.showConfirmDialog(null, "Deseja realmente extornar esta parcela?\n"
+                                                     + "(Fazendo isso voce estara retirando do caixa o valor pago nesta parcela)", "Deseja extornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                    parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
+                    parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
+                    parcelas.extornarparcela();
+                    ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
+                    mvtocaixa.setParcela(parcelas);
+                    mvtocaixa.setTpmvto("E");
+                    mvtocaixa.setVlmvto(parcelas.getVlpagar());
+                    mvtocaixa.setDsmvto("EXTORNO DA PARCELA NRO. "+mvtocaixa.getParcela().getCodigo()+" - "+parcelas.getConta().retornadescricaodaconta());
+                    mvtocaixa.incluir();
+                    TbContasMouseReleased(null);
+                }
+            }
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadFormaPgto;
@@ -209,21 +404,17 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the primeiratela
-     */
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
 
-    /**
-     * @param primeiratela the primeiratela to set
-     */
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
     }

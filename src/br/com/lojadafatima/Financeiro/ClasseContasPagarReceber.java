@@ -147,7 +147,162 @@ public class ClasseContasPagarReceber {
 "                               WHERE \"C\".\"CD_PESSOA\" = "+getCodigopessoa()+"\n" +
 "                               AND \"C\".\"CD_OPERACAO\" IN ((SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
 "                                                          WHERE \"TP_FINANCEIRO\" = 'E'))\n" +
-"                               ORDER BY \"SITUACAO\", \"CONTA\"");
+"                               ORDER BY ORDER BY \"CONTA\" DESC");
+        return conn.resultset;
+    }
+    
+    public ResultSet contaspagaraberta(){
+        conn.executeSQL("SELECT \"C\".\"CD_CONTA\" AS \"CONTA\",\n" +
+                        "       (SELECT \"DS_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
+                        "        WHERE \"CD_OPERACAO\" = \"C\".\"CD_OPERACAO\"),\n" +
+                        "       CASE WHEN \"P\".\"TP_PESSOA\" = 'F'\n" +
+                        "       THEN (SELECT \"NM_PESSOA\" FROM bancoloja.\"CAD_PESSOA_FISICA\" WHERE \"CD_PESSOA_FIS\" = \"C\".\"CD_PESSOA\")\n" +
+                        "       ELSE (SELECT \"NM_FANTASIA\" FROM bancoloja.\"CAD_PESSOA_JURIDICA\" WHERE \"CD_PESSOA_JUR\" = \"C\".\"CD_PESSOA\") END AS \"NOME\",\n" +
+                        "       (SELECT \"DS_CONDICAO_PGTO\" FROM bancoloja.\"CAD_CONDICAO_PGTO\"\n" +
+                        "        WHERE \"CD_CONDICAO_PGTO\" = \"C\".\"CD_CONDICAO_PGTO\") AS \"CONDICAO\",\n" +
+                        "       TO_CHAR(\"C\".\"DT_CONTA\", 'DD/MM/YYYY'),\n" +
+                        "       \"C\".\"VL_TOTAL\",\n" +
+                        "       CASE WHEN \"C\".\"SITUACAO\" = 'A'\n" +
+                        "       THEN 'ABERTA'\n" +
+                        "       ELSE CASE WHEN \"C\".\"SITUACAO\" = 'V'\n" +
+                        "       THEN 'VENCIDA'\n" +
+                        "       ELSE 'PAGA' END END AS \"SITUACAO\"\n" +
+                        "       FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n" +
+                        "       JOIN bancoloja.\"CAD_PESSOA\" \"P\"\n" +
+                        "       ON \"C\".\"CD_PESSOA\" = \"P\".\"CD_PESSOA\"\n" +
+                        "       WHERE \"C\".\"CD_OPERACAO\" IN ((SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
+                        "                                    WHERE \"TP_FINANCEIRO\" = 'S'))\n" +
+                        "       AND \"C\".\"SITUACAO\" = 'A'\n" +
+                        "       ORDER BY \"CONTA\" DESC");
+        return conn.resultset;
+    }
+    
+    public ResultSet contaspagarvencidas(){
+        conn.executeSQL("SELECT \"C\".\"CD_CONTA\" AS \"CONTA\",\n" +
+                        "       (SELECT \"DS_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
+                        "        WHERE \"CD_OPERACAO\" = \"C\".\"CD_OPERACAO\"),\n" +
+                        "       CASE WHEN \"P\".\"TP_PESSOA\" = 'F'\n" +
+                        "       THEN (SELECT \"NM_PESSOA\" FROM bancoloja.\"CAD_PESSOA_FISICA\" WHERE \"CD_PESSOA_FIS\" = \"C\".\"CD_PESSOA\")\n" +
+                        "       ELSE (SELECT \"NM_FANTASIA\" FROM bancoloja.\"CAD_PESSOA_JURIDICA\" WHERE \"CD_PESSOA_JUR\" = \"C\".\"CD_PESSOA\") END AS \"NOME\",\n" +
+                        "       (SELECT \"DS_CONDICAO_PGTO\" FROM bancoloja.\"CAD_CONDICAO_PGTO\"\n" +
+                        "        WHERE \"CD_CONDICAO_PGTO\" = \"C\".\"CD_CONDICAO_PGTO\") AS \"CONDICAO\",\n" +
+                        "       TO_CHAR(\"C\".\"DT_CONTA\", 'DD/MM/YYYY'),\n" +
+                        "       \"C\".\"VL_TOTAL\",\n" +
+                        "       CASE WHEN \"C\".\"SITUACAO\" = 'A'\n" +
+                        "       THEN 'ABERTA'\n" +
+                        "       ELSE CASE WHEN \"C\".\"SITUACAO\" = 'V'\n" +
+                        "       THEN 'VENCIDA'\n" +
+                        "       ELSE 'PAGA' END END AS \"SITUACAO\"\n" +
+                        "       FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n" +
+                        "       JOIN bancoloja.\"CAD_PESSOA\" \"P\"\n" +
+                        "       ON \"C\".\"CD_PESSOA\" = \"P\".\"CD_PESSOA\"\n" +
+                        "       WHERE \"C\".\"CD_OPERACAO\" IN ((SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
+                        "                                    WHERE \"TP_FINANCEIRO\" = 'S'))\n" +
+                        "       AND \"C\".\"SITUACAO\" = 'V'\n" +
+                        "       ORDER BY \"CONTA\" DESC");
+        return conn.resultset;
+    }
+    
+    public ResultSet contaspagardomes(){
+        conn.executeSQL("SELECT \"C\".\"CD_CONTA\" AS \"CONTA\",\n" +
+                        "       (SELECT \"DS_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
+                        "        WHERE \"CD_OPERACAO\" = \"C\".\"CD_OPERACAO\"),\n" +
+                        "       CASE WHEN \"P\".\"TP_PESSOA\" = 'F'\n" +
+                        "       THEN (SELECT \"NM_PESSOA\" FROM bancoloja.\"CAD_PESSOA_FISICA\" WHERE \"CD_PESSOA_FIS\" = \"C\".\"CD_PESSOA\")\n" +
+                        "       ELSE (SELECT \"NM_FANTASIA\" FROM bancoloja.\"CAD_PESSOA_JURIDICA\" WHERE \"CD_PESSOA_JUR\" = \"C\".\"CD_PESSOA\") END AS \"NOME\",\n" +
+                        "       (SELECT \"DS_CONDICAO_PGTO\" FROM bancoloja.\"CAD_CONDICAO_PGTO\"\n" +
+                        "        WHERE \"CD_CONDICAO_PGTO\" = \"C\".\"CD_CONDICAO_PGTO\") AS \"CONDICAO\",\n" +
+                        "       TO_CHAR(\"C\".\"DT_CONTA\", 'DD/MM/YYYY'),\n" +
+                        "       \"C\".\"VL_TOTAL\",\n" +
+                        "       CASE WHEN \"C\".\"SITUACAO\" = 'A'\n" +
+                        "       THEN 'ABERTA'\n" +
+                        "       ELSE CASE WHEN \"C\".\"SITUACAO\" = 'V'\n" +
+                        "       THEN 'VENCIDA'\n" +
+                        "       ELSE 'PAGA' END END AS \"SITUACAO\"\n" +
+                        "       FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n" +
+                        "       JOIN bancoloja.\"CAD_PESSOA\" \"P\"\n" +
+                        "       ON \"C\".\"CD_PESSOA\" = \"P\".\"CD_PESSOA\"\n" +
+                        "       WHERE \"C\".\"CD_OPERACAO\" IN ((SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
+                        "                                    WHERE \"TP_FINANCEIRO\" = 'S'))\n" +
+                        "       AND DATE_PART('MONTH', \"C\".\"DT_CONTA\") = DATE_PART('MONTH', CURRENT_DATE)\n" +
+                        "       ORDER BY \"CONTA\" DESC");
+        return conn.resultset;
+    }
+    
+    public ResultSet contaspagardomesanterior(){
+        conn.executeSQL("SELECT \"C\".\"CD_CONTA\" AS \"CONTA\",\n" +
+                        "       (SELECT \"DS_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
+                        "        WHERE \"CD_OPERACAO\" = \"C\".\"CD_OPERACAO\"),\n" +
+                        "       CASE WHEN \"P\".\"TP_PESSOA\" = 'F'\n" +
+                        "       THEN (SELECT \"NM_PESSOA\" FROM bancoloja.\"CAD_PESSOA_FISICA\" WHERE \"CD_PESSOA_FIS\" = \"C\".\"CD_PESSOA\")\n" +
+                        "       ELSE (SELECT \"NM_FANTASIA\" FROM bancoloja.\"CAD_PESSOA_JURIDICA\" WHERE \"CD_PESSOA_JUR\" = \"C\".\"CD_PESSOA\") END AS \"NOME\",\n" +
+                        "       (SELECT \"DS_CONDICAO_PGTO\" FROM bancoloja.\"CAD_CONDICAO_PGTO\"\n" +
+                        "        WHERE \"CD_CONDICAO_PGTO\" = \"C\".\"CD_CONDICAO_PGTO\") AS \"CONDICAO\",\n" +
+                        "       TO_CHAR(\"C\".\"DT_CONTA\", 'DD/MM/YYYY'),\n" +
+                        "       \"C\".\"VL_TOTAL\",\n" +
+                        "       CASE WHEN \"C\".\"SITUACAO\" = 'A'\n" +
+                        "       THEN 'ABERTA'\n" +
+                        "       ELSE CASE WHEN \"C\".\"SITUACAO\" = 'V'\n" +
+                        "       THEN 'VENCIDA'\n" +
+                        "       ELSE 'PAGA' END END AS \"SITUACAO\"\n" +
+                        "       FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n" +
+                        "       JOIN bancoloja.\"CAD_PESSOA\" \"P\"\n" +
+                        "       ON \"C\".\"CD_PESSOA\" = \"P\".\"CD_PESSOA\"\n" +
+                        "       WHERE \"C\".\"CD_OPERACAO\" IN ((SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
+                        "                                    WHERE \"TP_FINANCEIRO\" = 'S'))\n" +
+                        "       AND DATE_PART('MONTH', \"C\".\"DT_CONTA\") = (DATE_PART('MONTH', CURRENT_DATE) - 1)\n" +
+                        "       ORDER BY \"CONTA\" DESC");
+        return conn.resultset;
+    }
+    
+    public ResultSet contaspagardoano(){
+        conn.executeSQL("SELECT \"C\".\"CD_CONTA\" AS \"CONTA\",\n" +
+                        "       (SELECT \"DS_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
+                        "        WHERE \"CD_OPERACAO\" = \"C\".\"CD_OPERACAO\"),\n" +
+                        "       CASE WHEN \"P\".\"TP_PESSOA\" = 'F'\n" +
+                        "       THEN (SELECT \"NM_PESSOA\" FROM bancoloja.\"CAD_PESSOA_FISICA\" WHERE \"CD_PESSOA_FIS\" = \"C\".\"CD_PESSOA\")\n" +
+                        "       ELSE (SELECT \"NM_FANTASIA\" FROM bancoloja.\"CAD_PESSOA_JURIDICA\" WHERE \"CD_PESSOA_JUR\" = \"C\".\"CD_PESSOA\") END AS \"NOME\",\n" +
+                        "       (SELECT \"DS_CONDICAO_PGTO\" FROM bancoloja.\"CAD_CONDICAO_PGTO\"\n" +
+                        "        WHERE \"CD_CONDICAO_PGTO\" = \"C\".\"CD_CONDICAO_PGTO\") AS \"CONDICAO\",\n" +
+                        "       TO_CHAR(\"C\".\"DT_CONTA\", 'DD/MM/YYYY'),\n" +
+                        "       \"C\".\"VL_TOTAL\",\n" +
+                        "       CASE WHEN \"C\".\"SITUACAO\" = 'A'\n" +
+                        "       THEN 'ABERTA'\n" +
+                        "       ELSE CASE WHEN \"C\".\"SITUACAO\" = 'V'\n" +
+                        "       THEN 'VENCIDA'\n" +
+                        "       ELSE 'PAGA' END END AS \"SITUACAO\"\n" +
+                        "       FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n" +
+                        "       JOIN bancoloja.\"CAD_PESSOA\" \"P\"\n" +
+                        "       ON \"C\".\"CD_PESSOA\" = \"P\".\"CD_PESSOA\"\n" +
+                        "       WHERE \"C\".\"CD_OPERACAO\" IN ((SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
+                        "                                    WHERE \"TP_FINANCEIRO\" = 'S'))\n" +
+                        "       AND DATE_PART('YEAR', \"C\".\"DT_CONTA\") = DATE_PART('YEAR', CURRENT_DATE)\n" +
+                        "       ORDER BY \"CONTA\" DESC");
+        return conn.resultset;
+    }
+    
+    public ResultSet todascontaspagar(){
+        conn.executeSQL("SELECT \"C\".\"CD_CONTA\" AS \"CONTA\",\n" +
+                        "       (SELECT \"DS_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
+                        "        WHERE \"CD_OPERACAO\" = \"C\".\"CD_OPERACAO\"),\n" +
+                        "       CASE WHEN \"P\".\"TP_PESSOA\" = 'F'\n" +
+                        "       THEN (SELECT \"NM_PESSOA\" FROM bancoloja.\"CAD_PESSOA_FISICA\" WHERE \"CD_PESSOA_FIS\" = \"C\".\"CD_PESSOA\")\n" +
+                        "       ELSE (SELECT \"NM_FANTASIA\" FROM bancoloja.\"CAD_PESSOA_JURIDICA\" WHERE \"CD_PESSOA_JUR\" = \"C\".\"CD_PESSOA\") END AS \"NOME\",\n" +
+                        "       (SELECT \"DS_CONDICAO_PGTO\" FROM bancoloja.\"CAD_CONDICAO_PGTO\"\n" +
+                        "        WHERE \"CD_CONDICAO_PGTO\" = \"C\".\"CD_CONDICAO_PGTO\") AS \"CONDICAO\",\n" +
+                        "       TO_CHAR(\"C\".\"DT_CONTA\", 'DD/MM/YYYY'),\n" +
+                        "       \"C\".\"VL_TOTAL\",\n" +
+                        "       CASE WHEN \"C\".\"SITUACAO\" = 'A'\n" +
+                        "       THEN 'ABERTA'\n" +
+                        "       ELSE CASE WHEN \"C\".\"SITUACAO\" = 'V'\n" +
+                        "       THEN 'VENCIDA'\n" +
+                        "       ELSE 'PAGA' END END AS \"SITUACAO\"\n" +
+                        "       FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n" +
+                        "       JOIN bancoloja.\"CAD_PESSOA\" \"P\"\n" +
+                        "       ON \"C\".\"CD_PESSOA\" = \"P\".\"CD_PESSOA\"\n" +
+                        "       WHERE \"C\".\"CD_OPERACAO\" IN ((SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
+                        "                                    WHERE \"TP_FINANCEIRO\" = 'S'))\n" +
+                        "       ORDER BY \"CONTA\" DESC");
         return conn.resultset;
     }
     

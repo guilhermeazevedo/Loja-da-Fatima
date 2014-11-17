@@ -1383,11 +1383,6 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             TfFuncao.grabFocus();
             return false;
         }
-        if (TfComissao.getValue() == BigDecimal.valueOf(0)) {
-            JOptionPane.showMessageDialog(null, "Digite a Comissao que o funcionario recebera!");
-            TfComissao.grabFocus();
-            return false;
-        }
         if (TfSalario.getValue() == BigDecimal.valueOf(0)) {
             JOptionPane.showMessageDialog(null, "Digite o Salario que o funcionario recebera!");
             TfSalario.grabFocus();
