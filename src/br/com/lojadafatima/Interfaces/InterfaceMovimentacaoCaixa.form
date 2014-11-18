@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Fluxo de Caixa - Software Loja da F&#xe1;tima"/>
+    <Property name="title" type="java.lang.String" value="Movimento de Caixa - Software Loja da F&#xe1;tima"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -25,7 +25,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -43,18 +46,18 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="CbFluxoCaixa" min="-2" pref="162" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="TfFluxoCaixa" min="-2" pref="379" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton1" pref="115" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane1" pref="814" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="CbMvtoCaixa" min="-2" pref="332" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="BtPesqMvto" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -67,9 +70,8 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="CbFluxoCaixa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="TfFluxoCaixa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CbMvtoCaixa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtPesqMvto" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="361" max="-2" attributes="0"/>
@@ -81,28 +83,30 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Fluxo de Caixa referente"/>
+            <Property name="text" type="java.lang.String" value="Movimentacao de Caixa referente"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="CbFluxoCaixa">
+        <Component class="javax.swing.JComboBox" name="CbMvtoCaixa">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
+              <StringArray count="6">
                 <StringItem index="0" value="ao Dia de Hoje"/>
-                <StringItem index="1" value="&#xe0; Semana"/>
-                <StringItem index="2" value="ao M&#xea;s"/>
-                <StringItem index="3" value="todas as Entradas do Dia"/>
-                <StringItem index="4" value="todas as Sa&#xed;das do Dia"/>
+                <StringItem index="1" value="&#xe0; Ontem"/>
+                <StringItem index="2" value="ao M&#xea;s Atual"/>
+                <StringItem index="3" value="ao M&#xea;s Anterior"/>
+                <StringItem index="4" value="todas as Entradas do Dia"/>
+                <StringItem index="5" value="todas as Sa&#xed;das do Dia"/>
               </StringArray>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="TfFluxoCaixa">
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="BtPesqMvto">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pesquisar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtPesqMvtoActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -111,14 +115,13 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="TbFluxoCaixa">
+            <Component class="javax.swing.JTable" name="TbMvtoCaixa">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="8" rowCount="0">
-                    <Column editable="false" title="N&#xba; do Fluxo" type="java.lang.Object"/>
+                  <Table columnCount="7" rowCount="0">
+                    <Column editable="false" title="N&#xba; da Movimentacao" type="java.lang.Object"/>
                     <Column editable="false" title="Tipo" type="java.lang.Object"/>
-                    <Column editable="false" title="Data" type="java.lang.Object"/>
-                    <Column editable="false" title="Hora" type="java.lang.Object"/>
+                    <Column editable="false" title="Data e Hora" type="java.lang.Object"/>
                     <Column editable="false" title="Quant. Antes" type="java.lang.Object"/>
                     <Column editable="false" title="Quant. Depois" type="java.lang.Object"/>
                     <Column editable="false" title="Quant. Movimentado" type="java.lang.Object"/>
@@ -162,15 +165,10 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
                   </TableColumnModel>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                  <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
             </Component>
