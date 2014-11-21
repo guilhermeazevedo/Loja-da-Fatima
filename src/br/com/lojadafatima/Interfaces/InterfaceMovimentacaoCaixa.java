@@ -148,13 +148,13 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
 
     private void BtGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGerarRelatorioActionPerformed
         Relatorios relatorio = new Relatorios();
-        ClasseDatas datas = new ClasseDatas();
         switch(CbMvtoCaixa.getSelectedIndex()){
             case 0:{
                 relatorio.iniciarSplash(mvtocaixa.mvtocaixadia(), "relatorios\\mvtocaixadia.jasper", new HashMap());
                 break;
             }
             case 1:{
+                ClasseDatas datas = new ClasseDatas();
                 if(datas.diaatual() == 1){
                     relatorio.iniciarSplash(mvtocaixa.mvtocaixadiaanterior(), "relatorios\\mvtocaixadiaanteriordia1.jasper", new HashMap());
                 }else{
@@ -167,6 +167,7 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
                 break;
             }
             case 3:{
+                ClasseDatas datas = new ClasseDatas();
                 if(datas.mesatual() == 0){
                     relatorio.iniciarSplash(mvtocaixa.mvtocaixamesanterior(), "relatorios\\mvtocaixamesanteriorjaneiro.jasper", new HashMap());
                 }else{
