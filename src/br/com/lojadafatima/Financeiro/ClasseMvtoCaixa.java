@@ -60,13 +60,13 @@ public class ClasseMvtoCaixa {
 
     public ResultSet mvtocaixadia() {
         conn.executeSQL("SELECT \"CD_MVTO\",\n"
-                + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
-                + "       ELSE 'SAIDA' END AS \"TIPO\",\n"
-                + "       \"DT_MVTO\",\n"
+                + "       \"DS_MVTO\",\n"
+                + "       TO_CHAR(\"DT_MVTO\", 'DD/MM/YYYY ÀS HH24:MI:SS'),\n"
                 + "       \"VL_ANTES\",\n"
                 + "       \"VL_ATUAL\",\n"
                 + "       \"VL_MVTO\",\n"
-                + "       \"DS_MVTO\"\n"
+                + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
+                + "       ELSE 'SAIDA' END AS \"TIPO\"\n"
                 + "FROM bancoloja.\"MOV_CAIXA\"\n"
                 + "WHERE DATE_PART('DAY', \"DT_MVTO\") = DATE_PART('DAY', CURRENT_DATE)\n"
                 + "AND   DATE_PART('MONTH', \"DT_MVTO\") = DATE_PART('MONTH', CURRENT_DATE)\n"
@@ -85,26 +85,26 @@ public class ClasseMvtoCaixa {
         }
         if (diahj == 1) {
             conn.executeSQL("SELECT \"CD_MVTO\",\n"
-                    + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
-                    + "       ELSE 'SAIDA' END AS \"TIPO\",\n"
-                    + "       \"DT_MVTO\",\n"
+                    + "       \"DS_MVTO\",\n"
+                    + "       TO_CHAR(\"DT_MVTO\", 'DD/MM/YYYY ÀS HH24:MI:SS'),\n"
                     + "       \"VL_ANTES\",\n"
                     + "       \"VL_ATUAL\",\n"
                     + "       \"VL_MVTO\",\n"
-                    + "       \"DS_MVTO\"\n"
+                    + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
+                    + "       ELSE 'SAIDA' END AS \"TIPO\"\n"
                     + "FROM bancoloja.\"MOV_CAIXA\"\n"
                     + "WHERE DATE_PART('DAY', \"DT_MVTO\") = DATE_PART('DAY', (CURRENT_DATE - 1))\n"
                     + "AND   DATE_PART('MONTH', \"DT_MVTO\") = (DATE_PART('MONTH', CURRENT_DATE) - 1)\n"
                     + "ORDER BY \"CD_MVTO\"");
         } else {
             conn.executeSQL("SELECT \"CD_MVTO\",\n"
-                    + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
-                    + "       ELSE 'SAIDA' END AS \"TIPO\",\n"
-                    + "       \"DT_MVTO\",\n"
+                    + "       \"DS_MVTO\",\n"
+                    + "       TO_CHAR(\"DT_MVTO\", 'DD/MM/YYYY ÀS HH24:MI:SS'),\n"
                     + "       \"VL_ANTES\",\n"
                     + "       \"VL_ATUAL\",\n"
                     + "       \"VL_MVTO\",\n"
-                    + "       \"DS_MVTO\"\n"
+                    + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
+                    + "       ELSE 'SAIDA' END AS \"TIPO\"\n"
                     + "FROM bancoloja.\"MOV_CAIXA\"\n"
                     + "WHERE DATE_PART('DAY', \"DT_MVTO\") = DATE_PART('DAY', (CURRENT_DATE - 1))\n"
                     + "AND   DATE_PART('MONTH', \"DT_MVTO\") = DATE_PART('MONTH', CURRENT_DATE)\n"
@@ -115,13 +115,13 @@ public class ClasseMvtoCaixa {
 
     public ResultSet mvtocaixames() {
         conn.executeSQL("SELECT \"CD_MVTO\",\n"
-                + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
-                + "       ELSE 'SAIDA' END AS \"TIPO\",\n"
-                + "       \"DT_MVTO\",\n"
+                + "       \"DS_MVTO\",\n"
+                + "       TO_CHAR(\"DT_MVTO\", 'DD/MM/YYYY ÀS HH24:MI:SS'),\n"
                 + "       \"VL_ANTES\",\n"
                 + "       \"VL_ATUAL\",\n"
                 + "       \"VL_MVTO\",\n"
-                + "       \"DS_MVTO\"\n"
+                + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
+                + "       ELSE 'SAIDA' END AS \"TIPO\"\n"
                 + "FROM bancoloja.\"MOV_CAIXA\"\n"
                 + "WHERE DATE_PART('MONTH', \"DT_MVTO\") = DATE_PART('MONTH', CURRENT_DATE)\n"
                 + "AND   DATE_PART('YEAR', \"DT_MVTO\") = DATE_PART('YEAR', CURRENT_DATE)\n"
@@ -140,26 +140,26 @@ public class ClasseMvtoCaixa {
         }
         if (meshj == 1) {
             conn.executeSQL("SELECT \"CD_MVTO\",\n"
-                    + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
-                    + "       ELSE 'SAIDA' END AS \"TIPO\",\n"
-                    + "       \"DT_MVTO\",\n"
+                    + "       \"DS_MVTO\",\n"
+                    + "       TO_CHAR(\"DT_MVTO\", 'DD/MM/YYYY ÀS HH24:MI:SS'),\n"
                     + "       \"VL_ANTES\",\n"
                     + "       \"VL_ATUAL\",\n"
                     + "       \"VL_MVTO\",\n"
-                    + "       \"DS_MVTO\"\n"
+                    + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
+                    + "       ELSE 'SAIDA' END AS \"TIPO\"\n"
                     + "FROM bancoloja.\"MOV_CAIXA\"\n"
                     + "WHERE DATE_PART('MONTH', \"DT_MVTO\") = DATE_PART('MONTH', CURRENT_DATE - 31)\n"
                     + "AND   DATE_PART('YEAR', \"DT_MVTO\") = (DATE_PART('YEAR', CURRENT_DATE) - 1)\n"
                     + "ORDER BY \"CD_MVTO\"");
         } else {
             conn.executeSQL("SELECT \"CD_MVTO\",\n"
-                    + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
-                    + "       ELSE 'SAIDA' END AS \"TIPO\",\n"
-                    + "       \"DT_MVTO\",\n"
+                    + "       \"DS_MVTO\",\n"
+                    + "       TO_CHAR(\"DT_MVTO\", 'DD/MM/YYYY ÀS HH24:MI:SS'),\n"
                     + "       \"VL_ANTES\",\n"
                     + "       \"VL_ATUAL\",\n"
                     + "       \"VL_MVTO\",\n"
-                    + "       \"DS_MVTO\"\n"
+                    + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
+                    + "       ELSE 'SAIDA' END AS \"TIPO\"\n"
                     + "FROM bancoloja.\"MOV_CAIXA\"\n"
                     + "WHERE DATE_PART('MONTH', \"DT_MVTO\") = (DATE_PART('MONTH', CURRENT_DATE) - 1)\n"
                     + "AND   DATE_PART('YEAR', \"DT_MVTO\") = DATE_PART('YEAR', CURRENT_DATE)\n"
@@ -169,36 +169,36 @@ public class ClasseMvtoCaixa {
     }
 
     public ResultSet mvtocaixaentradasdia() {
-        conn.executeSQL("SELECT \"CD_MVTO\",\n" +
-"       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n" +
-"       ELSE 'SAIDA' END AS \"TIPO\",\n" +
-"       \"DT_MVTO\",\n" +
-"       \"VL_ANTES\",\n" +
-"       \"VL_ATUAL\",\n" +
-"       \"VL_MVTO\",\n" +
-"       \"DS_MVTO\"\n" +
-"       FROM bancoloja.\"MOV_CAIXA\"\n" +
-"       WHERE DATE_PART('DAY', \"DT_MVTO\") = DATE_PART('DAY', CURRENT_DATE)\n" +
-"       AND   DATE_PART('MONTH', \"DT_MVTO\") = DATE_PART('MONTH', CURRENT_DATE)\n" +
-"       AND \"TP_MVTO\" = 'E'\n" +
-"       ORDER BY \"CD_MVTO\"");
+        conn.executeSQL("SELECT \"CD_MVTO\",\n"
+                + "       \"DS_MVTO\",\n"
+                + "       TO_CHAR(\"DT_MVTO\", 'DD/MM/YYYY ÀS HH24:MI:SS'),\n"
+                + "       \"VL_ANTES\",\n"
+                + "       \"VL_ATUAL\",\n"
+                + "       \"VL_MVTO\",\n"
+                + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
+                + "       ELSE 'SAIDA' END AS \"TIPO\"\n"
+                + "       FROM bancoloja.\"MOV_CAIXA\"\n"
+                + "       WHERE DATE_PART('DAY', \"DT_MVTO\") = DATE_PART('DAY', CURRENT_DATE)\n"
+                + "       AND   DATE_PART('MONTH', \"DT_MVTO\") = DATE_PART('MONTH', CURRENT_DATE)\n"
+                + "       AND \"TP_MVTO\" = 'E'\n"
+                + "       ORDER BY \"CD_MVTO\"");
         return conn.resultset;
     }
 
     public ResultSet mvtocaixasaidasdia() {
-        conn.executeSQL("SELECT \"CD_MVTO\",\n" +
-"       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n" +
-"       ELSE 'SAIDA' END AS \"TIPO\",\n" +
-"       \"DT_MVTO\",\n" +
-"       \"VL_ANTES\",\n" +
-"       \"VL_ATUAL\",\n" +
-"       \"VL_MVTO\",\n" +
-"       \"DS_MVTO\"\n" +
-"       FROM bancoloja.\"MOV_CAIXA\"\n" +
-"       WHERE DATE_PART('DAY', \"DT_MVTO\") = DATE_PART('DAY', CURRENT_DATE)\n" +
-"       AND   DATE_PART('MONTH', \"DT_MVTO\") = DATE_PART('MONTH', CURRENT_DATE)\n" +
-"       AND \"TP_MVTO\" = 'S'\n" +
-"       ORDER BY \"CD_MVTO\"");
+        conn.executeSQL("SELECT \"CD_MVTO\",\n"
+                + "       \"DS_MVTO\",\n"
+                + "       TO_CHAR(\"DT_MVTO\", 'DD/MM/YYYY ÀS HH24:MI:SS'),\n"
+                + "       \"VL_ANTES\",\n"
+                + "       \"VL_ATUAL\",\n"
+                + "       \"VL_MVTO\",\n"
+                + "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n"
+                + "       ELSE 'SAIDA' END AS \"TIPO\"\n"
+                + "       FROM bancoloja.\"MOV_CAIXA\"\n"
+                + "       WHERE DATE_PART('DAY', \"DT_MVTO\") = DATE_PART('DAY', CURRENT_DATE)\n"
+                + "       AND   DATE_PART('MONTH', \"DT_MVTO\") = DATE_PART('MONTH', CURRENT_DATE)\n"
+                + "       AND \"TP_MVTO\" = 'S'\n"
+                + "       ORDER BY \"CD_MVTO\"");
         return conn.resultset;
     }
 

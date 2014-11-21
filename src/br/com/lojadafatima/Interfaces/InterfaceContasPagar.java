@@ -84,7 +84,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         BtCadFormaPgto = new javax.swing.JButton();
         BtPagar = new javax.swing.JButton();
 
-        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.setText("Extornar parcela");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);

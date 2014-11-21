@@ -28,6 +28,16 @@ public class ClasseDatas {
         return dia + "/" + mes + "/" + ano;
     }
     
+    public int diaatual(){
+        Date data = new Date();
+        return data.getDate();
+    }
+    
+    public int mesatual(){
+        Date data = new Date();
+        return data.getMonth();
+    }
+    
     public String retornasoma(String data, int dias){
         
         Calendar calendar = Calendar.getInstance();

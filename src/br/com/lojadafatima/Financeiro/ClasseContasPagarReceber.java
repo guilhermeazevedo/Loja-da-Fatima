@@ -147,7 +147,7 @@ public class ClasseContasPagarReceber {
 "                               WHERE \"C\".\"CD_PESSOA\" = "+getCodigopessoa()+"\n" +
 "                               AND \"C\".\"CD_OPERACAO\" IN ((SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
 "                                                          WHERE \"TP_FINANCEIRO\" = 'E'))\n" +
-"                               ORDER BY ORDER BY \"CONTA\" DESC");
+"                               ORDER BY \"CONTA\" DESC");
         return conn.resultset;
     }
     

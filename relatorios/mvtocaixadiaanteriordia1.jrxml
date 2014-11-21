@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mvtocaixadiaanteriordia1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b53c2d15-551c-40ef-804d-c70f4347fdde">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT "CD_MVTO",
+                           "DS_MVTO",
+                           TO_CHAR("DT_MVTO", 'DD/MM/YYYY ÀS HH24:MI:SS'),
+                           "VL_ANTES",
+                           "VL_ATUAL",
+                           "VL_MVTO",
+                           CASE WHEN "TP_MVTO" = 'E' THEN 'ENTRADA'
+                           ELSE 'SAIDA' END AS "TIPO"
+                    FROM bancoloja."MOV_CAIXA"
+                    WHERE DATE_PART('DAY', "DT_MVTO") = DATE_PART('DAY', (CURRENT_DATE - 1))
+                    AND   DATE_PART('MONTH', "DT_MVTO") = (DATE_PART('MONTH', CURRENT_DATE) - 1)
+                    ORDER BY "CD_MVTO"]]>
+	</queryString>
+	<field name="CD_MVTO" class="java.lang.Integer"/>
+	<field name="DS_MVTO" class="java.lang.String"/>
+	<field name="to_char" class="java.lang.String"/>
+	<field name="VL_ANTES" class="java.math.BigDecimal"/>
+	<field name="VL_ATUAL" class="java.math.BigDecimal"/>
+	<field name="VL_MVTO" class="java.math.BigDecimal"/>
+	<field name="TIPO" class="java.lang.String"/>
+	<variable name="VL_ATUAL_1" class="java.math.BigDecimal" calculation="First">
+		<variableExpression><![CDATA[$F{VL_ATUAL}]]></variableExpression>
+	</variable>
+	<variable name="VL_ANTES_1" class="java.math.BigDecimal" calculation="First">
+		<variableExpression><![CDATA[$F{VL_ANTES}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="139" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9d29c083-bfd3-4264-bf92-03c14a5a2fb8" x="72" y="35" width="418" height="37"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Movimentação do Caixa do Dia Anterior]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6539d992-19ee-4d00-aabd-5319cb2cfc23" x="0" y="0" width="217" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Software Loja da Fátima]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dc8d00cb-b226-4487-957e-636566757333" x="3" y="93" width="125" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Começou o dia com ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c60777f2-7f5b-416e-8bc6-3f4238758d18" x="228" y="93" width="115" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ em caixa.]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="¤ #,##0.00">
+				<reportElement uuid="d8aba713-39b3-4a9c-a3c5-191aaf9f89b1" x="128" y="93" width="100" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{VL_ANTES_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="2e8ce8fa-c6b0-4f4e-ad06-6353e104350d" x="0" y="0" width="47" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nr.º]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7c5604ab-23da-4912-9344-c18b60290357" x="57" y="0" width="137" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Referente à]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6d9cae70-74b2-4ed7-9603-b10722aa61e9" x="206" y="0" width="59" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data e Hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7711be51-57db-4273-af97-27dd509bd117" x="276" y="0" width="67" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quant. Antes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dff36cc5-15ec-41be-905d-eec0b1ee0938" x="354" y="0" width="60" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c83c248b-dda4-4d16-8d21-559f47421541" x="424" y="0" width="78" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quant. Movida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8e8f1a49-2a32-443c-9fac-3bcbecb525c6" x="502" y="0" width="53" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement uuid="eed9c225-2d94-4ccd-9784-6aa1f68abf86" x="0" y="0" width="47" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CD_MVTO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="ef7cb2c4-8ef1-416b-9121-f96336244c0f" x="57" y="0" width="137" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_MVTO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="9c000f74-2028-44ce-beab-6f4aa6b324f7" x="206" y="0" width="59" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{to_char}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+				<reportElement uuid="83207d3e-0e3d-4674-85a3-da6956a0c688" x="276" y="0" width="67" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_ANTES}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+				<reportElement uuid="d6fdff9e-7e20-40fb-ac2c-71327eda5324" x="354" y="0" width="60" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_ATUAL}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+				<reportElement uuid="07f5d184-1140-4401-b9a6-09db3ef2cc81" x="424" y="0" width="66" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_MVTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="961dc3ef-b6ed-48b6-9e33-ca07cd368b09" x="502" y="0" width="53" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TIPO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement uuid="dfcaa91e-c311-48b5-b7d5-ec3232df3ac9" x="435" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="76aaff67-46d9-4827-95c0-ec4499967d9d" x="515" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement uuid="b477dbba-b252-44f6-a9df-a30e2b218582" x="0" y="2" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="26" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="5a883850-f0e3-45d1-9509-b3e464a88ab4" x="128" y="6" width="100" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_ATUAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ffd1015a-2b8e-465b-bb4d-c5593a4b8fea" x="3" y="6" width="125" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Terminou o dia com ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0e95d7e8-8120-44b1-a025-5fb28c497336" x="228" y="6" width="115" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[em caixa.]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

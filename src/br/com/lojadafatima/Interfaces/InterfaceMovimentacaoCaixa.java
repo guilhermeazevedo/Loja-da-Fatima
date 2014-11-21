@@ -6,8 +6,11 @@
 
 package br.com.lojadafatima.Interfaces;
 
+import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
+import br.com.lojadafatima.ClassesFerramentas.Relatorios;
 import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
+import java.util.HashMap;
 
 /**
  *
@@ -25,13 +28,14 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
         initComponents();
         int[] tam = new int[7];
         tam[0] = 80;
-        tam[1] = 80;
-        tam[2] = 80;
-        tam[3] = 80;
-        tam[4] = 80;
-        tam[5] = 80;
+        tam[1] = 500;
+        tam[2] = 180;
+        tam[3] = 100;
+        tam[4] = 100;
+        tam[5] = 100;
         tam[6] = 80;
         preenche.FormataJtable(TbMvtoCaixa, tam);
+        CbMvtoCaixaActionPerformed(null);
     }
 
     /**
@@ -46,7 +50,7 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         CbMvtoCaixa = new javax.swing.JComboBox();
-        BtPesqMvto = new javax.swing.JButton();
+        BtGerarRelatorio = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbMvtoCaixa = new javax.swing.JTable();
 
@@ -57,11 +61,16 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
         jLabel1.setText("Movimentacao de Caixa referente");
 
         CbMvtoCaixa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ao Dia de Hoje", "à Ontem", "ao Mês Atual", "ao Mês Anterior", "todas as Entradas do Dia", "todas as Saídas do Dia" }));
-
-        BtPesqMvto.setText("Pesquisar");
-        BtPesqMvto.addActionListener(new java.awt.event.ActionListener() {
+        CbMvtoCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtPesqMvtoActionPerformed(evt);
+                CbMvtoCaixaActionPerformed(evt);
+            }
+        });
+
+        BtGerarRelatorio.setText("Gerar Relatório");
+        BtGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtGerarRelatorioActionPerformed(evt);
             }
         });
 
@@ -70,7 +79,7 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nº da Movimentacao", "Tipo", "Data e Hora", "Quant. Antes", "Quant. Depois", "Quant. Movimentado", "Referente à"
+                "Nº da Movimentacao", "Referente a", "Data e Hora", "Quant. Antes", "Saldo", "Quant. Movimentado", "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -94,14 +103,14 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 814, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1215, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(CbMvtoCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtPesqMvto)))
+                                .addComponent(BtGerarRelatorio)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -113,7 +122,7 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CbMvtoCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesqMvto))
+                    .addComponent(BtGerarRelatorio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -124,8 +133,9 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +146,46 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtPesqMvtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqMvtoActionPerformed
+    private void BtGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGerarRelatorioActionPerformed
+        Relatorios relatorio = new Relatorios();
+        ClasseDatas datas = new ClasseDatas();
+        switch(CbMvtoCaixa.getSelectedIndex()){
+            case 0:{
+                relatorio.iniciarSplash(mvtocaixa.mvtocaixadia(), "relatorios\\mvtocaixadia.jasper", new HashMap());
+                break;
+            }
+            case 1:{
+                if(datas.diaatual() == 1){
+                    relatorio.iniciarSplash(mvtocaixa.mvtocaixadiaanterior(), "relatorios\\mvtocaixadiaanteriordia1.jasper", new HashMap());
+                }else{
+                    relatorio.iniciarSplash(mvtocaixa.mvtocaixadiaanterior(), "relatorios\\mvtocaixadiaanterior.jasper", new HashMap());
+                }
+                break;
+            }
+            case 2:{
+                relatorio.iniciarSplash(mvtocaixa.mvtocaixames(), "relatorios\\mvtocaixames.jasper", new HashMap());
+                break;
+            }
+            case 3:{
+                if(datas.mesatual() == 0){
+                    relatorio.iniciarSplash(mvtocaixa.mvtocaixamesanterior(), "relatorios\\mvtocaixamesanteriorjaneiro.jasper", new HashMap());
+                }else{
+                    relatorio.iniciarSplash(mvtocaixa.mvtocaixamesanterior(), "relatorios\\mvtocaixamesanterior.jasper", new HashMap());
+                }
+                break;
+            }
+            case 4:{
+                relatorio.iniciarSplash(mvtocaixa.mvtocaixaentradasdia(), "relatorios\\mvtoentradasdia.jasper", new HashMap());
+                break;
+            }
+            case 5:{
+                relatorio.iniciarSplash(mvtocaixa.mvtocaixasaidasdia(), "relatorios\\mvtosaidasdia.jasper", new HashMap());
+                break;
+            }
+        }
+    }//GEN-LAST:event_BtGerarRelatorioActionPerformed
+
+    private void CbMvtoCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbMvtoCaixaActionPerformed
         switch(CbMvtoCaixa.getSelectedIndex()){
             case 0:{
                 preenche.PreencherJtable(TbMvtoCaixa, mvtocaixa.mvtocaixadia());
@@ -163,12 +212,12 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
                 break;
             }
         }
-    }//GEN-LAST:event_BtPesqMvtoActionPerformed
+    }//GEN-LAST:event_CbMvtoCaixaActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtPesqMvto;
+    private javax.swing.JButton BtGerarRelatorio;
     private javax.swing.JComboBox CbMvtoCaixa;
     private javax.swing.JTable TbMvtoCaixa;
     private javax.swing.JLabel jLabel1;

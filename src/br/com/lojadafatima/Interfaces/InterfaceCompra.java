@@ -801,7 +801,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 parcelas.getConta().setCompravenda(prodcompravenda.getCompravenda());
                 parcelas.getConta().setCondicao(prodcompravenda.getCompravenda().getCondicao());
                 parcelas.getConta().setOperacao(prodcompravenda.getCompravenda().getOperacao());
-                parcelas.getConta().setDescricao("REFERENTE A COMPRA, CODIGO DA NOTA DO FORNECEDOR: " + TfDescNotaCompra.getText());
+                parcelas.getConta().setDescricao(prodcompravenda.getCompravenda().getDescricao());
                 parcelas.getConta().setDtconta(TfData.getText());
                 parcelas.getConta().setTotal(Float.parseFloat(TfValorTotalCompra.getValue().toString()));
                 parcelas.getConta().setCodigopessoa(prodcompravenda.getCompravenda().getCodigopessoa());
@@ -941,7 +941,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
     public void enviardados() {
         prodcompravenda.getCompravenda().setData(datas.retornadataehora());
-        prodcompravenda.getCompravenda().setDescricao("COMPRA NRO. "+TfCodigo.getText()+" JUNTO AO FORNECEDOR "+TfFornecedor.getText()+" - "+TfDescNotaCompra.getText());
+        prodcompravenda.getCompravenda().setDescricao("COMPRA NRO. "+TfCodigo.getText()+" COM O FORNECEDOR "+TfFornecedor.getText()+" - "+TfDescNotaCompra.getText());
         prodcompravenda.getForneproduto().getFornecedor().setCodigo(Integer.parseInt(TfCodFornecedor.getText()));
         prodcompravenda.getCompravenda().setCodigopessoa(prodcompravenda.getForneproduto().getFornecedor().retornacodigopessoafornecedor());
         prodcompravenda.getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TfCodFuncionario.getText()));
