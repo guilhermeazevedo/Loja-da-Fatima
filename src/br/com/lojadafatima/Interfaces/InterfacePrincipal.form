@@ -146,9 +146,9 @@
             <MenuItem class="javax.swing.JMenuItem" name="MnItFluxoCaixa">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Alt+F"/>
+                  <KeyStroke key="Alt+M"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Fluxo de Caixa"/>
+                <Property name="text" type="java.lang.String" value="Movimenta&#xe7;&#xe3;o de Caixa"/>
                 <Property name="name" type="java.lang.String" value="11" noResource="true"/>
               </Properties>
               <Events>
@@ -203,6 +203,9 @@
                 <Property name="text" type="java.lang.String" value="Estoque"/>
                 <Property name="name" type="java.lang.String" value="15" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnItEstoqueActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -255,7 +258,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
@@ -264,24 +267,22 @@
                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="LbSair" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="BtRelatorios" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="BtRealizarOperacao" alignment="0" pref="224" max="32767" attributes="0"/>
                               <Component id="BtContasReceber" alignment="0" max="32767" attributes="0"/>
-                              <Component id="BtVenda" alignment="0" max="32767" attributes="0"/>
+                              <Component id="BtVenda" alignment="1" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="BtCompra" max="32767" attributes="0"/>
-                              <Component id="BtContasPagar" max="32767" attributes="0"/>
-                              <Component id="BtRealizarOperacao" alignment="0" max="32767" attributes="0"/>
+                              <Component id="BtContasPagar" alignment="1" pref="219" max="32767" attributes="0"/>
+                              <Component id="BtCompra" alignment="1" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="BtFluxoCaixa" max="32767" attributes="0"/>
                               <Component id="BtEstoque" max="32767" attributes="0"/>
+                              <Component id="BtMvtoCaixa" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="52" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -301,18 +302,15 @@
                       <Component id="BtCompra" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
                       <Component id="BtEstoque" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="BtContasPagar" pref="69" max="32767" attributes="0"/>
-                      <Component id="BtFluxoCaixa" max="32767" attributes="0"/>
-                      <Component id="BtContasReceber" max="32767" attributes="0"/>
+                      <Component id="BtContasPagar" max="32767" attributes="0"/>
+                      <Component id="BtMvtoCaixa" max="32767" attributes="0"/>
+                      <Component id="BtContasReceber" min="-2" pref="69" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="BtRelatorios" alignment="3" min="-2" pref="69" max="-2" attributes="0"/>
-                      <Component id="BtRealizarOperacao" alignment="3" min="-2" pref="69" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="34" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="BtRealizarOperacao" min="-2" pref="69" max="-2" attributes="0"/>
+                  <EmptySpace pref="59" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -335,7 +333,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" id="CheckBoxMenuItem.selectionBackground" palette="3" red="33" type="palette"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Trocar Usuario"/>
+            <Property name="text" type="java.lang.String" value="Trocar Usu&#xe1;rio"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Cursor em Forma de M&#xe3;o"/>
             </Property>
@@ -380,16 +378,16 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtContasPagarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="BtFluxoCaixa">
+        <Component class="javax.swing.JButton" name="BtMvtoCaixa">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Fluxo de Caixa"/>
+            <Property name="text" type="java.lang.String" value="Movimenta&#xe7;&#xe3;o de Caixa"/>
             <Property name="name" type="java.lang.String" value="11" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtFluxoCaixaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtMvtoCaixaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtEstoque">
@@ -400,15 +398,9 @@
             <Property name="text" type="java.lang.String" value="Estoque"/>
             <Property name="name" type="java.lang.String" value="15" noResource="true"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="BtRelatorios">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="18" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
-            <Property name="name" type="java.lang.String" value="18" noResource="true"/>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtEstoqueActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="LbNmUsuario">
           <Properties>

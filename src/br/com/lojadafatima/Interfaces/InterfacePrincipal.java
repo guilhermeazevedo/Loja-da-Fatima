@@ -13,6 +13,7 @@ import br.com.lojadafatima.InterfacesPessoa.InterfaceFuncionario;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceFornecedor;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceCidade;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceEstado;
+import br.com.lojadafatima.InterfacesProduto.InterfaceEstoque;
 import br.com.lojadafatima.Usuario.ClasseTelas;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import br.com.lojadafatima.Usuario.ClasseUsuario;
@@ -55,9 +56,8 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         BtCompra = new javax.swing.JButton();
         BtContasReceber = new javax.swing.JButton();
         BtContasPagar = new javax.swing.JButton();
-        BtFluxoCaixa = new javax.swing.JButton();
+        BtMvtoCaixa = new javax.swing.JButton();
         BtEstoque = new javax.swing.JButton();
-        BtRelatorios = new javax.swing.JButton();
         LbNmUsuario = new javax.swing.JLabel();
         BtRealizarOperacao = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -96,7 +96,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         });
 
         LbSair.setForeground(javax.swing.UIManager.getDefaults().getColor("CheckBoxMenuItem.selectionBackground"));
-        LbSair.setText("Trocar Usuario");
+        LbSair.setText("Trocar Usuário");
         LbSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LbSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -131,22 +131,23 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             }
         });
 
-        BtFluxoCaixa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        BtFluxoCaixa.setText("Fluxo de Caixa");
-        BtFluxoCaixa.setName("11"); // NOI18N
-        BtFluxoCaixa.addActionListener(new java.awt.event.ActionListener() {
+        BtMvtoCaixa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        BtMvtoCaixa.setText("Movimentação de Caixa");
+        BtMvtoCaixa.setName("11"); // NOI18N
+        BtMvtoCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtFluxoCaixaActionPerformed(evt);
+                BtMvtoCaixaActionPerformed(evt);
             }
         });
 
         BtEstoque.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtEstoque.setText("Estoque");
         BtEstoque.setName("15"); // NOI18N
-
-        BtRelatorios.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        BtRelatorios.setText("Relatórios");
-        BtRelatorios.setName("18"); // NOI18N
+        BtEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtEstoqueActionPerformed(evt);
+            }
+        });
 
         LbNmUsuario.setText("jLabel1");
 
@@ -171,21 +172,19 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                         .addComponent(LbNmUsuario)
                         .addGap(41, 41, 41)
                         .addComponent(LbSair))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(BtRelatorios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
                             .addComponent(BtContasReceber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtVenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(26, 26, 26)
+                            .addComponent(BtVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BtCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtContasPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(13, 13, 13)
+                            .addComponent(BtContasPagar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                            .addComponent(BtCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BtFluxoCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 52, Short.MAX_VALUE)))
+                            .addComponent(BtEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtMvtoCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -199,16 +198,14 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                     .addComponent(BtVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BtContasPagar, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                    .addComponent(BtFluxoCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtContasReceber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtRelatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(BtContasPagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtMvtoCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtContasReceber, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         MnCadastros.setText("Telas/Cadastros");
@@ -330,8 +327,8 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         });
         MnFinanceiro.add(MnItContasPagar);
 
-        MnItFluxoCaixa.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK));
-        MnItFluxoCaixa.setText("Fluxo de Caixa");
+        MnItFluxoCaixa.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_MASK));
+        MnItFluxoCaixa.setText("Movimentação de Caixa");
         MnItFluxoCaixa.setName("11"); // NOI18N
         MnItFluxoCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -376,6 +373,11 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         MnItEstoque.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
         MnItEstoque.setText("Estoque");
         MnItEstoque.setName("15"); // NOI18N
+        MnItEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnItEstoqueActionPerformed(evt);
+            }
+        });
         MnProduto.add(MnItEstoque);
 
         jMenuBar1.add(MnProduto);
@@ -457,7 +459,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         });
     }//GEN-LAST:event_BtContasPagarActionPerformed
 
-    private void BtFluxoCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtFluxoCaixaActionPerformed
+    private void BtMvtoCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtMvtoCaixaActionPerformed
         final InterfaceMovimentacaoCaixa tela = new InterfaceMovimentacaoCaixa(getPrimeiratela(), true);
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -465,7 +467,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
             }
         });
-    }//GEN-LAST:event_BtFluxoCaixaActionPerformed
+    }//GEN-LAST:event_BtMvtoCaixaActionPerformed
 
     private void MnItCadEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnItCadEstadoActionPerformed
         final InterfaceEstado tela = new InterfaceEstado(getPrimeiratela(), true);
@@ -526,7 +528,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
     }//GEN-LAST:event_MnItContasPagarActionPerformed
 
     private void MnItFluxoCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnItFluxoCaixaActionPerformed
-        BtFluxoCaixaActionPerformed(evt);
+        BtMvtoCaixaActionPerformed(evt);
     }//GEN-LAST:event_MnItFluxoCaixaActionPerformed
 
     private void MnItCadTipoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnItCadTipoProdutoActionPerformed
@@ -609,15 +611,28 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         });
     }//GEN-LAST:event_BtRealizarOperacaoActionPerformed
 
+    private void BtEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtEstoqueActionPerformed
+        final InterfaceEstoque tela = new InterfaceEstoque(getPrimeiratela(), true);
+        tela.setVisible(true);
+        tela.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+
+            }
+        });
+    }//GEN-LAST:event_BtEstoqueActionPerformed
+
+    private void MnItEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnItEstoqueActionPerformed
+        BtEstoqueActionPerformed(evt);
+    }//GEN-LAST:event_MnItEstoqueActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCompra;
     private javax.swing.JButton BtContasPagar;
     private javax.swing.JButton BtContasReceber;
     private javax.swing.JButton BtEstoque;
-    private javax.swing.JButton BtFluxoCaixa;
+    private javax.swing.JButton BtMvtoCaixa;
     private javax.swing.JButton BtRealizarOperacao;
-    private javax.swing.JButton BtRelatorios;
     private javax.swing.JButton BtVenda;
     private javax.swing.JLabel LbNmUsuario;
     private javax.swing.JLabel LbSair;
@@ -722,16 +737,10 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 //        }
     }
 
-/**
- * @return the primeiratela
- */
 public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
 
-    /**
-     * @param primeiratela the primeiratela to set
-     */
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
     }

@@ -23,7 +23,6 @@ import javax.swing.text.MaskFormatter;
  */
 public class InterfaceProduto extends javax.swing.JDialog {
 
-    MaskFormatter valor;
     private java.awt.Frame primeiratela;
     Preenche preenche = new Preenche();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
