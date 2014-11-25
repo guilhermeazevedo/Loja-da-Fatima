@@ -58,6 +58,13 @@ public class ClasseMvtoCaixa {
         }
     }
 
+    public ResultSet retornahistoricopagamentossalario() {
+        conn.executeSQL("SELECT \"DS_MVTO\", \"VL_MVTO\"\n"
+                + "FROM bancoloja.\"MOV_CAIXA\"\n"
+                + "WHERE \"DS_MVTO\" LIKE 'PAGAMENTO DE SALARIO AO FUNCIONARIO " + getParcela().getConta().getCompravenda().getFuncionario().getPessoafis().getNome() + "%'");
+        return conn.resultset;
+    }
+
     public ResultSet mvtocaixadia() {
         conn.executeSQL("SELECT \"CD_MVTO\",\n"
                 + "       \"DS_MVTO\",\n"

@@ -38,6 +38,11 @@ public class ClasseDatas {
         return data.getMonth();
     }
     
+    public int anoatual(){
+        Date data = new Date();
+        return data.getYear() + 1900;
+    }
+    
     public String retornasoma(String data, int dias){
         
         Calendar calendar = Calendar.getInstance();

@@ -10,6 +10,8 @@ import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.DadosPessoa.ClassePessoaFisica;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -76,16 +78,17 @@ public class ClasseFuncionario {
         }
         return false;
     }
-    
-    public boolean efuncionarioativo(){
-        conn.executeSQL("SELECT \"P\".\"SITUACAO\"\n" +
-                        "FROM bancoloja.\"CAD_FUNCIONARIO\" \"F\"\n" +
-                        "JOIN bancoloja.\"CAD_PESSOA\" \"P\" ON \"P\".\"CD_PESSOA\" = \"F\".\"CD_PESSOA_FIS\"\n" +
-                        "WHERE \"F\".\"CD_FUNCIONARIO\" = "+getCodigo());
+
+    public boolean efuncionarioativo() {
+        conn.executeSQL("SELECT \"P\".\"SITUACAO\"\n"
+                + "FROM bancoloja.\"CAD_FUNCIONARIO\" \"F\"\n"
+                + "JOIN bancoloja.\"CAD_PESSOA\" \"P\" ON \"P\".\"CD_PESSOA\" = \"F\".\"CD_PESSOA_FIS\"\n"
+                + "WHERE \"F\".\"CD_FUNCIONARIO\" = " + getCodigo());
         try {
             conn.resultset.first();
-            if(conn.resultset.getString(1).equals("A"))
-            return true;
+            if (conn.resultset.getString(1).equals("A")) {
+                return true;
+            }
         } catch (SQLException ex) {
         }
         return false;
@@ -109,12 +112,41 @@ public class ClasseFuncionario {
                 + "VALUES (" + getCodigo() + ", " + getPessoafis().getPessoa().getCodigo() + ", '" + getFuncao().toUpperCase() + "', " + getSalario() + ", " + getComissao() + ");");
     }
 
+    public float retornasalariomaiscomissao() {
+        conn.executeSQL("SELECT \"C\".\"VL_TOTAL\"\n"
+                + "FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n"
+                + "JOIN bancoloja.\"COMPRA_VENDA\" \"CV\"\n"
+                + "ON \"CV\".\"CD_COMPRA_VENDA\" = \"C\".\"CD_COMPRA_VENDA\" AND \"CV\".\"CD_OPERACAO\" = \"C\".\"CD_OPERACAO_COMPRA_VENDA\"\n"
+                + "WHERE \"CV\".\"CD_OPERACAO\" = 2\n"
+                + "AND \"CV\".\"CD_FUNCIONARIO\" = " + getCodigo());
+        float comissaosobrevendas = 0;
+        try {
+            System.out.println(comissaosobrevendas);
+            while(conn.resultset.next()){
+                comissaosobrevendas = comissaosobrevendas + ((conn.resultset.getFloat(1)*getComissao())/100);
+                System.out.println(comissaosobrevendas);
+            }
+            return comissaosobrevendas + getSalario();
+        } catch (SQLException ex) {
+            return getSalario();
+        }
+    }
+
     public ResultSet consultageral() {
         conn.executeSQL("SELECT \"F\".\"CD_FUNCIONARIO\", \"PF\".\"NM_PESSOA\", \"F\".\"DS_FUNCAO\", \"PF\".\"NR_CPF\"\n"
                 + "FROM bancoloja.\"CAD_FUNCIONARIO\" \"F\"\n"
                 + "JOIN bancoloja.\"CAD_PESSOA_FISICA\" \"PF\" ON \"PF\".\"CD_PESSOA_FIS\" = \"F\".\"CD_PESSOA_FIS\"\n"
                 + "JOIN bancoloja.\"CAD_PESSOA\" \"P\" ON \"F\".\"CD_PESSOA_FIS\" = \"P\".\"CD_PESSOA\"\n"
                 + "WHERE \"P\".\"SITUACAO\" = 'A'");
+        return conn.resultset;
+    }
+
+    public ResultSet consultatodososfuncionarios() {
+        conn.executeSQL("SELECT \"F\".\"CD_FUNCIONARIO\", \"PF\".\"NM_PESSOA\", \"F\".\"DS_FUNCAO\", \"F\".\"VL_SALARIO\", \"F\".\"PE_COMISSAO\"\n"
+                + "                FROM bancoloja.\"CAD_FUNCIONARIO\" \"F\"\n"
+                + "                JOIN bancoloja.\"CAD_PESSOA_FISICA\" \"PF\" ON \"PF\".\"CD_PESSOA_FIS\" = \"F\".\"CD_PESSOA_FIS\"\n"
+                + "                JOIN bancoloja.\"CAD_PESSOA\" \"P\" ON \"F\".\"CD_PESSOA_FIS\" = \"P\".\"CD_PESSOA\"\n"
+                + "                WHERE \"P\".\"SITUACAO\" = 'A'");
         return conn.resultset;
     }
 
@@ -163,8 +195,8 @@ public class ClasseFuncionario {
             setFuncao(conn.resultset.getString(1));
             setSalario(conn.resultset.getFloat(2));
             setComissao(conn.resultset.getFloat(3));
-        }catch(SQLException ex){
-            
+        } catch (SQLException ex) {
+
         }
     }
 

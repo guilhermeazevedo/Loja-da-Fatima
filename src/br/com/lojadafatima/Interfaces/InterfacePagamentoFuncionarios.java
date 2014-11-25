@@ -6,17 +6,50 @@
 
 package br.com.lojadafatima.Interfaces;
 
+import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
+import br.com.lojadafatima.ClassesFerramentas.Preenche;
+import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
+import java.math.BigDecimal;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hp
  */
-public class InterfacePagamentoFuncionarios extends javax.swing.JFrame {
+public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
 
-    /**
-     * Creates new form InterfacePagamentoFuncionarios
-     */
-    public InterfacePagamentoFuncionarios() {
+    ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
+    Preenche preenche = new Preenche();
+    ClasseDatas datas = new ClasseDatas();
+    private java.awt.Frame primeiratela;
+    
+    public InterfacePagamentoFuncionarios(java.awt.Frame telaorigem, boolean modal) {
+        super(telaorigem, modal);
+        setPrimeiratela(telaorigem);
         initComponents();
+        int[] tam = new int[5];
+        tam[0] = 70;
+        tam[1] = 150;
+        tam[2] = 100;
+        tam[3] = 80;
+        tam[4] = 80;
+        preenche.FormataJtable(TbFuncionariosCad, tam);
+        
+        int[] tam2 = new int[4];
+        tam2[0] = 70;
+        tam2[1] = 300;
+        tam2[2] = 200;
+        tam2[3] = 70;
+        preenche.FormataJtable(TbPesquisa, tam2);
+        
+        int[] tam3 = new int[2];
+        tam3[0] = 200;
+        tam3[1] = 80;
+        preenche.FormataJtable(TbPagamentos, tam3);
+        
+        preenche.PreencherJtable(TbPesquisa, mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().consultageral());
+        preenche.PreencherJtable(TbFuncionariosCad, mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().consultatodososfuncionarios());
+        preenchercomboanos();
     }
 
     /**
@@ -30,33 +63,200 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         PnRealizaPgto = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TbFuncionariosCad = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        TfSalario = new JNumberField.JNumberField();
+        BtPagar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        CbMes = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        CbAno = new javax.swing.JComboBox();
         PnPesqPgto = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TbPesquisa = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TbPagamentos = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pagamento de Salários a Funcionários - Software Loja da Fátima");
+        setResizable(false);
+
+        TbFuncionariosCad.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Nome", "Funcao", "Salario", "Comissao (%)"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TbFuncionariosCad.getTableHeader().setReorderingAllowed(false);
+        TbFuncionariosCad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                TbFuncionariosCadMouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TbFuncionariosCad);
+
+        jLabel1.setText("Funcionarios Cadastrados:");
+
+        jLabel2.setText("Salario:");
+
+        BtPagar.setText("Pagar Salario");
+        BtPagar.setEnabled(false);
+        BtPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtPagarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Referente ao mes");
+
+        CbMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+
+        jLabel4.setText("do ano");
 
         javax.swing.GroupLayout PnRealizaPgtoLayout = new javax.swing.GroupLayout(PnRealizaPgto);
         PnRealizaPgto.setLayout(PnRealizaPgtoLayout);
         PnRealizaPgtoLayout.setHorizontalGroup(
             PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 647, Short.MAX_VALUE)
+            .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
+                        .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 610, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
+                        .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CbAno, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2)
+                            .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
+                                .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         PnRealizaPgtoLayout.setVerticalGroup(
             PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 385, Short.MAX_VALUE)
+            .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtPagar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(CbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(CbAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Realizar Pagamento", PnRealizaPgto);
+
+        TbPesquisa.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Nome", "Função", "CPF"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TbPesquisa.getTableHeader().setReorderingAllowed(false);
+        TbPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                TbPesquisaMouseReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(TbPesquisa);
+
+        jLabel5.setText("Funcionarios Cadatrados:");
+
+        jLabel6.setText("Salarios ja pagos:");
+
+        TbPagamentos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Descricao", "Valor Pago ao Funcionario (R$)"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TbPagamentos.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(TbPagamentos);
 
         javax.swing.GroupLayout PnPesqPgtoLayout = new javax.swing.GroupLayout(PnPesqPgto);
         PnPesqPgto.setLayout(PnPesqPgtoLayout);
         PnPesqPgtoLayout.setHorizontalGroup(
             PnPesqPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 647, Short.MAX_VALUE)
+            .addGroup(PnPesqPgtoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PnPesqPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+                    .addGroup(PnPesqPgtoLayout.createSequentialGroup()
+                        .addGroup(PnPesqPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
         );
         PnPesqPgtoLayout.setVerticalGroup(
             PnPesqPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 385, Short.MAX_VALUE)
+            .addGroup(PnPesqPgtoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Historico de Pagamentos", PnPesqPgto);
@@ -65,7 +265,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,46 +273,90 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfacePagamentoFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfacePagamentoFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfacePagamentoFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfacePagamentoFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void TbFuncionariosCadMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbFuncionariosCadMouseReleased
+        if(TbFuncionariosCad.getSelectedRow() > -1){
+            mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 0).toString()));
+            mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().setSalario(Float.parseFloat(TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 3).toString()));
+            mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().setComissao(Float.parseFloat(TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 4).toString()));
+            TfSalario.setValue(BigDecimal.valueOf(mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().retornasalariomaiscomissao()));
+            BtPagar.setEnabled(true);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_TbFuncionariosCadMouseReleased
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InterfacePagamentoFuncionarios().setVisible(true);
-            }
-        });
-    }
+    private void BtPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPagarActionPerformed
+        if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja realizar o pagamento deste funcionario?\n"
+                + "Funcionario: "+TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString()+"\n"
+                + "Salario: "+TfSalario.getText()+"\n"
+                + "Rerente a: "+CbMes.getSelectedItem().toString()+"/"+CbAno.getSelectedItem().toString(), "Realizar pagamento?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            mvtocaixa.getParcela().getConta().getCompravenda().setCodigo(0);
+            mvtocaixa.getParcela().getConta().getOperacao().setCodigo(4);
+            mvtocaixa.getParcela().getConta().setDescricao("PAGAMENTO DE SALARIO AO FUNCIONARIO "+TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString()+", REFERENTE AO TRABALHO DO MES "+CbMes.getSelectedItem().toString()+"/"+CbAno.getSelectedItem().toString());
+            mvtocaixa.getParcela().getConta().setDtconta(datas.retornaratartual());
+            mvtocaixa.getParcela().getConta().setTotal(Float.parseFloat(TfSalario.getValue().toString()));
+            mvtocaixa.getParcela().getConta().setCodigopessoa(0);
+            mvtocaixa.getParcela().getConta().getCondicao().setCodigo(1);
+            mvtocaixa.getParcela().getConta().incluir();
+            mvtocaixa.getParcela().gerarparcelas();
+            mvtocaixa.getParcela().setCodigo(1);
+            mvtocaixa.getParcela().getFormapgto().setCodigo(1);
+            mvtocaixa.getParcela().setDtpago(datas.retornaratartual());
+            mvtocaixa.getParcela().setVlpago(Float.parseFloat(TfSalario.getValue().toString()));
+            mvtocaixa.getParcela().pagaparcela();
+            mvtocaixa.setTpmvto("S");
+            mvtocaixa.setVlmvto(Float.parseFloat(TfSalario.getValue().toString()));
+            mvtocaixa.setDsmvto(mvtocaixa.getParcela().getConta().getDescricao());
+            mvtocaixa.incluir();
+            BtPagar.setEnabled(false);
+            TfSalario.setText("");
+        }
+    }//GEN-LAST:event_BtPagarActionPerformed
+
+    private void TbPesquisaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbPesquisaMouseReleased
+        if(TbPesquisa.getSelectedRow() > -1){
+            mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().getPessoafis().setNome(TbPesquisa.getValueAt(TbPesquisa.getSelectedRow(), 1).toString());
+            preenche.PreencherJtable(TbPagamentos, mvtocaixa.retornahistoricopagamentossalario());
+        }
+    }//GEN-LAST:event_TbPesquisaMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtPagar;
+    private javax.swing.JComboBox CbAno;
+    private javax.swing.JComboBox CbMes;
     private javax.swing.JPanel PnPesqPgto;
     private javax.swing.JPanel PnRealizaPgto;
+    private javax.swing.JTable TbFuncionariosCad;
+    private javax.swing.JTable TbPagamentos;
+    private javax.swing.JTable TbPesquisa;
+    private JNumberField.JNumberField TfSalario;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
+
+    public void preenchercomboanos(){
+        CbAno.addItem(datas.anoatual());
+        for(int i = 1; i <= (datas.anoatual() - 2014); i++){
+            CbAno.addItem(datas.anoatual() - i);
+        }
+    }
+
+    public java.awt.Frame getPrimeiratela() {
+        return primeiratela;
+    }
+
+    public void setPrimeiratela(java.awt.Frame primeiratela) {
+        this.primeiratela = primeiratela;
+    }
+
 }
