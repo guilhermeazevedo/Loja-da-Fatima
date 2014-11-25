@@ -5,6 +5,8 @@ import br.com.lojadafatima.CompraVendaOperacoes.ClasseCompraVenda;
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -45,6 +47,19 @@ public class ClasseMvtoEstoque {
         try {
             conn.resultset.first();
             return conn.resultset.getFloat(1);
+        } catch (SQLException ex) {
+            return 0;
+        }
+    }
+    
+    public int retornanumerodeprodutoscomestoquebaixo(){
+        ResultSet rs = consultaestoquebaixo();
+        int cont = 0;
+        try {
+            while(rs.next()){
+                cont = cont + 1;
+            }
+            return cont;
         } catch (SQLException ex) {
             return 0;
         }

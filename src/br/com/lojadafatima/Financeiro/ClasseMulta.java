@@ -33,6 +33,23 @@ public class ClasseMulta {
         }
     }
     
+    public void retornamultacodigo(){
+        conn.executeSQL("SELECT \"CD_MULTA\", \"NR_DIAS_AVISO\", \"NR_DIAS_ACRESCIMO\", \"PC_ACRESCIMO\" FROM bancoloja.\"CAD_MULTAS\"\n" +
+                        "WHERE \"CD_MULTA\" = "+getCodigo());
+        try{
+            conn.resultset.first();
+            setCodigo(conn.resultset.getInt(1));
+            setDiasalerta(conn.resultset.getInt(2));
+            setDiasacresc(conn.resultset.getInt(3));
+            setPercent(Float.parseFloat(conn.resultset.getString(4)));
+        }catch(SQLException ex){
+            setCodigo(0);
+            setDiasalerta(0);
+            setDiasacresc(0);
+            setPercent(0);
+        }
+    }
+    
     public void incluir(){
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_MULTAS", "CD_MULTA"));

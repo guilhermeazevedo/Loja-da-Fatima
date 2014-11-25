@@ -5,6 +5,7 @@
  */
 package br.com.lojadafatima.Interfaces;
 
+import br.com.lojadafatima.Financeiro.ClasseParcelas;
 import br.com.lojadafatima.InterfacesProduto.InterfaceProduto;
 import br.com.lojadafatima.InterfacesProduto.InterfaceTabelas;
 import br.com.lojadafatima.InterfacesProduto.InterfaceTipoProduto;
@@ -14,6 +15,7 @@ import br.com.lojadafatima.InterfacesPessoa.InterfaceFornecedor;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceCidade;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceEstado;
 import br.com.lojadafatima.InterfacesProduto.InterfaceEstoque;
+import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
 import br.com.lojadafatima.Usuario.ClasseTelas;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import br.com.lojadafatima.Usuario.ClasseUsuario;
@@ -39,6 +41,8 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 //        telasusuario.setUsuario(usuario);
 //        LbNmUsuario.setText(telasusuario.getUsuario().getLogin());
 //        liberatelas();
+        
+        atualizasituacao();
     }
 
     /**
@@ -61,6 +65,17 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         LbNmUsuario = new javax.swing.JLabel();
         BtRealizarOperacao = new javax.swing.JButton();
         BtPagamentoFuncionarios = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        LbQtProdutosBaixos = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        LbContasReceberVencidas = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        LbContasReceberAbertas = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        LbContasPagarVencida = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        LbContasPagarAbertas = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         MnCadastros = new javax.swing.JMenu();
         MnItCadCliente = new javax.swing.JMenuItem();
@@ -170,6 +185,99 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Situacao:");
+
+        LbQtProdutosBaixos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        LbQtProdutosBaixos.setText("jLabel2");
+        LbQtProdutosBaixos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LbQtProdutosBaixos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LbQtProdutosBaixosMouseClicked(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("produtos baixos no estoque");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
+        LbContasReceberVencidas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        LbContasReceberVencidas.setText("jLabel3");
+        LbContasReceberVencidas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LbContasReceberVencidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LbContasReceberVencidasMouseClicked(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("contas a receber vencidas");
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+
+        LbContasReceberAbertas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        LbContasReceberAbertas.setText("jLabel4");
+        LbContasReceberAbertas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LbContasReceberAbertas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LbContasReceberAbertasMouseClicked(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("contas a receber em aberto");
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
+        LbContasPagarVencida.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        LbContasPagarVencida.setText("jLabel5");
+        LbContasPagarVencida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LbContasPagarVencida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LbContasPagarVencidaMouseClicked(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("contas a pagar vencidas");
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+
+        LbContasPagarAbertas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        LbContasPagarAbertas.setText("jLabel6");
+        LbContasPagarAbertas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LbContasPagarAbertas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LbContasPagarAbertasMouseClicked(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("contas a pagar em aberto");
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -182,22 +290,45 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                         .addComponent(LbNmUsuario)
                         .addGap(41, 41, 41)
                         .addComponent(LbSair))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(BtContasReceber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(BtVenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(BtContasPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BtCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(BtContasReceber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                    .addComponent(BtVenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                    .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(BtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BtMvtoCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(BtPagamentoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(BtContasPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(BtCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(BtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(BtMvtoCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(BtPagamentoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(LbQtProdutosBaixos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(LbContasReceberVencidas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(LbContasReceberAbertas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(LbContasPagarVencida)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(LbContasPagarAbertas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -219,9 +350,31 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                     .addComponent(BtMvtoCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                    .addComponent(BtPagamentoFuncionarios, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
-                .addGap(48, 48, 48))
+                    .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtPagamentoFuncionarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LbQtProdutosBaixos)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LbContasReceberVencidas)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LbContasReceberAbertas)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LbContasPagarVencida)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LbContasPagarAbertas)
+                    .addComponent(jLabel6))
+                .addContainerGap())
         );
 
         MnCadastros.setText("Telas/Cadastros");
@@ -440,7 +593,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
-
+                atualizasituacao();
             }
         });
     }//GEN-LAST:event_BtVendaActionPerformed
@@ -450,7 +603,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
-
+                atualizasituacao();
             }
         });
     }//GEN-LAST:event_BtCompraActionPerformed
@@ -460,7 +613,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
-
+                atualizasituacao();
             }
         });
     }//GEN-LAST:event_BtContasReceberActionPerformed
@@ -470,7 +623,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
-
+                atualizasituacao();
             }
         });
     }//GEN-LAST:event_BtContasPagarActionPerformed
@@ -490,7 +643,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
-
+                atualizasituacao();
             }
         });
     }//GEN-LAST:event_MnItCadEstadoActionPerformed
@@ -622,7 +775,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
-
+                atualizasituacao();
             }
         });
     }//GEN-LAST:event_BtRealizarOperacaoActionPerformed
@@ -632,7 +785,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
-
+                atualizasituacao();
             }
         });
     }//GEN-LAST:event_BtEstoqueActionPerformed
@@ -646,10 +799,50 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
-                
+                atualizasituacao();
             }
         });
     }//GEN-LAST:event_BtPagamentoFuncionariosActionPerformed
+
+    private void LbQtProdutosBaixosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LbQtProdutosBaixosMouseClicked
+        BtEstoqueActionPerformed(null);
+    }//GEN-LAST:event_LbQtProdutosBaixosMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        BtEstoqueActionPerformed(null);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void LbContasReceberVencidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LbContasReceberVencidasMouseClicked
+        BtContasReceberActionPerformed(null);
+    }//GEN-LAST:event_LbContasReceberVencidasMouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        BtContasReceberActionPerformed(null);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void LbContasReceberAbertasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LbContasReceberAbertasMouseClicked
+        BtContasReceberActionPerformed(null);
+    }//GEN-LAST:event_LbContasReceberAbertasMouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        BtContasReceberActionPerformed(null);
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void LbContasPagarVencidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LbContasPagarVencidaMouseClicked
+        BtContasPagarActionPerformed(null);
+    }//GEN-LAST:event_LbContasPagarVencidaMouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        BtContasPagarActionPerformed(null);
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void LbContasPagarAbertasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LbContasPagarAbertasMouseClicked
+        BtContasPagarActionPerformed(null);
+    }//GEN-LAST:event_LbContasPagarAbertasMouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        BtContasPagarActionPerformed(null);
+    }//GEN-LAST:event_jLabel6MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -661,7 +854,12 @@ public class InterfacePrincipal extends javax.swing.JDialog {
     private javax.swing.JButton BtPagamentoFuncionarios;
     private javax.swing.JButton BtRealizarOperacao;
     private javax.swing.JButton BtVenda;
+    private javax.swing.JLabel LbContasPagarAbertas;
+    private javax.swing.JLabel LbContasPagarVencida;
+    private javax.swing.JLabel LbContasReceberAbertas;
+    private javax.swing.JLabel LbContasReceberVencidas;
     private javax.swing.JLabel LbNmUsuario;
+    private javax.swing.JLabel LbQtProdutosBaixos;
     private javax.swing.JLabel LbSair;
     private javax.swing.JMenu MnCadastros;
     private javax.swing.JMenu MnFinanceiro;
@@ -683,6 +881,12 @@ public class InterfacePrincipal extends javax.swing.JDialog {
     private javax.swing.JMenuItem MnItFluxoCaixa;
     private javax.swing.JMenuItem MnItFuncionario;
     private javax.swing.JMenu MnProduto;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
@@ -764,7 +968,18 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 //        }
     }
 
-public java.awt.Frame getPrimeiratela() {
+    public void atualizasituacao(){
+        ClasseMvtoEstoque mvtoestoque = new ClasseMvtoEstoque();
+        ClasseParcelas parcelas = new ClasseParcelas();
+        parcelas.atualizaparcelasecontas();
+        LbContasReceberAbertas.setText(""+parcelas.getConta().retornanumerocontasreceberabertas());
+        LbContasReceberVencidas.setText(""+parcelas.getConta().retornanumerocontasrecebervencidas());
+        LbContasPagarAbertas.setText(""+parcelas.getConta().retornanumerocontaspagarabertas());
+        LbContasPagarVencida.setText(""+parcelas.getConta().retornanumerocontaspagarvencidas());
+        LbQtProdutosBaixos.setText(""+mvtoestoque.retornanumerodeprodutoscomestoquebaixo());
+    }
+    
+    public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
 

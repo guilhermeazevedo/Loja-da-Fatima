@@ -55,6 +55,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         tam3[6] = 70;
         preenche.FormataJtable(TbParcelas, tam3);
         preenche.PreencheJComboBox(CbFormaPgto, parcelas.getFormapgto().retornaformapgtocombobox());
+        CbPesqContasActionPerformed(null);
     }
 
     /**
@@ -71,7 +72,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         CbPesqContas = new javax.swing.JComboBox();
-        BtPesqContas = new javax.swing.JButton();
+        BtGerarRelatorio = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbContas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -98,12 +99,17 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
 
         jLabel7.setText("Buscar Contas:");
 
-        CbPesqContas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todas as Contas Abertas", "Todas as Contas Vencidas", "Todas as Contas do Mes", "Todas as Contas do Mes Anterior", "Todas as Contas Do Ano Atual", "Todas as Contas" }));
-
-        BtPesqContas.setText("Pesquisar");
-        BtPesqContas.addActionListener(new java.awt.event.ActionListener() {
+        CbPesqContas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todas as Contas Abertas e Vencidas", "Todas as Contas Abertas", "Todas as Contas Vencidas", "Todas as Contas do Mes", "Todas as Contas do Mes Anterior", "Todas as Contas Do Ano Atual", "Todas as Contas" }));
+        CbPesqContas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtPesqContasActionPerformed(evt);
+                CbPesqContasActionPerformed(evt);
+            }
+        });
+
+        BtGerarRelatorio.setText("Gerar Relatorio");
+        BtGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtGerarRelatorioActionPerformed(evt);
             }
         });
 
@@ -197,7 +203,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(CbPesqContas, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtPesqContas))
+                                .addComponent(BtGerarRelatorio))
                             .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,7 +227,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtPesqContas)
+                    .addComponent(BtGerarRelatorio)
                     .addComponent(CbPesqContas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,36 +266,9 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtPesqContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqContasActionPerformed
-        limpar.Limpar(TbContas);
-        limpar.Limpar(TbParcelas);
-        switch (CbPesqContas.getSelectedIndex()) {
-            case 0: {
-                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagaraberta());
-                break;
-            }
-            case 1: {
-                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagarvencidas());
-                break;
-            }
-            case 2: {
-                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagardomes());
-                break;
-            }
-            case 3: {
-                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagardomesanterior());
-                break;
-            }
-            case 4: {
-                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagardoano());
-                break;
-            }
-            case 5: {
-                preenche.PreencherJtable(TbContas, parcelas.getConta().todascontaspagar());
-                break;
-            }
-        }
-    }//GEN-LAST:event_BtPesqContasActionPerformed
+    private void BtGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGerarRelatorioActionPerformed
+        
+    }//GEN-LAST:event_BtGerarRelatorioActionPerformed
 
     private void TfValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorKeyTyped
         valida.limitemaximo(evt, TfValor.getText(), 13);
@@ -390,11 +369,46 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void CbPesqContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbPesqContasActionPerformed
+        limpar.Limpar(TbContas);
+        limpar.Limpar(TbParcelas);
+        switch (CbPesqContas.getSelectedIndex()) {
+            case 0: {
+                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagarabertasevencidas());
+                break;
+            }
+            case 1: {
+                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagaraberta());
+                break;
+            }
+            case 2: {
+                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagarvencidas());
+                break;
+            }
+            case 3: {
+                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagardomes());
+                break;
+            }
+            case 4: {
+                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagardomesanterior());
+                break;
+            }
+            case 5: {
+                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagardoano());
+                break;
+            }
+            case 6: {
+                preenche.PreencherJtable(TbContas, parcelas.getConta().todascontaspagar());
+                break;
+            }
+        }
+    }//GEN-LAST:event_CbPesqContasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadFormaPgto;
+    private javax.swing.JButton BtGerarRelatorio;
     private javax.swing.JButton BtPagar;
-    private javax.swing.JButton BtPesqContas;
     private javax.swing.JComboBox CbFormaPgto;
     private javax.swing.JComboBox CbPesqContas;
     private javax.swing.JTable TbContas;

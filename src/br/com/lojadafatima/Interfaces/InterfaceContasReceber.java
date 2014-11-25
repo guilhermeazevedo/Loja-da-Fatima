@@ -65,6 +65,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         preenche.FormataJtable(TbParcelas, tam3);
 
         preenche.PreencheJComboBox(CbFormaPgto, parcelas.getFormapgto().retornaformapgtocombobox());
+        CbPesqPessoaActionPerformed(null);
     }
 
     /**
@@ -83,7 +84,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         TbPessoas = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         CbPesqPessoa = new javax.swing.JComboBox();
-        BtPesqPessoa = new javax.swing.JButton();
+        BtGerarRelatorio = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TbContas = new javax.swing.JTable();
@@ -135,17 +136,17 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
 
         jLabel3.setText("Buscar Pessoas");
 
-        CbPesqPessoa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pessoas com Contas em Aberto", "Pessoas com Contas Vencidas", "Listar apenas Clientes com Contas em Aberto", "Listar apenas Clientes com Contas Vencidas", "Listar todos os Clientes" }));
+        CbPesqPessoa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pessoas com Contas em Aberto e Vencidas", "Pessoas com Contas em Aberto", "Pessoas com Contas Vencidas", "Listar apenas Clientes com Contas em Aberto", "Listar apenas Clientes com Contas Vencidas", "Listar todos os Clientes" }));
         CbPesqPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CbPesqPessoaActionPerformed(evt);
             }
         });
 
-        BtPesqPessoa.setText("Pesquisar");
-        BtPesqPessoa.addActionListener(new java.awt.event.ActionListener() {
+        BtGerarRelatorio.setText("Gerar Relatorio");
+        BtGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtPesqPessoaActionPerformed(evt);
+                BtGerarRelatorioActionPerformed(evt);
             }
         });
 
@@ -247,7 +248,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(CbPesqPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtPesqPessoa))
+                                .addComponent(BtGerarRelatorio))
                             .addComponent(jLabel3)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
@@ -275,7 +276,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CbPesqPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesqPessoa))
+                    .addComponent(BtGerarRelatorio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -320,36 +321,40 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CbPesqPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbPesqPessoaActionPerformed
-
-    }//GEN-LAST:event_CbPesqPessoaActionPerformed
-
-    private void BtPesqPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqPessoaActionPerformed
         limpar.Limpar(TbPessoas);
         limpar.Limpar(TbContas);
         limpar.Limpar(TbParcelas);
         switch (CbPesqPessoa.getSelectedIndex()) {
             case 0: {
-                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberaberto());
+                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberabertasevencidas());
                 break;
             }
             case 1: {
-                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasrecebervencidas());
+                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberaberto());
                 break;
             }
             case 2: {
-                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberclientesaberto());
+                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasrecebervencidas());
                 break;
             }
             case 3: {
-                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberclientesvencido());
+                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberclientesaberto());
                 break;
             }
             case 4: {
+                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberclientesvencido());
+                break;
+            }
+            case 5: {
                 preenche.PreencherJtable(TbPessoas, parcelas.getConta().listarclientes());
                 break;
             }
         }
-    }//GEN-LAST:event_BtPesqPessoaActionPerformed
+    }//GEN-LAST:event_CbPesqPessoaActionPerformed
+
+    private void BtGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGerarRelatorioActionPerformed
+        
+    }//GEN-LAST:event_BtGerarRelatorioActionPerformed
 
     private void TfValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorKeyTyped
         valida.limitemaximo(evt, TfValor.getText(), 13);
@@ -472,8 +477,8 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadFormaPgto;
+    private javax.swing.JButton BtGerarRelatorio;
     private javax.swing.JButton BtPagar;
-    private javax.swing.JButton BtPesqPessoa;
     private javax.swing.JComboBox CbFormaPgto;
     private javax.swing.JComboBox CbPesqPessoa;
     private javax.swing.JTable TbContas;

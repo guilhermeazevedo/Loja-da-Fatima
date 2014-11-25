@@ -72,7 +72,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="CbPesqContas" min="-2" pref="337" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="BtPesqContas" min="-2" max="-2" attributes="0"/>
+                                  <Component id="BtGerarRelatorio" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
@@ -106,7 +106,7 @@
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="BtPesqContas" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtGerarRelatorio" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="CbPesqContas" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -142,23 +142,27 @@
         <Component class="javax.swing.JComboBox" name="CbPesqContas">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
-                <StringItem index="0" value="Todas as Contas Abertas"/>
-                <StringItem index="1" value="Todas as Contas Vencidas"/>
-                <StringItem index="2" value="Todas as Contas do Mes"/>
-                <StringItem index="3" value="Todas as Contas do Mes Anterior"/>
-                <StringItem index="4" value="Todas as Contas Do Ano Atual"/>
-                <StringItem index="5" value="Todas as Contas"/>
+              <StringArray count="7">
+                <StringItem index="0" value="Todas as Contas Abertas e Vencidas"/>
+                <StringItem index="1" value="Todas as Contas Abertas"/>
+                <StringItem index="2" value="Todas as Contas Vencidas"/>
+                <StringItem index="3" value="Todas as Contas do Mes"/>
+                <StringItem index="4" value="Todas as Contas do Mes Anterior"/>
+                <StringItem index="5" value="Todas as Contas Do Ano Atual"/>
+                <StringItem index="6" value="Todas as Contas"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CbPesqContasActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="BtPesqContas">
+        <Component class="javax.swing.JButton" name="BtGerarRelatorio">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pesquisar"/>
+            <Property name="text" type="java.lang.String" value="Gerar Relatorio"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtPesqContasActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtGerarRelatorioActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
