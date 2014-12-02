@@ -10,6 +10,7 @@ import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.DadosPessoa.ClasseCidade;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,16 +20,19 @@ import javax.swing.JOptionPane;
 public class InterfaceCidade extends javax.swing.JDialog {
 
     private java.awt.Frame primeiratela;
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
     Preenche preenche = new Preenche();
     ClasseCidade cidade = new ClasseCidade();
     LimpaCamposTela limpar = new LimpaCamposTela();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
     
-    public InterfaceCidade(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceCidade(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super (telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
         
+        setTelasusuario(usuario);
+        analisausuario();
         int[] tam = new int[3];
         tam[0] = 50;
         tam[1] = 150;
@@ -244,7 +248,7 @@ public class InterfaceCidade extends javax.swing.JDialog {
     }//GEN-LAST:event_MnItAlterarActionPerformed
 
     private void BtCadEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadEstadoActionPerformed
-        final InterfaceEstado tela = new InterfaceEstado(getPrimeiratela(), true);
+        final InterfaceEstado tela = new InterfaceEstado(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -275,17 +279,31 @@ public class InterfaceCidade extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the primeiratela
-     */
+    
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(5);
+        if(!getTelasusuario().eadmintela()){
+            BtGravar.setVisible(false);
+        }
+        getTelasusuario().getTela().setCodigo(4);
+        if(!getTelasusuario().eadmintela()){
+            BtCadEstado.setVisible(false);
+        }
+    }
+    
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
 
-    /**
-     * @param primeiratela the primeiratela to set
-     */
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

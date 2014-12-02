@@ -10,6 +10,7 @@ import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Financeiro.ClasseFormaPagamento;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,11 +24,14 @@ public class InterfaceFormaPagto extends javax.swing.JDialog {
     ClasseFormaPagamento forma = new ClasseFormaPagamento();
     LimpaCamposTela limpa = new LimpaCamposTela();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
+    private ClasseTelasUsuario telasusario = new ClasseTelasUsuario();
     
-    public InterfaceFormaPagto(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceFormaPagto(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super (telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusario(usuario);
+        analisarusuario();
         int[] tam = new int[2];
         tam[0] = 50;
         tam[1] = 200;
@@ -239,11 +243,26 @@ public class InterfaceFormaPagto extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisarusuario(){
+        getTelasusario().getTela().setCodigo(7);
+        if(!getTelasusario().eadmintela()){
+            BtGravar.setVisible(false);
+        }
+    }
+    
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusario() {
+        return telasusario;
+    }
+
+    public void setTelasusario(ClasseTelasUsuario telasusario) {
+        this.telasusario = telasusario;
     }
 }

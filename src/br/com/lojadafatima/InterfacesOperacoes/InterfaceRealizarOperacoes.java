@@ -7,6 +7,7 @@ package br.com.lojadafatima.InterfacesOperacoes;
 
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseOperacoes;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 
 /**
  *
@@ -17,11 +18,14 @@ public class InterfaceRealizarOperacoes extends javax.swing.JDialog {
     ClasseOperacoes operacoes = new ClasseOperacoes();
     Preenche preenche = new Preenche();
     private java.awt.Frame primeiratela;
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
 
-    public InterfaceRealizarOperacoes(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceRealizarOperacoes(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
+        analisausuario();
         preenche.PreencheJComboBox(CbOperacoes, operacoes.retornaoperacoescombobox());
         CbOperacoes.setSelectedIndex(0);
     }
@@ -101,7 +105,7 @@ public class InterfaceRealizarOperacoes extends javax.swing.JDialog {
             if (operacoes.getCodigo() != 0) {
                 operacoes.retornaoperacao();
                 if (operacoes.getInestoque().equals("S") && operacoes.getInfinanceiro().equals("S")) {
-                    final InterfaceOperacaoEstoqueFinanceiro tela = new InterfaceOperacaoEstoqueFinanceiro(getPrimeiratela(), true, operacoes);
+                    final InterfaceOperacaoEstoqueFinanceiro tela = new InterfaceOperacaoEstoqueFinanceiro(getPrimeiratela(), true, operacoes, getTelasusuario());
                     tela.setVisible(true);
                     tela.addWindowListener(new java.awt.event.WindowAdapter() {
                         public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -109,7 +113,7 @@ public class InterfaceRealizarOperacoes extends javax.swing.JDialog {
                         }
                     });
                 } else if (operacoes.getInestoque().equals("S")) {
-                    final InterfaceOperacaoEstoque tela = new InterfaceOperacaoEstoque(getPrimeiratela(), true, operacoes);
+                    final InterfaceOperacaoEstoque tela = new InterfaceOperacaoEstoque(getPrimeiratela(), true, operacoes, getTelasusuario());
                     tela.setVisible(true);
                     tela.addWindowListener(new java.awt.event.WindowAdapter() {
                         public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -117,7 +121,7 @@ public class InterfaceRealizarOperacoes extends javax.swing.JDialog {
                         }
                     });
                 } else if (operacoes.getInfinanceiro().equals("S")) {
-                    final InterfaceOperacaoFinanceiro tela = new InterfaceOperacaoFinanceiro(getPrimeiratela(), true, operacoes);
+                    final InterfaceOperacaoFinanceiro tela = new InterfaceOperacaoFinanceiro(getPrimeiratela(), true, operacoes, getTelasusuario());
                     tela.setVisible(true);
                     tela.addWindowListener(new java.awt.event.WindowAdapter() {
                         public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -136,11 +140,26 @@ public class InterfaceRealizarOperacoes extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(22);
+        if(!getTelasusuario().eadmintela()){
+            BtAbrir.setVisible(false);
+        }
+    }
+    
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

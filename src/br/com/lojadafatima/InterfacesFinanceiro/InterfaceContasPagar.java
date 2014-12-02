@@ -11,6 +11,7 @@ import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -27,14 +28,17 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     LimpaCamposTela limpar = new LimpaCamposTela();
     ClasseParcelas parcelas = new ClasseParcelas();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
 
     /**
      * Creates new form InterfaceContasPagar
      */
-    public InterfaceContasPagar(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceContasPagar(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super (telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
+        analisausuario();
         int[] tam2 = new int[7];
         tam2[0] = 70;
         tam2[1] = 70;
@@ -296,7 +300,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     }//GEN-LAST:event_TbParcelasMouseReleased
 
     private void BtCadFormaPgtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadFormaPgtoActionPerformed
-        final InterfaceFormaPagto tela = new InterfaceFormaPagto(getPrimeiratela(), true);
+        final InterfaceFormaPagto tela = new InterfaceFormaPagto(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -425,11 +429,31 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(18);
+        if(!getTelasusuario().eadmintela()){
+            BtPagar.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(7);
+        if(!getTelasusuario().eadmintela()){
+            BtCadFormaPgto.setVisible(false);
+        }
+    }
+    
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

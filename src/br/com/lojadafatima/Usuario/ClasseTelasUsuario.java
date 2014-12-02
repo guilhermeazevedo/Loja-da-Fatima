@@ -2,6 +2,9 @@ package br.com.lojadafatima.Usuario;
 
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,6 +34,21 @@ public class ClasseTelasUsuario {
     public void deletartelasusuario(){
         conn.executeSQL("DELETE FROM bancoloja.\"CAD_TELAS_USUARIO\"\n" +
                        "WHERE \"CD_USUARIO\" = "+getUsuario().getCodigo());
+    }
+    
+    public boolean eadmintela(){
+        conn.executeSQL("SELECT \"IN_ADM_TELA\" FROM bancoloja.\"CAD_TELAS_USUARIO\"\n" +
+                        "WHERE \"CD_USUARIO\" = "+getUsuario().getCodigo()+" AND \"CD_TELA\" = "+getTela().getCodigo());
+        try {
+            conn.resultset.first();
+            if(conn.resultset.getString(1).equals("S")){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException ex) {
+            return false;
+        }
     }
 
     public ClasseUsuario getUsuario() {

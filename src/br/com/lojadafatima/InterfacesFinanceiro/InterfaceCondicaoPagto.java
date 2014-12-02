@@ -4,6 +4,7 @@ import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Financeiro.ClasseCondicaoPagamento;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,11 +18,14 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
     ClasseCondicaoPagamento condicao = new ClasseCondicaoPagamento();
     LimpaCamposTela limpar = new LimpaCamposTela();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
 
-    public InterfaceCondicaoPagto(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceCondicaoPagto(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
+        analisausuario();
         int[] tam = new int[5];
         tam[0] = 50;
         tam[1] = 100;
@@ -287,6 +291,13 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(6);
+        if(!getTelasusuario().eadmintela()){
+            BtGravar.setVisible(false);
+        }
+    }
+    
     public boolean camposobrigatoriospreenchidos() {
         if (TfCondicaoPgto.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite uma descricao para a condicao de pagamento!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
@@ -323,5 +334,13 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

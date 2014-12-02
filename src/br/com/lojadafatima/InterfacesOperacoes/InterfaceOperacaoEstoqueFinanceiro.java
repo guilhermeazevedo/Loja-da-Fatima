@@ -26,6 +26,7 @@ import br.com.lojadafatima.InterfacesPessoa.InterfaceFuncionario;
 import br.com.lojadafatima.InterfacesProduto.InterfaceProduto;
 import br.com.lojadafatima.Pessoa.ClasseCliente;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -47,11 +48,13 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     LimpaCamposTela limpar = new LimpaCamposTela();
     ClasseCliente cliente = new ClasseCliente();
     boolean estoqueok = false;
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
 
-    public InterfaceOperacaoEstoqueFinanceiro(java.awt.Frame telaorigem, boolean modal, ClasseOperacoes ope) {
+    public InterfaceOperacaoEstoqueFinanceiro(java.awt.Frame telaorigem, boolean modal, ClasseOperacoes ope, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
         prodcompravenda.getCompravenda().setOperacao(ope);
         CbPessoaActionPerformed(null);
         valida.validacamposCancelar(jPanel1, PnBotoes);
@@ -61,6 +64,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         TfCodFuncionario.setDocument(new PermiteApenasNumeros());
         TfCodProduto.setDocument(new PermiteApenasNumeros());
         TfDescOperacao.setText(prodcompravenda.getCompravenda().getOperacao().getDescricao());
+        analisausuario();
     }
 
     /**
@@ -629,7 +633,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     }//GEN-LAST:event_BtPesqFuncionarioActionPerformed
 
     private void BtCadFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadFuncionarioActionPerformed
-        final InterfaceFuncionario tela = new InterfaceFuncionario(getPrimeiratela(), true);
+        final InterfaceFuncionario tela = new InterfaceFuncionario(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -663,7 +667,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     }//GEN-LAST:event_BtPesqCondicaoPgtoActionPerformed
 
     private void BtCadCondicaoPgtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadCondicaoPgtoActionPerformed
-        final InterfaceCondicaoPagto tela = new InterfaceCondicaoPagto(getPrimeiratela(), true);
+        final InterfaceCondicaoPagto tela = new InterfaceCondicaoPagto(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -711,7 +715,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     }//GEN-LAST:event_BtPesqProdutoActionPerformed
 
     private void BtCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadProdutoActionPerformed
-        final InterfaceProduto tela = new InterfaceProduto(getPrimeiratela(), true);
+        final InterfaceProduto tela = new InterfaceProduto(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -904,7 +908,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
     private void BtCadPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadPessoaActionPerformed
         if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
-            final InterfaceCliente tela = new InterfaceCliente(getPrimeiratela(), true);
+            final InterfaceCliente tela = new InterfaceCliente(getPrimeiratela(), true, getTelasusuario());
             tela.setVisible(true);
             tela.addWindowListener(new java.awt.event.WindowAdapter() {
                 public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -912,7 +916,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                 }
             });
         } else {
-            final InterfaceFornecedor tela = new InterfaceFornecedor(getPrimeiratela(), true);
+            final InterfaceFornecedor tela = new InterfaceFornecedor(getPrimeiratela(), true, getTelasusuario());
             tela.setVisible(true);
             tela.addWindowListener(new java.awt.event.WindowAdapter() {
                 public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -932,6 +936,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
             LbNomePessoa.setText("Fornecedor");
             BtCadPessoa.setText("Cadastrar Fornecedor");
         }
+        analisausuario();
         TfCodPessoaKeyReleased(null);
     }//GEN-LAST:event_CbPessoaActionPerformed
 
@@ -1021,6 +1026,39 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        if(CbPessoa.getSelectedItem().toString().equals("Cliente")){
+            getTelasusuario().getTela().setCodigo(1);
+            if(!getTelasusuario().eadmintela()){
+                BtCadPessoa.setVisible(false);
+            }else{
+                BtCadPessoa.setVisible(true);
+            }
+        }else{
+            getTelasusuario().getTela().setCodigo(2);
+            if(!getTelasusuario().eadmintela()){
+                BtCadPessoa.setVisible(false);
+            }else{
+                BtCadPessoa.setVisible(true);
+            }
+        }
+        
+        getTelasusuario().getTela().setCodigo(3);
+        if(!getTelasusuario().eadmintela()){
+            BtCadFuncionario.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(11);
+        if(!getTelasusuario().eadmintela()){
+            BtCadProduto.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(6);
+        if(!getTelasusuario().eadmintela()){
+            BtCadCondicaoPgto.setVisible(false);
+        }
+    }
+    
     public void atualizavalortotal() {
         float valor = 0;
         for (int i = 0; i < TbProdutos.getRowCount(); i++) {
@@ -1078,5 +1116,13 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

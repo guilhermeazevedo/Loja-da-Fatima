@@ -13,6 +13,7 @@ import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;
 
@@ -26,11 +27,14 @@ public class InterfaceEstoque extends javax.swing.JDialog {
     Preenche preenche = new Preenche();
     ClasseMvtoEstoque mvtoestoque = new ClasseMvtoEstoque();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
 
-    public InterfaceEstoque(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceEstoque(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
+        analisausuario();
         CbPesqProdutoActionPerformed(null);
         int[] tam = new int[5];
         tam[0] = 80;
@@ -350,7 +354,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
 
     private void BtIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIniciarActionPerformed
         mvtoestoque.getCompravenda().getFuncionario().setCodigo(0);
-        final InterfacePerguntaFuncionarioAjusteEstoque tela = new InterfacePerguntaFuncionarioAjusteEstoque(getPrimeiratela(), true, mvtoestoque.getCompravenda().getFuncionario());
+        final InterfacePerguntaFuncionarioAjusteEstoque tela = new InterfacePerguntaFuncionarioAjusteEstoque(getPrimeiratela(), true, mvtoestoque.getCompravenda().getFuncionario(), getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -447,11 +451,29 @@ public class InterfaceEstoque extends javax.swing.JDialog {
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(14);
+        if(!getTelasusuario().eadmintela()){
+            BtIniciar.setVisible(false);
+            BtEncerrar.setVisible(false);
+            BtAjustar.setVisible(false);
+            BtRelatorioProdutos.setVisible(false);
+        }
+    }
+    
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

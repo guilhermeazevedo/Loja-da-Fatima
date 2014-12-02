@@ -22,6 +22,7 @@ import br.com.lojadafatima.InterfacesPessoa.InterfaceCliente;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceFornecedor;
 import br.com.lojadafatima.Pessoa.ClasseCliente;
 import br.com.lojadafatima.Pessoa.ClasseFornecedor;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -41,16 +42,19 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
     private java.awt.Frame primeiratela;
     ClasseCliente cliente = new ClasseCliente();
     ClasseFornecedor fornecedor = new ClasseFornecedor();
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
 
-    public InterfaceOperacaoFinanceiro(java.awt.Frame telaorigem, boolean modal, ClasseOperacoes ope) {
+    public InterfaceOperacaoFinanceiro(java.awt.Frame telaorigem, boolean modal, ClasseOperacoes ope, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
         parcelas.getConta().setOperacao(ope);
         TfCodCondicaoPgto.setDocument(new PermiteApenasNumeros());
         TfDescOperacao.setDocument(new NaoPermiteAspasSimples());
         TfDescOperacao.setText(parcelas.getConta().getOperacao().getDescricao());
         valida.validacamposCancelar(jPanel1, PnBotoes);
+        analisausuario();
     }
 
     /**
@@ -379,7 +383,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
     }//GEN-LAST:event_BtPesqCondicaoPgtoActionPerformed
 
     private void BtCadCondicaoPgtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadCondicaoPgtoActionPerformed
-        final InterfaceCondicaoPagto tela = new InterfaceCondicaoPagto(getPrimeiratela(), true);
+        final InterfaceCondicaoPagto tela = new InterfaceCondicaoPagto(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -462,6 +466,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
             LbNomePessoa.setText("Fornecedor");
             BtCadPessoa.setText("Cadastrar Fornecedor");
         }
+        analisausuario();
         TfCodPessoaKeyReleased(null);
     }//GEN-LAST:event_CbPessoaActionPerformed
 
@@ -499,7 +504,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
 
     private void BtCadPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadPessoaActionPerformed
         if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
-            final InterfaceCliente tela = new InterfaceCliente(getPrimeiratela(), true);
+            final InterfaceCliente tela = new InterfaceCliente(getPrimeiratela(), true, getTelasusuario());
             tela.setVisible(true);
             tela.addWindowListener(new java.awt.event.WindowAdapter() {
                 public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -507,7 +512,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
                 }
             });
         } else {
-            final InterfaceFornecedor tela = new InterfaceFornecedor(getPrimeiratela(), true);
+            final InterfaceFornecedor tela = new InterfaceFornecedor(getPrimeiratela(), true, getTelasusuario());
             tela.setVisible(true);
             tela.addWindowListener(new java.awt.event.WindowAdapter() {
                 public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -552,6 +557,29 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        if(CbPessoa.getSelectedItem().toString().equals("Cliente")){
+            getTelasusuario().getTela().setCodigo(1);
+            if(!getTelasusuario().eadmintela()){
+                BtCadPessoa.setVisible(false);
+            }else{
+                BtCadPessoa.setVisible(true);
+            }
+        }else{
+            getTelasusuario().getTela().setCodigo(2);
+            if(!getTelasusuario().eadmintela()){
+                BtCadPessoa.setVisible(false);
+            }else{
+                BtCadPessoa.setVisible(true);
+            }
+        }
+        
+        getTelasusuario().getTela().setCodigo(6);
+        if(!getTelasusuario().eadmintela()){
+            BtCadCondicaoPgto.setVisible(false);
+        }
+    }
+    
     public boolean camposobrigatoriospreenchidos(){
         if(TfDescOperacao.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Digite a descricao desta operacao!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
@@ -605,6 +633,14 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 
 }

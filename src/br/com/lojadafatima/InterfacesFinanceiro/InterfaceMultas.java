@@ -8,6 +8,7 @@ package br.com.lojadafatima.InterfacesFinanceiro;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.Financeiro.ClasseMulta;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.awt.Frame;
 import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
@@ -24,11 +25,14 @@ public class InterfaceMultas extends javax.swing.JDialog {
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
     ClasseMulta multa = new ClasseMulta();
     private java.awt.Frame primeiratela;
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
     
-    public InterfaceMultas(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceMultas(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super (telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
+        analisausuario();
         valida.validacamposCancelar(jPanel1, jPanel1);
         multa.getultimamulta();
         SpDiasAlerta.setValue(multa.getDiasalerta());
@@ -213,6 +217,15 @@ public class InterfaceMultas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(9);
+        if(!getTelasusuario().eadmintela()){
+            BtAlterar.setVisible(false);
+            BtCancelar.setVisible(false);
+            BtGravar.setVisible(false);
+        }
+    }
+    
     public boolean camposobrigatoriospreenchidos(){
         if(Integer.parseInt(SpDiasAlerta.getValue().toString()) < 0){
             JOptionPane.showMessageDialog(null, "Nao e permitido um numero negativo de dias!", "Campos obrigatorios",JOptionPane.INFORMATION_MESSAGE);
@@ -250,6 +263,14 @@ public class InterfaceMultas extends javax.swing.JDialog {
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 
 }

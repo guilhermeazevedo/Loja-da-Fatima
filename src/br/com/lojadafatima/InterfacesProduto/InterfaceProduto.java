@@ -9,6 +9,7 @@ import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesFornecedor;
 import br.com.lojadafatima.Produto.ClasseEspecificacaoProduto;
 import br.com.lojadafatima.Produto.ClasseFornecedoresProduto;
 import br.com.lojadafatima.Produto.ClasseProduto;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,14 +30,17 @@ public class InterfaceProduto extends javax.swing.JDialog {
     LimpaCamposTela limpar = new LimpaCamposTela();
     ClasseEspecificacaoProduto especproduto = new ClasseEspecificacaoProduto();
     ClasseFornecedoresProduto forneproduto = new ClasseFornecedoresProduto();
+    private ClasseTelasUsuario telausuario = new ClasseTelasUsuario();
 
     /**
      * Creates new form InterfaceProduto
      */
-    public InterfaceProduto(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceProduto(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelausuario(usuario);
+        analisausuario();
         valida.validacamposCancelar(PnProduto, PnBotoes);
         valida.validacamposCancelar(PnFornecedor, PnBotoes);
         TfCodFornecedor.setDocument(new PermiteApenasNumeros());
@@ -683,7 +687,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtCadTipoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadTipoProdutoActionPerformed
-        final InterfaceTipoProduto tela = new InterfaceTipoProduto(getPrimeiratela(), true);
+        final InterfaceTipoProduto tela = new InterfaceTipoProduto(getPrimeiratela(), true, getTelausuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -717,7 +721,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
     }//GEN-LAST:event_BtAlterarActionPerformed
 
     private void BtCadFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadFornecedorActionPerformed
-        final InterfaceFornecedor tela = new InterfaceFornecedor(getPrimeiratela(), true);
+        final InterfaceFornecedor tela = new InterfaceFornecedor(getPrimeiratela(), true, getTelausuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -827,7 +831,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
     }//GEN-LAST:event_BtGravarActionPerformed
 
     private void BtCadTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadTabelaActionPerformed
-        final InterfaceTabelas tela = new InterfaceTabelas(getPrimeiratela(), true);
+        final InterfaceTabelas tela = new InterfaceTabelas(getPrimeiratela(), true, getTelausuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -1143,6 +1147,28 @@ public class InterfaceProduto extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane5;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelausuario().getTela().setCodigo(11);
+        if(!getTelausuario().eadmintela()){
+            PnBotoes.setVisible(false);
+        }
+        
+        getTelausuario().getTela().setCodigo(2);
+        if(!getTelausuario().eadmintela()){
+            BtCadFornecedor.setVisible(false);
+        }
+        
+        getTelausuario().getTela().setCodigo(12);
+        if(!getTelausuario().eadmintela()){
+            BtCadTipoProduto.setVisible(false);
+        }
+        
+        getTelausuario().getTela().setCodigo(13);
+        if(!getTelausuario().eadmintela()){
+            BtCadTabela2.setVisible(false);
+        }
+    }
+    
     public boolean camposobrigatoriospreenchidos() {
         if (TfDescricao.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite a descricao do produto!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
@@ -1193,5 +1219,13 @@ public class InterfaceProduto extends javax.swing.JDialog {
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelausuario() {
+        return telausuario;
+    }
+
+    public void setTelausuario(ClasseTelasUsuario telausuario) {
+        this.telausuario = telausuario;
     }
 }

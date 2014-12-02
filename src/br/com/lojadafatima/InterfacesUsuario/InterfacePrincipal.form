@@ -15,6 +15,7 @@
                   <KeyStroke key="Shift+Ctrl+C"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cliente"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="6" noResource="true"/>
               </Properties>
               <Events>
@@ -27,6 +28,7 @@
                   <KeyStroke key="Shift+Ctrl+F"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Fornecedor"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="7" noResource="true"/>
               </Properties>
               <Events>
@@ -39,28 +41,31 @@
                   <KeyStroke key="Shift+Ctrl+J"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="8" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnItFuncionarioActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MnItCadFormaPgto">
+            <MenuItem class="javax.swing.JMenuItem" name="MnItCadCondicaoPagto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Condi&#xe7;&#xe3;o de Pagamento"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="3" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnItCadFormaPgtoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnItCadCondicaoPagtoActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MnItCadCondicaoPgto">
+            <MenuItem class="javax.swing.JMenuItem" name="MnItCadFormaPgto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Forma de Pagamento"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="4" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnItCadCondicaoPgtoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnItCadFormaPgtoActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MnItCadUsuario">
@@ -69,6 +74,7 @@
                   <KeyStroke key="Shift+Ctrl+U"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="5" noResource="true"/>
               </Properties>
               <Events>
@@ -78,6 +84,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="MnItCadEstado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Estado"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="1" noResource="true"/>
               </Properties>
               <Events>
@@ -87,6 +94,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="MnItCadCidade">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cidade"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="2" noResource="true"/>
               </Properties>
               <Events>
@@ -99,6 +107,7 @@
                   <KeyStroke key="Shift+Ctrl+M"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Multas"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnItCadMultasActionPerformed"/>
@@ -107,6 +116,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="MnItCadOperacoes">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Opera&#xe7;&#xf5;es"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnItCadOperacoesActionPerformed"/>
@@ -125,6 +135,7 @@
                   <KeyStroke key="Alt+R"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Contas &#xe0; Receber"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="9" noResource="true"/>
               </Properties>
               <Events>
@@ -137,22 +148,24 @@
                   <KeyStroke key="Alt+P"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Contas &#xe0; Pagar"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="10" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnItContasPagarActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="MnItFluxoCaixa">
+            <MenuItem class="javax.swing.JMenuItem" name="MnItMovimentacaoCaixa">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Alt+M"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Movimenta&#xe7;&#xe3;o de Caixa"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="11" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnItFluxoCaixaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnItMovimentacaoCaixaActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -168,6 +181,7 @@
                   <KeyStroke key="Shift+Ctrl+P"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Produto"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="12" noResource="true"/>
               </Properties>
               <Events>
@@ -180,6 +194,7 @@
                   <KeyStroke key="Shift+Ctrl+T"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Tipo de Produto"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="13" noResource="true"/>
               </Properties>
               <Events>
@@ -189,6 +204,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="MnItCadTabelas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tabelas de Caracter&#xed;sticas"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="14" noResource="true"/>
               </Properties>
               <Events>
@@ -201,6 +217,7 @@
                   <KeyStroke key="Alt+E"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Estoque"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="15" noResource="true"/>
               </Properties>
               <Events>
@@ -394,6 +411,7 @@
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Venda"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="16" noResource="true"/>
           </Properties>
           <Events>
@@ -420,6 +438,7 @@
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Compra"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="17" noResource="true"/>
           </Properties>
           <Events>
@@ -432,6 +451,7 @@
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Contas &#xe0; Receber"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="9" noResource="true"/>
           </Properties>
           <Events>
@@ -444,6 +464,7 @@
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Contas &#xe0; Pagar"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="10" noResource="true"/>
           </Properties>
           <Events>
@@ -456,6 +477,7 @@
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Movimenta&#xe7;&#xe3;o de Caixa"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="11" noResource="true"/>
           </Properties>
           <Events>
@@ -468,6 +490,7 @@
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Estoque"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="15" noResource="true"/>
           </Properties>
           <Events>
@@ -485,6 +508,7 @@
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Realizar Opera&#xe7;&#xe3;o"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="18" noResource="true"/>
           </Properties>
           <Events>
@@ -497,6 +521,7 @@
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Pagamento de Funcionarios"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="18" noResource="true"/>
           </Properties>
           <Events>
@@ -657,6 +682,7 @@
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

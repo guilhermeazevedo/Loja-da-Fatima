@@ -9,6 +9,7 @@ import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Produto.ClasseTipoProduto;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,11 +24,14 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
     LimpaCamposTela limpa = new LimpaCamposTela();
     ClasseTipoProduto tipoproduto = new ClasseTipoProduto();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
 
-    public InterfaceTipoProduto(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceTipoProduto(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
+        analisausuario();
 
         int[] tam = new int[2];
         tam[0] = 50;
@@ -455,7 +459,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
     }//GEN-LAST:event_TfTipoProdutoKeyTyped
 
     private void BtCadTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadTabelaActionPerformed
-        final InterfaceTabelas tela = new InterfaceTabelas(getPrimeiratela(), true);
+        final InterfaceTabelas tela = new InterfaceTabelas(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -548,11 +552,31 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(12);
+        if(!getTelasusuario().eadmintela()){
+            PnBotoes.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(13);
+        if(!getTelasusuario().eadmintela()){
+            BtCadTabela.setVisible(false);
+        }
+    }
+    
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

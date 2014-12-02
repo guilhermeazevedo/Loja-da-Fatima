@@ -15,6 +15,7 @@ import br.com.lojadafatima.ClassesFerramentas.TeclasPermitidas;
 import br.com.lojadafatima.DadosPessoa.ClassePessoaFisica;
 import br.com.lojadafatima.DadosPessoa.ClassePessoaJuridica;
 import br.com.lojadafatima.Pessoa.ClasseCliente;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.awt.Color;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -29,6 +30,7 @@ public class InterfaceCliente extends javax.swing.JDialog {
 
     MaskFormatter data, rg, cpf, cnpj, cep, fone;
     private java.awt.Frame primeiratela;
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
     Preenche preenche = new Preenche();
     ClasseCliente cliente = new ClasseCliente();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
@@ -38,10 +40,12 @@ public class InterfaceCliente extends javax.swing.JDialog {
     /**
      * Creates new form InterfaceCliente
      */
-    public InterfaceCliente(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceCliente(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
+        analisausuario();
         RbPeFisicaActionPerformed(null);
         TfNrCNPJKeyReleased(null);
         TfNrCPFKeyReleased(null);
@@ -1107,7 +1111,7 @@ public class InterfaceCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_CbEstadoActionPerformed
 
     private void BtCadEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadEstadoActionPerformed
-        final InterfaceEstado tela = new InterfaceEstado(getPrimeiratela(), true);
+        final InterfaceEstado tela = new InterfaceEstado(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -1117,7 +1121,7 @@ public class InterfaceCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_BtCadEstadoActionPerformed
 
     private void BtCadCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadCidadeActionPerformed
-        final InterfaceCidade tela = new InterfaceCidade(getPrimeiratela(), true);
+        final InterfaceCidade tela = new InterfaceCidade(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -1697,6 +1701,23 @@ public class InterfaceCliente extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator3;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(1);
+        if(!getTelasusuario().eadmintela()){
+            PnBotoes.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(4);
+        if(!getTelasusuario().eadmintela()){
+            BtCadEstado.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(5);
+        if(!getTelasusuario().eadmintela()){
+            BtCadCidade.setVisible(false);
+        }
+    }
+    
     public void LiberaCamposFouJ(boolean sit) {
         TfNomeFisica.setEditable(sit);
         RbMasculino.setEnabled(sit);
@@ -1830,5 +1851,13 @@ public class InterfaceCliente extends javax.swing.JDialog {
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

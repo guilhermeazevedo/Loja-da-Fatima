@@ -9,6 +9,7 @@ package br.com.lojadafatima.InterfacesFinanceiro;
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;
 
@@ -22,11 +23,14 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
     Preenche preenche = new Preenche();
     ClasseDatas datas = new ClasseDatas();
     private java.awt.Frame primeiratela;
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
     
-    public InterfacePagamentoFuncionarios(java.awt.Frame telaorigem, boolean modal) {
+    public InterfacePagamentoFuncionarios(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
+        analisausuario();
         int[] tam = new int[5];
         tam[0] = 70;
         tam[1] = 150;
@@ -344,6 +348,13 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(20);
+        if(!getTelasusuario().eadmintela()){
+            BtPagar.setVisible(false);
+        }
+    }
+    
     public void preenchercomboanos(){
         CbAno.addItem(datas.anoatual());
         for(int i = 1; i <= (datas.anoatual() - 2014); i++){
@@ -357,6 +368,14 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 
 }

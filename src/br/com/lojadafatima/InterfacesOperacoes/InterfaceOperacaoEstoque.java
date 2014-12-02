@@ -23,6 +23,7 @@ import br.com.lojadafatima.InterfacesPessoa.InterfaceFuncionario;
 import br.com.lojadafatima.InterfacesProduto.InterfaceProduto;
 import br.com.lojadafatima.Pessoa.ClasseCliente;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -43,11 +44,13 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     LimpaCamposTela limpar = new LimpaCamposTela();
     private java.awt.Frame primeiratela;
     boolean estoqueok = false;
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
 
-    public InterfaceOperacaoEstoque(java.awt.Frame telaorigem, boolean modal, ClasseOperacoes ope) {
+    public InterfaceOperacaoEstoque(java.awt.Frame telaorigem, boolean modal, ClasseOperacoes ope, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(telasusuario);
         prodcompravenda.getCompravenda().setOperacao(ope);
         TfData.setText(datas.retornaratartual());
         TfCodFuncionario.setDocument(new PermiteApenasNumeros());
@@ -56,6 +59,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
         TfDescOperacao.setDocument(new NaoPermiteAspasSimples());
         TfDescOperacao.setText(prodcompravenda.getCompravenda().getOperacao().getDescricao());
         valida.validacamposCancelar(jPanel1, PnBotoes);
+        analisausuario();
     }
 
     /**
@@ -487,6 +491,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
             LbNomePessoa.setText("Fornecedor");
             BtCadPessoa.setText("Cadastrar Fornecedor");
         }
+        analisausuario();
         TfCodPessoaKeyReleased(null);
     }//GEN-LAST:event_CbPessoaActionPerformed
 
@@ -551,7 +556,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
 
     private void BtCadPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadPessoaActionPerformed
         if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
-            final InterfaceCliente tela = new InterfaceCliente(getPrimeiratela(), true);
+            final InterfaceCliente tela = new InterfaceCliente(getPrimeiratela(), true, getTelasusuario());
             tela.setVisible(true);
             tela.addWindowListener(new java.awt.event.WindowAdapter() {
                 public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -559,7 +564,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                 }
             });
         } else {
-            final InterfaceFornecedor tela = new InterfaceFornecedor(getPrimeiratela(), true);
+            final InterfaceFornecedor tela = new InterfaceFornecedor(getPrimeiratela(), true, getTelasusuario());
             tela.setVisible(true);
             tela.addWindowListener(new java.awt.event.WindowAdapter() {
                 public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -600,7 +605,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     }//GEN-LAST:event_BtPesqFuncionarioActionPerformed
 
     private void BtCadFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadFuncionarioActionPerformed
-        final InterfaceFuncionario tela = new InterfaceFuncionario(getPrimeiratela(), true);
+        final InterfaceFuncionario tela = new InterfaceFuncionario(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -642,7 +647,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     }//GEN-LAST:event_BtPesqProdutoActionPerformed
 
     private void BtCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadProdutoActionPerformed
-        final InterfaceProduto tela = new InterfaceProduto(getPrimeiratela(), true);
+        final InterfaceProduto tela = new InterfaceProduto(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -805,6 +810,34 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        if(CbPessoa.getSelectedItem().toString().equals("Cliente")){
+            getTelasusuario().getTela().setCodigo(1);
+            if(!getTelasusuario().eadmintela()){
+                BtCadPessoa.setVisible(false);
+            }else{
+                BtCadPessoa.setVisible(true);
+            }
+        }else{
+            getTelasusuario().getTela().setCodigo(2);
+            if(!getTelasusuario().eadmintela()){
+                BtCadPessoa.setVisible(false);
+            }else{
+                BtCadPessoa.setVisible(true);
+            }
+        }
+        
+        getTelasusuario().getTela().setCodigo(3);
+        if(!getTelasusuario().eadmintela()){
+            BtCadFuncionario.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(11);
+        if(!getTelasusuario().eadmintela()){
+            BtCadProduto.setVisible(false);
+        }
+    }
+    
     public boolean camposobrigatoriospreenchidos() {
         if (TfDescOperacao.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite a descricao desta operacao!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
@@ -849,5 +882,13 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

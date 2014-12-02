@@ -10,6 +10,7 @@ import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Produto.ClasseTabelas;
 import br.com.lojadafatima.Produto.ClasseValores;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -24,11 +25,15 @@ public class InterfaceTabelas extends javax.swing.JDialog {
     LimpaCamposTela limpar = new LimpaCamposTela();
     ClasseTabelas tabela = new ClasseTabelas();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
 
-    public InterfaceTabelas(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceTabelas(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        
+        setTelasusuario(usuario);
+        analisausuario();
 
         int[] tam = new int[2];
         tam[0] = 50;
@@ -482,11 +487,27 @@ public class InterfaceTabelas extends javax.swing.JDialog {
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(13);
+        if(!getTelasusuario().eadmintela()){
+            BtGravar.setVisible(false);
+            BtGravar1.setVisible(false);
+        }
+    }
+    
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

@@ -10,6 +10,7 @@ import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesFuncionario;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceFuncionario;
 import br.com.lojadafatima.Pessoa.ClasseFuncionario;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,11 +21,14 @@ public class InterfacePerguntaFuncionarioAjusteEstoque extends javax.swing.JDial
 
     private ClasseFuncionario funcionario = new ClasseFuncionario();
     private java.awt.Frame primeiratela;
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
     
-    public InterfacePerguntaFuncionarioAjusteEstoque(java.awt.Frame telaorigem, boolean modal, ClasseFuncionario func) {
+    public InterfacePerguntaFuncionarioAjusteEstoque(java.awt.Frame telaorigem, boolean modal, ClasseFuncionario func, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
+        analisausuario();
         setFuncionario(func);
         TfCodFuncionario4.setDocument(new PermiteApenasNumeros());
     }
@@ -188,7 +192,7 @@ public class InterfacePerguntaFuncionarioAjusteEstoque extends javax.swing.JDial
     }//GEN-LAST:event_BtPesqFuncionarioActionPerformed
 
     private void BtCadFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadFuncionarioActionPerformed
-        final InterfaceFuncionario tela = new InterfaceFuncionario(getPrimeiratela(), true);
+        final InterfaceFuncionario tela = new InterfaceFuncionario(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -228,6 +232,13 @@ public class InterfacePerguntaFuncionarioAjusteEstoque extends javax.swing.JDial
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(3);
+        if(!getTelasusuario().eadmintela()){
+            BtCadFuncionario.setVisible(false);
+        }
+    }
+    
     public ClasseFuncionario getFuncionario() {
         return funcionario;
     }
@@ -242,5 +253,13 @@ public class InterfacePerguntaFuncionarioAjusteEstoque extends javax.swing.JDial
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

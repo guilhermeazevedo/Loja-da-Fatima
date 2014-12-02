@@ -146,7 +146,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
         if (!TfLogin.getText().equals("")) {
             if (!TfSenha.getText().equals("")) {
                 usuario.setLogin(TfLogin.getText());
-                usuario.setSenha(igualizasenha(TfSenha.getText()));
+                usuario.setSenha(TfSenha.getText());
                 if (usuario.realizalogin()) {
                     final InterfacePrincipal tela = new InterfacePrincipal(this, true, usuario);
                     setSedispose(true);
@@ -234,13 +234,6 @@ public class InterfaceLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField TfSenha;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
-
-    public String igualizasenha(String senha){
-        for(int i = senha.length(); i <= 14; i++){
-            senha = senha+" ";
-        }
-        return senha;
-    }
     
     public boolean isSedispose() {
         return sedispose;

@@ -27,10 +27,11 @@ public class InterfaceUsuario extends javax.swing.JDialog {
     Preenche preenche = new Preenche();
     ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
 
-    public InterfaceUsuario(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceUsuario(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        analisausuario(usuario);
         TfLogin.setDocument(new TeclasPermitidas());
         TfSenha.setDocument(new TeclasPermitidas());
         TfConfirmSenha.setDocument(new TeclasPermitidas());
@@ -646,6 +647,13 @@ public class InterfaceUsuario extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(ClasseTelasUsuario usuario){
+        usuario.getTela().setCodigo(8);
+        if(!usuario.eadmintela()){
+            PnBotoes.setVisible(false);
+        }
+    }
+    
     public boolean camposobrigatoriospreenchidos() {
         if (TfLogin.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite o Login que o usuario utilizara!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);

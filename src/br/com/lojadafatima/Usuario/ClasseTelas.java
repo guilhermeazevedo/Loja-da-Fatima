@@ -21,7 +21,7 @@ public class ClasseTelas {
     
     public ResultSet retornatelascadastradas(){
         conn.executeSQL("SELECT FALSE, \"NM_TELA\",\"CD_TELA\"\n" +
-                        "FROM bancoloja.\"CAD_TELA\"");
+                        "FROM bancoloja.\"CAD_TELA\" ORDER BY \"NM_TELA\"");
         return conn.resultset;
     }
 

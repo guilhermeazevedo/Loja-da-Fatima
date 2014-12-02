@@ -22,6 +22,7 @@ import br.com.lojadafatima.InterfacesPessoa.InterfaceFuncionario;
 import br.com.lojadafatima.InterfacesProduto.InterfaceProduto;
 import br.com.lojadafatima.Pessoa.ClasseCliente;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -43,14 +44,17 @@ public class InterfaceVenda extends javax.swing.JDialog {
     LimpaCamposTela limpar = new LimpaCamposTela();
     ClasseCliente cliente = new ClasseCliente();
     boolean estoqueok = false;
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
 
     /**
      * Creates new form InterfaceVenda
      */
-    public InterfaceVenda(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceVenda(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
+        analisausuario();
         TfCodCliente.setDocument(new PermiteApenasNumeros());
         TfCodCondicaoPgto.setDocument(new PermiteApenasNumeros());
         TfCodFuncionario.setDocument(new PermiteApenasNumeros());
@@ -543,7 +547,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtCadFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadFuncionarioActionPerformed
-        final InterfaceFuncionario tela = new InterfaceFuncionario(getPrimeiratela(), true);
+        final InterfaceFuncionario tela = new InterfaceFuncionario(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -553,7 +557,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
     }//GEN-LAST:event_BtCadFuncionarioActionPerformed
 
     private void BtCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadClienteActionPerformed
-        final InterfaceCliente tela = new InterfaceCliente(getPrimeiratela(), true);
+        final InterfaceCliente tela = new InterfaceCliente(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -563,7 +567,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
     }//GEN-LAST:event_BtCadClienteActionPerformed
 
     private void BtCadCondicaoPgtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadCondicaoPgtoActionPerformed
-        final InterfaceCondicaoPagto tela = new InterfaceCondicaoPagto(getPrimeiratela(), true);
+        final InterfaceCondicaoPagto tela = new InterfaceCondicaoPagto(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -665,7 +669,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
     }//GEN-LAST:event_BtPesqProdutoActionPerformed
 
     private void BtCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadProdutoActionPerformed
-        final InterfaceProduto tela = new InterfaceProduto(getPrimeiratela(), true);
+        final InterfaceProduto tela = new InterfaceProduto(getPrimeiratela(), true, getTelasusuario());
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -906,6 +910,33 @@ public class InterfaceVenda extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(16);
+        if(!getTelasusuario().eadmintela()){
+            PnBotoes.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(1);
+        if(!getTelasusuario().eadmintela()){
+            BtCadCliente.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(3);
+        if(!getTelasusuario().eadmintela()){
+            BtCadFuncionario.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(11);
+        if(!getTelasusuario().eadmintela()){
+            BtCadProduto.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(6);
+        if(!getTelasusuario().eadmintela()){
+            BtCadCondicaoPgto.setVisible(false);
+        }
+    }
+    
     public boolean camposobrigatoriospreenchidos() {
         if (TfCodFuncionario.getText().equals("") && TfFuncionario.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Informe qual funcionario realizou o atendimento nesta venda!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
@@ -954,5 +985,13 @@ public class InterfaceVenda extends javax.swing.JDialog {
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

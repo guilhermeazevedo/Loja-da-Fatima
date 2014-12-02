@@ -9,6 +9,7 @@ import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.DadosPessoa.ClasseEstado;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
@@ -24,13 +25,16 @@ public class InterfaceEstado extends javax.swing.JDialog {
     ClasseEstado estado = new ClasseEstado();
     LimpaCamposTela limpar = new LimpaCamposTela();
     private java.awt.Frame primeiratela;
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
 
-    public InterfaceEstado(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceEstado(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
 
+        setTelasusuario(usuario);
+        analisausuario();
         int[] tam = new int[3];
         tam[0] = 50;
         tam[1] = 200;
@@ -273,17 +277,27 @@ public class InterfaceEstado extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the primeiratela
-     */
+   
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(4);
+        if(!getTelasusuario().eadmintela()){
+            BtGravar.setVisible(false);
+        }
+    }
+    
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
 
-    /**
-     * @param primeiratela the primeiratela to set
-     */
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

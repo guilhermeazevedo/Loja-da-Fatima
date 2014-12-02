@@ -10,6 +10,7 @@ import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.ClassesFerramentas.Relatorios;
 import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.util.HashMap;
 
 /**
@@ -21,11 +22,14 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
     private java.awt.Frame primeiratela;
     Preenche preenche = new Preenche();
     ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
     
-    public InterfaceMovimentacaoCaixa(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceMovimentacaoCaixa(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super (telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
+        analisausuario();
         int[] tam = new int[7];
         tam[0] = 80;
         tam[1] = 500;
@@ -226,11 +230,26 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(19);
+        if(!getTelasusuario().eadmintela()){
+            BtGerarRelatorio.setVisible(false);
+        }
+    }
+    
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 }

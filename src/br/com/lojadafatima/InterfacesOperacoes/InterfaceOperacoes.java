@@ -9,6 +9,7 @@ import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseOperacoes;
+import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,11 +23,14 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
     Preenche preenche = new Preenche();
     LimpaCamposTela limpar = new LimpaCamposTela();
     private java.awt.Frame primeiratela;
+    private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
 
-    public InterfaceOperacoes(java.awt.Frame telaorigem, boolean modal) {
+    public InterfaceOperacoes(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super (telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
+        setTelasusuario(usuario);
+        analisausuario();
         ChkEstoqueActionPerformed(null);
         ChkFinanceiroActionPerformed(null);
         int[] tam = new int[2];
@@ -354,6 +358,13 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
+    public void analisausuario(){
+        getTelasusuario().getTela().setCodigo(10);
+        if(!getTelasusuario().eadmintela()){
+            BtGravar.setVisible(false);
+        }
+    }
+    
     public void enviardados() {
         operacao.setDescricao(TfOperacao.getText());
         if (ChkEstoque.isSelected()) {
@@ -387,6 +398,14 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
 
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
+    }
+
+    public ClasseTelasUsuario getTelasusuario() {
+        return telasusuario;
+    }
+
+    public void setTelasusuario(ClasseTelasUsuario telasusuario) {
+        this.telasusuario = telasusuario;
     }
 
 }
