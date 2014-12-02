@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.lojadafatima.Interfaces;
+package br.com.lojadafatima.InterfacesOperacoes;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ClassesFerramentas.GeraCodigos;
@@ -19,6 +19,7 @@ import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCondicaoPgto;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesFornecedor;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesFuncionario;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesProduto;
+import br.com.lojadafatima.InterfacesFinanceiro.InterfaceCondicaoPagto;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceCliente;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceFornecedor;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceFuncionario;

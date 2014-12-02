@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.lojadafatima.Interfaces;
+package br.com.lojadafatima.InterfacesUsuario;
 
 import br.com.lojadafatima.Usuario.ClasseUsuario;
 import javax.swing.JFrame;

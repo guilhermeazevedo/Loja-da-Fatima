@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.com.lojadafatima.Interfaces;
+package br.com.lojadafatima.InterfacesFinanceiro;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;

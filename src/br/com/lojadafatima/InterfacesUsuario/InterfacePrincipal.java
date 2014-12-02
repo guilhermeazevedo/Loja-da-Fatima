@@ -3,8 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.lojadafatima.Interfaces;
+package br.com.lojadafatima.InterfacesUsuario;
 
+import br.com.lojadafatima.InterfacesFinanceiro.InterfaceMultas;
+import br.com.lojadafatima.InterfacesOperacoes.InterfaceOperacoes;
+import br.com.lojadafatima.InterfacesFinanceiro.InterfaceCondicaoPagto;
+import br.com.lojadafatima.InterfacesFinanceiro.InterfaceContasPagar;
+import br.com.lojadafatima.InterfacesFinanceiro.InterfaceMovimentacaoCaixa;
+import br.com.lojadafatima.InterfacesFinanceiro.InterfaceFormaPagto;
+import br.com.lojadafatima.InterfacesFinanceiro.InterfacePagamentoFuncionarios;
+import br.com.lojadafatima.InterfacesFinanceiro.InterfaceContasReceber;
+import br.com.lojadafatima.InterfacesOperacoes.InterfaceCompra;
+import br.com.lojadafatima.InterfacesOperacoes.InterfaceRealizarOperacoes;
+import br.com.lojadafatima.InterfacesOperacoes.InterfaceVenda;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
 import br.com.lojadafatima.InterfacesProduto.InterfaceProduto;
 import br.com.lojadafatima.InterfacesProduto.InterfaceTabelas;
@@ -76,6 +87,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         LbContasPagarAbertas = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        BtRelatorios = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         MnCadastros = new javax.swing.JMenu();
         MnItCadCliente = new javax.swing.JMenuItem();
@@ -165,7 +177,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             }
         });
 
-        LbNmUsuario.setText("jLabel1");
+        LbNmUsuario.setText("admin");
 
         BtRealizarOperacao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtRealizarOperacao.setText("Realizar Operação");
@@ -278,6 +290,9 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             }
         });
 
+        BtRelatorios.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        BtRelatorios.setText("Relatórios");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -287,27 +302,31 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(LbNmUsuario)
-                        .addGap(41, 41, 41)
+                        .addComponent(LbNmUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(LbSair))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(BtContasReceber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(BtVenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(BtContasReceber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                    .addComponent(BtVenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                    .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BtContasPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BtCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(BtContasPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(BtCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(BtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(BtMvtoCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(BtPagamentoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(BtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BtMvtoCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(BtPagamentoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(BtRelatorios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(LbQtProdutosBaixos)
@@ -350,8 +369,9 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                     .addComponent(BtMvtoCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPagamentoFuncionarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                    .addComponent(BtPagamentoFuncionarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtRelatorios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -853,6 +873,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
     private javax.swing.JButton BtMvtoCaixa;
     private javax.swing.JButton BtPagamentoFuncionarios;
     private javax.swing.JButton BtRealizarOperacao;
+    private javax.swing.JButton BtRelatorios;
     private javax.swing.JButton BtVenda;
     private javax.swing.JLabel LbContasPagarAbertas;
     private javax.swing.JLabel LbContasPagarVencida;

@@ -75,11 +75,11 @@ public class ClasseParcelas {
                 + "SET \"DT_PAGAR\" = '" + getDtpagar() + "', \"VL_PAGAR\" = " + getVlpagar() + "\n"
                 + "WHERE \"CD_PARCELA\" = " + getCodigo() + " AND \"CD_CONTA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO\" = " + getConta().getOperacao().getCodigo());
     }
-    
+
     public void acrescentarparcela() {
-        setVlpagar(getVlpagar() + ((getVlpagar() * getConta().getMulta().getPercent())/100));
+        setVlpagar(getVlpagar() + ((getVlpagar() * getConta().getMulta().getPercent()) / 100));
         conn.executeSQL("UPDATE bancoloja.\"PARCELAS\"\n"
-                + "SET \"VL_PAGAR\" = " + getVlpagar() + "\n"
+                + "SET \"VL_PAGAR\" = " + getVlpagar() + ", \"IN_APLICACAO_MULTA\" = 'S'\n"
                 + "WHERE \"CD_PARCELA\" = " + getCodigo() + " AND \"CD_CONTA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO\" = " + getConta().getOperacao().getCodigo());
     }
 
@@ -144,7 +144,7 @@ public class ClasseParcelas {
         String data1, data2;
         ResultSet rsp = retornaparcelasnaopagas();
         try {
-            while(rsp.next()){
+            while (rsp.next()) {
                 setCodigo(rsp.getInt(1));
                 getConta().setCodigo(rsp.getInt(2));
                 getConta().getOperacao().setCodigo(rsp.getInt(3));
@@ -155,21 +155,23 @@ public class ClasseParcelas {
                 try {
                     date1 = format.parse(data1);
                     date2 = format.parse(data2);
-                    if(date1.before(date2)){
+                    if (date1.before(date2)) {
                         acrescentarparcela();
                     }
                 } catch (ParseException ex) {
                 }
             }
         } catch (SQLException ex) {
-            
+
         }
     }
 
     public ResultSet retornaparcelasnaopagas() {
         conn.executeSQL("SELECT \"CD_PARCELA\", \"CD_CONTA\", \"CD_OPERACAO\", \"VL_PAGAR\", TO_CHAR(\"DT_PAGAR\", 'DD/MM/YYYY')\n"
                 + "FROM bancoloja.\"PARCELAS\"\n"
-                + "WHERE \"DT_PAGO\" IS NULL AND \"IN_APLICACAO_MULTA\" IS NULL");
+                + "WHERE \"DT_PAGO\" IS NULL AND \"IN_APLICACAO_MULTA\" IS NULL\n"
+                + "AND \"CD_OPERACAO\" IN ((SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n"
+                + "                       WHERE \"TP_FINANCEIRO\" = 'E'))");
         return conn.resultset;
     }
 
