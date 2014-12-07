@@ -24,6 +24,7 @@ import br.com.lojadafatima.Pessoa.ClasseCliente;
 import br.com.lojadafatima.Pessoa.ClasseFornecedor;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
+import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
@@ -55,6 +56,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
         TfDescOperacao.setText(parcelas.getConta().getOperacao().getDescricao());
         valida.validacamposCancelar(jPanel1, PnBotoes);
         analisausuario();
+        setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
     }
 
     /**
@@ -102,6 +104,11 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Operação de Financeiro - Software Loja da Fátima");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Código");
 
@@ -525,6 +532,16 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
     private void TfValorTotalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorTotalKeyTyped
         valida.limitemaximo(evt, TfValorTotal.getText(), 13);
     }//GEN-LAST:event_TfValorTotalKeyTyped
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(PnBotoes.isVisible() && BtGravar.isEnabled()){
+            if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                dispose();
+            }
+        }else{
+            dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

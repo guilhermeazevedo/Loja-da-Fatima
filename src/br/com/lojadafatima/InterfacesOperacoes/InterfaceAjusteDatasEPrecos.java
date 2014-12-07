@@ -16,7 +16,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -27,12 +30,14 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
     private java.awt.Frame primeiratela;
     private ClasseParcelas parcelas = new ClasseParcelas();
     Preenche preenche = new Preenche();
+    MaskFormatter data;
 
     public InterfaceAjusteDatasEPrecos(java.awt.Frame telaorigem, boolean modal, ClasseParcelas parc) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         setParcelas(parc);
         initComponents();
+        setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         int[] tam = new int[3];
         tam[0] = 150;
         tam[1] = 300;
@@ -60,9 +65,29 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
         BtFinalizar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         TfValorTotal = new JNumberField.JNumberField();
+        jLabel3 = new javax.swing.JLabel();
+        TfNrParcela = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        try{
+            data = new MaskFormatter("##/##/####");
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Nao foi possivel localizar");
+        }
+        TfDtVencimento = new JFormattedTextField(data);
+        jLabel5 = new javax.swing.JLabel();
+        TfValor = new JNumberField.JNumberField();
+        BtAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ajuste de Datas e Preços de Parcelas - Software Loja da Fátima");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Ajuste as datas e preços da melhor forma (caso você feche esta janela, as datas das parcelas e preços serão mantidos):");
 
@@ -75,7 +100,7 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -83,6 +108,11 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
             }
         });
         TbParcelas.getTableHeader().setReorderingAllowed(false);
+        TbParcelas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                TbParcelasMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(TbParcelas);
 
         BtFinalizar.setText("Finalizar");
@@ -96,6 +126,27 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
 
         TfValorTotal.setEditable(false);
 
+        jLabel3.setText("Nº da Parcela");
+
+        TfNrParcela.setEditable(false);
+
+        jLabel4.setText("Data de Vencimento");
+
+        TfDtVencimento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfDtVencimentoFocusLost(evt);
+            }
+        });
+
+        jLabel5.setText("Valor da Parcela");
+
+        BtAlterar.setText("Alterar data e/ou valor desta parcela");
+        BtAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -105,14 +156,34 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 90, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(49, 49, 49)
+                                .addComponent(jLabel4)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BtFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(TfNrParcela, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BtFinalizar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 397, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(TfDtVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(BtAlterar)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -123,12 +194,23 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TfNrParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfDtVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtAlterar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -141,7 +223,9 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,7 +239,8 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
                     for (int i = 0; i < TbParcelas.getRowCount(); i++) {
                         getParcelas().setCodigo(Integer.parseInt(TbParcelas.getValueAt(i, 0).toString()));
                         getParcelas().setDtpagar(TbParcelas.getValueAt(i, 1).toString());
-                        getParcelas().setVlpagar(Float.parseFloat(TbParcelas.getValueAt(i, 2).toString()));
+                        TfValor.setText(TbParcelas.getValueAt(i, 2).toString());
+                        getParcelas().setVlpagar(Float.parseFloat(TfValor.getValue().toString()));
                         getParcelas().atualizarparcela();
                     }
                     dispose();
@@ -168,23 +253,70 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtFinalizarActionPerformed
 
+    private void TbParcelasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbParcelasMouseReleased
+        if(TbParcelas.getSelectedRow() > -1){
+            TfNrParcela.setText(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString());
+            TfDtVencimento.setText(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString());
+            TfValor.setText(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString());
+        }
+    }//GEN-LAST:event_TbParcelasMouseReleased
+
+    private void TfDtVencimentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfDtVencimentoFocusLost
+        GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
+        ClasseDatas datas = new ClasseDatas();
+        if(valida.CampoTotalmentePreenchido(TfDtVencimento.getText())){
+            if(!datas.validadatas(TfDtVencimento.getText())){
+                TfDtVencimento.setValue(null);
+            }
+        }
+    }//GEN-LAST:event_TfDtVencimentoFocusLost
+
+    private void BtAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtAlterarActionPerformed
+        if(!TfDtVencimento.getText().equals("  /  /    ")){
+            TbParcelas.setValueAt(TfDtVencimento.getText(), TbParcelas.getSelectedRow(), 1);
+            TbParcelas.setValueAt(TfValor.getText(), TbParcelas.getSelectedRow(), 2);
+            TfNrParcela.setText("");
+            TfDtVencimento.setValue(null);
+            TfValor.setText("0");
+        }else{
+            JOptionPane.showMessageDialog(null, "Digite a data de vencimento da parcela!", "Digite a data de vencimento", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_BtAlterarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nCaso voce feche essa janela, todas as alteracoes feitas\nnos valores e datas das parcelas serao ignoradas.\n\nDeseja realmente fechar esta janela?", "Deseja fechar esta janela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtAlterar;
     private javax.swing.JButton BtFinalizar;
     private javax.swing.JTable TbParcelas;
+    private javax.swing.JFormattedTextField TfDtVencimento;
+    private javax.swing.JTextField TfNrParcela;
+    private JNumberField.JNumberField TfValor;
     private JNumberField.JNumberField TfValorTotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
     public boolean valortotalcorreto() {
-        GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
         float totalparcelas = 0;
         for (int i = 0; i < TbParcelas.getRowCount(); i++) {
-            if (CampoValorCorreto(TbParcelas.getValueAt(i, 2).toString())) {
-                totalparcelas = totalparcelas + Float.parseFloat(TbParcelas.getValueAt(i, 2).toString());
+            TfValor.setText(TbParcelas.getValueAt(i, 2).toString());
+            if (CampoValorCorreto(TfValor.getValue().toString())) {
+                totalparcelas = totalparcelas + Float.parseFloat(TfValor.getValue().toString());
             } else {
                 return false;
             }

@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -48,6 +49,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         analisausuario();
         TfNrCPFFocusLost(null);
         valida.validacamposCancelar(PnCadastro, PnBotoes);
+        setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         preenche.PreencheJComboBox(CbEstado, funcionario.getPessoafis().getPessoa().getEndereco().getCidade().getEstado().buscarestadosjcombobox());
     }
 
@@ -176,6 +178,11 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Funcionário - Software Loja da Fátima");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Código");
 
@@ -1264,6 +1271,16 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
     private void TfComissaoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfComissaoKeyTyped
         valida.limitemaximo(evt, TfComissao.getText(), 10);
     }//GEN-LAST:event_TfComissaoKeyTyped
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(PnBotoes.isVisible() && BtGravar.isEnabled()){
+            if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                dispose();
+            }
+        }else{
+            dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtAlterar;

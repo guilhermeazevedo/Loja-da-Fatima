@@ -55,6 +55,11 @@ public class InterfacePerguntaFuncionarioAjusteEstoque extends javax.swing.JDial
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Selecionar Funcionário - Software Loja da Fátima");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel3.setText("Cód. Funcionário");
 
@@ -202,7 +207,7 @@ public class InterfacePerguntaFuncionarioAjusteEstoque extends javax.swing.JDial
     }//GEN-LAST:event_BtCadFuncionarioActionPerformed
 
     private void BtSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtSelecionarActionPerformed
-        if(!TfCodFuncionario4.getText().equals("")){
+        if(!TfCodFuncionario4.getText().equals("") && !TfFuncionario.getText().equals("")){
             getFuncionario().setCodigo(Integer.parseInt(TfCodFuncionario4.getText()));
             dispose();
         }else{
@@ -215,16 +220,16 @@ public class InterfacePerguntaFuncionarioAjusteEstoque extends javax.swing.JDial
         dispose();
     }//GEN-LAST:event_BtCancelarActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        getFuncionario().setCodigo(0);
+    }//GEN-LAST:event_formWindowClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadFuncionario;
     private javax.swing.JButton BtCancelar;
     private javax.swing.JButton BtPesqFuncionario;
     private javax.swing.JButton BtSelecionar;
-    private javax.swing.JTextField TfCodFuncionario;
-    private javax.swing.JTextField TfCodFuncionario1;
-    private javax.swing.JTextField TfCodFuncionario2;
-    private javax.swing.JTextField TfCodFuncionario3;
     private javax.swing.JTextField TfCodFuncionario4;
     private javax.swing.JTextField TfFuncionario;
     private javax.swing.JLabel jLabel3;

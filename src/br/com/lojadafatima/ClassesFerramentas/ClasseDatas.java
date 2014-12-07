@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextField;
 
 /**
@@ -46,13 +48,24 @@ public class ClasseDatas {
     public String retornasoma(String data, int dias){
         
         Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         
         if(data.equals("")){
-            Date date = new Date();
-            calendar.setTime(date);
+            Date date;
+            try {
+                date = format.parse(new Date().toString());
+                calendar.setTime(date);
+            } catch (ParseException ex) {
+                
+            }
         } else{
-            Date xy = new Date(data);
-            calendar.setTime(xy);
+            Date xy;
+            try {
+                xy = format.parse(data);
+                calendar.setTime(xy);
+            } catch (ParseException ex) {
+                
+            }
         }
         calendar.add(Calendar.DATE, dias);
         if(ediautil(sd.format(calendar.getTime()))){

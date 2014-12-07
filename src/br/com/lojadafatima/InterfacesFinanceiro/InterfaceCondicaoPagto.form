@@ -23,7 +23,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Forma de Pagamento - Software Loja da Fatima"/>
+    <Property name="title" type="java.lang.String" value="Condi&#xe7;&#xe3;o de Pagamento - Software Loja da Fatima"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>

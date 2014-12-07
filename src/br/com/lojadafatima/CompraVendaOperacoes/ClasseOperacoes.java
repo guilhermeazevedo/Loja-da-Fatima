@@ -37,7 +37,7 @@ public class ClasseOperacoes {
     
     public ResultSet consultaoperacoes(){
         conn.executeSQL("SELECT \"CD_OPERACAO\", \"DS_OPERACAO\"\n" +
-                        "FROM bancoloja.\"CAD_OPERACOES\"");
+                        "FROM bancoloja.\"CAD_OPERACOES\" ORDER BY \"CD_OPERACAO\"");
         return conn.resultset;
     }
     
@@ -61,7 +61,7 @@ public class ClasseOperacoes {
     
     public ResultSet retornaoperacoescombobox(){
         conn.executeSQL("SELECT \"DS_OPERACAO\"\n" +
-                        "FROM bancoloja.\"CAD_OPERACOES\"");
+                        "FROM bancoloja.\"CAD_OPERACOES\" WHERE \"CD_OPERACAO\" > 4 ORDER BY \"CD_OPERACAO\"");
         return conn.resultset;
     }
     

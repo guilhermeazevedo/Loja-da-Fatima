@@ -42,7 +42,7 @@ public class ClasseCondicaoPagamento {
         conn.executeSQL("SELECT \"CD_CONDICAO_PGTO\", \"DS_CONDICAO_PGTO\", \"NR_VEZES_PGTO\", \"NR_INTERVALO_DIAS\",\n" +
                         "CASE WHEN \"IN_ENTRADA\" = 'S' THEN 'COM ENTRADA'\n" +
                         "     ELSE 'SEM ENTRADA' END AS \"SITUACAO\"\n" +
-                        "FROM bancoloja.\"CAD_CONDICAO_PGTO\"");
+                        "FROM bancoloja.\"CAD_CONDICAO_PGTO\" ORDER BY \"CD_CONDICAO_PGTO\"");
         return conn.resultset;
     }
     

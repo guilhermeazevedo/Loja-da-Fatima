@@ -24,6 +24,7 @@ import br.com.lojadafatima.Pessoa.ClasseCliente;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
+import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -60,6 +61,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
         TfCodFuncionario.setDocument(new PermiteApenasNumeros());
         TfCodProduto.setDocument(new PermiteApenasNumeros());
         valida.validacamposCancelar(jPanel1, PnBotoes);
+        setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
     }
 
     /**
@@ -126,6 +128,11 @@ public class InterfaceVenda extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Venda - Software Loja da Fátima");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Código");
 
@@ -859,6 +866,16 @@ public class InterfaceVenda extends javax.swing.JDialog {
     private void TfValorUnitarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorUnitarioKeyTyped
         valida.limitemaximo(evt, TfValorUnitario.getText(), 13);
     }//GEN-LAST:event_TfValorUnitarioKeyTyped
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(PnBotoes.isVisible() && BtGravar.isEnabled()){
+            if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                dispose();
+            }
+        }else{
+            dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -64,7 +64,7 @@ public class ClasseParcelas {
     }
 
     public ResultSet buscaparcelasajuste() {
-        conn.executeSQL("SELECT \"CD_PARCELA\", TO_CHAR(\"DT_PAGAR\", 'DD/MM/YYYY'), \"VL_PAGAR\"\n"
+        conn.executeSQL("SELECT \"CD_PARCELA\", TO_CHAR(\"DT_PAGAR\", 'DD/MM/YYYY'), TO_CHAR(\"VL_PAGAR\", 'R$9999999D99')\n"
                 + "FROM bancoloja.\"PARCELAS\"\n"
                 + "WHERE \"CD_CONTA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO\" = " + getConta().getOperacao().getCodigo());
         return conn.resultset;
@@ -145,6 +145,7 @@ public class ClasseParcelas {
         ResultSet rsp = retornaparcelasnaopagas();
         try {
             while (rsp.next()) {
+                data1 = ""; data2 = "";
                 setCodigo(rsp.getInt(1));
                 getConta().setCodigo(rsp.getInt(2));
                 getConta().getOperacao().setCodigo(rsp.getInt(3));
@@ -155,7 +156,7 @@ public class ClasseParcelas {
                 try {
                     date1 = format.parse(data1);
                     date2 = format.parse(data2);
-                    if (date1.before(date2)) {
+                    if (!date1.before(date2)) {
                         acrescentarparcela();
                     }
                 } catch (ParseException ex) {
@@ -205,8 +206,8 @@ public class ClasseParcelas {
         } catch (SQLException ex) {
         }
         ClasseDatas datas = new ClasseDatas();
-        conn.executeSQL("SELECT TO_CHAR(\"DT_PAGAR\", 'MM/DD/YYYY') FROM bancoloja.\"PARCELAS\"\n"
-                + "WHERE \"CD_PARCELA\" = " + retornanumeroultimaparcela() + " AND \"CD_CONTA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO\" = " + getConta().getOperacao().getCodigo());
+        conn.executeSQL("SELECT TO_CHAR(MAX(\"DT_PAGAR\"), 'DD/MM/YYYY') FROM bancoloja.\"PARCELAS\"\n" +
+                        "WHERE \"CD_CONTA\" = "+getConta().getCodigo()+" AND \"CD_OPERACAO\" = " + getConta().getOperacao().getCodigo());
         try {
             conn.resultset.first();
             return datas.retornasoma(conn.resultset.getString(1), getConta().getCondicao().getIntervalodias());

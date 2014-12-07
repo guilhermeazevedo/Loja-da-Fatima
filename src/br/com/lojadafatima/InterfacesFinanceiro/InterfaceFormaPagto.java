@@ -69,7 +69,7 @@ public class InterfaceFormaPagto extends javax.swing.JDialog {
         jPopupMenu1.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Condição de Pagamento - Software Loja da Fátima");
+        setTitle("Forma de Pagamento - Software Loja da Fátima");
         setResizable(false);
 
         jLabel1.setText("Código");
@@ -209,7 +209,7 @@ public class InterfaceFormaPagto extends javax.swing.JDialog {
     }//GEN-LAST:event_BtLimparActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if(TbConsulta.getSelectedRow() > -1){
+        if(TbConsulta.getSelectedRow() > 0){
             TfCodigo.setText(TbConsulta.getValueAt(TbConsulta.getSelectedRow(), 0).toString());
             TfForma.setText(TbConsulta.getValueAt(TbConsulta.getSelectedRow(), 1).toString());
         }

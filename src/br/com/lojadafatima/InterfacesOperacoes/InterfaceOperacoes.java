@@ -303,7 +303,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
     }//GEN-LAST:event_BtGravarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if(TbOperacoes.getSelectedRow() > -1){
+        if(TbOperacoes.getSelectedRow() > 3){
             operacao.setCodigo(Integer.parseInt(TbOperacoes.getValueAt(TbOperacoes.getSelectedRow(), 0).toString()));
             operacao.retornaoperacao();
             TfCodigo.setText(""+operacao.getCodigo());

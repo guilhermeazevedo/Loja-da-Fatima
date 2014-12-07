@@ -24,6 +24,7 @@ import br.com.lojadafatima.InterfacesProduto.InterfaceProduto;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
+import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -34,7 +35,7 @@ import javax.swing.text.MaskFormatter;
  * @author hp
  */
 public class InterfaceCompra extends javax.swing.JDialog {
-
+    
     MaskFormatter valor;
     MaskFormatter data;
     private java.awt.Frame primeiratela;
@@ -57,7 +58,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
         TfCodFornecedor.setDocument(new PermiteApenasNumeros());
         TfCodProduto.setDocument(new PermiteApenasNumeros());
         TfCodFuncionario.setDocument(new PermiteApenasNumeros());
-
+        setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         TfDescNotaCompra.setDocument(new NaoPermiteAspasSimples());
         valida.validacamposCancelar(jPanel1, PnBotoes);
     }
@@ -128,6 +129,11 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Compra - Software Loja da Fátima");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Código");
 
@@ -139,6 +145,11 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
         jLabel3.setText("Cód. Funcionário");
 
+        TfCodFuncionario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfCodFuncionarioFocusLost(evt);
+            }
+        });
         TfCodFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfCodFuncionarioKeyReleased(evt);
@@ -165,6 +176,11 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
         jLabel5.setText("Cód. Fornecedor");
 
+        TfCodFornecedor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfCodFornecedorFocusLost(evt);
+            }
+        });
         TfCodFornecedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfCodFornecedorKeyReleased(evt);
@@ -191,6 +207,11 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
         jLabel7.setText("Cód. Condicao de Pagamento");
 
+        TfCodCondicaoPgto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfCodCondicaoPgtoFocusLost(evt);
+            }
+        });
         TfCodCondicaoPgto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfCodCondicaoPgtoKeyReleased(evt);
@@ -557,7 +578,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
-
+                
             }
         });
     }//GEN-LAST:event_BtCadFuncionarioActionPerformed
@@ -567,7 +588,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
-
+                
             }
         });
     }//GEN-LAST:event_BtCadCondicaoPgtoActionPerformed
@@ -577,7 +598,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
-
+                
             }
         });
     }//GEN-LAST:event_BtCadFornecedorActionPerformed
@@ -671,24 +692,30 @@ public class InterfaceCompra extends javax.swing.JDialog {
     }//GEN-LAST:event_TfDescNotaCompraKeyTyped
 
     private void TfCodProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfCodProdutoKeyReleased
-        if (!TfCodProduto.getText().equals("")) {
-            prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
-            if (prodcompravenda.getForneproduto().getProduto().eprodutoativo()) {
-                TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
-                TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto()));
-                TfQuantidade.setValue(BigDecimal.valueOf(0));
-                TfValorProduto.setValue(BigDecimal.valueOf(0));
+        if (!TfCodFornecedor.getText().equals("") || !TfFornecedor.getText().equals("")) {
+            if (!TfCodProduto.getText().equals("")) {
+                prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
+                if (prodcompravenda.getForneproduto().getProduto().eprodutoativo() && prodcompravenda.getForneproduto().produtodestefornecedor()) {
+                    TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
+                    TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto()));
+                    TfQuantidade.setValue(BigDecimal.valueOf(0));
+                    TfValorProduto.setValue(BigDecimal.valueOf(0));
+                } else {
+                    TfProduto.setText("");
+                    TfValorUnitario.setValue(BigDecimal.valueOf(0));
+                    TfQuantidade.setValue(BigDecimal.valueOf(0));
+                    TfValorProduto.setValue(BigDecimal.valueOf(0));
+                }
             } else {
                 TfProduto.setText("");
                 TfValorUnitario.setValue(BigDecimal.valueOf(0));
                 TfQuantidade.setValue(BigDecimal.valueOf(0));
                 TfValorProduto.setValue(BigDecimal.valueOf(0));
             }
-        } else {
-            TfProduto.setText("");
-            TfValorUnitario.setValue(BigDecimal.valueOf(0));
-            TfQuantidade.setValue(BigDecimal.valueOf(0));
-            TfValorProduto.setValue(BigDecimal.valueOf(0));
+        } else{
+            JOptionPane.showMessageDialog(null, "Insira o Fornecedor para que o sistema faca a\nbusca somente dos produtos fornecidos por ele!", "Insira o fornecedor", JOptionPane.INFORMATION_MESSAGE);
+            TfCodProduto.setText("");
+            TfCodFornecedor.grabFocus();
         }
     }//GEN-LAST:event_TfCodProdutoKeyReleased
 
@@ -772,7 +799,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
-
+                
             }
         });
     }//GEN-LAST:event_BtCadProdutoActionPerformed
@@ -782,7 +809,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
             if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Gravar esta compra e de que todas as informacoes estao corretas?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 enviardados();
                 prodcompravenda.getCompravenda().incluir();
-
+                
                 ClasseMvtoEstoque mvestoque = new ClasseMvtoEstoque();
                 ClasseParcelas parcelas = new ClasseParcelas();
                 mvestoque.setCompravenda(prodcompravenda.getCompravenda());
@@ -797,7 +824,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                     TfValorProduto.setText(TbCompra.getValueAt(i, 5).toString());
                     prodcompravenda.setValorprodut(Float.parseFloat(TfValorProduto.getValue().toString()));
                     prodcompravenda.incluirprodutocompravenda();
-
+                    
                     mvestoque.getProduto().setCodigo(Integer.parseInt(TbCompra.getValueAt(i, 1).toString()));
                     TfQuantidade.setText(TbCompra.getValueAt(i, 3).toString());
                     mvestoque.setQtmvto(Float.parseFloat(TfQuantidade.getValue().toString()));
@@ -811,9 +838,9 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 parcelas.getConta().setTotal(Float.parseFloat(TfValorTotalCompra.getValue().toString()));
                 parcelas.getConta().setCodigopessoa(prodcompravenda.getCompravenda().getCodigopessoa());
                 parcelas.getConta().incluir();
-
+                
                 parcelas.gerarparcelas();
-
+                
                 final InterfaceAjusteDatasEPrecos tela = new InterfaceAjusteDatasEPrecos(getPrimeiratela(), true, parcelas);
                 tela.setVisible(true);
                 tela.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -821,7 +848,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                         //imprimir nota de compra iReport
                     }
                 });
-
+                
                 limpar.Limpar(jPanel1);
                 limpar.Limpar(TbCompra);
                 valida.validacamposCancelar(jPanel1, PnBotoes);
@@ -853,6 +880,36 @@ public class InterfaceCompra extends javax.swing.JDialog {
     private void TfValorUnitarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorUnitarioKeyTyped
         valida.limitemaximo(evt, TfValorUnitario.getText(), 13);
     }//GEN-LAST:event_TfValorUnitarioKeyTyped
+
+    private void TfCodFuncionarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodFuncionarioFocusLost
+        if (TfFuncionario.getText().equals("")) {
+            TfCodFuncionario.setText("");
+        }
+    }//GEN-LAST:event_TfCodFuncionarioFocusLost
+
+    private void TfCodFornecedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodFornecedorFocusLost
+        if (TfFornecedor.getText().equals("")) {
+            TfCodFornecedor.setText("");
+        }else{
+            prodcompravenda.getForneproduto().getFornecedor().setCodigo(Integer.parseInt(TfCodFornecedor.getText().toString()));
+        }
+    }//GEN-LAST:event_TfCodFornecedorFocusLost
+
+    private void TfCodCondicaoPgtoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodCondicaoPgtoFocusLost
+        if(TfCondicaoPgto.getText().equals("")){
+            TfCodCondicaoPgto.setText("");
+        }
+    }//GEN-LAST:event_TfCodCondicaoPgtoFocusLost
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(PnBotoes.isVisible() && BtGravar.isEnabled()){
+            if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                dispose();
+            }
+        }else{
+            dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -906,29 +963,29 @@ public class InterfaceCompra extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
-    public void analisausuario(){
+    public void analisausuario() {
         getTelasusuario().getTela().setCodigo(16);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             PnBotoes.setVisible(false);
         }
         
         getTelasusuario().getTela().setCodigo(2);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtCadFornecedor.setVisible(false);
         }
         
         getTelasusuario().getTela().setCodigo(3);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtCadFuncionario.setVisible(false);
         }
         
         getTelasusuario().getTela().setCodigo(11);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtCadProduto.setVisible(false);
         }
         
         getTelasusuario().getTela().setCodigo(6);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtCadCondicaoPgto.setVisible(false);
         }
     }
@@ -941,24 +998,24 @@ public class InterfaceCompra extends javax.swing.JDialog {
         }
         TfValorTotalCompra.setValue(BigDecimal.valueOf(valor));
     }
-
+    
     public boolean camposobrigatoriospreenchidos() {
         if (TfDescNotaCompra.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite o codigo da nota do fornecedor!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfDescNotaCompra.grabFocus();
             return false;
         }
-        if (TfCodFuncionario.getText().equals("") && TfFuncionario.getText().equals("")) {
+        if (TfCodFuncionario.getText().equals("") || TfFuncionario.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Insira o Funcionario que esta realizando o antendimento nesta compra!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodFuncionario.grabFocus();
             return false;
         }
-        if (TfCodFornecedor.getText().equals("") && TfFornecedor.getText().equals("")) {
+        if (TfCodFornecedor.getText().equals("") || TfFornecedor.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Insira qual o Fornecedor desta compra!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodFornecedor.grabFocus();
             return false;
         }
-        if (TfCodCondicaoPgto.getText().equals("") && TfCondicaoPgto.getText().equals("")) {
+        if (TfCodCondicaoPgto.getText().equals("") || TfCondicaoPgto.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Insira a condicao de pagamento escolhida para esta compra!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodCondicaoPgto.grabFocus();
             return false;
@@ -970,28 +1027,28 @@ public class InterfaceCompra extends javax.swing.JDialog {
         }
         return true;
     }
-
+    
     public void enviardados() {
         prodcompravenda.getCompravenda().setData(datas.retornadataehora());
-        prodcompravenda.getCompravenda().setDescricao("COMPRA NRO. "+TfCodigo.getText()+" COM O FORNECEDOR "+TfFornecedor.getText()+" - "+TfDescNotaCompra.getText());
+        prodcompravenda.getCompravenda().setDescricao("COMPRA NRO. " + TfCodigo.getText() + " COM O FORNECEDOR " + TfFornecedor.getText() + " - " + TfDescNotaCompra.getText());
         prodcompravenda.getForneproduto().getFornecedor().setCodigo(Integer.parseInt(TfCodFornecedor.getText()));
         prodcompravenda.getCompravenda().setCodigopessoa(prodcompravenda.getForneproduto().getFornecedor().retornacodigopessoafornecedor());
         prodcompravenda.getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TfCodFuncionario.getText()));
         prodcompravenda.getCompravenda().getOperacao().setCodigo(1);
     }
-
+    
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
-
+    
     public void setPrimeiratela(java.awt.Frame primeiratela) {
         this.primeiratela = primeiratela;
     }
-
+    
     public ClasseTelasUsuario getTelasusuario() {
         return telasusuario;
     }
-
+    
     public void setTelasusuario(ClasseTelasUsuario telasusuario) {
         this.telasusuario = telasusuario;
     }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.lojadafatima.InterfacesFinanceiro;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
@@ -24,7 +23,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
     ClasseDatas datas = new ClasseDatas();
     private java.awt.Frame primeiratela;
     private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
-    
+
     public InterfacePagamentoFuncionarios(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
@@ -38,19 +37,19 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         tam[3] = 80;
         tam[4] = 80;
         preenche.FormataJtable(TbFuncionariosCad, tam);
-        
+
         int[] tam2 = new int[4];
         tam2[0] = 70;
         tam2[1] = 300;
         tam2[2] = 200;
         tam2[3] = 70;
         preenche.FormataJtable(TbPesquisa, tam2);
-        
+
         int[] tam3 = new int[2];
         tam3[0] = 200;
         tam3[1] = 80;
         preenche.FormataJtable(TbPagamentos, tam3);
-        
+
         preenche.PreencherJtable(TbPesquisa, mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().consultageral());
         preenche.PreencherJtable(TbFuncionariosCad, mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().consultatodososfuncionarios());
         preenchercomboanos();
@@ -269,7 +268,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,7 +280,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TbFuncionariosCadMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbFuncionariosCadMouseReleased
-        if(TbFuncionariosCad.getSelectedRow() > -1){
+        if (TbFuncionariosCad.getSelectedRow() > -1) {
             mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 0).toString()));
             mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().setSalario(Float.parseFloat(TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 3).toString()));
             mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().setComissao(Float.parseFloat(TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 4).toString()));
@@ -291,35 +290,40 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
     }//GEN-LAST:event_TbFuncionariosCadMouseReleased
 
     private void BtPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPagarActionPerformed
-        if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja realizar o pagamento deste funcionario?\n"
-                + "Funcionario: "+TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString()+"\n"
-                + "Salario: "+TfSalario.getText()+"\n"
-                + "Rerente a: "+CbMes.getSelectedItem().toString()+"/"+CbAno.getSelectedItem().toString(), "Realizar pagamento?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-            mvtocaixa.getParcela().getConta().getCompravenda().setCodigo(0);
-            mvtocaixa.getParcela().getConta().getOperacao().setCodigo(4);
-            mvtocaixa.getParcela().getConta().setDescricao("PAGAMENTO DE SALARIO AO FUNCIONARIO "+TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString()+", REFERENTE AO TRABALHO DO MES "+CbMes.getSelectedItem().toString()+"/"+CbAno.getSelectedItem().toString());
-            mvtocaixa.getParcela().getConta().setDtconta(datas.retornaratartual());
-            mvtocaixa.getParcela().getConta().setTotal(Float.parseFloat(TfSalario.getValue().toString()));
-            mvtocaixa.getParcela().getConta().setCodigopessoa(0);
-            mvtocaixa.getParcela().getConta().getCondicao().setCodigo(1);
-            mvtocaixa.getParcela().getConta().incluir();
-            mvtocaixa.getParcela().gerarparcelas();
-            mvtocaixa.getParcela().setCodigo(1);
-            mvtocaixa.getParcela().getFormapgto().setCodigo(1);
-            mvtocaixa.getParcela().setDtpago(datas.retornaratartual());
-            mvtocaixa.getParcela().setVlpago(Float.parseFloat(TfSalario.getValue().toString()));
-            mvtocaixa.getParcela().pagaparcela();
-            mvtocaixa.setTpmvto("S");
-            mvtocaixa.setVlmvto(Float.parseFloat(TfSalario.getValue().toString()));
-            mvtocaixa.setDsmvto(mvtocaixa.getParcela().getConta().getDescricao());
-            mvtocaixa.incluir();
-            BtPagar.setEnabled(false);
-            TfSalario.setText("");
+        mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().getPessoafis().setNome(TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString());
+        if (!mvtocaixa.pagamentodomesrealizado(CbMes.getSelectedItem().toString() + "/" + CbAno.getSelectedItem().toString())) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja realizar o pagamento deste funcionario?\n"
+                    + "Funcionario: " + TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString() + "\n"
+                    + "Salario: " + TfSalario.getText() + "\n"
+                    + "Rerente a: " + CbMes.getSelectedItem().toString() + "/" + CbAno.getSelectedItem().toString(), "Realizar pagamento?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                mvtocaixa.getParcela().getConta().getCompravenda().setCodigo(0);
+                mvtocaixa.getParcela().getConta().getOperacao().setCodigo(4);
+                mvtocaixa.getParcela().getConta().setDescricao("PAGAMENTO DE SALARIO AO FUNCIONARIO " + TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString() + ", REFERENTE AO TRABALHO DO MES " + CbMes.getSelectedItem().toString() + "/" + CbAno.getSelectedItem().toString());
+                mvtocaixa.getParcela().getConta().setDtconta(datas.retornaratartual());
+                mvtocaixa.getParcela().getConta().setTotal(Float.parseFloat(TfSalario.getValue().toString()));
+                mvtocaixa.getParcela().getConta().setCodigopessoa(0);
+                mvtocaixa.getParcela().getConta().getCondicao().setCodigo(1);
+                mvtocaixa.getParcela().getConta().incluir();
+                mvtocaixa.getParcela().gerarparcelas();
+                mvtocaixa.getParcela().setCodigo(1);
+                mvtocaixa.getParcela().getFormapgto().setCodigo(1);
+                mvtocaixa.getParcela().setDtpago(datas.retornaratartual());
+                mvtocaixa.getParcela().setVlpago(Float.parseFloat(TfSalario.getValue().toString()));
+                mvtocaixa.getParcela().pagaparcela();
+                mvtocaixa.setTpmvto("S");
+                mvtocaixa.setVlmvto(Float.parseFloat(TfSalario.getValue().toString()));
+                mvtocaixa.setDsmvto(mvtocaixa.getParcela().getConta().getDescricao());
+                mvtocaixa.incluir();
+                BtPagar.setEnabled(false);
+                TfSalario.setText("");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "O pagamento referente a este mes e ano ja foi realizado!", "Pagamento ja realizado", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_BtPagarActionPerformed
 
     private void TbPesquisaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbPesquisaMouseReleased
-        if(TbPesquisa.getSelectedRow() > -1){
+        if (TbPesquisa.getSelectedRow() > -1) {
             mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().getPessoafis().setNome(TbPesquisa.getValueAt(TbPesquisa.getSelectedRow(), 1).toString());
             preenche.PreencherJtable(TbPagamentos, mvtocaixa.retornahistoricopagamentossalario());
         }
@@ -348,16 +352,16 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 
-    public void analisausuario(){
+    public void analisausuario() {
         getTelasusuario().getTela().setCodigo(20);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtPagar.setVisible(false);
         }
     }
-    
-    public void preenchercomboanos(){
+
+    public void preenchercomboanos() {
         CbAno.addItem(datas.anoatual());
-        for(int i = 1; i <= (datas.anoatual() - 2014); i++){
+        for (int i = 1; i <= (datas.anoatual() - 2014); i++) {
             CbAno.addItem(datas.anoatual() - i);
         }
     }

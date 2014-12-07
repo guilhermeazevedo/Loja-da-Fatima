@@ -70,7 +70,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
         jPopupMenu1.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Forma de Pagamento - Software Loja da Fatima");
+        setTitle("Condição de Pagamento - Software Loja da Fatima");
         setResizable(false);
 
         jLabel1.setText("Código");
@@ -255,7 +255,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
     }//GEN-LAST:event_TfCondicaoPgtoKeyTyped
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if (TbConsulta.getSelectedRow() > -1) {
+        if (TbConsulta.getSelectedRow() > 0) {
             TfCodigo.setText(TbConsulta.getValueAt(TbConsulta.getSelectedRow(), 0).toString());
             TfCondicaoPgto.setText(TbConsulta.getValueAt(TbConsulta.getSelectedRow(), 1).toString());
             SpNrParcelas.setValue(Integer.parseInt(TbConsulta.getValueAt(TbConsulta.getSelectedRow(), 2).toString()));

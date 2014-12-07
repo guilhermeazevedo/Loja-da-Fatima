@@ -64,6 +64,19 @@ public class ClasseMvtoCaixa {
                 + "WHERE \"DS_MVTO\" LIKE 'PAGAMENTO DE SALARIO AO FUNCIONARIO " + getParcela().getConta().getCompravenda().getFuncionario().getPessoafis().getNome() + "%'");
         return conn.resultset;
     }
+    
+    public boolean pagamentodomesrealizado(String mesano){
+        conn.executeSQL("SELECT \"DS_MVTO\"\n" +
+                        "FROM bancoloja.\"MOV_CAIXA\"\n" +
+                        "WHERE \"DS_MVTO\" LIKE '%"+ getParcela().getConta().getCompravenda().getFuncionario().getPessoafis().getNome() +", REFERENTE AO TRABALHO DO MES "+mesano+"'");
+        try {
+            conn.resultset.first();
+            conn.resultset.getString(1);
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
 
     public ResultSet mvtocaixadia() {
         conn.executeSQL("SELECT \"CD_MVTO\",\n"

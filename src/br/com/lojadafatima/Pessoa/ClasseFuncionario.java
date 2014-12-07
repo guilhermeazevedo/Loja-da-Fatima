@@ -113,15 +113,16 @@ public class ClasseFuncionario {
     }
 
     public float retornasalariomaiscomissao() {
-        conn.executeSQL("SELECT \"C\".\"VL_TOTAL\"\n"
-                + "FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n"
-                + "JOIN bancoloja.\"COMPRA_VENDA\" \"CV\"\n"
-                + "ON \"CV\".\"CD_COMPRA_VENDA\" = \"C\".\"CD_COMPRA_VENDA\" AND \"CV\".\"CD_OPERACAO\" = \"C\".\"CD_OPERACAO_COMPRA_VENDA\"\n"
-                + "WHERE \"CV\".\"CD_OPERACAO\" = 2\n"
-                + "AND \"CV\".\"CD_FUNCIONARIO\" = " + getCodigo());
+        conn.executeSQL("SELECT \"C\".\"VL_TOTAL\"\n" +
+                        "FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n" +
+                        "JOIN bancoloja.\"COMPRA_VENDA\" \"CV\"\n" +
+                        "ON \"CV\".\"CD_COMPRA_VENDA\" = \"C\".\"CD_COMPRA_VENDA\" AND \"CV\".\"CD_OPERACAO\" = \"C\".\"CD_OPERACAO_COMPRA_VENDA\"\n" +
+                        "WHERE \"CV\".\"CD_OPERACAO\" = 2\n" +
+                        "AND \"CV\".\"CD_FUNCIONARIO\" =  "+ getCodigo()+" \n" +
+                        "AND DATE_PART('MONTH', \"CV\".\"DT_COMPRA_VENDA\") = DATE_PART('MONTH', CURRENT_DATE)\n" +
+                        "AND DATE_PART('YEAR', \"CV\".\"DT_COMPRA_VENDA\") = DATE_PART('YEAR', CURRENT_DATE)");
         float comissaosobrevendas = 0;
         try {
-            System.out.println(comissaosobrevendas);
             while(conn.resultset.next()){
                 comissaosobrevendas = comissaosobrevendas + ((conn.resultset.getFloat(1)*getComissao())/100);
                 System.out.println(comissaosobrevendas);

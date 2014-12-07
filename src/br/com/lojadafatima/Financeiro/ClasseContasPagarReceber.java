@@ -57,7 +57,11 @@ public class ClasseContasPagarReceber {
                 + "       WHERE \"P\".\"CD_PESSOA\" IN ((SELECT \"CD_PESSOA\" FROM bancoloja.\"CONTAS_PAGAR_RECEBER\"\n"
                 + "                                  WHERE \"CD_OPERACAO\" IN ((SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n"
                 + "                                                           WHERE \"TP_FINANCEIRO\" = 'E'))\n"
-                + "                                  AND \"SITUACAO\" = 'V' OR \"SITUACAO\" = 'A'))\n"
+                + "                                  AND \"SITUACAO\" = 'V'))\n"
+                + "       OR    \"P\".\"CD_PESSOA\" IN ((SELECT \"CD_PESSOA\" FROM bancoloja.\"CONTAS_PAGAR_RECEBER\"\n"
+                + "                                  WHERE \"CD_OPERACAO\" IN ((SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n"
+                + "                                                           WHERE \"TP_FINANCEIRO\" = 'E'))\n"
+                + "                                  AND \"SITUACAO\" = 'A'))\n"
                 + "       ORDER BY \"NOME\"");
         return conn.resultset;
     }
@@ -130,14 +134,15 @@ public class ClasseContasPagarReceber {
 
     public ResultSet listarclientes() {
         conn.executeSQL("SELECT CASE WHEN \"P\".\"TP_PESSOA\" = 'F'\n"
-                + "                               THEN (SELECT \"NM_PESSOA\" FROM bancoloja.\"CAD_PESSOA_FISICA\" WHERE \"CD_PESSOA_FIS\" = \"C\".\"CD_PESSOA\")\n"
-                + "                               ELSE (SELECT \"NM_FANTASIA\" FROM bancoloja.\"CAD_PESSOA_JURIDICA\" WHERE \"CD_PESSOA_JUR\" = \"C\".\"CD_PESSOA\") END AS \"NOME\",\n"
-                + "                               CASE WHEN \"P\".\"TP_PESSOA\" = 'F'\n"
-                + "                               THEN (SELECT \"NR_CPF\" FROM bancoloja.\"CAD_PESSOA_FISICA\" WHERE \"CD_PESSOA_FIS\"= \"C\".\"CD_PESSOA\")\n"
-                + "                               ELSE (SELECT \"NR_CNPJ\" FROM bancoloja.\"CAD_PESSOA_JURIDICA\" WHERE \"CD_PESSOA_JUR\" = \"C\".\"CD_PESSOA\") END AS \"CPFCNPJ\"\n"
-                + "                               FROM bancoloja.\"CAD_PESSOA\" \"P\"\n"
-                + "                               JOIN bancoloja.\"CAD_CLIENTE\" \"C\" ON \"C\".\"CD_PESSOA\" = \"P\".\"CD_PESSOA\"\n"
-                + "                               ORDER BY \"NOME\"");
+                + "       THEN (SELECT \"NM_PESSOA\" FROM bancoloja.\"CAD_PESSOA_FISICA\" WHERE \"CD_PESSOA_FIS\" = \"C\".\"CD_PESSOA\")\n"
+                + "       ELSE (SELECT \"NM_FANTASIA\" FROM bancoloja.\"CAD_PESSOA_JURIDICA\" WHERE \"CD_PESSOA_JUR\" = \"C\".\"CD_PESSOA\") END AS \"NOME\",\n"
+                + "       CASE WHEN \"P\".\"TP_PESSOA\" = 'F'\n"
+                + "       THEN (SELECT \"NR_CPF\" FROM bancoloja.\"CAD_PESSOA_FISICA\" WHERE \"CD_PESSOA_FIS\"= \"C\".\"CD_PESSOA\")\n"
+                + "       ELSE (SELECT \"NR_CNPJ\" FROM bancoloja.\"CAD_PESSOA_JURIDICA\" WHERE \"CD_PESSOA_JUR\" = \"C\".\"CD_PESSOA\") END AS \"CPFCNPJ\"\n"
+                + "       FROM bancoloja.\"CAD_PESSOA\" \"P\"\n"
+                + "       JOIN bancoloja.\"CAD_CLIENTE\" \"C\" ON \"C\".\"CD_PESSOA\" = \"P\".\"CD_PESSOA\"\n"
+                + "       WHERE \"C\".\"SITUACAO\" = 'A'\n"
+                + "       ORDER BY \"NOME\"");
         return conn.resultset;
     }
 
@@ -390,7 +395,7 @@ public class ClasseContasPagarReceber {
     public void buscamultaconta() {
         conn.executeSQL("SELECT \"CD_MULTA\"\n"
                 + "FROM bancoloja.\"CONTAS_PAGAR_RECEBER\"\n"
-                + "WHERE \"CD_CONTA\" = "+getCodigo()+" AND \"CD_OPERACAO\" = "+getOperacao().getCodigo());
+                + "WHERE \"CD_CONTA\" = " + getCodigo() + " AND \"CD_OPERACAO\" = " + getOperacao().getCodigo());
         try {
             conn.resultset.first();
             getMulta().setCodigo(conn.resultset.getInt(1));
@@ -398,12 +403,12 @@ public class ClasseContasPagarReceber {
         } catch (SQLException ex) {
         }
     }
-    
-    public int retornanumerocontasreceberabertas(){
+
+    public int retornanumerocontasreceberabertas() {
         ResultSet rs = contasreceberaberto();
         int cont = 0;
         try {
-            while(rs.next()){
+            while (rs.next()) {
                 cont = cont + 1;
             }
             return cont;
@@ -411,12 +416,12 @@ public class ClasseContasPagarReceber {
             return 0;
         }
     }
-    
-    public int retornanumerocontasrecebervencidas(){
+
+    public int retornanumerocontasrecebervencidas() {
         ResultSet rs = contasrecebervencidas();
         int cont = 0;
         try {
-            while(rs.next()){
+            while (rs.next()) {
                 cont = cont + 1;
             }
             return cont;
@@ -424,12 +429,12 @@ public class ClasseContasPagarReceber {
             return 0;
         }
     }
-    
-    public int retornanumerocontaspagarabertas(){
+
+    public int retornanumerocontaspagarabertas() {
         ResultSet rs = contaspagaraberta();
         int cont = 0;
         try {
-            while(rs.next()){
+            while (rs.next()) {
                 cont = cont + 1;
             }
             return cont;
@@ -437,12 +442,12 @@ public class ClasseContasPagarReceber {
             return 0;
         }
     }
-    
-    public int retornanumerocontaspagarvencidas(){
+
+    public int retornanumerocontaspagarvencidas() {
         ResultSet rs = contaspagarvencidas();
         int cont = 0;
         try {
-            while(rs.next()){
+            while (rs.next()) {
                 cont = cont + 1;
             }
             return cont;

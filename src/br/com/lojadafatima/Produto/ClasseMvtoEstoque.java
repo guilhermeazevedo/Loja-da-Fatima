@@ -72,7 +72,7 @@ public class ClasseMvtoEstoque {
                 + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
                 + "JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n"
                 + "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n"
-                + "WHERE \"E\".\"CD_PRODUTO\" IN ((SELECT \"CD_PRODUTO\" FROM bancoloja.\"CAD_PRODUTO\"))\n"
+                + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"E\".\"CD_PRODUTO\" IN ((SELECT \"CD_PRODUTO\" FROM bancoloja.\"CAD_PRODUTO\"))\n"
                 + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
                 + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) ORDER BY \"P\".\"DS_PRODUTO\"");
         return conn.resultset;
@@ -85,7 +85,7 @@ public class ClasseMvtoEstoque {
                 + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
                 + "JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n"
                 + "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n"
-                + "WHERE \"E\".\"CD_PRODUTO\" = " + getProduto().getCodigo() + "\n"
+                + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"E\".\"CD_PRODUTO\" = " + getProduto().getCodigo() + "\n"
                 + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
                 + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) ORDER BY \"P\".\"DS_PRODUTO\"");
         return conn.resultset;
@@ -98,7 +98,7 @@ public class ClasseMvtoEstoque {
                 + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
                 + "JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n"
                 + "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n"
-                + "WHERE \"P\".\"DS_PRODUTO\" LIKE '%" + getProduto().getDescricao() + "%' \n"
+                + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"P\".\"DS_PRODUTO\" LIKE '%" + getProduto().getDescricao() + "%' \n"
                 + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
                 + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) ORDER BY \"P\".\"DS_PRODUTO\"");
         return conn.resultset;
@@ -111,7 +111,7 @@ public class ClasseMvtoEstoque {
                 + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
                 + "JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n"
                 + "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n"
-                + "WHERE \"E\".\"CD_PRODUTO\" IN ((SELECT \"CD_PRODUTO\" FROM bancoloja.\"CAD_PRODUTO\"))\n"
+                + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"E\".\"CD_PRODUTO\" IN ((SELECT \"CD_PRODUTO\" FROM bancoloja.\"CAD_PRODUTO\"))\n"
                 + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
                 + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"))\n"
                 + "AND \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" ORDER BY \"P\".\"DS_PRODUTO\"");
@@ -125,7 +125,7 @@ public class ClasseMvtoEstoque {
                 + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
                 + "JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n"
                 + "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n"
-                + "WHERE \"E\".\"CD_PRODUTO\" IN ((SELECT \"CD_PRODUTO\" FROM bancoloja.\"CAD_PRODUTO\"))\n"
+                + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"E\".\"CD_PRODUTO\" IN ((SELECT \"CD_PRODUTO\" FROM bancoloja.\"CAD_PRODUTO\"))\n"
                 + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
                 + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"))\n"
                 + "AND \"E\".\"QT_ATUAL\" >= \"P\".\"QT_ESTOQUE_MIN\" ORDER BY \"P\".\"DS_PRODUTO\"");

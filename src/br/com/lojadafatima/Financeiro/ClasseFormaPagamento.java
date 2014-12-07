@@ -39,7 +39,7 @@ public class ClasseFormaPagamento {
     
     public ResultSet retornaformapgtojtable(){
         conn.executeSQL("SELECT \"CD_FORMA_PGTO\", \"DS_FORMA_PGTO\"\n" +
-                        "FROM bancoloja.\"CAD_FORMA_PGTO\"");
+                        "FROM bancoloja.\"CAD_FORMA_PGTO\" ORDER BY \"CD_FORMA_PGTO\"");
         return conn.resultset;
     }
     

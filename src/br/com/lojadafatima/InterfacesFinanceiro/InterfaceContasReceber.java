@@ -224,6 +224,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
             }
         });
 
+        TfValor.setEnabled(false);
         TfValor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TfValorKeyTyped(evt);
@@ -357,7 +358,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
     }//GEN-LAST:event_CbPesqPessoaActionPerformed
 
     private void BtGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGerarRelatorioActionPerformed
-        
+
     }//GEN-LAST:event_BtGerarRelatorioActionPerformed
 
     private void TfValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorKeyTyped
@@ -392,18 +393,28 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
     }//GEN-LAST:event_TbContasMouseReleased
 
     private void TbParcelasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbParcelasMouseReleased
-        if (TbParcelas.getSelectedRow() > -1) {
-            if (TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 5).toString().equals("PAGA")) {
-                TfValor.setEnabled(false);
+        int linha = TbParcelas.getSelectedRow();
+        if (linha > -1) {
+            if (linha == 0) {
+                if (TbParcelas.getValueAt(linha, 5).toString().equals("PAGA")) {
+                    TfValor.setEnabled(false);
+                } else {
+                    TfValor.setEnabled(true);
+                    TfValor.setText(TbParcelas.getValueAt(linha, 1).toString());
+                }
             } else {
-                TfValor.setEnabled(true);
-                TfValor.setText(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString());
+                if (TbParcelas.getValueAt((linha - 1), 5).toString().equals("PAGA") && !TbParcelas.getValueAt(linha, 5).toString().equals("PAGA")) {
+                    TfValor.setEnabled(true);
+                    TfValor.setText(TbParcelas.getValueAt(linha, 1).toString());
+                } else {
+                    TfValor.setEnabled(false);
+                }
             }
         }
     }//GEN-LAST:event_TbParcelasMouseReleased
 
     private void BtPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPagarActionPerformed
-        if (TbParcelas.getSelectedRow() > -1 && TfValor.getValue() != BigDecimal.valueOf(0)) {
+        if (TbParcelas.getSelectedRow() > -1 && TfValor.getValue() != BigDecimal.valueOf(0) && TfValor.isEnabled()) {
             if (CbFormaPgto.getSelectedItem() != null) {
                 if (Float.parseFloat(TfValor.getValue().toString()) == Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString())) {
                     if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja realizar o pagamento desta parcela?", "Deseja pagar esta parcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -416,7 +427,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                         mvtocaixa.setParcela(parcelas);
                         mvtocaixa.setTpmvto("E");
                         mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
-                        mvtocaixa.setDsmvto("PAGAMENTO DA PARCELA NRO. "+mvtocaixa.getParcela().getCodigo()+" - "+parcelas.getConta().retornadescricaodaconta());
+                        mvtocaixa.setDsmvto("PAGAMENTO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " - " + parcelas.getConta().retornadescricaodaconta());
                         mvtocaixa.incluir();
                         TbContasMouseReleased(null);
                     }
@@ -432,7 +443,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                     mvtocaixa.setParcela(parcelas);
                     mvtocaixa.setTpmvto("E");
                     mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
-                    mvtocaixa.setDsmvto("PAGAMENTO PARCIAL DA PARCELA NRO. "+mvtocaixa.getParcela().getCodigo()+" - "+parcelas.getConta().retornadescricaodaconta());
+                    mvtocaixa.setDsmvto("PAGAMENTO PARCIAL DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " - " + parcelas.getConta().retornadescricaodaconta());
                     mvtocaixa.incluir();
                     parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString()) - Float.parseFloat(TfValor.getValue().toString()));
                     parcelas.gerarreparcela();
@@ -459,20 +470,38 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
     }//GEN-LAST:event_BtCadFormaPgtoActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if(TbParcelas.getSelectedRow() > -1){
-            if(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 5).toString().equals("PAGA")){
-                if(JOptionPane.showConfirmDialog(null, "Deseja realmente extornar esta parcela?\n"
-                                                     + "(Fazendo isso voce estara retirando do caixa o valor pago nesta parcela)", "Deseja extornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-                    parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
-                    parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
-                    parcelas.extornarparcela();
-                    ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
-                    mvtocaixa.setParcela(parcelas);
-                    mvtocaixa.setTpmvto("S");
-                    mvtocaixa.setVlmvto(parcelas.getVlpagar());
-                    mvtocaixa.setDsmvto("EXTORNO DA PARCELA NRO. "+mvtocaixa.getParcela().getCodigo()+" - "+parcelas.getConta().retornadescricaodaconta());
-                    mvtocaixa.incluir();
-                    TbContasMouseReleased(null);
+        if (TbParcelas.getSelectedRow() > -1) {
+            if (TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 5).toString().equals("PAGA")) {
+                if (Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()) != TbParcelas.getRowCount()) {
+                    if (!TbParcelas.getValueAt(TbParcelas.getSelectedRow() + 1, 5).toString().equals("PAGA")) {
+                        if (JOptionPane.showConfirmDialog(null, "Deseja realmente extornar esta parcela?\n"
+                                + "(Fazendo isso voce estara retirando do caixa o valor pago nesta parcela)", "Deseja extornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
+                            parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
+                            parcelas.extornarparcela();
+                            ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
+                            mvtocaixa.setParcela(parcelas);
+                            mvtocaixa.setTpmvto("S");
+                            mvtocaixa.setVlmvto(parcelas.getVlpagar());
+                            mvtocaixa.setDsmvto("EXTORNO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " - " + parcelas.getConta().retornadescricaodaconta());
+                            mvtocaixa.incluir();
+                            TbContasMouseReleased(null);
+                        }
+                    }
+                } else {
+                    if (JOptionPane.showConfirmDialog(null, "Deseja realmente extornar esta parcela?\n"
+                            + "(Fazendo isso voce estara retirando do caixa o valor pago nesta parcela)", "Deseja extornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
+                        parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
+                        parcelas.extornarparcela();
+                        ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
+                        mvtocaixa.setParcela(parcelas);
+                        mvtocaixa.setTpmvto("S");
+                        mvtocaixa.setVlmvto(parcelas.getVlpagar());
+                        mvtocaixa.setDsmvto("EXTORNO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " - " + parcelas.getConta().retornadescricaodaconta());
+                        mvtocaixa.incluir();
+                        TbContasMouseReleased(null);
+                    }
                 }
             }
         }
@@ -502,18 +531,18 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 
-    public void analisausuario(){
+    public void analisausuario() {
         getTelasusuario().getTela().setCodigo(17);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtPagar.setVisible(false);
         }
-        
+
         getTelasusuario().getTela().setCodigo(7);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtCadFormaPgto.setVisible(false);
         }
     }
-    
+
     public java.awt.Frame getPrimeiratela() {
         return primeiratela;
     }
