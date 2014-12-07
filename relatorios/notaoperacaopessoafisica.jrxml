@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="notaoperacaopessoafisica" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="77cdcbd3-1dc6-42a8-9f8b-23b1752709c2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="07e545c1-dd1d-48d3-b68d-6d0714012d90">
+		<parameter name="CD_OPERACAO" class="java.lang.Integer"/>
+		<parameter name="CD_COMPRA_VENDA" class="java.lang.Integer"/>
+		<queryString>
+			<![CDATA[SELECT "P"."DS_PRODUTO", "PV"."QT_PRODUTO", "PV"."VL_PRODUTO"
+FROM bancoloja."PRODUTOS_COMPRA_VENDA" "PV"
+JOIN bancoloja."CAD_PRODUTO" "P"
+ON "P"."CD_PRODUTO" = "PV"."CD_PRODUTO"
+WHERE "PV"."CD_COMPRA_VENDA" = $P{CD_COMPRA_VENDA} AND "PV"."CD_OPERACAO" = $P{CD_OPERACAO}]]>
+		</queryString>
+		<field name="DS_PRODUTO" class="java.lang.String"/>
+		<field name="QT_PRODUTO" class="java.math.BigDecimal"/>
+		<field name="VL_PRODUTO" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="CD_PESSOA_FIS" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DS_OPERACAO" class="java.lang.String"/>
+	<parameter name="CD_COMPRA_VENDA" class="java.lang.Integer"/>
+	<parameter name="CD_OPERACAO" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT "NM_PESSOA"
+FROM bancoloja."CAD_PESSOA_FISICA"
+WHERE "CD_PESSOA_FIS" = $P{CD_PESSOA_FIS}]]>
+	</queryString>
+	<field name="NM_PESSOA" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e340585a-a54a-444c-a5c6-6f7ed0659cc1" x="0" y="60" width="100" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Loja da Fátima]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="54c149b5-3112-487f-b730-50552f1e0a93" x="0" y="0" width="555" height="43"/>
+				<textElement>
+					<font size="28"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_OPERACAO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="47" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="643de009-5481-4b1d-a9ff-9702ca9ff3b2" x="0" y="11" width="555" height="24"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NM_PESSOA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a5c70804-fd18-44fe-a125-1c2806b0855a" x="0" y="0" width="291" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="69b563ef-23e5-426e-8b6f-ee118791f3ce" x="291" y="0" width="125" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ba622557-ea05-4518-886e-63b25de35e8f" x="416" y="0" width="139" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<componentElement>
+				<reportElement uuid="69fd5506-3d2c-4797-803a-87c8102e3f76" x="0" y="0" width="555" height="24"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dataset1" uuid="18573ed6-bfc4-4cdf-b731-b61202e3d852">
+						<datasetParameter name="CD_OPERACAO">
+							<datasetParameterExpression><![CDATA[$P{CD_OPERACAO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="CD_COMPRA_VENDA">
+							<datasetParameterExpression><![CDATA[$P{CD_COMPRA_VENDA}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="24" width="555">
+						<textField isStretchWithOverflow="true">
+							<reportElement uuid="fb691998-b316-4ac9-8850-f92e7670a49e" x="0" y="0" width="291" height="20"/>
+							<textElement>
+								<font size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{DS_PRODUTO}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement uuid="e1c9bc59-4b84-4437-8c91-7eeb89e2f5e3" x="291" y="0" width="125" height="20"/>
+							<textElement>
+								<font size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{QT_PRODUTO}]]></textFieldExpression>
+						</textField>
+						<textField pattern="¤ #,##0.00">
+							<reportElement uuid="13723e54-528a-4923-88d2-2d02c82660b0" x="416" y="0" width="139" height="20"/>
+							<textElement>
+								<font size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{VL_PRODUTO}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

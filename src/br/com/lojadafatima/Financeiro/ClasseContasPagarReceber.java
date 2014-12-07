@@ -455,6 +455,20 @@ public class ClasseContasPagarReceber {
             return 0;
         }
     }
+    
+    public boolean epessoainadimplente(){
+        conn.executeSQL("SELECT * FROM bancoloja.\"CONTAS_PAGAR_RECEBER\"\n" +
+                        "WHERE \"CD_OPERACAO\" IN (SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\" WHERE \"TP_FINANCEIRO\" = 'E') AND\n" +
+                        "      ((\"SITUACAO\" = 'A') OR (\"SITUACAO\" = 'V')) AND\n" +
+                        "      \"CD_PESSOA\" = "+getCodigopessoa());
+        try {
+            conn.resultset.first();
+            conn.resultset.getString(1);
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
 
     public int getCodigo() {
         return codigo;

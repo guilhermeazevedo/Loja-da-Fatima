@@ -300,6 +300,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="TfCodFuncionario">
           <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TfCodFuncionarioFocusLost"/>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TfCodFuncionarioKeyReleased"/>
           </Events>
         </Component>
@@ -336,6 +337,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="TfCodCliente">
           <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TfCodClienteFocusLost"/>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TfCodClienteKeyReleased"/>
           </Events>
         </Component>
@@ -372,6 +374,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="TfCodCondicaoPgto">
           <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TfCodCondicaoPgtoFocusLost"/>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TfCodCondicaoPgtoKeyReleased"/>
           </Events>
         </Component>

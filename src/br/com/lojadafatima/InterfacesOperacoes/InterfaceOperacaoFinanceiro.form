@@ -219,6 +219,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="TfCodCondicaoPgto">
           <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TfCodCondicaoPgtoFocusLost"/>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TfCodCondicaoPgtoKeyReleased"/>
           </Events>
         </Component>
@@ -312,6 +313,7 @@
         </Container>
         <Component class="javax.swing.JTextField" name="TfCodPessoa">
           <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TfCodPessoaFocusLost"/>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TfCodPessoaKeyReleased"/>
           </Events>
         </Component>

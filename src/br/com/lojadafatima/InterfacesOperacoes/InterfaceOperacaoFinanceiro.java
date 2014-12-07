@@ -128,6 +128,11 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
 
         jLabel7.setText("Cód. Condicao de Pagamento");
 
+        TfCodCondicaoPgto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfCodCondicaoPgtoFocusLost(evt);
+            }
+        });
         TfCodCondicaoPgto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfCodCondicaoPgtoKeyReleased(evt);
@@ -202,6 +207,11 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
             .addComponent(BtGravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        TfCodPessoa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfCodPessoaFocusLost(evt);
+            }
+        });
         TfCodPessoa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfCodPessoaKeyReleased(evt);
@@ -543,6 +553,37 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void TfCodCondicaoPgtoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodCondicaoPgtoFocusLost
+        if(TfCondicaoPgto.getText().equals("")){
+            TfCodCondicaoPgto.setText("");
+        }
+    }//GEN-LAST:event_TfCodCondicaoPgtoFocusLost
+
+    private void TfCodPessoaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodPessoaFocusLost
+        if(TfPessoa.getText().equals("")){
+            TfCodPessoa.setText("");
+        }else{
+            if (parcelas.getConta().getOperacao().getTpfinanceiro().equals("E")) {
+                ClasseContasPagarReceber contas = new ClasseContasPagarReceber();
+                if(CbPessoa.getSelectedItem().toString().equals("Fornecedor")){
+                    ClasseFornecedor forn2 = new ClasseFornecedor();
+                    forn2.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
+                    contas.setCodigopessoa(forn2.retornacodigopessoafornecedor());
+                }else{
+                    ClasseCliente cliente2 = new ClasseCliente();
+                    cliente2.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
+                    contas.setCodigopessoa(cliente2.retornacodigopessoacliente());
+                }
+                if (contas.epessoainadimplente()) {
+                    if (JOptionPane.showConfirmDialog(null, "Existem contas a receber em aberto ou vencidas desta pessoa, deseja continuar?", "Pessoa inadimplente", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+                        TfCodPessoa.setText("");
+                        TfCodPessoaKeyReleased(null);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_TfCodPessoaFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadCondicaoPgto;
@@ -603,7 +644,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
             TfDescOperacao.grabFocus();
             return false;
         }
-        if(TfCodCondicaoPgto.getText().equals("") && TfCondicaoPgto.getText().equals("")){
+        if(TfCodCondicaoPgto.getText().equals("") || TfCondicaoPgto.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Digite a condicao de pagamento escolhida!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodCondicaoPgto.grabFocus();
             return false;
@@ -613,7 +654,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
             TfValorTotal.grabFocus();
             return false;
         }
-        if(parcelas.getConta().getOperacao().getTpfinanceiro().equals("E") && TfCodPessoa.getText().equals("") && TfPessoa.getText().equals("")){
+        if(parcelas.getConta().getOperacao().getTpfinanceiro().equals("E") && (TfCodPessoa.getText().equals("") || TfPessoa.getText().equals(""))){
             JOptionPane.showMessageDialog(null, "Digite a Pessoa que fara parte desta conta a receber!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodPessoa.grabFocus();
             return false;

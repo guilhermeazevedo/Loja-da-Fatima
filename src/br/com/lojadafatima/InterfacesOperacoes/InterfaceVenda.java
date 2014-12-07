@@ -11,6 +11,7 @@ import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseProdutosCompraVenda;
+import br.com.lojadafatima.Financeiro.ClasseContasPagarReceber;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCliente;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCondicaoPgto;
@@ -144,6 +145,11 @@ public class InterfaceVenda extends javax.swing.JDialog {
 
         jLabel3.setText("Cód. Funcionário");
 
+        TfCodFuncionario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfCodFuncionarioFocusLost(evt);
+            }
+        });
         TfCodFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfCodFuncionarioKeyReleased(evt);
@@ -170,6 +176,11 @@ public class InterfaceVenda extends javax.swing.JDialog {
 
         jLabel5.setText("Cód. Cliente");
 
+        TfCodCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfCodClienteFocusLost(evt);
+            }
+        });
         TfCodCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfCodClienteKeyReleased(evt);
@@ -196,6 +207,11 @@ public class InterfaceVenda extends javax.swing.JDialog {
 
         jLabel7.setText("Cód. Condicao de Pagamento");
 
+        TfCodCondicaoPgto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfCodCondicaoPgtoFocusLost(evt);
+            }
+        });
         TfCodCondicaoPgto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfCodCondicaoPgtoKeyReleased(evt);
@@ -851,7 +867,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
             ClasseMvtoEstoque estoque = new ClasseMvtoEstoque();
             estoque.getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
             if (Float.parseFloat(TfQuantidade.getValue().toString()) > estoque.retornaestoqueatual()) {
-                JOptionPane.showMessageDialog(null, "A quantidade digitada e maior que o estoque atual disponivel deste produto!\nEstoque atual: "+estoque.retornaestoqueatual(), "Estoque indiponivel", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "A quantidade digitada e maior que o estoque atual disponivel deste produto!\nEstoque atual: " + estoque.retornaestoqueatual(), "Estoque indiponivel", JOptionPane.INFORMATION_MESSAGE);
                 TfValorProduto.setValue(BigDecimal.valueOf(0));
             } else {
                 estoqueok = true;
@@ -868,14 +884,43 @@ public class InterfaceVenda extends javax.swing.JDialog {
     }//GEN-LAST:event_TfValorUnitarioKeyTyped
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if(PnBotoes.isVisible() && BtGravar.isEnabled()){
-            if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+        if (PnBotoes.isVisible() && BtGravar.isEnabled()) {
+            if (JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 dispose();
             }
-        }else{
+        } else {
             dispose();
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void TfCodClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodClienteFocusLost
+        if (TfCliente.getText().equals("")) {
+            TfCodCliente.setText("");
+        } else {
+            ClasseContasPagarReceber contas = new ClasseContasPagarReceber();
+            cliente.setCodigo(Integer.parseInt(TfCodCliente.getText()));
+            contas.setCodigopessoa(cliente.retornacodigopessoacliente());
+            contas.setCodigopessoa(cliente.retornacodigopessoacliente());
+            if (contas.epessoainadimplente()) {
+                if (JOptionPane.showConfirmDialog(null, "Existem contas a receber em aberto ou vencidas desta pessoa, deseja continuar?", "Pessoa inadimplente", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+                    TfCodCliente.setText("");
+                    TfCodClienteKeyReleased(null);
+                }
+            }
+        }
+    }//GEN-LAST:event_TfCodClienteFocusLost
+
+    private void TfCodFuncionarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodFuncionarioFocusLost
+        if (TfFuncionario.getText().equals("")) {
+            TfCodFuncionario.setText("");
+        }
+    }//GEN-LAST:event_TfCodFuncionarioFocusLost
+
+    private void TfCodCondicaoPgtoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodCondicaoPgtoFocusLost
+        if (TfCondicaoPgto.getText().equals("")) {
+            TfCodCondicaoPgto.setText("");
+        }
+    }//GEN-LAST:event_TfCodCondicaoPgtoFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -927,45 +972,45 @@ public class InterfaceVenda extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
-    public void analisausuario(){
+    public void analisausuario() {
         getTelasusuario().getTela().setCodigo(16);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             PnBotoes.setVisible(false);
         }
-        
+
         getTelasusuario().getTela().setCodigo(1);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtCadCliente.setVisible(false);
         }
-        
+
         getTelasusuario().getTela().setCodigo(3);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtCadFuncionario.setVisible(false);
         }
-        
+
         getTelasusuario().getTela().setCodigo(11);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtCadProduto.setVisible(false);
         }
-        
+
         getTelasusuario().getTela().setCodigo(6);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtCadCondicaoPgto.setVisible(false);
         }
     }
-    
+
     public boolean camposobrigatoriospreenchidos() {
-        if (TfCodFuncionario.getText().equals("") && TfFuncionario.getText().equals("")) {
+        if (TfCodFuncionario.getText().equals("") || TfFuncionario.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Informe qual funcionario realizou o atendimento nesta venda!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodFuncionario.grabFocus();
             return false;
         }
-        if (TfCodCliente.getText().equals("") && TfCliente.getText().equals("")) {
+        if (TfCodCliente.getText().equals("") || TfCliente.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Informe qual cliente esta realizando a venda!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodCliente.grabFocus();
             return false;
         }
-        if (TfCodCondicaoPgto.getText().equals("") && TfCondicaoPgto.getText().equals("")) {
+        if (TfCodCondicaoPgto.getText().equals("") || TfCondicaoPgto.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Informe qual a condicao de pagamento escolhida pelo cliente!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodCondicaoPgto.grabFocus();
             return false;
@@ -980,7 +1025,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
 
     public void enviardados() {
         prodcompravenda.getCompravenda().setData(datas.retornadataehora());
-        prodcompravenda.getCompravenda().setDescricao("VENDA DE NRO. " + TfCodigo.getText()+" AO CLIENTE "+TfCliente.getText());
+        prodcompravenda.getCompravenda().setDescricao("VENDA DE NRO. " + TfCodigo.getText() + " AO CLIENTE " + TfCliente.getText());
         cliente.setCodigo(Integer.parseInt(TfCodCliente.getText()));
         prodcompravenda.getCompravenda().setCodigopessoa(cliente.retornacodigopessoacliente());
         prodcompravenda.getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TfCodFuncionario.getText()));

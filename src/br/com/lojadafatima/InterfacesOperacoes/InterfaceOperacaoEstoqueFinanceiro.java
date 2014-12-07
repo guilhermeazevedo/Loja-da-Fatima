@@ -13,6 +13,7 @@ import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseOperacoes;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseProdutosCompraVenda;
+import br.com.lojadafatima.Financeiro.ClasseContasPagarReceber;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCliente;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCondicaoPgto;
@@ -25,6 +26,7 @@ import br.com.lojadafatima.InterfacesPessoa.InterfaceFornecedor;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceFuncionario;
 import br.com.lojadafatima.InterfacesProduto.InterfaceProduto;
 import br.com.lojadafatima.Pessoa.ClasseCliente;
+import br.com.lojadafatima.Pessoa.ClasseFornecedor;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
@@ -162,6 +164,11 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
         jLabel3.setText("Cód. Funcionário");
 
+        TfCodFuncionario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfCodFuncionarioFocusLost(evt);
+            }
+        });
         TfCodFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfCodFuncionarioKeyReleased(evt);
@@ -186,6 +193,11 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
             }
         });
 
+        TfCodCondicaoPgto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfCodCondicaoPgtoFocusLost(evt);
+            }
+        });
         TfCodCondicaoPgto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfCodCondicaoPgtoKeyReleased(evt);
@@ -332,6 +344,11 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
         LbCodPessoa.setText("Cód. Pessoa");
 
+        TfCodPessoa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfCodPessoaFocusLost(evt);
+            }
+        });
         TfCodPessoa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfCodPessoaKeyReleased(evt);
@@ -687,10 +704,37 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         if (!TfCodProduto.getText().equals("")) {
             prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
             if (prodcompravenda.getForneproduto().getProduto().eprodutoativo()) {
-                TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
-                TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto()));
-                TfQuantidade.setValue(BigDecimal.valueOf(0));
-                TfValorProduto.setValue(BigDecimal.valueOf(0));
+                if (prodcompravenda.getCompravenda().getOperacao().getTpestoque().equals("E")) {
+                    if (CbPessoa.getSelectedItem().toString().equals("Fornecedor")) {
+                        if (!TfCodPessoa.getText().equals("")) {
+                            if (prodcompravenda.getForneproduto().produtodestefornecedor()) {
+                                TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
+                                TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto()));
+                                TfQuantidade.setValue(BigDecimal.valueOf(0));
+                                TfValorProduto.setValue(BigDecimal.valueOf(0));
+                            } else {
+                                TfProduto.setText("");
+                                TfValorUnitario.setValue(BigDecimal.valueOf(0));
+                                TfQuantidade.setValue(BigDecimal.valueOf(0));
+                                TfValorProduto.setText("");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Insira o fornecedor para que o sistema faca a busca\napenas dos produtos deste fornecedor!", "Insira o fornecedor", JOptionPane.INFORMATION_MESSAGE);
+                            TfCodProduto.setText("");
+                            TfCodPessoa.grabFocus();
+                        }
+                    } else {
+                        TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
+                        TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto()));
+                        TfQuantidade.setValue(BigDecimal.valueOf(0));
+                        TfValorProduto.setValue(BigDecimal.valueOf(0));
+                    }
+                } else {
+                    TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
+                    TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto()));
+                    TfQuantidade.setValue(BigDecimal.valueOf(0));
+                    TfValorProduto.setValue(BigDecimal.valueOf(0));
+                }
             } else {
                 TfProduto.setText("");
                 TfValorUnitario.setValue(BigDecimal.valueOf(0));
@@ -855,6 +899,8 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     }//GEN-LAST:event_BtCancelarActionPerformed
 
     private void TfCodPessoaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfCodPessoaKeyReleased
+        limpar.Limpar(TbProdutos);
+        atualizavalortotal();
         if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
             if (!TfCodPessoa.getText().equals("")) {
                 cliente.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
@@ -934,6 +980,8 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     }//GEN-LAST:event_BtCadPessoaActionPerformed
 
     private void CbPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbPessoaActionPerformed
+        limpar.Limpar(TbProdutos);
+        atualizavalortotal();
         if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
             LbCodPessoa.setText("Cód. Cliente");
             LbNomePessoa.setText("Cliente");
@@ -980,14 +1028,56 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     }//GEN-LAST:event_TfValorUnitarioKeyTyped
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if(PnBotoes.isVisible() && BtGravar.isEnabled()){
-            if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+        if (PnBotoes.isVisible() && BtGravar.isEnabled()) {
+            if (JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 dispose();
             }
-        }else{
+        } else {
             dispose();
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void TfCodFuncionarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodFuncionarioFocusLost
+        if (TfFuncionario.getText().equals("")) {
+            TfCodFuncionario.setText("");
+        }
+    }//GEN-LAST:event_TfCodFuncionarioFocusLost
+
+    private void TfCodPessoaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodPessoaFocusLost
+        if (TfPessoa.getText().equals("")) {
+            TfCodPessoa.setText("");
+        } else {
+            if (CbPessoa.getSelectedItem().toString().equals("Fornecedor") && prodcompravenda.getCompravenda().getOperacao().getTpestoque().equals("E")) {
+                prodcompravenda.getForneproduto().getFornecedor().setCodigo(Integer.parseInt(TfCodPessoa.getText()));
+            }
+            if (prodcompravenda.getCompravenda().getOperacao().getTpfinanceiro().equals("E")) {
+                ClasseContasPagarReceber contas = new ClasseContasPagarReceber();
+                if(CbPessoa.getSelectedItem().toString().equals("Fornecedor")){
+                    ClasseFornecedor forn = new ClasseFornecedor();
+                    forn.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
+                    contas.setCodigopessoa(forn.retornacodigopessoafornecedor());
+                }else{
+                    ClasseCliente cliente = new ClasseCliente();
+                    cliente.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
+                    contas.setCodigopessoa(cliente.retornacodigopessoacliente());
+                }
+                contas.setCodigopessoa(cliente.retornacodigopessoacliente());
+                if (contas.epessoainadimplente()) {
+                    if (JOptionPane.showConfirmDialog(null, "Existem contas a receber em aberto ou vencidas desta pessoa, deseja continuar?", "Pessoa inadimplente", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+                        TfCodPessoa.setText("");
+                        TfCodPessoaKeyReleased(null);
+                    }
+                }
+            }
+
+        }
+    }//GEN-LAST:event_TfCodPessoaFocusLost
+
+    private void TfCodCondicaoPgtoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodCondicaoPgtoFocusLost
+        if (TfCondicaoPgto.getText().equals("")) {
+            TfCodCondicaoPgto.setText("");
+        }
+    }//GEN-LAST:event_TfCodCondicaoPgtoFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1043,39 +1133,39 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
-    public void analisausuario(){
-        if(CbPessoa.getSelectedItem().toString().equals("Cliente")){
+    public void analisausuario() {
+        if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
             getTelasusuario().getTela().setCodigo(1);
-            if(!getTelasusuario().eadmintela()){
+            if (!getTelasusuario().eadmintela()) {
                 BtCadPessoa.setVisible(false);
-            }else{
+            } else {
                 BtCadPessoa.setVisible(true);
             }
-        }else{
+        } else {
             getTelasusuario().getTela().setCodigo(2);
-            if(!getTelasusuario().eadmintela()){
+            if (!getTelasusuario().eadmintela()) {
                 BtCadPessoa.setVisible(false);
-            }else{
+            } else {
                 BtCadPessoa.setVisible(true);
             }
         }
-        
+
         getTelasusuario().getTela().setCodigo(3);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtCadFuncionario.setVisible(false);
         }
-        
+
         getTelasusuario().getTela().setCodigo(11);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtCadProduto.setVisible(false);
         }
-        
+
         getTelasusuario().getTela().setCodigo(6);
-        if(!getTelasusuario().eadmintela()){
+        if (!getTelasusuario().eadmintela()) {
             BtCadCondicaoPgto.setVisible(false);
         }
     }
-    
+
     public void atualizavalortotal() {
         float valor = 0;
         for (int i = 0; i < TbProdutos.getRowCount(); i++) {
@@ -1091,17 +1181,17 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
             TfDescOperacao.grabFocus();
             return false;
         }
-        if (TfCodFuncionario.getText().equals("") && TfFuncionario.getText().equals("")) {
+        if (TfCodFuncionario.getText().equals("") || TfFuncionario.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Insira o Funcionario que esta realizando o antendimento nesta operacao!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodFuncionario.grabFocus();
             return false;
         }
-        if (TfCodPessoa.getText().equals("") && TfPessoa.getText().equals("")) {
+        if (TfCodPessoa.getText().equals("") || TfPessoa.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Insira qual a pessoa envolvida nesta operacao!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodPessoa.grabFocus();
             return false;
         }
-        if (TfCodCondicaoPgto.getText().equals("") && TfCondicaoPgto.getText().equals("")) {
+        if (TfCodCondicaoPgto.getText().equals("") || TfCondicaoPgto.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Insira a condicao de pagamento escolhida para esta operacao!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             TfCodCondicaoPgto.grabFocus();
             return false;
@@ -1116,7 +1206,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
     public void enviardados() {
         prodcompravenda.getCompravenda().setData(datas.retornadataehora());
-        prodcompravenda.getCompravenda().setDescricao(prodcompravenda.getCompravenda().getOperacao().getDescricao()+" NRO. "+TfCodigo.getText()+" - "+TfDescOperacao.getText());
+        prodcompravenda.getCompravenda().setDescricao(prodcompravenda.getCompravenda().getOperacao().getDescricao() + " NRO. " + TfCodigo.getText() + " - " + TfDescOperacao.getText());
         if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
             cliente.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
             prodcompravenda.getCompravenda().setCodigopessoa(cliente.retornacodigopessoacliente());
