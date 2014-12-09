@@ -17,6 +17,7 @@ import br.com.lojadafatima.InterfacesOperacoes.InterfaceCompra;
 import br.com.lojadafatima.InterfacesOperacoes.InterfaceRealizarOperacoes;
 import br.com.lojadafatima.InterfacesOperacoes.InterfaceVenda;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
+import br.com.lojadafatima.InterfaceConsultaSimples.InterfaceRelatorios;
 import br.com.lojadafatima.InterfacesProduto.InterfaceProduto;
 import br.com.lojadafatima.InterfacesProduto.InterfaceTabelas;
 import br.com.lojadafatima.InterfacesProduto.InterfaceTipoProduto;
@@ -941,7 +942,13 @@ public class InterfacePrincipal extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void BtRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtRelatoriosActionPerformed
-        // TODO add your handling code here:
+        final InterfaceRelatorios tela = new InterfaceRelatorios(getPrimeiratela(), true);
+        tela.setVisible(true);
+        tela.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                atualizasituacao();
+            }
+        });
     }//GEN-LAST:event_BtRelatoriosActionPerformed
 
 

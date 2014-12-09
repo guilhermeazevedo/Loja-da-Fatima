@@ -3,20 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.lojadafatima.InterfaceConsultaSimples;
+
+import br.com.lojadafatima.ClassesFerramentas.Preenche;
+import br.com.lojadafatima.CompraVendaOperacoes.ClasseProdutosCompraVenda;
+import br.com.lojadafatima.Financeiro.ClasseParcelas;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author hp
  */
-public class InterfaceRelatorios extends javax.swing.JFrame {
+public class InterfaceRelatorios extends javax.swing.JDialog {
 
-    /**
-     * Creates new form InterfaceRelatorios
-     */
-    public InterfaceRelatorios() {
+    ClasseProdutosCompraVenda prodcompravenda = new ClasseProdutosCompraVenda();
+    Preenche preenche = new Preenche();
+    private java.awt.Frame primeiratela;
+
+    public InterfaceRelatorios(java.awt.Frame telaorigem, boolean modal) {
+        super(telaorigem, modal);
+        setPrimeiratela(telaorigem);
         initComponents();
+        CbOrdenarClientesActionPerformed(null);
+        CbOrdenarFornecedoresActionPerformed(null);
+        preenche.PreencherJtable(TbFuncionarios, prodcompravenda.getCompravenda().getFuncionario().consultageral());
+        preenche.PreencheJComboBox(CbFiltroOperacoesFuncionario, prodcompravenda.getCompravenda().getOperacao().retornaoperacoesdeestoquecombobox());
+        preenche.PreencherJtable(TbOperacoesFuncionario1, prodcompravenda.getCompravenda().operacoesdeestoque());
     }
 
     /**
@@ -28,62 +40,384 @@ public class InterfaceRelatorios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PopDetalhes = new javax.swing.JPopupMenu();
+        ItMnDetalhes = new javax.swing.JMenuItem();
+        ItMnCancelar = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        CbOrdenarClientes = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TbClientes = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        CbOrdenarFornecedores = new javax.swing.JComboBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TbFornecedores = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TbFuncionarios = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        CbFiltroOperacoesFuncionario = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
+        CbFiltroPeriodoFuncionario = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TbOperacoesFuncionario = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        TbOperacoesFuncionario1 = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        TbProdutos = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        ItMnDetalhes.setText("Detalhes...");
+        ItMnDetalhes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItMnDetalhesActionPerformed(evt);
+            }
+        });
+        PopDetalhes.add(ItMnDetalhes);
+
+        ItMnCancelar.setText("Cancelar operação");
+        ItMnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItMnCancelarActionPerformed(evt);
+            }
+        });
+        PopDetalhes.add(ItMnCancelar);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Relatórios - Software Loja de Fátima");
+        setResizable(false);
+
+        jLabel1.setText("Clientes e numero respectivo de compras feitas na loja.");
+
+        jLabel2.setText("Ordernar por:");
+
+        CbOrdenarClientes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Clientes que mais compram", "Clientes que menos compram" }));
+        CbOrdenarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbOrdenarClientesActionPerformed(evt);
+            }
+        });
+
+        TbClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome/Nome Fantasia Cliente", "CPF/CNPJ", "Numeros de compras"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TbClientes.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(TbClientes);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 824, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CbOrdenarClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 458, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(CbOrdenarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Clientes", jPanel1);
+
+        jLabel3.setText("Fornecedores e numero de vendas realizadas para a loja.");
+
+        jLabel4.setText("Ordenar por:");
+
+        CbOrdenarFornecedores.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fornecedores que mais vendem", "Fornecedores que menos vendem" }));
+        CbOrdenarFornecedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbOrdenarFornecedoresActionPerformed(evt);
+            }
+        });
+
+        TbFornecedores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome Fantasia", "CNPJ", "Numero de vendas"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TbFornecedores.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(TbFornecedores);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 824, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CbOrdenarFornecedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 458, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(CbOrdenarFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Fornecedor", jPanel2);
+
+        jLabel5.setText("Funcionarios cadastrados:");
+
+        TbFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Nome", "Função", "CPF"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TbFuncionarios.getTableHeader().setReorderingAllowed(false);
+        TbFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                TbFuncionariosMouseReleased(evt);
+            }
+        });
+        jScrollPane4.setViewportView(TbFuncionarios);
+
+        jLabel6.setText("Operacao:");
+
+        CbFiltroOperacoesFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbFiltroOperacoesFuncionarioActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Periodo:");
+
+        CbFiltroPeriodoFuncionario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mês atual", "Mês anterior", "Ano atual", "Desde o cadastro do funcionário" }));
+        CbFiltroPeriodoFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbFiltroPeriodoFuncionarioActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Operacoes realizadas pelo funcionario selecionado no periodo escolhido:");
+
+        TbOperacoesFuncionario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Operacao", "Descricao", "Data e Hora"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TbOperacoesFuncionario.setComponentPopupMenu(PopDetalhes);
+        TbOperacoesFuncionario.getTableHeader().setReorderingAllowed(false);
+        TbOperacoesFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                TbOperacoesFuncionarioMouseReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(TbOperacoesFuncionario);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 824, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel5)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(CbFiltroOperacoesFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addGap(14, 14, 14)
+                                    .addComponent(CbFiltroPeriodoFuncionario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel8))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 458, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(CbFiltroOperacoesFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(CbFiltroPeriodoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Funcionario", jPanel3);
+
+        TbOperacoesFuncionario1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Operacao", "Descricao", "Data e Hora"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TbOperacoesFuncionario1.getTableHeader().setReorderingAllowed(false);
+        TbOperacoesFuncionario1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                TbOperacoesFuncionario1MouseReleased(evt);
+            }
+        });
+        jScrollPane5.setViewportView(TbOperacoesFuncionario1);
+
+        jLabel9.setText("Todas as operacoes apenas de estoque realizadas:");
+
+        jLabel10.setText("Produtos:");
+
+        TbProdutos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cod. Produto", "Produto", "Quantidade"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TbProdutos.setEnabled(false);
+        TbProdutos.getTableHeader().setReorderingAllowed(false);
+        jScrollPane6.setViewportView(TbProdutos);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 824, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6))
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 458, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Operacoes de Estoque", jPanel6);
@@ -104,48 +438,173 @@ public class InterfaceRelatorios extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfaceRelatorios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfaceRelatorios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfaceRelatorios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfaceRelatorios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void CbOrdenarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbOrdenarClientesActionPerformed
+        if (CbOrdenarClientes.getSelectedIndex() == 0) {
+            preenche.PreencherJtable(TbClientes, prodcompravenda.getCompravenda().numerocomprasclientesmaiscompram());
+        } else {
+            preenche.PreencherJtable(TbClientes, prodcompravenda.getCompravenda().numerocomprasclientesmenoscompram());
         }
-        //</editor-fold>
+    }//GEN-LAST:event_CbOrdenarClientesActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InterfaceRelatorios().setVisible(true);
+    private void CbOrdenarFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbOrdenarFornecedoresActionPerformed
+        if (CbOrdenarFornecedores.getSelectedIndex() == 0) {
+            preenche.PreencherJtable(TbFornecedores, prodcompravenda.getCompravenda().numerovendasfornecedoresmaisvendem());
+        } else {
+            preenche.PreencherJtable(TbFornecedores, prodcompravenda.getCompravenda().numerovendasfornecedoresmenosvendem());
+        }
+    }//GEN-LAST:event_CbOrdenarFornecedoresActionPerformed
+
+    private void TbFuncionariosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbFuncionariosMouseReleased
+        if (TbFuncionarios.getSelectedRow() > -1) {
+            prodcompravenda.getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TbFuncionarios.getValueAt(TbFuncionarios.getSelectedRow(), 0).toString()));
+            consultaoperacoesfuncionario();
+        }
+    }//GEN-LAST:event_TbFuncionariosMouseReleased
+
+    private void CbFiltroOperacoesFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbFiltroOperacoesFuncionarioActionPerformed
+        if (TbFuncionarios.getSelectedRow() > -1) {
+            consultaoperacoesfuncionario();
+        }
+    }//GEN-LAST:event_CbFiltroOperacoesFuncionarioActionPerformed
+
+    private void CbFiltroPeriodoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbFiltroPeriodoFuncionarioActionPerformed
+        if (TbFuncionarios.getSelectedRow() > -1) {
+            consultaoperacoesfuncionario();
+        }
+    }//GEN-LAST:event_CbFiltroPeriodoFuncionarioActionPerformed
+
+    private void ItMnDetalhesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItMnDetalhesActionPerformed
+        if (TbOperacoesFuncionario.getSelectedRow() > -1) {
+            final ConsulSimplesDetalhesOperacao tela = new ConsulSimplesDetalhesOperacao(getPrimeiratela(), true, prodcompravenda);
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+
+                }
+            });
+        }
+    }//GEN-LAST:event_ItMnDetalhesActionPerformed
+
+    private void ItMnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItMnCancelarActionPerformed
+        ClasseParcelas parcelas = new ClasseParcelas();
+        parcelas.getConta().setCompravenda(prodcompravenda.getCompravenda());
+        parcelas.getConta().buscarcontacompravenda();
+        if (TbOperacoesFuncionario.getSelectedRow() > -1) {
+            if (!parcelas.parcelapaga()) {
+                if (JOptionPane.showConfirmDialog(null, "Voce esta prestes a cancelar esta conta.\nCaso haja produtos envolvidos nessa operacao, a situacao do estoque sera revertido!\n\nTem certeza que deseja cancelar?", "Deseja cancelar operacao?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    parcelas.getConta().retornainformacoesconta();
+                    if (parcelas.getConta().getCompravenda().getCodigo() != 0) {
+                        parcelas.getConta().getCompravenda().getOperacao().retornaoperacao();
+                        if (prodcompravenda.getCompravenda().getOperacao().getTpestoque().equals("E")) {
+                            if (!prodcompravenda.houveretiradadosprodutosenvolvidos()) {
+                                parcelas.getConta().cancelarconta();
+                                prodcompravenda.getCompravenda().cancelarcompravenda();
+                                prodcompravenda.reverterestoqueprodutos();
+                                consultaoperacoesfuncionario();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Nao e possivel realizar o cancelamento desta operacao!\nOs produtos que entraram no estoque tem registro de saida.", "Cancelamento de operacao nao permitido", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        } else {
+                            parcelas.getConta().cancelarconta();
+                            prodcompravenda.getCompravenda().cancelarcompravenda();
+                            prodcompravenda.reverterestoqueprodutos();
+                            consultaoperacoesfuncionario();
+                        }
+                    } else {
+                        parcelas.getConta().cancelarconta();
+                        consultaoperacoesfuncionario();
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Faca estorno de todas as parcelas desta conta para que o cancelamento seja realizado!", "Existem parcelas pagas", JOptionPane.INFORMATION_MESSAGE);
             }
-        });
-    }
+        }
+    }//GEN-LAST:event_ItMnCancelarActionPerformed
+
+    private void TbOperacoesFuncionarioMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbOperacoesFuncionarioMouseReleased
+        prodcompravenda.getCompravenda().setCodigo(Integer.parseInt(TbOperacoesFuncionario.getValueAt(TbOperacoesFuncionario.getSelectedRow(), 0).toString()));
+        prodcompravenda.getCompravenda().getOperacao().setDescricao(CbFiltroOperacoesFuncionario.getSelectedItem().toString());
+        prodcompravenda.getCompravenda().getOperacao().setCodigo(prodcompravenda.getCompravenda().getOperacao().retornacodigooperacao());
+    }//GEN-LAST:event_TbOperacoesFuncionarioMouseReleased
+
+    private void TbOperacoesFuncionario1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbOperacoesFuncionario1MouseReleased
+        if (TbOperacoesFuncionario1.getSelectedRow() > -1) {
+            prodcompravenda.getCompravenda().setCodigo(Integer.parseInt(TbOperacoesFuncionario1.getValueAt(TbOperacoesFuncionario1.getSelectedRow(), 0).toString()));
+            prodcompravenda.getCompravenda().getOperacao().setDescricao(TbOperacoesFuncionario1.getValueAt(TbOperacoesFuncionario1.getSelectedRow(), 1).toString());
+            prodcompravenda.getCompravenda().getOperacao().setCodigo(prodcompravenda.getCompravenda().getOperacao().retornacodigooperacao());
+            preenche.PreencherJtable(TbProdutos, prodcompravenda.produtoscompravendaest());
+        }
+    }//GEN-LAST:event_TbOperacoesFuncionario1MouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox CbFiltroOperacoesFuncionario;
+    private javax.swing.JComboBox CbFiltroPeriodoFuncionario;
+    private javax.swing.JComboBox CbOrdenarClientes;
+    private javax.swing.JComboBox CbOrdenarFornecedores;
+    private javax.swing.JMenuItem ItMnCancelar;
+    private javax.swing.JMenuItem ItMnDetalhes;
+    private javax.swing.JPopupMenu PopDetalhes;
+    private javax.swing.JTable TbClientes;
+    private javax.swing.JTable TbFornecedores;
+    private javax.swing.JTable TbFuncionarios;
+    private javax.swing.JTable TbOperacoesFuncionario;
+    private javax.swing.JTable TbOperacoesFuncionario1;
+    private javax.swing.JTable TbProdutos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
+
+    public void consultaoperacoesfuncionario() {
+        prodcompravenda.getCompravenda().getOperacao().setDescricao(CbFiltroOperacoesFuncionario.getSelectedItem().toString());
+        prodcompravenda.getCompravenda().getOperacao().setCodigo(prodcompravenda.getCompravenda().getOperacao().retornacodigooperacao());
+        switch (CbFiltroPeriodoFuncionario.getSelectedIndex()) {
+            case 0: {
+                preenche.PreencherJtable(TbOperacoesFuncionario, prodcompravenda.getCompravenda().operacoesfuncionariomesatual());
+                break;
+            }
+            case 1: {
+                preenche.PreencherJtable(TbOperacoesFuncionario, prodcompravenda.getCompravenda().operacoesfuncionariomesanterior());
+                break;
+            }
+            case 2: {
+                preenche.PreencherJtable(TbOperacoesFuncionario, prodcompravenda.getCompravenda().operacoesfuncionarioano());
+                break;
+            }
+            case 3: {
+                preenche.PreencherJtable(TbOperacoesFuncionario, prodcompravenda.getCompravenda().operacoesfuncionariosempre());
+                break;
+            }
+        }
+    }
+
+    public java.awt.Frame getPrimeiratela() {
+        return primeiratela;
+    }
+
+    public void setPrimeiratela(java.awt.Frame primeiratela) {
+        this.primeiratela = primeiratela;
+    }
+
 }

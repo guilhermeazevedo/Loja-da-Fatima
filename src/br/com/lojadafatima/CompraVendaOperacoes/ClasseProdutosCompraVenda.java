@@ -37,6 +37,15 @@ public class ClasseProdutosCompraVenda {
                 + "WHERE \"PCV\".\"CD_COMPRA_VENDA\" = " + getCompravenda().getCodigo() + " AND \"PCV\".\"CD_OPERACAO\" = " + getCompravenda().getOperacao().getCodigo());
         return conn.resultset;
     }
+    
+    public ResultSet produtoscompravendaest() {
+        conn.executeSQL("SELECT \"PCV\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"PCV\".\"QT_PRODUTO\"\n"
+                + "FROM bancoloja.\"PRODUTOS_COMPRA_VENDA\" \"PCV\"\n"
+                + "JOIN bancoloja.\"CAD_PRODUTO\" \"P\"\n"
+                + "ON \"P\".\"CD_PRODUTO\" = \"PCV\".\"CD_PRODUTO\"\n"
+                + "WHERE \"PCV\".\"CD_COMPRA_VENDA\" = " + getCompravenda().getCodigo() + " AND \"PCV\".\"CD_OPERACAO\" = " + getCompravenda().getOperacao().getCodigo());
+        return conn.resultset;
+    }
 
     public void reverterestoqueprodutos() {
         ResultSet rs = produtoscompravenda();

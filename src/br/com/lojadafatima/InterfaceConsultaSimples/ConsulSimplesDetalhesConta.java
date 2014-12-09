@@ -18,18 +18,19 @@ import javax.swing.ListSelectionModel;
  *
  * @author hp
  */
-public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
+public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
 
     private java.awt.Frame primeiratela;
-    private ClasseProdutosCompraVenda prodcompravenda = new ClasseProdutosCompraVenda();
+    private ClasseParcelas parcela = new ClasseParcelas();
     Preenche preenche = new Preenche();
     
-    public ConsulSimplesDetalhesOperacao(java.awt.Frame telaorigem, boolean modal, ClasseProdutosCompraVenda prod) {
+    public ConsulSimplesDetalhesConta(java.awt.Frame telaorigem, boolean modal, ClasseParcelas par) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
-        setProdcompravenda(prod);
+        setParcela(par);
         preencheinformacoes();
+        preenche.PreencherJtable(TbParcelas, getParcela().retornaparcelas());
         TbParcelas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TbProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
@@ -63,6 +64,7 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         TfDsOperacao = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        BtRelatorio = new javax.swing.JButton();
         PnProdutos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbProdutos = new javax.swing.JTable();
@@ -100,15 +102,17 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
 
         TfCodigo.setEditable(false);
 
-        jLabel6.setText("Codigo");
+        jLabel6.setText("Codigo da Conta");
 
         TfData.setEditable(false);
 
-        jLabel2.setText("Data e Hora");
+        jLabel2.setText("Data");
 
         TfDsOperacao.setEditable(false);
 
         jLabel4.setText("Operacao");
+
+        BtRelatorio.setText("Gerar Relatorio");
 
         javax.swing.GroupLayout PnInformacoesLayout = new javax.swing.GroupLayout(PnInformacoes);
         PnInformacoes.setLayout(PnInformacoesLayout);
@@ -117,41 +121,43 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
             .addGroup(PnInformacoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TfFuncionario)
-                    .addComponent(TfPessoa)
-                    .addComponent(TfDescricao)
                     .addGroup(PnInformacoesLayout.createSequentialGroup()
                         .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PnInformacoesLayout.createSequentialGroup()
-                                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2))
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(PnInformacoesLayout.createSequentialGroup()
-                                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TfSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
-                                .addGap(18, 18, 18)
-                                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtRelatorio))))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
                     .addGroup(PnInformacoesLayout.createSequentialGroup()
-                        .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(TfDsOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TfSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(PnInformacoesLayout.createSequentialGroup()
+                        .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(TfDsOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PnInformacoesLayout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(0, 228, Short.MAX_VALUE))
-                            .addComponent(TfCondicao))))
+                            .addComponent(TfCondicao)))
+                    .addComponent(TfFuncionario)
+                    .addComponent(TfPessoa)
+                    .addComponent(TfDescricao))
                 .addContainerGap())
         );
         PnInformacoesLayout.setVerticalGroup(
@@ -164,7 +170,8 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtRelatorio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PnInformacoesLayout.createSequentialGroup()
@@ -294,6 +301,7 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtRelatorio;
     private javax.swing.JPanel PnInformacoes;
     private javax.swing.JPanel PnParcelas;
     private javax.swing.JPanel PnProdutos;
@@ -323,33 +331,29 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void preencheinformacoes(){
-        TfCodigo.setText(""+getProdcompravenda().getCompravenda().getCodigo());
-        TfDsOperacao.setText(getProdcompravenda().getCompravenda().getOperacao().getDescricao());
-        getProdcompravenda().getCompravenda().retornainformacoescompravenda();
-        TfDescricao.setText(getProdcompravenda().getCompravenda().getDescricao());
-        TfData.setText(getProdcompravenda().getCompravenda().getData());
-        TfCondicao.setText(getProdcompravenda().getCompravenda().getCondicao().getCondicaodepgto());
+        TfCodigo.setText(""+getParcela().getConta().getCodigo());
+        TfDsOperacao.setText(getParcela().getConta().getOperacao().getDescricao());
+        TfDescricao.setText(getParcela().getConta().retornadescricaodaconta());
+        getParcela().getConta().retornainformacoesconta();
+        TfData.setText(getParcela().getConta().getDtconta());
+        TfCondicao.setText(getParcela().getConta().getCondicao().getCondicaodepgto());
         ClassePessoaFisica fisica = new ClassePessoaFisica();
-        fisica.getPessoa().setCodigo(getProdcompravenda().getCompravenda().getCodigopessoa());
+        fisica.getPessoa().setCodigo(getParcela().getConta().getCodigopessoa());
         fisica.setNome(fisica.retornanomeporCodigo());
         if(fisica.epessoafisica()){
             TfPessoa.setText(fisica.retornanomeporCodigo());
         }else{
             ClassePessoaJuridica juridica = new ClassePessoaJuridica();
-            juridica.getPessoa().setCodigo(getProdcompravenda().getCompravenda().getCodigopessoa());
+            juridica.getPessoa().setCodigo(getParcela().getConta().getCodigopessoa());
             TfPessoa.setText(juridica.retornanomeporCodigo());
         }
-        fisica.getPessoa().setCodigo(getProdcompravenda().getCompravenda().getFuncionario().retornacodigopessoafuncionario());
+        TfSituacao.setText(getParcela().getConta().getSituacao());
+        TfValorTotal.setValue(BigDecimal.valueOf(getParcela().getConta().getTotal()));
+        fisica.getPessoa().setCodigo(getParcela().getConta().getCompravenda().getFuncionario().retornacodigopessoafuncionario());
         TfFuncionario.setText(fisica.retornanomeporCodigo());
-        preenche.PreencherJtable(TbProdutos, getProdcompravenda().produtoscompravenda());
-        
-        ClasseParcelas parcelas = new ClasseParcelas();
-        parcelas.getConta().setCompravenda(getProdcompravenda().getCompravenda());
-        parcelas.getConta().buscarcontacompravenda();
-        parcelas.getConta().retornainformacoesconta();
-        TfSituacao.setText(parcelas.getConta().getSituacao());
-        TfValorTotal.setValue(BigDecimal.valueOf(parcelas.getConta().getTotal()));
-        preenche.PreencherJtable(TbParcelas, parcelas.retornaparcelas());
+        ClasseProdutosCompraVenda prodcompravenda = new ClasseProdutosCompraVenda();
+        prodcompravenda.setCompravenda(getParcela().getConta().getCompravenda());
+        preenche.PreencherJtable(TbProdutos, prodcompravenda.produtoscompravenda());
     }
     
     public java.awt.Frame getPrimeiratela() {
@@ -360,11 +364,11 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
         this.primeiratela = primeiratela;
     }
 
-    public ClasseProdutosCompraVenda getProdcompravenda() {
-        return prodcompravenda;
+    public ClasseParcelas getParcela() {
+        return parcela;
     }
 
-    public void setProdcompravenda(ClasseProdutosCompraVenda prodcompravenda) {
-        this.prodcompravenda = prodcompravenda;
+    public void setParcela(ClasseParcelas parcela) {
+        this.parcela = parcela;
     }
 }

@@ -11,7 +11,7 @@ import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseProdutosCompraVenda;
 import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
-import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesDetalhesOperacao;
+import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesDetalhesConta;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
@@ -490,7 +490,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
 
     private void ItMnDetalhesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItMnDetalhesActionPerformed
         if (TbContas.getSelectedRow() > -1) {
-            final ConsulSimplesDetalhesOperacao tela = new ConsulSimplesDetalhesOperacao(getPrimeiratela(), true, parcelas);
+            final ConsulSimplesDetalhesConta tela = new ConsulSimplesDetalhesConta(getPrimeiratela(), true, parcelas);
             tela.setVisible(true);
             tela.addWindowListener(new java.awt.event.WindowAdapter() {
                 public void windowClosed(java.awt.event.WindowEvent evt) {

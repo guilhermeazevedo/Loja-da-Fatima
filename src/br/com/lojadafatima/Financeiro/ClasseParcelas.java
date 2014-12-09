@@ -82,6 +82,20 @@ public class ClasseParcelas {
                 + "SET \"VL_PAGAR\" = " + getVlpagar() + ", \"IN_APLICACAO_MULTA\" = 'S'\n"
                 + "WHERE \"CD_PARCELA\" = " + getCodigo() + " AND \"CD_CONTA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO\" = " + getConta().getOperacao().getCodigo());
     }
+    
+    public boolean parcelapaga(){
+        ResultSet rs = retornaparcelas();
+        try {
+            while(rs.next()){
+                if(rs.getString(8).equals("PAGA")){
+                    return true;
+                }
+            }
+            return false;
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
 
     public ResultSet retornaparcelas() {
         conn.executeSQL("SELECT \"P\".\"CD_PARCELA\", \"P\".\"VL_PAGAR\", \"P\".\"VL_PAGO\",\n"

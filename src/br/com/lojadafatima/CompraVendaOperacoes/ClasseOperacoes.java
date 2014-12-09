@@ -71,6 +71,12 @@ public class ClasseOperacoes {
                 + "FROM bancoloja.\"CAD_OPERACOES\" WHERE \"CD_OPERACAO\" > 4 ORDER BY \"CD_OPERACAO\"");
         return conn.resultset;
     }
+    
+    public ResultSet retornaoperacoesdeestoquecombobox() {
+        conn.executeSQL("SELECT \"DS_OPERACAO\"\n"
+                + "FROM bancoloja.\"CAD_OPERACOES\" WHERE \"IN_ESTOQUE\" = 'S' ORDER BY \"CD_OPERACAO\"");
+        return conn.resultset;
+    }
 
     public int retornacodigooperacao() {
         conn.executeSQL("SELECT \"CD_OPERACAO\"\n"

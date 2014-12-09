@@ -49,7 +49,7 @@ public class ClasseContasPagarReceber {
     public void cancelarconta() {
         conn.executeSQL("UPDATE bancoloja.\"CONTAS_PAGAR_RECEBER\" SET \"SITUACAO\" = 'C',\n"
                 + "                                           \"DS_CONTA\" = (\"DS_CONTA\" || ' - CANCELADA DIA ' || TO_CHAR(CURRENT_DATE, 'DD/MM/YYYY'))\n"
-                + "WHERE \"CD_CONTA\" = "+getCodigo()+" AND \"CD_OPERACAO\" = "+getOperacao().getCodigo());
+                + "WHERE \"CD_CONTA\" = " + getCodigo() + " AND \"CD_OPERACAO\" = " + getOperacao().getCodigo());
     }
 
     public ResultSet contasreceberabertasevencidas() {
@@ -509,6 +509,21 @@ public class ClasseContasPagarReceber {
             getCompravenda().getFuncionario().setCodigo(0);
             getCompravenda().setCodigo(0);
             getCompravenda().getOperacao().setCodigo(0);
+        }
+    }
+
+    public void buscarcontacompravenda() {
+        conn.executeSQL("SELECT \"C\".\"CD_CONTA\", \"C\".\"CD_OPERACAO\"\n"
+                + "FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n"
+                + "JOIN bancoloja.\"COMPRA_VENDA\" \"CV\" ON \"CV\".\"CD_COMPRA_VENDA\" = \"C\".\"CD_COMPRA_VENDA\" AND \"CV\".\"CD_OPERACAO\" = \"C\".\"CD_OPERACAO_COMPRA_VENDA\"\n"
+                + "WHERE \"CV\".\"CD_COMPRA_VENDA\" = "+getCompravenda().getCodigo()+" AND \"CV\".\"CD_OPERACAO\" = "+getCompravenda().getOperacao().getCodigo());
+        try {
+            conn.resultset.first();
+            setCodigo(conn.resultset.getInt(1));
+            getOperacao().setCodigo(conn.resultset.getInt(2));
+        } catch (SQLException ex) {
+            setCodigo(0);
+            getOperacao().setCodigo(0);
         }
     }
 
