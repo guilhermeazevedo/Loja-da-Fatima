@@ -37,7 +37,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Tabelas e Caracter&#xed;sticas dos Produtos - Software Loja da F&#xe1;tima"/>
+    <Property name="title" type="java.lang.String" value="Caracter&#xed;sticas e Especifica&#xe7;&#xf5;es dos Produtos - Software Loja da F&#xe1;tima"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -76,8 +76,8 @@
         <Container class="javax.swing.JPanel" name="PnTabelas">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Tabelas">
-                <Property name="tabTitle" type="java.lang.String" value="Tabelas"/>
+              <JTabbedPaneConstraints tabName="Caracteristicas">
+                <Property name="tabTitle" type="java.lang.String" value="Caracteristicas"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -224,8 +224,8 @@
         <Container class="javax.swing.JPanel" name="PnValores">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Valores">
-                <Property name="tabTitle" type="java.lang.String" value="Valores"/>
+              <JTabbedPaneConstraints tabName="Especificacoes">
+                <Property name="tabTitle" type="java.lang.String" value="Especificacoes"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>

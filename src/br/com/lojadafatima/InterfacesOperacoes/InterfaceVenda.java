@@ -37,6 +37,7 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -73,6 +74,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
         TfCodProduto.setDocument(new PermiteApenasNumeros());
         valida.validacamposCancelar(jPanel1, PnBotoes);
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        TbVenda.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

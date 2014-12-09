@@ -64,6 +64,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         preenche.PreencheJComboBox(CbFormaPgto, parcelas.getFormapgto().retornaformapgtocombobox());
         CbPesqContasActionPerformed(null);
         TbContas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbParcelas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

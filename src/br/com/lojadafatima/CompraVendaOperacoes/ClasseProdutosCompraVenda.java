@@ -1,7 +1,9 @@
 package br.com.lojadafatima.CompraVendaOperacoes;
 
+import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.Produto.ClasseFornecedoresProduto;
+import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
 import br.com.lojadafatima.Produto.ClasseProduto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,7 +39,25 @@ public class ClasseProdutosCompraVenda {
     }
 
     public void reverterestoqueprodutos() {
-        System.out.println("reverteu estoque");
+        ResultSet rs = produtoscompravenda();
+        ClasseMvtoEstoque est = new ClasseMvtoEstoque();
+        if(getCompravenda().getOperacao().getTpestoque().equals("E")){
+            est.setTpmvto("S");
+        }else if(getCompravenda().getOperacao().getTpestoque().equals("S")){
+            est.setTpmvto("E");
+        }
+        est.setCompravenda(getCompravenda());
+        ClasseDatas datas = new ClasseDatas();
+        est.setDtmvto(datas.retornadataehora());
+        try {
+            while(rs.next()){
+                est.setQtmvto(rs.getFloat(3));
+                est.getProduto().setCodigo(rs.getInt(1));
+                est.incluirmvto();
+            }
+        } catch (SQLException ex) {
+            
+        }
     }
 
     public boolean houveretiradadosprodutosenvolvidos() {

@@ -11,6 +11,7 @@ import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseOperacoes;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -38,6 +39,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
         tam[1] = 200;
         preenche.FormataJtable(TbOperacoes, tam);
         preenche.PreencherJtable(TbOperacoes, operacao.consultaoperacoes());
+        TbOperacoes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

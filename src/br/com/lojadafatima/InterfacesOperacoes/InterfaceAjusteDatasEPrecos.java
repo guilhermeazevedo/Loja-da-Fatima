@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -47,6 +48,7 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
         preenche.PreencherJtable(TbParcelas, getParcelas().buscaparcelasajuste());
         DecimalFormat df = new DecimalFormat("0.00");
         TfValorTotal.setValue(BigDecimal.valueOf(getParcelas().getConta().getTotal()));
+        TbParcelas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

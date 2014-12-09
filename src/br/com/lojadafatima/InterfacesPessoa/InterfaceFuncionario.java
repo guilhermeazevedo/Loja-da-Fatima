@@ -23,6 +23,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -50,6 +51,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         TfNrCPFFocusLost(null);
         valida.validacamposCancelar(PnCadastro, PnBotoes);
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        TbPesquisa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         preenche.PreencheJComboBox(CbEstado, funcionario.getPessoafis().getPessoa().getEndereco().getCidade().getEstado().buscarestadosjcombobox());
     }
 

@@ -12,6 +12,7 @@ import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Financeiro.ClasseFormaPagamento;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -37,6 +38,7 @@ public class InterfaceFormaPagto extends javax.swing.JDialog {
         tam[1] = 200;
         preenche.FormataJtable(TbConsulta, tam);
         preenche.PreencherJtable(TbConsulta, forma.retornaformapgtojtable());
+        TbConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

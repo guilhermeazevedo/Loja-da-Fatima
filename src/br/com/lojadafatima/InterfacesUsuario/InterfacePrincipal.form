@@ -203,7 +203,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MnItCadTabelas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Tabelas de Caracter&#xed;sticas"/>
+                <Property name="text" type="java.lang.String" value="Caracter&#xed;sticas e Especifica&#xe7;&#xf5;es"/>
                 <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="14" noResource="true"/>
               </Properties>
@@ -589,7 +589,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="contas a receber vencidas de"/>
+            <Property name="text" type="java.lang.String" value="Contas a receber vencidas de"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Cursor em Forma de M&#xe3;o"/>
             </Property>
@@ -617,7 +617,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="contas a receber em aberto de"/>
+            <Property name="text" type="java.lang.String" value="Contas a receber em aberto de"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Cursor em Forma de M&#xe3;o"/>
             </Property>

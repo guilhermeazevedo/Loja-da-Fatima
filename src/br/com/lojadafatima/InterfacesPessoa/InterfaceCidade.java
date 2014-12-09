@@ -12,6 +12,7 @@ import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.DadosPessoa.ClasseCidade;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -40,6 +41,7 @@ public class InterfaceCidade extends javax.swing.JDialog {
         preenche.FormataJtable(TbCidades, tam);
         preenche.PreencherJtable(TbCidades, cidade.buscarcidadesjtable());
         preenche.PreencheJComboBox(CbEstado, cidade.getEstado().buscarestadosjcombobox());
+        TbCidades.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

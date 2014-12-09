@@ -33,6 +33,7 @@ import java.math.BigDecimal;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -69,6 +70,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         TfDescOperacao.setText(prodcompravenda.getCompravenda().getOperacao().getDescricao());
         analisausuario();
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        TbProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

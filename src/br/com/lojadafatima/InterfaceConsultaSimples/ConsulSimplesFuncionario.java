@@ -5,6 +5,7 @@ import br.com.lojadafatima.ClassesFerramentas.PermiteNumerosPontoBarra;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Pessoa.ClasseFuncionario;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -22,6 +23,7 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
         initComponents();
         TfNomeFisica.setVisible(false);
         setFuncionario(func);
+        TbPesquisa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

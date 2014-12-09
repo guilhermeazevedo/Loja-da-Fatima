@@ -12,6 +12,7 @@ import br.com.lojadafatima.DadosPessoa.ClassePessoaFisica;
 import br.com.lojadafatima.DadosPessoa.ClassePessoaJuridica;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
 import java.math.BigDecimal;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -30,6 +31,8 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
         setParcela(par);
         preencheinformacoes();
         preenche.PreencherJtable(TbParcelas, getParcela().retornaparcelas());
+        TbParcelas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

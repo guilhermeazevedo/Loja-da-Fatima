@@ -12,6 +12,7 @@ import br.com.lojadafatima.DadosPessoa.ClasseEstado;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -41,6 +42,7 @@ public class InterfaceEstado extends javax.swing.JDialog {
         tam[2] = 50;
         preenche.FormataJtable(TbEstados, tam);
         preenche.PreencherJtable(TbEstados, estado.buscarestadosjtable());
+        TbEstados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

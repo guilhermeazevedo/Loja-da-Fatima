@@ -12,6 +12,7 @@ import br.com.lojadafatima.Produto.ClasseTipoProduto;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -44,6 +45,8 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         valida.validacamposCancelar(jPanel1, PnBotoes);
         TbConsulta.setEnabled(true);
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        TbCarcTipoProduto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

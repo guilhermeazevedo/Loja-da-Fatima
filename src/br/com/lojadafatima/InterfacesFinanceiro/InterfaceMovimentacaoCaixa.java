@@ -12,6 +12,7 @@ import br.com.lojadafatima.ClassesFerramentas.Relatorios;
 import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.util.HashMap;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -40,6 +41,7 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
         tam[6] = 80;
         preenche.FormataJtable(TbMvtoCaixa, tam);
         CbMvtoCaixaActionPerformed(null);
+        TbMvtoCaixa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

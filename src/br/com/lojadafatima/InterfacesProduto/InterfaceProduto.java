@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -63,6 +64,11 @@ public class InterfaceProduto extends javax.swing.JDialog {
         tam2[3] = 50;
         preenche.FormataJtable(TbProduto, tam2);
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        TbFornecedoresProd.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbCarcteristica.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbEspecificacao.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbProduto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

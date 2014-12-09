@@ -13,6 +13,7 @@ import br.com.lojadafatima.Produto.ClasseValores;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -42,6 +43,9 @@ public class InterfaceTabelas extends javax.swing.JDialog {
         preenche.PreencherJtable(TbTabelas, tabela.buscartabelas());
         preenche.FormataJtable(TbTabelas2, tam);
         preenche.PreencherJtable(TbTabelas2, tabela.buscartabelas());
+        TbTabelas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbTabelas2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbValores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**
@@ -98,7 +102,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
         jPopupMenu2.add(MnItAlterarValor);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Tabelas e Características dos Produtos - Software Loja da Fátima");
+        setTitle("Características e Especificações dos Produtos - Software Loja da Fátima");
         setResizable(false);
 
         jLabel1.setText("Código");
@@ -198,7 +202,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Tabelas", PnTabelas);
+        jTabbedPane1.addTab("Caracteristicas", PnTabelas);
 
         jLabel4.setText("Características:");
 
@@ -334,7 +338,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Valores", PnValores);
+        jTabbedPane1.addTab("Especificacoes", PnValores);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

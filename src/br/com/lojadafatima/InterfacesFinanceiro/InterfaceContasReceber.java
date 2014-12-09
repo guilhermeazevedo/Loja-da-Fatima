@@ -21,6 +21,7 @@ import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -73,6 +74,9 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
 
         preenche.PreencheJComboBox(CbFormaPgto, parcelas.getFormapgto().retornaformapgtocombobox());
         CbPesqPessoaActionPerformed(null);
+        TbContas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbParcelas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbPessoas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**
@@ -449,7 +453,8 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                         mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
                         mvtocaixa.setDsmvto("PAGAMENTO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " - " + parcelas.getConta().retornadescricaodaconta());
                         mvtocaixa.incluir();
-                        TbContasMouseReleased(null);
+                        TbPessoasMouseReleased(null);
+                        buscarcontaatualizacao();
                     }
                 } else if (Float.parseFloat(TfValor.getValue().toString()) > Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString())) {
                     JOptionPane.showMessageDialog(null, "O valor digitado e maior que o valor da parcela!\nPor favor, digite um valor igual ou menor que o valor da parcela.", "Valor digitado incorretamente", JOptionPane.INFORMATION_MESSAGE);
@@ -467,7 +472,8 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                     mvtocaixa.incluir();
                     parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString()) - Float.parseFloat(TfValor.getValue().toString()));
                     parcelas.gerarreparcela();
-                    TbContasMouseReleased(null);
+                    TbPessoasMouseReleased(null);
+                    buscarcontaatualizacao();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Selecione ou insira a Forma de Pagamento escolhida pela pessoa!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
@@ -507,7 +513,8 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                                 mvtocaixa.setVlmvto(parcelas.getVlpagar());
                                 mvtocaixa.setDsmvto("ESTORNO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " - " + parcelas.getConta().retornadescricaodaconta());
                                 mvtocaixa.incluir();
-                                TbContasMouseReleased(null);
+                                TbPessoasMouseReleased(null);
+                                buscarcontaatualizacao();
                             }else{
                                 JOptionPane.showMessageDialog(null, "Impossivel realizar o estorno desta parcela.\nO saldo do caixa e menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
                             }
@@ -527,7 +534,8 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                             mvtocaixa.setVlmvto(parcelas.getVlpagar());
                             mvtocaixa.setDsmvto("ESTORNO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " - " + parcelas.getConta().retornadescricaodaconta());
                             mvtocaixa.incluir();
-                            TbContasMouseReleased(null);
+                            TbPessoasMouseReleased(null);
+                            buscarcontaatualizacao();
                         } else {
                             JOptionPane.showMessageDialog(null, "Impossivel realizar o estorno desta parcela.\nO saldo do caixa e menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
                         }
@@ -644,5 +652,14 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
 
     public void setTelasusuario(ClasseTelasUsuario telasusuario) {
         this.telasusuario = telasusuario;
+    }
+
+    private void buscarcontaatualizacao() {
+        for(int i = 0; i < TbContas.getRowCount();i++){
+            if((Integer.parseInt(TbContas.getValueAt(i, 0).toString()) == parcelas.getConta().getCodigo()) && (TbContas.getValueAt(i, 1).toString().equals(parcelas.getConta().getOperacao().getDescricao()))){
+                TbContas.setRowSelectionInterval(i, i);
+                TbContasMouseReleased(null);
+            }
+        }
     }
 }

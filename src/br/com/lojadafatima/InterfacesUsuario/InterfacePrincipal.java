@@ -237,7 +237,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("contas a receber vencidas de");
+        jLabel3.setText("Contas a receber vencidas de");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -255,7 +255,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("contas a receber em aberto de");
+        jLabel4.setText("Contas a receber em aberto de");
         jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -604,7 +604,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         });
         MnProduto.add(MnItCadTipoProduto);
 
-        MnItCadTabelas.setText("Tabelas de Características");
+        MnItCadTabelas.setText("Características e Especificações");
         MnItCadTabelas.setEnabled(false);
         MnItCadTabelas.setName("14"); // NOI18N
         MnItCadTabelas.addActionListener(new java.awt.event.ActionListener() {

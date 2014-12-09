@@ -6,6 +6,7 @@ import br.com.lojadafatima.ClassesFerramentas.PermiteNumerosPontoBarra;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Pessoa.ClasseFornecedor;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -22,6 +23,7 @@ public class ConsulSimplesFornecedor extends javax.swing.JDialog {
         setPrimeiratela(telaorigem);
         initComponents();
         setFornecedor(forn);
+        TbPesquisa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     @SuppressWarnings("unchecked")

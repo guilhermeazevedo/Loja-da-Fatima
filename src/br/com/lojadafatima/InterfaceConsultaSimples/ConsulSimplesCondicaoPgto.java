@@ -3,6 +3,7 @@ package br.com.lojadafatima.InterfaceConsultaSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Financeiro.ClasseCondicaoPagamento;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -26,7 +27,7 @@ public class ConsulSimplesCondicaoPgto extends javax.swing.JDialog {
         tam[3] = 50;
         tam[4] = 70;
         preenche.FormataJtable(TbConsulta, tam);
-
+        TbConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         preenche.PreencherJtable(TbConsulta, condicao.retornacondicoespagamentojtable());
     }
 

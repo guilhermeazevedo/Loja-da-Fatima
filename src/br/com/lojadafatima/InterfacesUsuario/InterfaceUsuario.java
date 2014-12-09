@@ -13,6 +13,7 @@ import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -51,6 +52,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
         preenche.PreencherJtable(TbConsulta, telasusuario.getUsuario().consultausuarios());
         valida.validacamposCancelar(PnLogin, PnBotoes);
         valida.validacamposCancelar(PnTelas, PnBotoes);
+        TbConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

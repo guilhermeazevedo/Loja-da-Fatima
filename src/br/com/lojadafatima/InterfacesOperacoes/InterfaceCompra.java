@@ -27,6 +27,7 @@ import java.math.BigDecimal;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -61,6 +62,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         TfDescNotaCompra.setDocument(new NaoPermiteAspasSimples());
         valida.validacamposCancelar(jPanel1, PnBotoes);
+        TbCompra.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

@@ -11,6 +11,7 @@ import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -53,6 +54,9 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         preenche.PreencherJtable(TbPesquisa, mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().consultageral());
         preenche.PreencherJtable(TbFuncionariosCad, mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().consultatodososfuncionarios());
         preenchercomboanos();
+        TbFuncionariosCad.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbPagamentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbPesquisa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

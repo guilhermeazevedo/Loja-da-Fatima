@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -55,6 +56,7 @@ public class InterfaceCliente extends javax.swing.JDialog {
         valida.validacamposCancelar(PnCadastro, PnBotoes);
         CbPesquisaActionPerformed(null);
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        TbPesquisa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

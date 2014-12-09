@@ -12,6 +12,7 @@ import br.com.lojadafatima.ClassesFerramentas.PermiteNumerosPontoBarra;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Pessoa.ClasseCliente;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -30,6 +31,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
         initComponents();
         CbPesquisa.setSelectedIndex(0);
         CbPesquisa2.setSelectedIndex(0);
+        TbPesquisa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

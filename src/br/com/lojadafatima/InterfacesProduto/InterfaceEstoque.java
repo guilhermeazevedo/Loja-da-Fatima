@@ -16,6 +16,7 @@ import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -44,6 +45,8 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         tam[4] = 80;
         preenche.FormataJtable(TbProdutos, tam);
         preenche.FormataJtable(TbAjuste, tam);
+        TbAjuste.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TbProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

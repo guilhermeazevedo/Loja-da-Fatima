@@ -12,6 +12,7 @@ import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Produto.ClasseEspecificacaoProduto;
 import br.com.lojadafatima.Produto.ClasseProduto;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -28,6 +29,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
         setPrimeiratela(telaorigem);
         initComponents();
         getEspecproduto().setProduto(prod);
+        TbConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

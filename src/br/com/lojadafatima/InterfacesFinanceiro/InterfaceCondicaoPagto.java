@@ -6,6 +6,7 @@ import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Financeiro.ClasseCondicaoPagamento;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -33,7 +34,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
         tam[3] = 50;
         tam[4] = 70;
         preenche.FormataJtable(TbConsulta, tam);
-
+        TbConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         preenche.PreencherJtable(TbConsulta, condicao.retornacondicoespagamentojtable());
     }
 
