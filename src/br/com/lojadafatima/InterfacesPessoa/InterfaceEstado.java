@@ -7,6 +7,7 @@ package br.com.lojadafatima.InterfacesPessoa;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.DadosPessoa.ClasseEstado;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
@@ -43,6 +44,7 @@ public class InterfaceEstado extends javax.swing.JDialog {
         preenche.FormataJtable(TbEstados, tam);
         preenche.PreencherJtable(TbEstados, estado.buscarestadosjtable());
         TbEstados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TfEstado.setDocument(new NaoPermiteAspasSimples());
     }
 
     /**

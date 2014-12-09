@@ -204,7 +204,7 @@ public class ConsulSimplesFornecedor extends javax.swing.JDialog {
             }
             case 1: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o Codigo do fornecedor que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o código do fornecedor que deseja consultar!", "Digite o código", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     fornecedor.setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -214,7 +214,7 @@ public class ConsulSimplesFornecedor extends javax.swing.JDialog {
             }
             case 2:{
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o Nome fantasia do fornecedor que deseja consultar!", "Digite o nome fantasia", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o nome fantasia do fornecedor que deseja consultar!", "Digite o nome fantasia", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     fornecedor.getPessoajur().setNomefantasia(TfPesquisa.getText());
@@ -239,7 +239,7 @@ public class ConsulSimplesFornecedor extends javax.swing.JDialog {
         if(TbPesquisa.getSelectedRow() > -1){
             dispose();
         }else{
-            JOptionPane.showMessageDialog(null, "Selecione um fornecedor para retornar para a tela anterior!", "A pesquisa nao retornou valores", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Selecione um fornecedor para retornar para a tela anterior!", "A pesquisa não retornou valores", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_BtSelecionarActionPerformed
 

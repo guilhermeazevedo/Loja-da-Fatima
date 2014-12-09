@@ -7,6 +7,7 @@ package br.com.lojadafatima.InterfacesProduto;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Produto.ClasseTipoProduto;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
@@ -47,6 +48,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         TbCarcTipoProduto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TbConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TfTipoProduto.setDocument(new NaoPermiteAspasSimples());
     }
 
     /**

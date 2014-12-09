@@ -97,7 +97,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Codigo", "Nome", "Funcao", "Salario", "Comissao (%)"
+                "Código", "Nome", "Função", "Salário", "Comissão (%)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -116,11 +116,11 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(TbFuncionariosCad);
 
-        jLabel1.setText("Funcionarios Cadastrados:");
+        jLabel1.setText("Funcionários cadastrados:");
 
-        jLabel2.setText("Salario:");
+        jLabel2.setText("Salário:");
 
-        BtPagar.setText("Pagar Salario");
+        BtPagar.setText("Pagar Salário");
         BtPagar.setEnabled(false);
         BtPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,7 +128,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setText("Referente ao mes");
+        jLabel3.setText("Referente ao mês");
 
         CbMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
@@ -146,7 +146,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                             .addComponent(jScrollPane1)
                             .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(0, 610, Short.MAX_VALUE)))
+                                .addGap(0, 612, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
                         .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,7 +213,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(TbPesquisa);
 
-        jLabel5.setText("Funcionarios Cadatrados:");
+        jLabel5.setText("Funcionários cadatrados:");
 
         jLabel6.setText("Salarios ja pagos:");
 
@@ -222,7 +222,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Descricao", "Valor Pago ao Funcionario (R$)"
+                "Descrição", "Valor Pago ao Funcionário (R$)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -266,7 +266,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Historico de Pagamentos", PnPesqPgto);
+        jTabbedPane1.addTab("Histórico de Pagamentos", PnPesqPgto);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -84,7 +84,6 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         CbPesqContas = new javax.swing.JComboBox();
-        BtGerarRelatorio = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbContas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -134,19 +133,12 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
             }
         });
 
-        BtGerarRelatorio.setText("Gerar Relatorio");
-        BtGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtGerarRelatorioActionPerformed(evt);
-            }
-        });
-
         TbContas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo da Conta", "Operacao", "Pessoa", "Condicao de Pagamento", "Data", "Valor Total (R$)", "Situacao"
+                "Código da Conta", "Operação", "Pessoa", "Condição de Pagamento", "Data", "Valor Total (R$)", "Situação"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -173,7 +165,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nrº Parcela", "Valor a Pagar (R$)", "Valor Pago (R$)", "Forma de pagamento", "Data a Pagar", "Data Pago", "Situacao", "Reparcela da Parcela Nro."
+                "Nrº Parcela", "Valor a Pagar (R$)", "Valor Pago (R$)", "Forma de pagamento", "Data a Pagar", "Data Pago", "Situação", "Reparcela da Parcela Nro."
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -229,10 +221,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(CbPesqContas, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtGerarRelatorio))
+                            .addComponent(CbPesqContas, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,10 +244,8 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtGerarRelatorio)
-                    .addComponent(CbPesqContas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CbPesqContas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
@@ -294,10 +281,6 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BtGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGerarRelatorioActionPerformed
-
-    }//GEN-LAST:event_BtGerarRelatorioActionPerformed
 
     private void TfValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorKeyTyped
         valida.limitemaximo(evt, TfValor.getText(), 13);
@@ -363,11 +346,11 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                             mvtocaixa.incluir();
                             TbContasMouseReleased(null);
                         } else {
-                            JOptionPane.showMessageDialog(null, "Impossivel realizar o pagamento desta parcela.\nO saldo do caixa e menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Impossível realizar o pagamento desta parcela.\nO saldo do caixa e menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                 } else if (Float.parseFloat(TfValor.getValue().toString()) > Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString())) {
-                    if (JOptionPane.showConfirmDialog(null, "Este valor e maior que o valor da parcela.\nVoce alega ter recebido acrescimo no valor desta parcela e por isso esta pagando um valor maior?", "Voce recebeu acrescimo no valor da parcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    if (JOptionPane.showConfirmDialog(null, "Este valor é maior que o valor da parcela.\nVocê alega ter recebido acréscimo no valor desta parcela e por isso está pagando um valor maior?", "Voce recebeu acréscimo no valor da parcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
                         if (mvtocaixa.retornacaixaatual() > Float.parseFloat(TfValor.getValue().toString())) {
                             parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
@@ -382,10 +365,10 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                             mvtocaixa.incluir();
                             TbContasMouseReleased(null);
                         } else {
-                            JOptionPane.showMessageDialog(null, "Impossivel realizar o pagamento desta parcela.\nO saldo do caixa e menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Impossível realizar o pagamento desta parcela.\nO saldo do caixa é menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
-                } else if (JOptionPane.showConfirmDialog(null, "Este valor e menor que o valor da parcela.\nVoce alega ter recebido desconto nesta parcela e por isso esta pagando um valor menor?", "Voce recebeu desconto nesta parcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                } else if (JOptionPane.showConfirmDialog(null, "Este valor é menor que o valor da parcela.\nVocê alega ter recebido desconto nesta parcela e por isso está pagando um valor menor?", "Voce recebeu desconto nesta parcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
                     if (mvtocaixa.retornacaixaatual() > Float.parseFloat(TfValor.getValue().toString())) {
                         parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
@@ -400,15 +383,15 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                         mvtocaixa.incluir();
                         TbContasMouseReleased(null);
                     } else {
-                        JOptionPane.showMessageDialog(null, "Impossivel realizar o pagamento desta parcela.\nO saldo do caixa e menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Impossível realizar o pagamento desta parcela.\nO saldo do caixa é menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Selecione ou insira a Forma de Pagamento escolhida pela pessoa!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Selecione ou insira a forma de Pagamento escolhida pela pessoa!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
                 CbFormaPgto.grabFocus();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione a Parcela que sera paga e o valor correto a ser pago!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Selecione a parcela que será paga e o valor correto a ser pago!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
             TfValor.grabFocus();
         }
     }//GEN-LAST:event_BtPagarActionPerformed
@@ -419,7 +402,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                 if (Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()) != parcelas.retornanumeroultimaparcelavalida()) {
                     if (!TbParcelas.getValueAt(TbParcelas.getSelectedRow() + 1, 5).toString().equals("PAGA")) {
                         if (JOptionPane.showConfirmDialog(null, "Deseja realmente estornar esta parcela?\n"
-                                + "(Fazendo isso voce estara retirando do caixa o valor pago nesta parcela)", "Deseja extornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                + "(Fazendo isso você estará retirando do caixa o valor pago nesta parcela)", "Deseja estornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
                             parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
                             parcelas.estornarparcela();
@@ -435,7 +418,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                     }
                 } else {
                     if (JOptionPane.showConfirmDialog(null, "Deseja realmente estornar esta parcela?\n"
-                            + "(Fazendo isso voce estara retirando do caixa o valor pago nesta parcela)", "Deseja extornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            + "(Fazendo isso você estará retirando do caixa o valor pago nesta parcela)", "Deseja estornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
                         parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
                         parcelas.estornarparcela();
@@ -502,7 +485,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
 
     private void ItMnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItMnCancelarActionPerformed
         if (!parcelapaga()) {
-            if (JOptionPane.showConfirmDialog(null, "Voce esta prestes a cancelar esta conta.\nCaso haja produtos envolvidos nessa operacao, a situacao do estoque sera revertido!\n\nTem certeza que deseja cancelar?", "Deseja cancelar operacao?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Você está prestes a cancelar esta conta.\nCaso haja produtos envolvidos nessa operação, a situação do estoque sera revertido!\n\nTem certeza que deseja cancelar?", "Deseja cancelar operação?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 parcelas.getConta().retornainformacoesconta();
                 if (parcelas.getConta().getCompravenda().getCodigo() != 0) {
                     parcelas.getConta().getCompravenda().getOperacao().retornaoperacao();
@@ -515,7 +498,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                             prodcompravenda.reverterestoqueprodutos();
                             CbPesqContasActionPerformed(evt);
                         } else {
-                            JOptionPane.showMessageDialog(null, "Nao e possivel realizar o cancelamento desta operacao!\nOs produtos que entraram no estoque tem registro de saida.", "Cancelamento de operacao nao permitido", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Não é possivel realizar o cancelamento desta operação!\nOs produtos que entraram no estoque tem registro de saída.", "Cancelamento de operação não permitido", JOptionPane.INFORMATION_MESSAGE);
                         }
                     } else {
                         parcelas.getConta().cancelarconta();
@@ -529,14 +512,13 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Faca estorno de todas as parcelas desta conta para que o cancelamento seja realizado!", "Existem parcelas pagas", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Faça estorno de todas as parcelas desta conta para que o cancelamento seja realizado!", "Existem parcelas pagas", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_ItMnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadFormaPgto;
-    private javax.swing.JButton BtGerarRelatorio;
     private javax.swing.JButton BtPagar;
     private javax.swing.JComboBox CbFormaPgto;
     private javax.swing.JComboBox CbPesqContas;

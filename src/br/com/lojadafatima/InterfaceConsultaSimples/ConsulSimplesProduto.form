@@ -98,7 +98,7 @@
                 <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
                 <Column editable="false" title="Tipo de Produto" type="java.lang.Object"/>
                 <Column editable="false" title="Valor(R$)" type="java.lang.Object"/>
-                <Column editable="false" title="Estoque minimo" type="java.lang.Object"/>
+                <Column editable="false" title="Estoque m&#xed;nimo" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

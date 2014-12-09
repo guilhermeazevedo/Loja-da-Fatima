@@ -8,6 +8,7 @@ package br.com.lojadafatima.InterfacesFinanceiro;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Financeiro.ClasseFormaPagamento;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
@@ -39,6 +40,7 @@ public class InterfaceFormaPagto extends javax.swing.JDialog {
         preenche.FormataJtable(TbConsulta, tam);
         preenche.PreencherJtable(TbConsulta, forma.retornaformapgtojtable());
         TbConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TfForma.setDocument(new NaoPermiteAspasSimples());
     }
 
     /**
@@ -201,7 +203,7 @@ public class InterfaceFormaPagto extends javax.swing.JDialog {
             limpa.Limpar(jPanel1);
             preenche.PreencherJtable(TbConsulta, forma.retornaformapgtojtable());
         }else{
-            JOptionPane.showMessageDialog(null, "Digite a descricao da forma de pagamento!", "Campo obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Digite a descrição da forma de pagamento!", "Campo obrigatórios", JOptionPane.INFORMATION_MESSAGE);
             TfForma.grabFocus();
         }
     }//GEN-LAST:event_BtGravarActionPerformed

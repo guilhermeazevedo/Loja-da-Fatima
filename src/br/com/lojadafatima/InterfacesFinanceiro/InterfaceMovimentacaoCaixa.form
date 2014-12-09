@@ -84,7 +84,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Movimentacao de Caixa referente"/>
+            <Property name="text" type="java.lang.String" value="Movimenta&#xe7;&#xe3;o de Caixa referente"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="CbMvtoCaixa">
@@ -123,7 +123,7 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="7" rowCount="0">
-                    <Column editable="false" title="N&#xba; da Movimentacao" type="java.lang.Object"/>
+                    <Column editable="false" title="Nr&#xba; da Movimenta&#xe7;&#xe3;o" type="java.lang.Object"/>
                     <Column editable="false" title="Referente a" type="java.lang.Object"/>
                     <Column editable="false" title="Data e Hora" type="java.lang.Object"/>
                     <Column editable="false" title="Quant. Antes" type="java.lang.Object"/>

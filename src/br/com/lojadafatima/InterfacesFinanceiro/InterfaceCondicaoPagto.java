@@ -2,6 +2,7 @@ package br.com.lojadafatima.InterfacesFinanceiro;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Financeiro.ClasseCondicaoPagamento;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
@@ -36,6 +37,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
         preenche.FormataJtable(TbConsulta, tam);
         TbConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         preenche.PreencherJtable(TbConsulta, condicao.retornacondicoespagamentojtable());
+        TfCondicaoPgto.setDocument(new NaoPermiteAspasSimples());
     }
 
     @SuppressWarnings("unchecked")
@@ -105,7 +107,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Código", "Descrição", "Nº de Parcelas", "Intervalo de Dias", "Entrada"
+                "Código", "Descrição", "Nrº de Parcelas", "Intervalo de Dias", "Entrada"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -123,7 +125,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
             TbConsulta.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jLabel3.setText("Numero de parcelas*");
+        jLabel3.setText("Número de parcelas*");
 
         jLabel4.setText("Intervalo de dias entre as parcelas*");
 
@@ -225,7 +227,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
 
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
         if (camposobrigatoriospreenchidos()) {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja gravar os dados desta condicao de pagamento?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja gravar os dados desta condição de pagamento?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 enviardados();
                 if (TfCodigo.getText().equals("")) {
                     condicao.incluir();
@@ -301,17 +303,17 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
     
     public boolean camposobrigatoriospreenchidos() {
         if (TfCondicaoPgto.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Digite uma descricao para a condicao de pagamento!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Digite uma descrição para a condição de pagamento!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
             TfCondicaoPgto.grabFocus();
             return false;
         }
         if (Integer.parseInt(SpNrParcelas.getValue().toString()) <= 0) {
-            JOptionPane.showMessageDialog(null, "O numero de parcelas deve ser maior que 0!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O número de parcelas deve ser maior que 0!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
             SpNrParcelas.grabFocus();;
             return false;
         }
         if (Integer.parseInt(SpIntervalo.getValue().toString()) <= 0) {
-            JOptionPane.showMessageDialog(null, "O numero do intervalo de dias deve ser maior que 0!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O número do intervalo de dias deve ser maior que 0!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
             SpNrParcelas.grabFocus();;
             return false;
         }

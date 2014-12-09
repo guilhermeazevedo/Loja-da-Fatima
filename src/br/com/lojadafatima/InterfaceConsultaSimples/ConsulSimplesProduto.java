@@ -64,7 +64,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Código", "Descrição", "Tipo de Produto", "Valor(R$)", "Estoque minimo"
+                "Código", "Descrição", "Tipo de Produto", "Valor(R$)", "Estoque mínimo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -188,7 +188,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
             }
             case 1: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o codigo do produto que deseja consultar!", "Digite a informacao", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o código do produto que deseja consultar!", "Digite o código", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     getEspecproduto().getProduto().setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -198,7 +198,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
             }
             case 2: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite a descricao do produto que deseja consultar!", "Digite a informacao", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite a descrição do produto que deseja consultar!", "Digite a descrição", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     getEspecproduto().getProduto().setDescricao(TfPesquisa.getText());
@@ -208,7 +208,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
             }
             case 3: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o codigo do tipo de produto que deseja consultar!", "Digite a informacao", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o código do tipo de produto que deseja consultar!", "Digite o código do tipo de produto", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     getEspecproduto().getTipoproduto().setCodigo(Integer.parseInt(TfPesquisa.getText()));

@@ -8,6 +8,7 @@ package br.com.lojadafatima.InterfacesPessoa;
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.ClassesFerramentas.PermiteNumerosPontoBarra;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
@@ -51,6 +52,12 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
         preenche.PreencheJComboBox(CbEstado, fornecedor.getPessoajur().getPessoa().getEndereco().getCidade().getEstado().buscarestadosjcombobox());
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         TbPesquisa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TfBairro.setDocument(new NaoPermiteAspasSimples());
+        TfDsEmail.setDocument(new NaoPermiteAspasSimples());
+        TfLogradouro.setDocument(new NaoPermiteAspasSimples());
+        TfNomeFantasia.setDocument(new NaoPermiteAspasSimples());
+        TfNumero.setDocument(new NaoPermiteAspasSimples());
+        TfRazaoSocial.setDocument(new NaoPermiteAspasSimples());
     }
 
     /**

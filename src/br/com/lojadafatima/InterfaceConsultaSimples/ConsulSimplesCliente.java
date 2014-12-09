@@ -73,7 +73,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Codigo", "Nome/Nome Fantasia", "CPF/CNPJ", "Data do Cadastro"
+                "Código", "Nome/Nome Fantasia", "CPF/CNPJ", "Data do Cadastro"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -246,7 +246,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
             }
             case 1: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o Codigo do cliente que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o código do cliente que deseja consultar!", "Digite o código", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     getCliente().setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -258,7 +258,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
                 switch (CbPesquisa2.getSelectedIndex()) {
                     case 0: {
                         if (TfPesquisa.getText().equals("")) {
-                            JOptionPane.showMessageDialog(null, "Digite o Nome/Nome Fantasia do cliente que deseja consultar!", "Digite o nome", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Digite o nome/nome fantasia do cliente que deseja consultar!", "Digite o nome", JOptionPane.INFORMATION_MESSAGE);
                             TfPesquisa.grabFocus();
                         } else {
                             preenche.PreencherJtable(TbPesquisa, getCliente().consultadescricaogeral(TfPesquisa.getText().toUpperCase()));
@@ -267,7 +267,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
                     }
                     case 1: {
                         if (TfPesquisa.getText().equals("")) {
-                            JOptionPane.showMessageDialog(null, "Digite o Nome do cliente que deseja consultar!", "Digite o nome", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Digite o nome do cliente que deseja consultar!", "Digite o nome", JOptionPane.INFORMATION_MESSAGE);
                             TfPesquisa.grabFocus();
                         } else {
                             preenche.PreencherJtable(TbPesquisa, getCliente().consultadescricaofisica(TfPesquisa.getText().toUpperCase()));
@@ -276,7 +276,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
                     }
                     case 2: {
                         if (TfPesquisa.getText().equals("")) {
-                            JOptionPane.showMessageDialog(null, "Digite o Nome Fantasia do cliente que deseja consultar!", "Digite o nome", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Digite o nome fantasia do cliente que deseja consultar!", "Digite o nome", JOptionPane.INFORMATION_MESSAGE);
                             TfPesquisa.grabFocus();
                         } else {
                             preenche.PreencherJtable(TbPesquisa, getCliente().consultadescricaojuridica(TfPesquisa.getText().toUpperCase()));
@@ -331,7 +331,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
         if(TbPesquisa.getSelectedRow() > -1){
             dispose();
         }else{
-            JOptionPane.showMessageDialog(null, "Selecione um cliente para retornar para a tela anterior!", "A pesquisa nao retornou valores", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Selecione um cliente para retornar para a tela anterior!", "A pesquisa não retornou valores", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_BtSelecionarActionPerformed
 

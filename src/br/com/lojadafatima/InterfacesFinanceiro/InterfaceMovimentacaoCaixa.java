@@ -64,7 +64,7 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
         setTitle("Movimento de Caixa - Software Loja da Fátima");
         setResizable(false);
 
-        jLabel1.setText("Movimentacao de Caixa referente");
+        jLabel1.setText("Movimentação de Caixa referente");
 
         CbMvtoCaixa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ao Dia de Hoje", "à Ontem", "ao Mês Atual", "ao Mês Anterior", "todas as Entradas do Dia", "todas as Saídas do Dia" }));
         CbMvtoCaixa.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +85,7 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nº da Movimentacao", "Referente a", "Data e Hora", "Quant. Antes", "Saldo", "Quant. Movimentado", "Tipo"
+                "Nrº da Movimentação", "Referente a", "Data e Hora", "Quant. Antes", "Saldo", "Quant. Movimentado", "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {

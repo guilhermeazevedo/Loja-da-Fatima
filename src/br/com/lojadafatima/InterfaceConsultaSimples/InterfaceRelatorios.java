@@ -95,7 +95,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
         setTitle("Relatórios - Software Loja de Fátima");
         setResizable(false);
 
-        jLabel1.setText("Clientes e numero respectivo de compras feitas na loja.");
+        jLabel1.setText("Clientes e número respectivo de compras feitas na loja.");
 
         jLabel2.setText("Ordernar por:");
 
@@ -111,7 +111,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome/Nome Fantasia Cliente", "CPF/CNPJ", "Numeros de compras"
+                "Nome/Nome Fantasia Cliente", "CPF/CNPJ", "Números de compras"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -159,7 +159,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Clientes", jPanel1);
 
-        jLabel3.setText("Fornecedores e numero de vendas realizadas para a loja.");
+        jLabel3.setText("Fornecedores e número de vendas realizadas para a loja.");
 
         jLabel4.setText("Ordenar por:");
 
@@ -175,7 +175,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome Fantasia", "CNPJ", "Numero de vendas"
+                "Nome Fantasia", "CNPJ", "Número de vendas"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -223,7 +223,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Fornecedor", jPanel2);
 
-        jLabel5.setText("Funcionarios cadastrados:");
+        jLabel5.setText("Funcionários cadastrados:");
 
         TbFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -249,7 +249,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
         });
         jScrollPane4.setViewportView(TbFuncionarios);
 
-        jLabel6.setText("Operacao:");
+        jLabel6.setText("Operação:");
 
         CbFiltroOperacoesFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,7 +257,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
             }
         });
 
-        jLabel7.setText("Periodo:");
+        jLabel7.setText("Período:");
 
         CbFiltroPeriodoFuncionario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mês atual", "Mês anterior", "Ano atual", "Desde o cadastro do funcionário" }));
         CbFiltroPeriodoFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -266,14 +266,14 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
             }
         });
 
-        jLabel8.setText("Operacoes realizadas pelo funcionario selecionado no periodo escolhido:");
+        jLabel8.setText("Operações realizadas pelo funcionário selecionado no período escolhido:");
 
         TbOperacoesFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Operacao", "Descricao", "Data e Hora"
+                "Código", "Operação", "Descrição", "Data e Hora"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -340,14 +340,14 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Funcionario", jPanel3);
+        jTabbedPane1.addTab("Funcionário", jPanel3);
 
         TbOperacoesFuncionario1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Operacao", "Descricao", "Data e Hora"
+                "Código", "Operação", "Descrição", "Data e Hora"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -366,7 +366,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
         });
         jScrollPane5.setViewportView(TbOperacoesFuncionario1);
 
-        jLabel9.setText("Todas as operacoes apenas de estoque realizadas:");
+        jLabel9.setText("Todas as operações apenas de estoque realizadas:");
 
         jLabel10.setText("Produtos:");
 
@@ -375,7 +375,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Cod. Produto", "Produto", "Quantidade"
+                "Cód. Produto", "Produto", "Quantidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -420,7 +420,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Operacoes de Estoque", jPanel6);
+        jTabbedPane1.addTab("Operações de Estoque", jPanel6);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -494,7 +494,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
         parcelas.getConta().buscarcontacompravenda();
         if (TbOperacoesFuncionario.getSelectedRow() > -1) {
             if (!parcelas.parcelapaga()) {
-                if (JOptionPane.showConfirmDialog(null, "Voce esta prestes a cancelar esta conta.\nCaso haja produtos envolvidos nessa operacao, a situacao do estoque sera revertido!\n\nTem certeza que deseja cancelar?", "Deseja cancelar operacao?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(null, "Você está prestes a cancelar esta conta.\nCaso haja produtos envolvidos nessa operação, a situação do estoque sera revertido!\n\nTem certeza que deseja cancelar?", "Deseja cancelar operação?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     parcelas.getConta().retornainformacoesconta();
                     if (parcelas.getConta().getCompravenda().getCodigo() != 0) {
                         parcelas.getConta().getCompravenda().getOperacao().retornaoperacao();
@@ -505,7 +505,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
                                 prodcompravenda.reverterestoqueprodutos();
                                 consultaoperacoesfuncionario();
                             } else {
-                                JOptionPane.showMessageDialog(null, "Nao e possivel realizar o cancelamento desta operacao!\nOs produtos que entraram no estoque tem registro de saida.", "Cancelamento de operacao nao permitido", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Nao é possível realizar o cancelamento desta operação!\nOs produtos que entraram no estoque tem registro de saída.", "Cancelamento de operação nao permitido", JOptionPane.INFORMATION_MESSAGE);
                             }
                         } else {
                             parcelas.getConta().cancelarconta();
@@ -519,7 +519,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Faca estorno de todas as parcelas desta conta para que o cancelamento seja realizado!", "Existem parcelas pagas", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Faça estorno de todas as parcelas desta conta para que o cancelamento seja realizado!", "Existem parcelas pagas", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_ItMnCancelarActionPerformed

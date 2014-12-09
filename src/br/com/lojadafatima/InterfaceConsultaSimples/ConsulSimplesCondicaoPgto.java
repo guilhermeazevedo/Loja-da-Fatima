@@ -54,7 +54,7 @@ public class ConsulSimplesCondicaoPgto extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Codigo", "Descrição", "Nº de Parcelas", "Intervalo de Dias", "Entrada"
+                "Código", "Descrição", "Nrº de parcelas", "Intervalo de dias", "Entrada"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -140,7 +140,7 @@ public class ConsulSimplesCondicaoPgto extends javax.swing.JDialog {
         if(TbConsulta.getSelectedRow() > -1){
             dispose();
         }else{
-            JOptionPane.showMessageDialog(null, "Selecione uma condicao de pagamento da tabela para retorna a janela anterior!", "Selecione uma Condicao de Pagamento",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Selecione uma condição de pagamento da tabela para retornar para janela anterior!", "Selecione uma condição de pagamento",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_BtSelecionarActionPerformed
 

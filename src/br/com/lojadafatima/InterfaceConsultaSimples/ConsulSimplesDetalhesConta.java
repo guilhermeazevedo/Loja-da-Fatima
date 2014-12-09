@@ -64,7 +64,6 @@ public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         TfDsOperacao = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        BtRelatorio = new javax.swing.JButton();
         PnProdutos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbProdutos = new javax.swing.JTable();
@@ -78,7 +77,7 @@ public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
 
         TfSituacao.setEditable(false);
 
-        jLabel8.setText("Situacao");
+        jLabel8.setText("Situação");
 
         jLabel9.setText("Valor Total");
 
@@ -86,11 +85,11 @@ public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
 
         TfDescricao.setEditable(false);
 
-        jLabel5.setText("Descricao");
+        jLabel5.setText("Descrição");
 
         TfCondicao.setEditable(false);
 
-        jLabel7.setText("Condicao de Pagamento");
+        jLabel7.setText("Condição de Pagamento");
 
         TfPessoa.setEditable(false);
 
@@ -98,11 +97,11 @@ public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
 
         TfFuncionario.setEditable(false);
 
-        jLabel1.setText("Funcionario");
+        jLabel1.setText("Funcionário");
 
         TfCodigo.setEditable(false);
 
-        jLabel6.setText("Codigo da Conta");
+        jLabel6.setText("Código da Conta");
 
         TfData.setEditable(false);
 
@@ -110,9 +109,7 @@ public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
 
         TfDsOperacao.setEditable(false);
 
-        jLabel4.setText("Operacao");
-
-        BtRelatorio.setText("Gerar Relatorio");
+        jLabel4.setText("Operação");
 
         javax.swing.GroupLayout PnInformacoesLayout = new javax.swing.GroupLayout(PnInformacoes);
         PnInformacoes.setLayout(PnInformacoesLayout);
@@ -121,30 +118,6 @@ public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
             .addGroup(PnInformacoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PnInformacoesLayout.createSequentialGroup()
-                        .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PnInformacoesLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(PnInformacoesLayout.createSequentialGroup()
-                                .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BtRelatorio))))
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5)
-                    .addGroup(PnInformacoesLayout.createSequentialGroup()
-                        .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TfSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addGap(18, 18, 18)
-                        .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PnInformacoesLayout.createSequentialGroup()
                         .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -157,7 +130,29 @@ public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
                             .addComponent(TfCondicao)))
                     .addComponent(TfFuncionario)
                     .addComponent(TfPessoa)
-                    .addComponent(TfDescricao))
+                    .addComponent(TfDescricao)
+                    .addGroup(PnInformacoesLayout.createSequentialGroup()
+                        .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PnInformacoesLayout.createSequentialGroup()
+                                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
+                                .addGap(18, 18, 18)
+                                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addGroup(PnInformacoesLayout.createSequentialGroup()
+                                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TfSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
+                                .addGap(18, 18, 18)
+                                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PnInformacoesLayout.setVerticalGroup(
@@ -170,8 +165,7 @@ public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtRelatorio))
+                    .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PnInformacoesLayout.createSequentialGroup()
@@ -212,7 +206,7 @@ public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Cod. Produto", "Produto", "Quantidade", "Valor Unitario (R$)", "Valor (R$)"
+                "Cód. Produto", "Produto", "Quantidade", "Valor Unitário (R$)", "Valor (R$)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -301,7 +295,6 @@ public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtRelatorio;
     private javax.swing.JPanel PnInformacoes;
     private javax.swing.JPanel PnParcelas;
     private javax.swing.JPanel PnProdutos;

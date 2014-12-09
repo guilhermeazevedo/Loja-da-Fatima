@@ -3,6 +3,7 @@ package br.com.lojadafatima.InterfacesProduto;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceFornecedor;
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesFornecedor;
@@ -69,6 +70,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
         TbEspecificacao.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TbProduto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TbConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TfDescricao.setDocument(new NaoPermiteAspasSimples());
     }
 
     /**

@@ -7,6 +7,7 @@ package br.com.lojadafatima.InterfacesOperacoes;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseOperacoes;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
@@ -40,6 +41,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
         preenche.FormataJtable(TbOperacoes, tam);
         preenche.PreencherJtable(TbOperacoes, operacao.consultaoperacoes());
         TbOperacoes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TfOperacao.setDocument(new NaoPermiteAspasSimples());
     }
 
     /**

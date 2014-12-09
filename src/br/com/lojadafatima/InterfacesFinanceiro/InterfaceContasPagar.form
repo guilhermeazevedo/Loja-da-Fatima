@@ -93,11 +93,7 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="CbPesqContas" min="-2" pref="337" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="BtGerarRelatorio" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="CbPesqContas" min="-2" pref="337" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -129,11 +125,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="BtGerarRelatorio" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="CbPesqContas" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="CbPesqContas" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="188" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -181,14 +174,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CbPesqContasActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="BtGerarRelatorio">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Gerar Relatorio"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtGerarRelatorioActionPerformed"/>
-          </Events>
-        </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -200,13 +185,13 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="7" rowCount="0">
-                    <Column editable="false" title="Codigo da Conta" type="java.lang.Object"/>
-                    <Column editable="false" title="Operacao" type="java.lang.Object"/>
+                    <Column editable="false" title="C&#xf3;digo da Conta" type="java.lang.Object"/>
+                    <Column editable="false" title="Opera&#xe7;&#xe3;o" type="java.lang.Object"/>
                     <Column editable="false" title="Pessoa" type="java.lang.Object"/>
-                    <Column editable="false" title="Condicao de Pagamento" type="java.lang.Object"/>
+                    <Column editable="false" title="Condi&#xe7;&#xe3;o de Pagamento" type="java.lang.Object"/>
                     <Column editable="false" title="Data" type="java.lang.Object"/>
                     <Column editable="true" title="Valor Total (R$)" type="java.lang.Object"/>
-                    <Column editable="false" title="Situacao" type="java.lang.Object"/>
+                    <Column editable="false" title="Situa&#xe7;&#xe3;o" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -283,7 +268,7 @@
                     <Column editable="false" title="Forma de pagamento" type="java.lang.Object"/>
                     <Column editable="false" title="Data a Pagar" type="java.lang.Object"/>
                     <Column editable="false" title="Data Pago" type="java.lang.Object"/>
-                    <Column editable="false" title="Situacao" type="java.lang.Object"/>
+                    <Column editable="false" title="Situa&#xe7;&#xe3;o" type="java.lang.Object"/>
                     <Column editable="false" title="Reparcela da Parcela Nro." type="java.lang.Object"/>
                   </Table>
                 </Property>

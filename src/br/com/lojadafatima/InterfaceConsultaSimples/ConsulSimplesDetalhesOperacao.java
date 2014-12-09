@@ -76,7 +76,7 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
 
         TfSituacao.setEditable(false);
 
-        jLabel8.setText("Situacao");
+        jLabel8.setText("Situação");
 
         jLabel9.setText("Valor Total");
 
@@ -84,11 +84,11 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
 
         TfDescricao.setEditable(false);
 
-        jLabel5.setText("Descricao");
+        jLabel5.setText("Descrição");
 
         TfCondicao.setEditable(false);
 
-        jLabel7.setText("Condicao de Pagamento");
+        jLabel7.setText("Condição de Pagamento");
 
         TfPessoa.setEditable(false);
 
@@ -96,11 +96,11 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
 
         TfFuncionario.setEditable(false);
 
-        jLabel1.setText("Funcionario");
+        jLabel1.setText("Funcionário");
 
         TfCodigo.setEditable(false);
 
-        jLabel6.setText("Codigo");
+        jLabel6.setText("Código");
 
         TfData.setEditable(false);
 
@@ -108,7 +108,7 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
 
         TfDsOperacao.setEditable(false);
 
-        jLabel4.setText("Operacao");
+        jLabel4.setText("Operação");
 
         javax.swing.GroupLayout PnInformacoesLayout = new javax.swing.GroupLayout(PnInformacoes);
         PnInformacoes.setLayout(PnInformacoesLayout);
@@ -205,7 +205,7 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Cod. Produto", "Produto", "Quantidade", "Valor Unitario (R$)", "Valor (R$)"
+                "Cód. Produto", "Produto", "Quantidade", "Valor Unitário (R$)", "Valor (R$)"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -187,7 +187,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Código da Conta", "Operacao", "Pessoa", "Condicao de Pagamento", "Data", "Valor Total", "Situação"
+                "Código da Conta", "Operação", "Pessoa", "Condição de Pagamento", "Data", "Valor Total", "Situação"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -457,8 +457,8 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                         buscarcontaatualizacao();
                     }
                 } else if (Float.parseFloat(TfValor.getValue().toString()) > Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString())) {
-                    JOptionPane.showMessageDialog(null, "O valor digitado e maior que o valor da parcela!\nPor favor, digite um valor igual ou menor que o valor da parcela.", "Valor digitado incorretamente", JOptionPane.INFORMATION_MESSAGE);
-                } else if (JOptionPane.showConfirmDialog(null, "Tem certeza que este e o valor correto?\n(Caso for pago essa quantia, seja gerado uma parcela a mais para\nesta conta com o valor restante a ser pago pela pessoa)", "Deseja gerar uma reparcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, "O valor digitado é maior que o valor da parcela!\nPor favor, digite um valor igual ou menor que o valor da parcela.", "Valor digitado incorretamente", JOptionPane.INFORMATION_MESSAGE);
+                } else if (JOptionPane.showConfirmDialog(null, "Tem certeza que este é o valor correto?\n(Caso for pago essa quantia, será gerado uma parcela a mais para\nesta conta com o valor restante a ser pago pela pessoa)", "Deseja gerar uma reparcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
                     parcelas.setVlpago(Float.parseFloat(TfValor.getValue().toString()));
                     parcelas.getFormapgto().setFormapgto(CbFormaPgto.getSelectedItem().toString());
@@ -476,11 +476,11 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                     buscarcontaatualizacao();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Selecione ou insira a Forma de Pagamento escolhida pela pessoa!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Selecione ou insira a forma de Pagamento escolhida pela pessoa!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
                 CbFormaPgto.grabFocus();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione a Parcela que sera paga e o valor correto a ser pago!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Selecione a parcela que será paga e o valor correto a ser pago!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
             TfValor.grabFocus();
         }
     }//GEN-LAST:event_BtPagarActionPerformed
@@ -501,7 +501,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                 if (Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()) != parcelas.retornanumeroultimaparcelavalida()) {
                     if (!TbParcelas.getValueAt(TbParcelas.getSelectedRow() + 1, 6).toString().equals("PAGA")) {
                         if (JOptionPane.showConfirmDialog(null, "Deseja realmente estornar esta parcela?\n"
-                                + "(Fazendo isso voce estara retirando do caixa o valor pago nesta parcela)", "Deseja estornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                + "(Fazendo isso você estará retirando do caixa o valor pago nesta parcela)", "Deseja estornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
                             if (!(mvtocaixa.retornacaixaatual() < Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()))) {
                                 parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
@@ -516,13 +516,13 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                                 TbPessoasMouseReleased(null);
                                 buscarcontaatualizacao();
                             }else{
-                                JOptionPane.showMessageDialog(null, "Impossivel realizar o estorno desta parcela.\nO saldo do caixa e menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Impossível realizar o estorno desta parcela.\nO saldo do caixa é menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
                     }
                 } else {
                     if (JOptionPane.showConfirmDialog(null, "Deseja realmente estornar esta parcela?\n"
-                            + "(Fazendo isso voce estara retirando do caixa o valor pago nesta parcela)", "Deseja extornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            + "(Fazendo isso você estará retirando do caixa o valor pago nesta parcela)", "Deseja estornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
                         if (!(mvtocaixa.retornacaixaatual() < Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()))) {
                             parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
@@ -537,7 +537,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                             TbPessoasMouseReleased(null);
                             buscarcontaatualizacao();
                         } else {
-                            JOptionPane.showMessageDialog(null, "Impossivel realizar o estorno desta parcela.\nO saldo do caixa e menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Impossível realizar o estorno desta parcela.\nO saldo do caixa é menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                 }
@@ -559,7 +559,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
 
     private void ItMnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItMnCancelarActionPerformed
         if (!parcelapaga()) {
-            if (JOptionPane.showConfirmDialog(null, "Voce esta prestes a cancelar esta conta.\nCaso haja produtos envolvidos nessa operacao, a situacao do estoque sera revertido!\n\nTem certeza que deseja cancelar?", "Deseja cancelar operacao?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Você está prestes a cancelar esta conta.\nCaso haja produtos envolvidos nessa operação, a situação do estoque será revertido!\n\nTem certeza que deseja cancelar?", "Deseja cancelar operacao?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 parcelas.getConta().retornainformacoesconta();
                 if (parcelas.getConta().getCompravenda().getCodigo() != 0) {
                     parcelas.getConta().getCompravenda().getOperacao().retornaoperacao();
@@ -572,7 +572,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                             prodcompravenda.reverterestoqueprodutos();
                             TbPessoasMouseReleased(null);
                         } else {
-                            JOptionPane.showMessageDialog(null, "Nao e possivel realizar o cancelamento desta operacao!\nOs produtos que entraram no estoque tem registro de saida.", "Cancelamento de operacao nao permitido", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Nao é possivel realizar o cancelamento desta operação!\nOs produtos que entraram no estoque tem registro de saída.", "Cancelamento de operação não permitido", JOptionPane.INFORMATION_MESSAGE);
                         }
                     } else {
                         parcelas.getConta().cancelarconta();
@@ -586,7 +586,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Faca estorno de todas as parcelas desta conta para que o cancelamento seja realizado!", "Existem parcelas pagas", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Faça estorno de todas as parcelas desta conta para que o cancelamento seja realizado!", "Existem parcelas pagas", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_ItMnCancelarActionPerformed
 

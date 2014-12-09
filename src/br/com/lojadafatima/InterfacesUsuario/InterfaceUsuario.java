@@ -7,6 +7,7 @@ package br.com.lojadafatima.InterfacesUsuario;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.ClassesFerramentas.TeclasPermitidas;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
@@ -36,6 +37,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
         TfLogin.setDocument(new TeclasPermitidas());
         TfSenha.setDocument(new TeclasPermitidas());
         TfConfirmSenha.setDocument(new TeclasPermitidas());
+        TfDica.setDocument(new NaoPermiteAspasSimples());
 
         int[] tam = new int[2];
         tam[0] = 30;

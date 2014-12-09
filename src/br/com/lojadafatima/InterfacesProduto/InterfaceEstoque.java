@@ -65,7 +65,6 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         CbPesqProduto = new javax.swing.JComboBox();
         TfPesqProduto = new javax.swing.JTextField();
         BtPesqProduto = new javax.swing.JButton();
-        BtRelatorioProdutos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbProdutos = new javax.swing.JTable();
         PnAjusteEstoque = new javax.swing.JPanel();
@@ -103,8 +102,6 @@ public class InterfaceEstoque extends javax.swing.JDialog {
             }
         });
 
-        BtRelatorioProdutos.setText("Imprimir Relatório");
-
         TbProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -130,17 +127,15 @@ public class InterfaceEstoque extends javax.swing.JDialog {
             PnPesqEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnPesqEstoqueLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PnPesqEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
+                .addGroup(PnPesqEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addGroup(PnPesqEstoqueLayout.createSequentialGroup()
                         .addComponent(CbPesqProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TfPesqProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtPesqProduto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtRelatorioProdutos)))
+                        .addComponent(BtPesqProduto)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PnPesqEstoqueLayout.setVerticalGroup(
@@ -152,8 +147,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 .addGroup(PnPesqEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CbPesqProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TfPesqProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesqProduto)
-                    .addComponent(BtRelatorioProdutos))
+                    .addComponent(BtPesqProduto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
                 .addContainerGap())
@@ -441,7 +435,6 @@ public class InterfaceEstoque extends javax.swing.JDialog {
     private javax.swing.JButton BtEncerrar;
     private javax.swing.JButton BtIniciar;
     private javax.swing.JButton BtPesqProduto;
-    private javax.swing.JButton BtRelatorioProdutos;
     private javax.swing.JComboBox CbPesqProduto;
     private javax.swing.JPanel PnAjusteEstoque;
     private javax.swing.JPanel PnPesqEstoque;
@@ -466,7 +459,6 @@ public class InterfaceEstoque extends javax.swing.JDialog {
             BtIniciar.setVisible(false);
             BtEncerrar.setVisible(false);
             BtAjustar.setVisible(false);
-            BtRelatorioProdutos.setVisible(false);
         }
     }
     

@@ -192,7 +192,7 @@ public class InterfaceMultas extends javax.swing.JDialog {
 
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
         if(camposobrigatoriospreenchidos()){
-            if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja gravar as alteracoes dos dados de multa?", "Deseja gravar?",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(null, "Tem certeza que deseja gravar as alterações dos dados de multa?", "Deseja gravar?",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 enviardados();
                 multa.incluir();
                 BtCancelarActionPerformed(evt);
@@ -228,23 +228,23 @@ public class InterfaceMultas extends javax.swing.JDialog {
     
     public boolean camposobrigatoriospreenchidos(){
         if(Integer.parseInt(SpDiasAlerta.getValue().toString()) < 0){
-            JOptionPane.showMessageDialog(null, "Nao e permitido um numero negativo de dias!", "Campos obrigatorios",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Nao é permitido um número negativo de dias!", "Campos obrigatórios",JOptionPane.INFORMATION_MESSAGE);
             SpDiasAlerta.setValue(0);
             SpDiasAlerta.grabFocus();
             return false;
         }
         if(Integer.parseInt(SpDiasAcresc.getValue().toString()) < 0){
-            JOptionPane.showMessageDialog(null, "Nao e permitido um numero negativo de dias!", "Campos obrigatorios",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Nao é permitido um número negativo de dias!", "Campos obrigatórios",JOptionPane.INFORMATION_MESSAGE);
             SpDiasAcresc.setValue(0);
             SpDiasAcresc.grabFocus();
             return false;
         }
         if(Integer.parseInt(SpDiasAlerta.getValue().toString()) > Integer.parseInt(SpDiasAcresc.getValue().toString())){
-            JOptionPane.showMessageDialog(null, "O numero de dias para o aviso ao usuario deve ser\nmenor que o dia de acrescimo do valor!", "Campos obrigatorios",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O número de dias para o aviso ao usuário deve ser\nmenor que o dia de acréscimo do valor!", "Campos obrigatórios",JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         if(TfPercMulta.getValue() == BigDecimal.valueOf(0)){
-            JOptionPane.showMessageDialog(null, "Digite a porcentagem corretamente!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Digite a porcentagem corretamente!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
             TfPercMulta.grabFocus();
             return false;
         }

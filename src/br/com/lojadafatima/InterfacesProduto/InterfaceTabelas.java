@@ -7,6 +7,7 @@ package br.com.lojadafatima.InterfacesProduto;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Produto.ClasseTabelas;
 import br.com.lojadafatima.Produto.ClasseValores;
@@ -46,6 +47,8 @@ public class InterfaceTabelas extends javax.swing.JDialog {
         TbTabelas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TbTabelas2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TbValores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TfTabela.setDocument(new NaoPermiteAspasSimples());
+        TfValor.setDocument(new NaoPermiteAspasSimples());
     }
 
     /**

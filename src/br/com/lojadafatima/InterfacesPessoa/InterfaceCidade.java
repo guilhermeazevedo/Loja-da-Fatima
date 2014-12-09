@@ -8,6 +8,7 @@ package br.com.lojadafatima.InterfacesPessoa;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.DadosPessoa.ClasseCidade;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
@@ -42,6 +43,7 @@ public class InterfaceCidade extends javax.swing.JDialog {
         preenche.PreencherJtable(TbCidades, cidade.buscarcidadesjtable());
         preenche.PreencheJComboBox(CbEstado, cidade.getEstado().buscarestadosjcombobox());
         TbCidades.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TfCidade.setDocument(new NaoPermiteAspasSimples());
     }
 
     /**

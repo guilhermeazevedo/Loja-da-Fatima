@@ -84,10 +84,10 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="0">
-                    <Column editable="false" title="Codigo" type="java.lang.Object"/>
+                    <Column editable="false" title="C&#xf3;digo" type="java.lang.Object"/>
                     <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
-                    <Column editable="false" title="N&#xba; de Parcelas" type="java.lang.Object"/>
-                    <Column editable="false" title="Intervalo de Dias" type="java.lang.Object"/>
+                    <Column editable="false" title="Nr&#xba; de parcelas" type="java.lang.Object"/>
+                    <Column editable="false" title="Intervalo de dias" type="java.lang.Object"/>
                     <Column editable="false" title="Entrada" type="java.lang.Object"/>
                   </Table>
                 </Property>

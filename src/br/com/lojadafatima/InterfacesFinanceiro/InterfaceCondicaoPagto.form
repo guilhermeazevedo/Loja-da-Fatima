@@ -183,7 +183,7 @@
                   <Table columnCount="5" rowCount="0">
                     <Column editable="false" title="C&#xf3;digo" type="java.lang.Object"/>
                     <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
-                    <Column editable="false" title="N&#xba; de Parcelas" type="java.lang.Object"/>
+                    <Column editable="false" title="Nr&#xba; de Parcelas" type="java.lang.Object"/>
                     <Column editable="false" title="Intervalo de Dias" type="java.lang.Object"/>
                     <Column editable="false" title="Entrada" type="java.lang.Object"/>
                   </Table>
@@ -229,7 +229,7 @@
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Numero de parcelas*"/>
+            <Property name="text" type="java.lang.String" value="N&#xfa;mero de parcelas*"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">

@@ -1,5 +1,6 @@
 package br.com.lojadafatima.InterfaceConsultaSimples;
 
+import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.ClassesFerramentas.PermiteNumerosPontoBarra;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
@@ -21,7 +22,6 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
-        TfNomeFisica.setVisible(false);
         setFuncionario(func);
         TbPesquisa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
@@ -43,7 +43,6 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
         BtPesquisa = new javax.swing.JButton();
         BtSelecionar = new javax.swing.JButton();
         BtCancelar = new javax.swing.JButton();
-        TfNomeFisica = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Rápida de Funcionário - Software Loja da Fátima");
@@ -148,34 +147,15 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
                     .addContainerGap(63, Short.MAX_VALUE)))
         );
 
-        TfNomeFisica.setEditable(false);
-        TfNomeFisica.setEnabled(false);
-        TfNomeFisica.setName("NM_PESSOA"); // NOI18N
-        TfNomeFisica.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                TfNomeFisicaKeyTyped(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(457, 457, 457)
-                    .addComponent(TfNomeFisica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(97, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(142, 142, 142)
-                    .addComponent(TfNomeFisica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(123, Short.MAX_VALUE)))
         );
 
         pack();
@@ -186,7 +166,7 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
         switch (CbPesquisa.getSelectedIndex()) {
             case 0: {
                 TfPesquisa.setEnabled(false);
-                TfPesquisa.setDocument(TfNomeFisica.getDocument());
+                TfPesquisa.setDocument(new NaoPermiteAspasSimples());
                 break;
             }
             case 1: {
@@ -196,12 +176,12 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
             }
             case 2: {
                 TfPesquisa.setEnabled(true);
-                TfPesquisa.setDocument(TfNomeFisica.getDocument());
+                TfPesquisa.setDocument(new NaoPermiteAspasSimples());
                 break;
             }
             case 3: {
                 TfPesquisa.setEnabled(true);
-                TfPesquisa.setDocument(TfNomeFisica.getDocument());
+                TfPesquisa.setDocument(new NaoPermiteAspasSimples());
                 break;
             }
             case 4: {
@@ -227,7 +207,7 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
             }
             case 1: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o Codigo do funcionario que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o código do funcionário que deseja consultar!", "Digite o código", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     funcionario.setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -237,7 +217,7 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
             }
             case 2: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o Nome do funcionario que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o nome do funcionário que deseja consultar!", "Digite o nome", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     funcionario.getPessoafis().setNome(TfPesquisa.getText());
@@ -247,7 +227,7 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
             }
             case 3: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite a funcao do funcionario que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite a função do funcionário que deseja consultar!", "Digite a função", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     funcionario.setFuncao(TfPesquisa.getText());
@@ -257,7 +237,7 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
             }
             case 4: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o CPF do funcionario que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o CPF do funcionário que deseja consultar!", "Digite o CPF", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     funcionario.getPessoafis().setCpf(TfPesquisa.getText());
@@ -267,10 +247,6 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_BtPesquisaActionPerformed
-
-    private void TfNomeFisicaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfNomeFisicaKeyTyped
-        
-    }//GEN-LAST:event_TfNomeFisicaKeyTyped
 
     private void TbPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbPesquisaMouseClicked
         if(TbPesquisa.getSelectedRow() > -1){
@@ -282,7 +258,7 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
         if(TbPesquisa.getSelectedRow() > -1){
             dispose();
         }else{
-            JOptionPane.showMessageDialog(null, "Selecione um Funcionario na tabela para retornar a janela anterior!", "Selecione um Funcionario", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Selecione um funcionário na tabela para retornar a janela anterior!", "Selecione um funcionário", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_BtSelecionarActionPerformed
 
@@ -298,7 +274,6 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
     private javax.swing.JButton BtSelecionar;
     private javax.swing.JComboBox CbPesquisa;
     private javax.swing.JTable TbPesquisa;
-    private javax.swing.JTextField TfNomeFisica;
     private javax.swing.JTextField TfPesquisa;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
