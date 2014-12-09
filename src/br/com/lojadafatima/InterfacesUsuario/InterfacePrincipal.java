@@ -302,6 +302,11 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         BtRelatorios.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtRelatorios.setText("Relatórios");
         BtRelatorios.setEnabled(false);
+        BtRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtRelatoriosActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("pessoa(s)");
@@ -934,6 +939,10 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         if(BtContasReceber.isEnabled())
         BtContasReceberActionPerformed(null);
     }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void BtRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtRelatoriosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtRelatoriosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

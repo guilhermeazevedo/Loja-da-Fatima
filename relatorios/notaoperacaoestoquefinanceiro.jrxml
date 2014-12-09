@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="notaoperacaoestoquefinanceiro" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6f60b170-8b6b-4e29-99fd-4f5aa0f018f1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="07e545c1-dd1d-48d3-b68d-6d0714012d90">
+		<parameter name="CD_OPERACAO" class="java.lang.Integer"/>
+		<parameter name="CD_COMPRA_VENDA" class="java.lang.Integer"/>
+		<queryString>
+			<![CDATA[SELECT "P"."DS_PRODUTO", "PV"."QT_PRODUTO", "PV"."VL_PRODUTO"
+FROM bancoloja."PRODUTOS_COMPRA_VENDA" "PV"
+JOIN bancoloja."CAD_PRODUTO" "P"
+ON "P"."CD_PRODUTO" = "PV"."CD_PRODUTO"
+WHERE "PV"."CD_COMPRA_VENDA" = $P{CD_COMPRA_VENDA} AND "PV"."CD_OPERACAO" = $P{CD_OPERACAO}]]>
+		</queryString>
+		<field name="DS_PRODUTO" class="java.lang.String"/>
+		<field name="QT_PRODUTO" class="java.math.BigDecimal"/>
+		<field name="VL_PRODUTO" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="CD_COMPRA_VENDA" class="java.lang.Integer"/>
+	<parameter name="CD_OPERACAO" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Program Files\\Software Loja da Fátima\\Loja da Fatima\\relatorios\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CD_CONTA" class="java.lang.Integer"/>
+	<parameter name="PESSOA" class="java.lang.String"/>
+	<parameter name="FUNCIONARIO" class="java.lang.String"/>
+	<parameter name="CONDICAO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT "DS_OPERACAO"
+FROM bancoloja."CAD_OPERACOES"
+WHERE "CD_OPERACAO" = $P{CD_OPERACAO}]]>
+	</queryString>
+	<field name="DS_OPERACAO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="85" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e340585a-a54a-444c-a5c6-6f7ed0659cc1" x="0" y="60" width="100" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Loja da Fátima]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="d2457d2a-a489-4c52-b320-374e8b1559ea" x="0" y="0" width="555" height="43"/>
+				<textElement>
+					<font size="28"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_OPERACAO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="75" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="d388e27a-cfea-4b2c-91dc-1360cb0ad0f4" x="0" y="10" width="555" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PESSOA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="28d22a5e-231c-4e70-8d2d-96731a4e1be3" x="0" y="30" width="74" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Funcionário:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="d7143030-3d98-4dce-b7c8-ed9fdcd3903a" x="74" y="30" width="481" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FUNCIONARIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6b7fce71-a96f-4845-aeaa-00ef9e396054" x="0" y="50" width="147" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Condição de Pagamento:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="3ad454c2-9018-45e2-b0ea-54d3465635e9" x="147" y="50" width="408" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CONDICAO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="75c10303-372e-43e9-924f-1de10ed4382b" x="0" y="0" width="555" height="27"/>
+				<subreportParameter name="CD_COMPRA_VENDA">
+					<subreportParameterExpression><![CDATA[$P{CD_COMPRA_VENDA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="CD_OPERACAO">
+					<subreportParameterExpression><![CDATA[$P{CD_OPERACAO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "notaoperacao_subprodutos.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="29">
+			<subreport>
+				<reportElement uuid="86bd06a7-8770-4fbe-99b7-08c935051186" x="0" y="0" width="555" height="25"/>
+				<subreportParameter name="CD_CONTA">
+					<subreportParameterExpression><![CDATA[$P{CD_CONTA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="CD_OPERACAO">
+					<subreportParameterExpression><![CDATA[$P{CD_OPERACAO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "notaoperacao_subparcelas.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement uuid="3d8c2dac-95af-409c-842f-3a0e307a043a" x="435" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="59de655d-21a8-4fa2-a901-1a722a74ae64" x="515" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="b2c0764a-a68a-4abc-84b4-d5d59e950a64" x="0" y="0" width="185" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -39,6 +39,11 @@ public class ClasseCompraVenda {
         }
     }
 
+    public void cancelarcompravenda() {
+        conn.atualizarSQL("UPDATE bancoloja.\"COMPRA_VENDA\" SET \"DS_COMPRA_VENDA\" = (\"DS_COMPRA_VENDA\" || ' - CANCELADO DIA ' || TO_CHAR(CURRENT_DATE, 'DD/MM/YYYY'))\n"
+                + "WHERE \"CD_COMPRA_VENDA\" = "+getCodigo()+" AND \"CD_OPERACAO\" = "+getOperacao().getCodigo());
+    }
+
     public int getCodigo() {
         return codigo;
     }

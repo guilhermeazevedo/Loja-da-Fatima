@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * @author hp
  */
 public class ClasseOperacoes {
-    
+
     ConexaoPostgre conn = new ConexaoPostgre();
     private int codigo;
     private String descricao;
@@ -20,59 +20,66 @@ public class ClasseOperacoes {
     private String tpfinanceiro;
     private String inestoque;
     private String tpestoque;
-    
-    public void incluir(){
+
+    public void incluir() {
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_OPERACOES", "CD_OPERACAO"));
-        conn.incluirSQL("INSERT INTO bancoloja.\"CAD_OPERACOES\"(\n" +
-                        "\"CD_OPERACAO\", \"DS_OPERACAO\", \"IN_FINANCEIRO\", \"TP_FINANCEIRO\", \"IN_ESTOQUE\", \"TP_ESTOQUE\")\n" +
-                        "VALUES ("+getCodigo()+", '"+getDescricao().toUpperCase()+"', '"+getInfinanceiro()+"', '"+getTpfinanceiro()+"', '"+getInestoque()+"', '"+getTpestoque()+"')");
+        conn.incluirSQL("INSERT INTO bancoloja.\"CAD_OPERACOES\"(\n"
+                + "\"CD_OPERACAO\", \"DS_OPERACAO\", \"IN_FINANCEIRO\", \"TP_FINANCEIRO\", \"IN_ESTOQUE\", \"TP_ESTOQUE\")\n"
+                + "VALUES (" + getCodigo() + ", '" + getDescricao().toUpperCase() + "', '" + getInfinanceiro() + "', '" + getTpfinanceiro() + "', '" + getInestoque() + "', '" + getTpestoque() + "')");
     }
-    
-    public void alterar(){
-        conn.atualizarSQL("UPDATE bancoloja.\"CAD_OPERACOES\"\n" +
-                          "SET \"DS_OPERACAO\"='"+getDescricao().toUpperCase()+"', \"IN_FINANCEIRO\"='"+getInfinanceiro()+"', \"TP_FINANCEIRO\"='"+getTpfinanceiro()+"', \"IN_ESTOQUE\"='"+getInestoque()+"', \"TP_ESTOQUE\"='"+getTpestoque()+"'\n" +
-                          "WHERE \"CD_OPERACAO\"= "+getCodigo());
+
+    public void alterar() {
+        conn.atualizarSQL("UPDATE bancoloja.\"CAD_OPERACOES\"\n"
+                + "SET \"DS_OPERACAO\"='" + getDescricao().toUpperCase() + "', \"IN_FINANCEIRO\"='" + getInfinanceiro() + "', \"TP_FINANCEIRO\"='" + getTpfinanceiro() + "', \"IN_ESTOQUE\"='" + getInestoque() + "', \"TP_ESTOQUE\"='" + getTpestoque() + "'\n"
+                + "WHERE \"CD_OPERACAO\"= " + getCodigo());
     }
-    
-    public ResultSet consultaoperacoes(){
-        conn.executeSQL("SELECT \"CD_OPERACAO\", \"DS_OPERACAO\"\n" +
-                        "FROM bancoloja.\"CAD_OPERACOES\" ORDER BY \"CD_OPERACAO\"");
+
+    public ResultSet consultaoperacoes() {
+        conn.executeSQL("SELECT \"CD_OPERACAO\", \"DS_OPERACAO\"\n"
+                + "FROM bancoloja.\"CAD_OPERACOES\" ORDER BY \"CD_OPERACAO\"");
         return conn.resultset;
     }
-    
-    public void retornaoperacao(){
-        conn.executeSQL("SELECT \"DS_OPERACAO\", \"IN_FINANCEIRO\", \"TP_FINANCEIRO\", \"IN_ESTOQUE\", \"TP_ESTOQUE\"\n" +
-                        "FROM bancoloja.\"CAD_OPERACOES\"\n" +
-                        "WHERE \"CD_OPERACAO\" = "+getCodigo());
-        try{
+
+    public void retornaoperacao() {
+        conn.executeSQL("SELECT \"DS_OPERACAO\", \"IN_FINANCEIRO\", \"TP_FINANCEIRO\", \"IN_ESTOQUE\", \"TP_ESTOQUE\"\n"
+                + "FROM bancoloja.\"CAD_OPERACOES\"\n"
+                + "WHERE \"CD_OPERACAO\" = " + getCodigo());
+        try {
             conn.resultset.first();
             setDescricao(conn.resultset.getString(1));
             setInfinanceiro(conn.resultset.getString(2));
             setTpfinanceiro(conn.resultset.getString(3));
             setInestoque(conn.resultset.getString(4));
             setTpestoque(conn.resultset.getString(5));
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             setDescricao("");
             setInestoque("N");
             setInfinanceiro("N");
         }
     }
-    
-    public ResultSet retornaoperacoescombobox(){
-        conn.executeSQL("SELECT \"DS_OPERACAO\"\n" +
-                        "FROM bancoloja.\"CAD_OPERACOES\" WHERE \"CD_OPERACAO\" > 4 ORDER BY \"CD_OPERACAO\"");
+
+    public ResultSet operacaorelatorio() {
+        conn.executeSQL("SELECT \"DS_OPERACAO\"\n"
+                + "FROM bancoloja.\"CAD_OPERACOES\"\n"
+                + "WHERE \"CD_OPERACAO\" = " + getCodigo());
         return conn.resultset;
     }
-    
-    public int retornacodigooperacao(){
-        conn.executeSQL("SELECT \"CD_OPERACAO\"\n" +
-                        "FROM bancoloja.\"CAD_OPERACOES\"\n" +
-                        "WHERE \"DS_OPERACAO\" = '"+getDescricao()+"'");
-        try{
+
+    public ResultSet retornaoperacoescombobox() {
+        conn.executeSQL("SELECT \"DS_OPERACAO\"\n"
+                + "FROM bancoloja.\"CAD_OPERACOES\" WHERE \"CD_OPERACAO\" > 4 ORDER BY \"CD_OPERACAO\"");
+        return conn.resultset;
+    }
+
+    public int retornacodigooperacao() {
+        conn.executeSQL("SELECT \"CD_OPERACAO\"\n"
+                + "FROM bancoloja.\"CAD_OPERACOES\"\n"
+                + "WHERE \"DS_OPERACAO\" = '" + getDescricao() + "'");
+        try {
             conn.resultset.first();
             return conn.resultset.getInt(1);
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             return 0;
         }
     }
@@ -124,5 +131,5 @@ public class ClasseOperacoes {
     public void setTpestoque(String tpestoque) {
         this.tpestoque = tpestoque;
     }
-    
+
 }

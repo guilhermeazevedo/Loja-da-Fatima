@@ -4,6 +4,7 @@ import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import java.awt.print.PrinterJob;
 import java.sql.ResultSet;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.print.PrintService;
@@ -30,7 +31,7 @@ public class Relatorios {
     
     ConexaoPostgre conexao = new ConexaoPostgre();
 
-    public void gerarRelatorio(ResultSet rs, String caminho, HashMap parametros) {
+    public void gerarRelatorio(ResultSet rs, String caminho, Map parametros) {
         try {
             JRResultSetDataSource jrds = new JRResultSetDataSource(rs);
             String report = caminho;
@@ -60,7 +61,7 @@ public class Relatorios {
         }
     }
     
-    public void iniciarSplash(final ResultSet rs, final String caminho, final HashMap parametros){
+    public void iniciarSplash(final ResultSet rs, final String caminho, final Map parametros){
         final Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {

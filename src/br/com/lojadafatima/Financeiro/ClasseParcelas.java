@@ -84,13 +84,16 @@ public class ClasseParcelas {
     }
 
     public ResultSet retornaparcelas() {
-        conn.executeSQL("SELECT \"CD_PARCELA\", \"VL_PAGAR\", \"VL_PAGO\", TO_CHAR(\"DT_PAGAR\", 'DD/MM/YYYY'), TO_CHAR(\"DT_PAGO\", 'DD/MM/YYYY'),\n"
-                + "                               CASE WHEN \"DT_PAGO\" IS NOT NULL THEN 'PAGA'\n"
-                + "                               ELSE CASE WHEN \"DT_PAGAR\" < (SELECT CURRENT_DATE) THEN 'VENCIDO'\n"
-                + "                               ELSE 'A PAGAR' END END,\n"
-                + "\"CD_PARCELA_REPARCELA\""
-                + "                        FROM bancoloja.\"PARCELAS\"\n"
-                + "WHERE \"CD_CONTA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO\" = " + getConta().getOperacao().getCodigo() + "\n"
+        conn.executeSQL("SELECT \"P\".\"CD_PARCELA\", \"P\".\"VL_PAGAR\", \"P\".\"VL_PAGO\",\n"
+                + "(SELECT \"DS_FORMA_PGTO\" FROM bancoloja.\"CAD_FORMA_PGTO\" WHERE \"CD_FORMA_PGTO\" = \"P\".\"CD_FORMA_PGTO\"),\n"
+                + "TO_CHAR(\"P\".\"DT_PAGAR\", 'DD/MM/YYYY'),\n"
+                + "TO_CHAR(\"P\".\"DT_PAGO\", 'DD/MM/YYYY'),\n"
+                + "CASE WHEN \"P\".\"DT_PAGO\" IS NOT NULL THEN 'PAGA'\n"
+                + "ELSE CASE WHEN \"P\".\"DT_PAGAR\" < (SELECT CURRENT_DATE) THEN 'VENCIDO'\n"
+                + "ELSE 'A PAGAR' END END,\n"
+                + "\"P\".\"CD_PARCELA_REPARCELA\"\n"
+                + "FROM bancoloja.\"PARCELAS\" \"P\"\n"
+                + "WHERE \"VL_PAGAR\" IS NOT NULL AND \"CD_CONTA\" = "+getConta().getCodigo()+" AND \"CD_OPERACAO\" = "+getConta().getOperacao().getCodigo()+"\n"
                 + "ORDER BY \"CD_PARCELA\"");
         return conn.resultset;
     }
@@ -109,10 +112,10 @@ public class ClasseParcelas {
         boolean vencida = false, paga = true;
         try {
             while (rs.next()) {
-                if (rs.getString(6).equals("VENCIDO")) {
+                if (rs.getString(7).equals("VENCIDO")) {
                     vencida = true;
                 }
-                if (rs.getString(6).equals("A PAGAR")) {
+                if (rs.getString(7).equals("A PAGAR")) {
                     paga = false;
                 }
             }
@@ -145,7 +148,8 @@ public class ClasseParcelas {
         ResultSet rsp = retornaparcelasnaopagas();
         try {
             while (rsp.next()) {
-                data1 = ""; data2 = "";
+                data1 = "";
+                data2 = "";
                 setCodigo(rsp.getInt(1));
                 getConta().setCodigo(rsp.getInt(2));
                 getConta().getOperacao().setCodigo(rsp.getInt(3));
@@ -170,7 +174,7 @@ public class ClasseParcelas {
     public ResultSet retornaparcelasnaopagas() {
         conn.executeSQL("SELECT \"CD_PARCELA\", \"CD_CONTA\", \"CD_OPERACAO\", \"VL_PAGAR\", TO_CHAR(\"DT_PAGAR\", 'DD/MM/YYYY')\n"
                 + "FROM bancoloja.\"PARCELAS\"\n"
-                + "WHERE \"DT_PAGO\" IS NULL AND \"IN_APLICACAO_MULTA\" IS NULL\n"
+                + "WHERE \"VL_PAGAR\" IS NOT NULL AND \"DT_PAGO\" IS NULL AND \"IN_APLICACAO_MULTA\" IS NULL\n"
                 + "AND \"CD_OPERACAO\" IN ((SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n"
                 + "                       WHERE \"TP_FINANCEIRO\" = 'E'))");
         return conn.resultset;
@@ -188,12 +192,50 @@ public class ClasseParcelas {
                 + "            " + getConta().getOperacao().getCodigo() + ")");
     }
 
-    public void extornarparcela() {
+    public void estornarparcela() {
         setDtpagar(proximadatapagar());
+        if (foiaplicadamulta()) {
+            getConta().buscamultaconta();
+            setVlpagar(getVlpagar() - ((getVlpagar() * getConta().getMulta().getPercent()) / 100));
+        }
+        if (temreparcela() != 0) {
+            setVlpagar(getVlpagar() + temreparcela());
+            conn.executeSQL("UPDATE bancoloja.\"MOV_CAIXA\" SET \"DS_MVTO\" = (\"DS_MVTO\" || ' - EXCLUIDO DIA '|| TO_CHAR(CURRENT_DATE,'DD/MM/YYYY'))\n"
+                    + "WHERE \"CD_PARCELA\" = (SELECT \"CD_PARCELA\" FROM bancoloja.\"PARCELAS\" WHERE \"CD_PARCELA_REPARCELA\" = " + getCodigo() + " AND \"CD_CONTA_REPARCELA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO_REPARCELA\" = " + getConta().getOperacao().getCodigo() + ") AND\n"
+                    + "      \"CD_CONTA\" = (SELECT \"CD_CONTA\" FROM bancoloja.\"PARCELAS\" WHERE \"CD_PARCELA_REPARCELA\" = " + getCodigo() + " AND \"CD_CONTA_REPARCELA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO_REPARCELA\" = " + getConta().getOperacao().getCodigo() + ") AND\n"
+                    + "      \"CD_OPERACAO\" = (SELECT \"CD_OPERACAO\" FROM bancoloja.\"PARCELAS\" WHERE \"CD_PARCELA_REPARCELA\" = " + getCodigo() + " AND \"CD_CONTA_REPARCELA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO_REPARCELA\" = " + getConta().getOperacao().getCodigo() + ")");
+            conn.executeSQL("UPDATE bancoloja.\"PARCELAS\" SET \"VL_PAGAR\" = NULL\n"
+                    + "WHERE \"CD_PARCELA\" = (SELECT \"CD_PARCELA\" FROM bancoloja.\"PARCELAS\" WHERE \"CD_PARCELA_REPARCELA\" = " + getCodigo() + " AND \"CD_CONTA_REPARCELA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO_REPARCELA\" = " + getConta().getOperacao().getCodigo() + ") AND\n"
+                    + "      \"CD_CONTA\" = (SELECT \"CD_CONTA\" FROM bancoloja.\"PARCELAS\" WHERE \"CD_PARCELA_REPARCELA\" = " + getCodigo() + " AND \"CD_CONTA_REPARCELA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO_REPARCELA\" = " + getConta().getOperacao().getCodigo() + ") AND\n"
+                    + "      \"CD_OPERACAO\" = (SELECT \"CD_OPERACAO\" FROM bancoloja.\"PARCELAS\" WHERE \"CD_PARCELA_REPARCELA\" = " + getCodigo() + " AND \"CD_CONTA_REPARCELA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO_REPARCELA\" = " + getConta().getOperacao().getCodigo() + ")");
+        }
         conn.executeSQL("UPDATE bancoloja.\"PARCELAS\"\n"
-                + "   SET \"CD_FORMA_PGTO\" = NULL, \"DT_PAGO\" = NULL, \"DT_PAGAR\" = '" + getDtpagar() + "', \"VL_PAGAR\" = " + getVlpagar() + ", \"VL_PAGO\" = NULL\n"
+                + "   SET \"CD_FORMA_PGTO\" = NULL, \"DT_PAGO\" = NULL, \"DT_PAGAR\" = '" + getDtpagar() + "', \"VL_PAGAR\" = " + getVlpagar() + ", \"VL_PAGO\" = NULL, \"IN_APLICACAO_MULTA\" = NULL\n"
                 + " WHERE \"CD_PARCELA\" = " + getCodigo() + " AND \"CD_CONTA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO\" = " + getConta().getOperacao().getCodigo());
         atualizasituacaoconta();
+    }
+
+    public boolean foiaplicadamulta() {
+        conn.executeSQL("SELECT * FROM bancoloja.\"PARCELAS\"\n"
+                + "WHERE \"VL_PAGAR\" IS NOT NULL AND \"CD_PARCELA\" = " + getCodigo() + " AND \"CD_CONTA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO\" = " + getConta().getOperacao().getCodigo() + " AND \"IN_APLICACAO_MULTA\" = 'S'");
+        try {
+            conn.resultset.first();
+            conn.resultset.getString(1);
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+
+    public float temreparcela() {
+        conn.executeSQL("SELECT \"VL_PAGAR\" FROM bancoloja.\"PARCELAS\"\n"
+                + "WHERE \"VL_PAGAR\" IS NOT NULL AND \"CD_PARCELA_REPARCELA\" = " + getCodigo() + " AND \"CD_CONTA_REPARCELA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO_REPARCELA\" = " + getConta().getOperacao().getCodigo());
+        try {
+            conn.resultset.first();
+            return conn.resultset.getFloat(1);
+        } catch (SQLException ex) {
+            return 0;
+        }
     }
 
     public String proximadatapagar() {
@@ -206,8 +248,8 @@ public class ClasseParcelas {
         } catch (SQLException ex) {
         }
         ClasseDatas datas = new ClasseDatas();
-        conn.executeSQL("SELECT TO_CHAR(MAX(\"DT_PAGAR\"), 'DD/MM/YYYY') FROM bancoloja.\"PARCELAS\"\n" +
-                        "WHERE \"CD_CONTA\" = "+getConta().getCodigo()+" AND \"CD_OPERACAO\" = " + getConta().getOperacao().getCodigo());
+        conn.executeSQL("SELECT TO_CHAR(MAX(\"DT_PAGAR\"), 'DD/MM/YYYY') FROM bancoloja.\"PARCELAS\"\n"
+                + "WHERE \"VL_PAGAR\" IS NOT NULL AND \"CD_CONTA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO\" = " + getConta().getOperacao().getCodigo());
         try {
             conn.resultset.first();
             return datas.retornasoma(conn.resultset.getString(1), getConta().getCondicao().getIntervalodias());
@@ -219,6 +261,17 @@ public class ClasseParcelas {
     public int retornanumeroultimaparcela() {
         conn.executeSQL("SELECT MAX(\"CD_PARCELA\") FROM bancoloja.\"PARCELAS\"\n"
                 + "WHERE \"CD_CONTA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO\" = " + getConta().getOperacao().getCodigo());
+        try {
+            conn.resultset.first();
+            return conn.resultset.getInt(1);
+        } catch (SQLException ex) {
+            return 0;
+        }
+    }
+    
+    public int retornanumeroultimaparcelavalida() {
+        conn.executeSQL("SELECT MAX(\"CD_PARCELA\") FROM bancoloja.\"PARCELAS\"\n"
+                + "WHERE \"VL_PAGAR\" IS NOT NULL AND \"CD_CONTA\" = " + getConta().getCodigo() + " AND \"CD_OPERACAO\" = " + getConta().getOperacao().getCodigo());
         try {
             conn.resultset.first();
             return conn.resultset.getInt(1);

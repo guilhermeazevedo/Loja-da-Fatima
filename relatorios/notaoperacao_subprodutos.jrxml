@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="notaoperacao_subprodutos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1cfc2f43-3903-43a7-9bd5-b0b90b6eddc9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CD_COMPRA_VENDA" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CD_OPERACAO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT "P"."DS_PRODUTO", "PV"."QT_PRODUTO", "PV"."VL_PRODUTO_UNITARIO", "PV"."VL_PRODUTO"
+FROM bancoloja."PRODUTOS_COMPRA_VENDA" "PV"
+JOIN bancoloja."CAD_PRODUTO" "P"
+ON "P"."CD_PRODUTO" = "PV"."CD_PRODUTO"
+WHERE "PV"."CD_COMPRA_VENDA" = $P{CD_COMPRA_VENDA} AND "PV"."CD_OPERACAO" = $P{CD_OPERACAO}]]>
+	</queryString>
+	<field name="DS_PRODUTO" class="java.lang.String"/>
+	<field name="QT_PRODUTO" class="java.math.BigDecimal"/>
+	<field name="VL_PRODUTO_UNITARIO" class="java.math.BigDecimal"/>
+	<field name="VL_PRODUTO" class="java.math.BigDecimal"/>
+	<variable name="VL_PRODUTO_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_PRODUTO}]]></variableExpression>
+	</variable>
+	<variable name="VL_PRODUTO_2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_PRODUTO}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="30">
+			<staticText>
+				<reportElement uuid="cfb05e2f-ba63-4cb5-8edd-9d962184db5c" x="0" y="0" width="216" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e173c9fb-5b3a-490a-9b5a-c546ceab58bf" x="227" y="0" width="88" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QUANTIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c3d35341-86a5-416d-8299-8118d4e3eba6" x="326" y="0" width="105" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR UNITÁRIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="880cacae-27e0-4b3b-8e77-fb2953eae309" x="442" y="0" width="113" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="fa93b8ff-82d1-4815-be64-8d20e13468d5" x="442" y="0" width="113" height="23"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_PRODUTO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="21ec2b48-6e9b-4084-98fc-1a646a7407de" x="326" y="0" width="105" height="23"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_PRODUTO_UNITARIO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="a4efc93e-69a9-4666-b29b-3af5535ec7e2" x="227" y="0" width="88" height="23"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QT_PRODUTO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="75533c2b-4fd1-44c9-8d1e-70f95db92d83" x="0" y="0" width="216" height="23"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_PRODUTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="27">
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="c8587575-e9da-4af1-baa8-4c832eb733b2" x="442" y="7" width="113" height="20"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{VL_PRODUTO_2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c1f72ef7-adbb-43e1-b0f7-f7f6594a4b67" x="339" y="7" width="92" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR TOTAL:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="notaoperacao_subparcelas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9ff07d47-d887-4bed-b7bb-959a04d8d051">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CD_CONTA" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CD_OPERACAO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT "P"."CD_PARCELA", "P"."VL_PAGAR",
+TO_CHAR("P"."DT_PAGAR", 'DD/MM/YYYY')
+FROM bancoloja."PARCELAS" "P"
+WHERE "CD_CONTA" = $P{CD_CONTA} AND "CD_OPERACAO" = $P{CD_OPERACAO}
+ORDER BY "CD_PARCELA"]]>
+	</queryString>
+	<field name="CD_PARCELA" class="java.lang.Integer"/>
+	<field name="VL_PAGAR" class="java.math.BigDecimal"/>
+	<field name="to_char" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9c87ce04-8962-48f2-a725-6d42d49b58c6" x="0" y="0" width="145" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NRº DA PARCELA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c0523b2e-57db-4d04-8797-d4a23431b1cb" x="182" y="0" width="183" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VENCIMENTO PARCELA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b603cd05-8f08-4263-866e-547551d19ae5" x="396" y="0" width="159" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR DA PARCELA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement uuid="4550f2f1-1ae1-4116-8af5-ea232dde0729" x="0" y="0" width="145" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CD_PARCELA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2b472613-ba0d-43d0-9583-331b57414d42" x="182" y="0" width="183" height="20"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{to_char}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="9c23f3f3-6020-4fc6-8034-ffc070d8b46b" x="396" y="0" width="159" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VL_PAGAR}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

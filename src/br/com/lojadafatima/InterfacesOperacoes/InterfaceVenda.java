@@ -10,7 +10,9 @@ import br.com.lojadafatima.ClassesFerramentas.GeraCodigos;
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
+import br.com.lojadafatima.ClassesFerramentas.Relatorios;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseProdutosCompraVenda;
+import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.Financeiro.ClasseContasPagarReceber;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCliente;
@@ -25,6 +27,13 @@ import br.com.lojadafatima.Pessoa.ClasseCliente;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -47,6 +56,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
     ClasseCliente cliente = new ClasseCliente();
     boolean estoqueok = false;
     private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
+    ClasseParcelas parcelas = new ClasseParcelas();
 
     /**
      * Creates new form InterfaceVenda
@@ -799,7 +809,6 @@ public class InterfaceVenda extends javax.swing.JDialog {
                 prodcompravenda.getCompravenda().incluir();
 
                 ClasseMvtoEstoque mvestoque = new ClasseMvtoEstoque();
-                ClasseParcelas parcelas = new ClasseParcelas();
                 mvestoque.setCompravenda(prodcompravenda.getCompravenda());
                 mvestoque.setDtmvto(datas.retornadataehora());
                 mvestoque.setTpmvto("S");
@@ -833,7 +842,22 @@ public class InterfaceVenda extends javax.swing.JDialog {
                 tela.setVisible(true);
                 tela.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosed(java.awt.event.WindowEvent evt) {
-                        //imprimir nota de compra iReport
+//                        Relatorios rel = new Relatorios();
+//                        Map par = new HashMap();
+//                        par.put("$P{SUBREPORT_DIR}", "relatorios\\");
+//                        par.put("$P{CD_COMPRA_VENDA}", prodcompravenda.getCompravenda().getCodigo());
+//                        par.put("$P{CD_OPERACAO}", prodcompravenda.getCompravenda().getOperacao().getCodigo());
+//                        par.put("$P{CD_CONTA}", parcelas.getConta().getCodigo());
+//                        par.put("$P{PESSOA}", TfCliente.getText());
+//                        par.put("$P{FUNCIONARIO}", TfFuncionario.getText());
+//                        par.put("$P{CONDICAO}", TfCondicaoPgto.getText());
+//                        try {
+//                            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/lojafatima", "lojafatima", "lojafatima");
+//                            par.put("$P{REPORT_CONNECTION}", conn);
+//                            rel.iniciarSplash(prodcompravenda.getCompravenda().getOperacao().operacaorelatorio(), "relatorios\\notaoperacaoestoquefinanceiro.jasper",  par);
+//                        } catch (SQLException ex) {
+//                            
+//                        }
                     }
                 });
 
