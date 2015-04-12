@@ -490,15 +490,17 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                 if (parcelas.getConta().getCompravenda().getCodigo() != 0) {
                     parcelas.getConta().getCompravenda().getOperacao().retornaoperacao();
                     ClasseProdutosCompraVenda prodcompravenda = new ClasseProdutosCompraVenda();
-                    prodcompravenda.setCompravenda(parcelas.getConta().getCompravenda());
+                    prodcompravenda.getCompravenda().setCodigo(parcelas.getConta().getCompravenda().getCodigo());
+                    prodcompravenda.getCompravenda().getOperacao().setCodigo(parcelas.getConta().getOperacao().getCodigo());
+                    prodcompravenda.getCompravenda().getOperacao().retornaoperacao();
                     if (prodcompravenda.getCompravenda().getOperacao().getTpestoque().equals("E")) {
-                        if (!prodcompravenda.houveretiradadosprodutosenvolvidos()) {
+                        if (prodcompravenda.estoquedisponiveldetodososprodutos()) {
                             parcelas.getConta().cancelarconta();
                             prodcompravenda.getCompravenda().cancelarcompravenda();
                             prodcompravenda.reverterestoqueprodutos();
                             CbPesqContasActionPerformed(evt);
                         } else {
-                            JOptionPane.showMessageDialog(null, "Não é possivel realizar o cancelamento desta operação!\nOs produtos que entraram no estoque tem registro de saída.", "Cancelamento de operação não permitido", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Não é possivel realizar o cancelamento desta operação!\nOs produtos dessa operacao tem estoque disponivel menor que a quantidade para devolucao.", "Cancelamento de operação não permitido", JOptionPane.INFORMATION_MESSAGE);
                         }
                     } else {
                         parcelas.getConta().cancelarconta();
@@ -540,15 +542,15 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario() {
-        getTelasusuario().getTela().setCodigo(18);
-        if (!getTelasusuario().eadmintela()) {
-            BtPagar.setVisible(false);
-        }
-
-        getTelasusuario().getTela().setCodigo(7);
-        if (!getTelasusuario().eadmintela()) {
-            BtCadFormaPgto.setVisible(false);
-        }
+//        getTelasusuario().getTela().setCodigo(18);
+//        if (!getTelasusuario().eadmintela()) {
+//            BtPagar.setVisible(false);
+//        }
+//
+//        getTelasusuario().getTela().setCodigo(7);
+//        if (!getTelasusuario().eadmintela()) {
+//            BtCadFormaPgto.setVisible(false);
+//        }
     }
 
     public boolean parcelapaga() {

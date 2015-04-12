@@ -87,7 +87,7 @@ public class ClasseParcelas {
         ResultSet rs = retornaparcelas();
         try {
             while(rs.next()){
-                if(rs.getString(8).equals("PAGA")){
+                if(rs.getString(7).equals("PAGA")){
                     return true;
                 }
             }

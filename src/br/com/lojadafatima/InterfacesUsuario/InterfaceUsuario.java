@@ -652,10 +652,10 @@ public class InterfaceUsuario extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(ClasseTelasUsuario usuario){
-        usuario.getTela().setCodigo(8);
-        if(!usuario.eadmintela()){
-            PnBotoes.setVisible(false);
-        }
+//        usuario.getTela().setCodigo(8);
+//        if(!usuario.eadmintela()){
+//            PnBotoes.setVisible(false);
+//        }
     }
     
     public boolean camposobrigatoriospreenchidos() {

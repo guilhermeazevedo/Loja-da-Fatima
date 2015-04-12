@@ -454,12 +454,12 @@ public class InterfaceEstoque extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-        getTelasusuario().getTela().setCodigo(14);
-        if(!getTelasusuario().eadmintela()){
-            BtIniciar.setVisible(false);
-            BtEncerrar.setVisible(false);
-            BtAjustar.setVisible(false);
-        }
+//        getTelasusuario().getTela().setCodigo(14);
+//        if(!getTelasusuario().eadmintela()){
+//            BtIniciar.setVisible(false);
+//            BtEncerrar.setVisible(false);
+//            BtAjustar.setVisible(false);
+//        }
     }
     
     public java.awt.Frame getPrimeiratela() {

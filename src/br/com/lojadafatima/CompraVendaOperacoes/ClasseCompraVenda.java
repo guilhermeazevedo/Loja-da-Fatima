@@ -116,7 +116,7 @@ public class ClasseCompraVenda {
                 + "\"CV\".\"DS_COMPRA_VENDA\",\n"
                 + "TO_CHAR(\"CV\".\"DT_COMPRA_VENDA\", 'DD/MM/YYYY HH24:MI:SS')\n"
                 + "FROM bancoloja.\"COMPRA_VENDA\" \"CV\"\n"
-                + "WHERE \"CV\".\"CD_FUNCIONARIO\" = " + getFuncionario().getCodigo() + " AND \"CV\".\"CD_OPERACAO\" = " + getOperacao().getCodigo() + " AND \n"
+                + "WHERE \"CV\".\"CD_FUNCIONARIO\" = " + getFuncionario().getCodigo() + " AND \"CV\".\"CD_OPERACAO\" = " + getOperacao().getCodigo() + " AND \"CV\".\"DS_COMPRA_VENDA\" NOT LIKE '% - CANCELADO DIA %' AND\n"
                 + "DATE_PART('MONTH', \"CV\".\"DT_COMPRA_VENDA\") = DATE_PART('MONTH', CURRENT_DATE) AND\n"
                 + "DATE_PART('YEAR', \"CV\".\"DT_COMPRA_VENDA\") = DATE_PART('YEAR', CURRENT_DATE) ORDER BY \"CV\".\"CD_COMPRA_VENDA\" DESC");
         return conn.resultset;
@@ -137,7 +137,7 @@ public class ClasseCompraVenda {
                     + "\"CV\".\"DS_COMPRA_VENDA\",\n"
                     + "TO_CHAR(\"CV\".\"DT_COMPRA_VENDA\", 'DD/MM/YYYY HH24:MI:SS')\n"
                     + "FROM bancoloja.\"COMPRA_VENDA\" \"CV\"\n"
-                    + "WHERE \"CV\".\"CD_FUNCIONARIO\" = " + getFuncionario().getCodigo() + " AND \"CV\".\"CD_OPERACAO\" = " + getOperacao().getCodigo() + " AND \n"
+                    + "WHERE \"CV\".\"CD_FUNCIONARIO\" = " + getFuncionario().getCodigo() + " AND \"CV\".\"CD_OPERACAO\" = " + getOperacao().getCodigo() + " AND \"CV\".\"DS_COMPRA_VENDA\" NOT LIKE '% - CANCELADO DIA %' AND\n"
                     + "DATE_PART('MONTH', \"CV\".\"DT_COMPRA_VENDA\") = DATE_PART('MONTH', CURRENT_DATE - 31) AND\n"
                     + "DATE_PART('YEAR', \"CV\".\"DT_COMPRA_VENDA\") = (DATE_PART('YEAR', CURRENT_DATE) - 1) ORDER BY \"CV\".\"CD_COMPRA_VENDA\" DESC");
         } else {
@@ -146,7 +146,7 @@ public class ClasseCompraVenda {
                     + "\"CV\".\"DS_COMPRA_VENDA\",\n"
                     + "TO_CHAR(\"CV\".\"DT_COMPRA_VENDA\", 'DD/MM/YYYY HH24:MI:SS')\n"
                     + "FROM bancoloja.\"COMPRA_VENDA\" \"CV\"\n"
-                    + "WHERE \"CV\".\"CD_FUNCIONARIO\" = " + getFuncionario().getCodigo() + " AND \"CV\".\"CD_OPERACAO\" = " + getOperacao().getCodigo() + " AND \n"
+                    + "WHERE \"CV\".\"CD_FUNCIONARIO\" = " + getFuncionario().getCodigo() + " AND \"CV\".\"CD_OPERACAO\" = " + getOperacao().getCodigo() + " AND \"CV\".\"DS_COMPRA_VENDA\" NOT LIKE '% - CANCELADO DIA %' AND\n"
                     + "DATE_PART('MONTH', \"CV\".\"DT_COMPRA_VENDA\") = (DATE_PART('MONTH', CURRENT_DATE) - 1) AND\n"
                     + "DATE_PART('YEAR', \"CV\".\"DT_COMPRA_VENDA\") = DATE_PART('YEAR', CURRENT_DATE) ORDER BY \"CV\".\"CD_COMPRA_VENDA\" DESC");
         }
@@ -159,7 +159,7 @@ public class ClasseCompraVenda {
                 + "\"CV\".\"DS_COMPRA_VENDA\",\n"
                 + "TO_CHAR(\"CV\".\"DT_COMPRA_VENDA\", 'DD/MM/YYYY HH24:MI:SS')\n"
                 + "FROM bancoloja.\"COMPRA_VENDA\" \"CV\"\n"
-                + "WHERE \"CV\".\"CD_FUNCIONARIO\" = " + getFuncionario().getCodigo() + " AND \"CV\".\"CD_OPERACAO\" = " + getOperacao().getCodigo() + " AND \n"
+                + "WHERE \"CV\".\"CD_FUNCIONARIO\" = " + getFuncionario().getCodigo() + " AND \"CV\".\"CD_OPERACAO\" = " + getOperacao().getCodigo() + " AND \"CV\".\"DS_COMPRA_VENDA\" NOT LIKE '% - CANCELADO DIA %' AND\n"
                 + "DATE_PART('YEAR', \"CV\".\"DT_COMPRA_VENDA\") = DATE_PART('YEAR', CURRENT_DATE) ORDER BY \"CV\".\"CD_COMPRA_VENDA\" DESC");
         return conn.resultset;
     }
@@ -170,7 +170,7 @@ public class ClasseCompraVenda {
                 + "\"CV\".\"DS_COMPRA_VENDA\",\n"
                 + "TO_CHAR(\"CV\".\"DT_COMPRA_VENDA\", 'DD/MM/YYYY HH24:MI:SS')\n"
                 + "FROM bancoloja.\"COMPRA_VENDA\" \"CV\"\n"
-                + "WHERE \"CV\".\"CD_FUNCIONARIO\" = " + getFuncionario().getCodigo() + " AND \"CV\".\"CD_OPERACAO\" = " + getOperacao().getCodigo() + "\n ORDER BY \"CV\".\"CD_COMPRA_VENDA\" DESC");
+                + "WHERE \"CV\".\"CD_FUNCIONARIO\" = " + getFuncionario().getCodigo() + " AND \"CV\".\"CD_OPERACAO\" = " + getOperacao().getCodigo() + "\n AND \"CV\".\"DS_COMPRA_VENDA\" NOT LIKE '% - CANCELADO DIA %' ORDER BY \"CV\".\"CD_COMPRA_VENDA\" DESC");
         return conn.resultset;
     }
 

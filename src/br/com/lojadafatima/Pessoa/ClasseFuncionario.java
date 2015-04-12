@@ -26,6 +26,7 @@ public class ClasseFuncionario {
     private String funcao;
     private float salario;
     private float comissao;
+    private float maxdesconto;
 
     public void incluir() {
         getPessoafis().getPessoa().incluir();
@@ -33,8 +34,8 @@ public class ClasseFuncionario {
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_FUNCIONARIO", "CD_FUNCIONARIO"));
         conn.executeSQL("INSERT INTO bancoloja.\"CAD_FUNCIONARIO\"(\n"
-                + "\"CD_FUNCIONARIO\", \"CD_PESSOA_FIS\", \"DS_FUNCAO\", \"VL_SALARIO\", \"PE_COMISSAO\")\n"
-                + "VALUES (" + getCodigo() + ", " + getPessoafis().getPessoa().getCodigo() + ", '" + getFuncao().toUpperCase() + "', " + getSalario() + ", " + getComissao() + ");");
+                + "\"CD_FUNCIONARIO\", \"CD_PESSOA_FIS\", \"DS_FUNCAO\", \"VL_SALARIO\", \"PE_COMISSAO\", \"PE_MAX_DESCONTO\")\n"
+                + "VALUES (" + getCodigo() + ", " + getPessoafis().getPessoa().getCodigo() + ", '" + getFuncao().toUpperCase() + "', " + getSalario() + ", " + getComissao() + ", " + getMaxdesconto() + ");");
     }
 
     public void alterar() {
@@ -42,7 +43,7 @@ public class ClasseFuncionario {
         getPessoafis().getPessoa().getEndereco().setCodigopessoa(getPessoafis().getPessoa().getCodigo());
         getPessoafis().getPessoa().getEndereco().alterar();
         conn.executeSQL("UPDATE bancoloja.\"CAD_FUNCIONARIO\"\n"
-                + "SET \"DS_FUNCAO\"='" + getFuncao().toUpperCase() + "', \"VL_SALARIO\"=" + getSalario() + ", \"PE_COMISSAO\"=" + getComissao() + "\n"
+                + "SET \"DS_FUNCAO\"='" + getFuncao().toUpperCase() + "', \"VL_SALARIO\"=" + getSalario() + ", \"PE_COMISSAO\"=" + getComissao() + ", \"PE_MAX_DESCONTO\"=" + getMaxdesconto() + "\n"
                 + "WHERE \"CD_FUNCIONARIO\" = " + getCodigo() + "");
     }
 
@@ -108,23 +109,23 @@ public class ClasseFuncionario {
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_FUNCIONARIO", "CD_FUNCIONARIO"));
         conn.executeSQL("INSERT INTO bancoloja.\"CAD_FUNCIONARIO\"(\n"
-                + "\"CD_FUNCIONARIO\", \"CD_PESSOA_FIS\", \"DS_FUNCAO\", \"VL_SALARIO\", \"PE_COMISSAO\")\n"
-                + "VALUES (" + getCodigo() + ", " + getPessoafis().getPessoa().getCodigo() + ", '" + getFuncao().toUpperCase() + "', " + getSalario() + ", " + getComissao() + ");");
+                + "\"CD_FUNCIONARIO\", \"CD_PESSOA_FIS\", \"DS_FUNCAO\", \"VL_SALARIO\", \"PE_COMISSAO\", \"PE_MAX_DESCONTO\")\n"
+                + "VALUES (" + getCodigo() + ", " + getPessoafis().getPessoa().getCodigo() + ", '" + getFuncao().toUpperCase() + "', " + getSalario() + ", " + getComissao() + ", " + getMaxdesconto() + ");");
     }
 
     public float retornasalariomaiscomissao() {
-        conn.executeSQL("SELECT \"C\".\"VL_TOTAL\"\n" +
-                        "FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n" +
-                        "JOIN bancoloja.\"COMPRA_VENDA\" \"CV\"\n" +
-                        "ON \"CV\".\"CD_COMPRA_VENDA\" = \"C\".\"CD_COMPRA_VENDA\" AND \"CV\".\"CD_OPERACAO\" = \"C\".\"CD_OPERACAO_COMPRA_VENDA\"\n" +
-                        "WHERE \"CV\".\"CD_OPERACAO\" = 2\n" +
-                        "AND \"CV\".\"CD_FUNCIONARIO\" =  "+ getCodigo()+" \n" +
-                        "AND DATE_PART('MONTH', \"CV\".\"DT_COMPRA_VENDA\") = DATE_PART('MONTH', CURRENT_DATE)\n" +
-                        "AND DATE_PART('YEAR', \"CV\".\"DT_COMPRA_VENDA\") = DATE_PART('YEAR', CURRENT_DATE)");
+        conn.executeSQL("SELECT \"C\".\"VL_TOTAL\"\n"
+                + "FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n"
+                + "JOIN bancoloja.\"COMPRA_VENDA\" \"CV\"\n"
+                + "ON \"CV\".\"CD_COMPRA_VENDA\" = \"C\".\"CD_COMPRA_VENDA\" AND \"CV\".\"CD_OPERACAO\" = \"C\".\"CD_OPERACAO_COMPRA_VENDA\"\n"
+                + "WHERE \"CV\".\"CD_OPERACAO\" = 2\n"
+                + "AND \"CV\".\"CD_FUNCIONARIO\" =  " + getCodigo() + " \n"
+                + "AND DATE_PART('MONTH', \"CV\".\"DT_COMPRA_VENDA\") = DATE_PART('MONTH', CURRENT_DATE)\n"
+                + "AND DATE_PART('YEAR', \"CV\".\"DT_COMPRA_VENDA\") = DATE_PART('YEAR', CURRENT_DATE)");
         float comissaosobrevendas = 0;
         try {
-            while(conn.resultset.next()){
-                comissaosobrevendas = comissaosobrevendas + ((conn.resultset.getFloat(1)*getComissao())/100);
+            while (conn.resultset.next()) {
+                comissaosobrevendas = comissaosobrevendas + ((conn.resultset.getFloat(1) * getComissao()) / 100);
                 System.out.println(comissaosobrevendas);
             }
             return comissaosobrevendas + getSalario();
@@ -188,7 +189,7 @@ public class ClasseFuncionario {
     }
 
     public void retornafuncionario() {
-        conn.executeSQL("SELECT \"DS_FUNCAO\", \"VL_SALARIO\", \"PE_COMISSAO\"\n"
+        conn.executeSQL("SELECT \"DS_FUNCAO\", \"VL_SALARIO\", \"PE_COMISSAO\", \"PE_MAX_DESCONTO\"\n"
                 + "FROM bancoloja.\"CAD_FUNCIONARIO\"\n"
                 + "WHERE \"CD_FUNCIONARIO\" = " + getCodigo() + "");
         try {
@@ -196,8 +197,20 @@ public class ClasseFuncionario {
             setFuncao(conn.resultset.getString(1));
             setSalario(conn.resultset.getFloat(2));
             setComissao(conn.resultset.getFloat(3));
+            setMaxdesconto(conn.resultset.getFloat(4));
         } catch (SQLException ex) {
 
+        }
+    }
+
+    public float percentmaxdesconto() {
+        conn.executeSQL("SELECT \"PE_MAX_DESCONTO\" FROM bancoloja.\"CAD_FUNCIONARIO\"\n"
+                + "WHERE \"CD_FUNCIONARIO\" = "+getCodigo());
+        try {
+            conn.resultset.first();
+            return conn.resultset.getFloat(1);
+        } catch (SQLException ex) {
+            return 0;
         }
     }
 
@@ -239,6 +252,14 @@ public class ClasseFuncionario {
 
     public void setComissao(float comissao) {
         this.comissao = comissao;
+    }
+
+    public float getMaxdesconto() {
+        return maxdesconto;
+    }
+
+    public void setMaxdesconto(float maxdesconto) {
+        this.maxdesconto = maxdesconto;
     }
 
 }

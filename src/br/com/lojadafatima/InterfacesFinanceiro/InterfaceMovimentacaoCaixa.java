@@ -233,10 +233,10 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-        getTelasusuario().getTela().setCodigo(19);
-        if(!getTelasusuario().eadmintela()){
-            BtGerarRelatorio.setVisible(false);
-        }
+//        getTelasusuario().getTela().setCodigo(19);
+//        if(!getTelasusuario().eadmintela()){
+//            BtGerarRelatorio.setVisible(false);
+//        }
     }
     
     public java.awt.Frame getPrimeiratela() {

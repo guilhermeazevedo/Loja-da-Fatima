@@ -8,6 +8,7 @@ package br.com.lojadafatima.InterfacesPessoa;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.DadosPessoa.ClasseCidade;
@@ -27,6 +28,7 @@ public class InterfaceCidade extends javax.swing.JDialog {
     ClasseCidade cidade = new ClasseCidade();
     LimpaCamposTela limpar = new LimpaCamposTela();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
+    MensagensUsuario msg = new MensagensUsuario();
     
     public InterfaceCidade(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super (telaorigem, modal);
@@ -69,6 +71,8 @@ public class InterfaceCidade extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         CbEstado = new javax.swing.JComboBox();
         BtCadEstado = new javax.swing.JButton();
+        jPanel24 = new javax.swing.JPanel();
+        LbNotificacoes = new javax.swing.JLabel();
 
         MnItAlterar.setText("Alterar Cidade");
         MnItAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -142,6 +146,21 @@ public class InterfaceCidade extends javax.swing.JDialog {
             }
         });
 
+        LbNotificacoes.setText(" ");
+
+        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
+        jPanel24.setLayout(jPanel24Layout);
+        jPanel24Layout.setHorizontalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addComponent(LbNotificacoes)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel24Layout.setVerticalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LbNotificacoes)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -149,26 +168,29 @@ public class InterfaceCidade extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(CbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtCadEstado)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)))
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(BtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BtLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(CbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtCadEstado)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +205,7 @@ public class InterfaceCidade extends javax.swing.JDialog {
                     .addComponent(TfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtCadEstado))
@@ -193,7 +215,9 @@ public class InterfaceCidade extends javax.swing.JDialog {
                     .addComponent(BtLimpar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,7 +228,7 @@ public class InterfaceCidade extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -219,20 +243,24 @@ public class InterfaceCidade extends javax.swing.JDialog {
             if(TfCodigo.getText().equals("")){
                 opcao = JOptionPane.showConfirmDialog(rootPane, "Incluir nova Cidade?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if(opcao == JOptionPane.YES_OPTION)
-                cidade.incluir();
+                if (cidade.incluir()){
+                    msg.Sucesso(LbNotificacoes, "Dados da Cidade gravados com sucesso!");
+                }
                 limpar.Limpar(jPanel1);
                 limpar.Limpar(TbCidades);
             } else {
                 cidade.setCodigo(Integer.parseInt(TfCodigo.getText()));
                 opcao = JOptionPane.showConfirmDialog(rootPane, "Alterar dados da Cidade?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if(opcao == JOptionPane.YES_OPTION)
-                cidade.alterar();
+                if (cidade.alterar()){
+                    msg.Sucesso(LbNotificacoes, "Dados da Cidade alterados com sucesso!");
+                }
                 limpar.Limpar(jPanel1);
                 limpar.Limpar(TbCidades);
             }
             preenche.PreencherJtable(TbCidades, cidade.buscarcidadesjtable());
         }else{
-            JOptionPane.showMessageDialog(rootPane, "Digite o Nome da Cidade", "Campos Obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacoes, "Digite o Nome da Cidade!");
             TfCidade.grabFocus();
         }
     }//GEN-LAST:event_BtGravarActionPerformed
@@ -248,6 +276,7 @@ public class InterfaceCidade extends javax.swing.JDialog {
             TfCodigo.setText(TbCidades.getValueAt(index, 0).toString());
             TfCidade.setText(TbCidades.getValueAt(index, 1).toString());
             CbEstado.setSelectedItem(TbCidades.getValueAt(index, 2).toString());
+            msg.StatusEditar(LbNotificacoes, "Editando informações...");
         }
     }//GEN-LAST:event_MnItAlterarActionPerformed
 
@@ -271,6 +300,29 @@ public class InterfaceCidade extends javax.swing.JDialog {
     private javax.swing.JButton BtGravar;
     private javax.swing.JButton BtLimpar;
     private javax.swing.JComboBox CbEstado;
+    private javax.swing.JLabel LbNotificacao;
+    private javax.swing.JLabel LbNotificacao1;
+    private javax.swing.JLabel LbNotificacao10;
+    private javax.swing.JLabel LbNotificacao11;
+    private javax.swing.JLabel LbNotificacao12;
+    private javax.swing.JLabel LbNotificacao13;
+    private javax.swing.JLabel LbNotificacao14;
+    private javax.swing.JLabel LbNotificacao15;
+    private javax.swing.JLabel LbNotificacao16;
+    private javax.swing.JLabel LbNotificacao17;
+    private javax.swing.JLabel LbNotificacao18;
+    private javax.swing.JLabel LbNotificacao19;
+    private javax.swing.JLabel LbNotificacao2;
+    private javax.swing.JLabel LbNotificacao20;
+    private javax.swing.JLabel LbNotificacao21;
+    private javax.swing.JLabel LbNotificacao3;
+    private javax.swing.JLabel LbNotificacao4;
+    private javax.swing.JLabel LbNotificacao5;
+    private javax.swing.JLabel LbNotificacao6;
+    private javax.swing.JLabel LbNotificacao7;
+    private javax.swing.JLabel LbNotificacao8;
+    private javax.swing.JLabel LbNotificacao9;
+    private javax.swing.JLabel LbNotificacoes;
     private javax.swing.JMenuItem MnItAlterar;
     private javax.swing.JTable TbCidades;
     private javax.swing.JTextField TfCidade;
@@ -279,20 +331,43 @@ public class InterfaceCidade extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
     
     public void analisausuario(){
-        getTelasusuario().getTela().setCodigo(5);
-        if(!getTelasusuario().eadmintela()){
-            BtGravar.setVisible(false);
-        }
-        getTelasusuario().getTela().setCodigo(4);
-        if(!getTelasusuario().eadmintela()){
-            BtCadEstado.setVisible(false);
-        }
+//        getTelasusuario().getTela().setCodigo(5);
+//        if(!getTelasusuario().eadmintela()){
+//            BtGravar.setVisible(false);
+//        }
+//        getTelasusuario().getTela().setCodigo(4);
+//        if(!getTelasusuario().eadmintela()){
+//            BtCadEstado.setVisible(false);
+//        }
     }
     
     public java.awt.Frame getPrimeiratela() {

@@ -60,7 +60,6 @@ public class ConexaoPostgre {
         try {
             statement = ConexaoPostgre.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             statement.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null, "Dados cadastrados com sucesso!");
             retorno = 1;
         } catch (SQLException sqlex) {
             if (sqlex.getErrorCode() == 00001) {
@@ -88,9 +87,6 @@ public class ConexaoPostgre {
             statement = ConexaoPostgre.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             retorno = 0;
             retorno = statement.executeUpdate(sql);
-            if (retorno == 1) {
-                JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
-            }
         } catch (SQLException sqlex) {
             if (sqlex.getErrorCode() == 2292) {
                 JOptionPane.showMessageDialog(null, "O resgistro não pôde ser excluído porque ele está sendo utilizado em outro cadastro/movimento");
@@ -106,9 +102,6 @@ public class ConexaoPostgre {
             statement = ConexaoPostgre.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             retorno = 0;
             retorno = statement.executeUpdate(sql);
-            if (retorno == 1) {
-                JOptionPane.showMessageDialog(null, "Atualização dos dados realizada com sucesso!");
-            }
         } catch (SQLException sqlex) {
             if (sqlex.getErrorCode() == 2292) {
                 JOptionPane.showMessageDialog(null, "Os dados não puderam ser atualizados pois estão sendo utilizados");

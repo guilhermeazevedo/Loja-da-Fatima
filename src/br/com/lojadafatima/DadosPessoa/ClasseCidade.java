@@ -25,20 +25,24 @@ public class ClasseCidade {
         return conn.resultset;
     }
     
-    public void incluir(){
+    public boolean incluir(){
         GeraCodigos geracodigo = new GeraCodigos();
         setCodigo(geracodigo.gerasequencia("CAD_CIDADE", "CD_CIDADE"));
         getEstado().setCodigo(getEstado().retornacodigo());
         conn.incluirSQL("INSERT INTO bancoloja.\"CAD_CIDADE\"(\n" +
                         "\"CD_CIDADE\", \"CD_UF\", \"NM_CIDADE\")\n" +
                         "VALUES ( "+getCodigo()+" , "+getEstado().getCodigo()+", '"+getCidade().toUpperCase()+"');");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
-    public void alterar(){
+    public boolean alterar(){
         getEstado().setCodigo(getEstado().retornacodigo());
         conn.atualizarSQL("UPDATE bancoloja.\"CAD_CIDADE\"\n" +
                           "SET \"CD_UF\"="+getEstado().getCodigo()+", \"NM_CIDADE\"='"+getCidade().toUpperCase()+"'\n" +
                           "WHERE \"CD_CIDADE\"='"+getCodigo()+"';");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
     public ResultSet buscarcidadesporestado(){

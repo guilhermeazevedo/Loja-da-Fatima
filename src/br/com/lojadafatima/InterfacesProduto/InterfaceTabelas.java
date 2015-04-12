@@ -495,11 +495,11 @@ public class InterfaceTabelas extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-        getTelasusuario().getTela().setCodigo(13);
-        if(!getTelasusuario().eadmintela()){
-            BtGravar.setVisible(false);
-            BtGravar1.setVisible(false);
-        }
+//        getTelasusuario().getTela().setCodigo(13);
+//        if(!getTelasusuario().eadmintela()){
+//            BtGravar.setVisible(false);
+//            BtGravar1.setVisible(false);
+//        }
     }
     
     public java.awt.Frame getPrimeiratela() {

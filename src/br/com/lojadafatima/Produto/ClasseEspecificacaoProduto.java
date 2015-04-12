@@ -33,7 +33,7 @@ public class ClasseEspecificacaoProduto {
     }
     
     public ResultSet consultatipoproduto(){
-        conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\", \"P\".\"VL_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\"\n" +
+        conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\"\n" +
                         "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n" +
                         "JOIN bancoloja.\"CAD_CARACTERISTICAS_PRODUTO\" \"CP\" ON \"P\".\"CD_PRODUTO\" = \"CP\".\"CD_PRODUTO\"\n" +
                         "JOIN bancoloja.\"CAD_TIPO_PRODUTO\" \"TP\" ON \"CP\".\"CD_TIPO_PRODUTO\" = \"TP\".\"CD_TIPO_PRODUTO\"\n" +

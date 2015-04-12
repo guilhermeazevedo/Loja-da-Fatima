@@ -295,10 +295,10 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-        getTelasusuario().getTela().setCodigo(6);
-        if(!getTelasusuario().eadmintela()){
-            BtGravar.setVisible(false);
-        }
+//        getTelasusuario().getTela().setCodigo(6);
+//        if(!getTelasusuario().eadmintela()){
+//            BtGravar.setVisible(false);
+//        }
     }
     
     public boolean camposobrigatoriospreenchidos() {

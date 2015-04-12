@@ -120,6 +120,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
 
         jLabel2.setText("Salário:");
 
+        BtPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/dinheiro.png"))); // NOI18N
         BtPagar.setText("Pagar Salário");
         BtPagar.setEnabled(false);
         BtPagar.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +163,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                             .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
                                 .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(BtPagar)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         PnRealizaPgtoLayout.setVerticalGroup(
@@ -171,7 +172,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -357,10 +358,10 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario() {
-        getTelasusuario().getTela().setCodigo(20);
-        if (!getTelasusuario().eadmintela()) {
-            BtPagar.setVisible(false);
-        }
+//        getTelasusuario().getTela().setCodigo(20);
+//        if (!getTelasusuario().eadmintela()) {
+//            BtPagar.setVisible(false);
+//        }
     }
 
     public void preenchercomboanos() {

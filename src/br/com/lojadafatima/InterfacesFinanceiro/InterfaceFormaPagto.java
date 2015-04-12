@@ -248,10 +248,10 @@ public class InterfaceFormaPagto extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisarusuario(){
-        getTelasusario().getTela().setCodigo(7);
-        if(!getTelasusario().eadmintela()){
-            BtGravar.setVisible(false);
-        }
+//        getTelasusario().getTela().setCodigo(7);
+//        if(!getTelasusario().eadmintela()){
+//            BtGravar.setVisible(false);
+//        }
     }
     
     public java.awt.Frame getPrimeiratela() {

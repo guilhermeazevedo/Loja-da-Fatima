@@ -69,21 +69,21 @@ public class ClasseProdutosCompraVenda {
         }
     }
 
-    public boolean houveretiradadosprodutosenvolvidos() {
-        conn.executeSQL("SELECT \"CV\".\"CD_COMPRA_VENDA\"\n"
-                + "FROM bancoloja.\"COMPRA_VENDA\" \"CV\"\n"
-                + "JOIN bancoloja.\"PRODUTOS_COMPRA_VENDA\" \"PCV\"\n"
-                + "ON \"CV\".\"CD_COMPRA_VENDA\" = \"PCV\".\"CD_COMPRA_VENDA\" AND \"CV\".\"CD_OPERACAO\" = \"PCV\".\"CD_OPERACAO\"\n"
-                + "WHERE \"CV\".\"CD_OPERACAO\" IN (SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\" WHERE \"TP_ESTOQUE\" = 'S') AND\n"
-                + "      \"PCV\".\"CD_PRODUTO\" IN (SELECT \"CD_PRODUTO\" FROM bancoloja.\"PRODUTOS_COMPRA_VENDA\" WHERE \"CD_COMPRA_VENDA\" = " + getCompravenda().getCodigo() + " AND \"CD_OPERACAO\" = " + getCompravenda().getOperacao().getCodigo() + ") AND\n"
-                + "      \"CV\".\"DT_COMPRA_VENDA\" > (SELECT \"DT_COMPRA_VENDA\" FROM bancoloja.\"COMPRA_VENDA\" WHERE \"CD_COMPRA_VENDA\" = " + getCompravenda().getCodigo() + " AND \"CD_OPERACAO\" = " + getCompravenda().getOperacao().getCodigo() + ") AND\n"
-                + "      \"CV\".\"DS_COMPRA_VENDA\" NOT LIKE '% - CANCELADO DIA %'");
+    public boolean estoquedisponiveldetodososprodutos() {
+        conn.executeSQL("SELECT \"CD_PRODUTO\", \"QT_PRODUTO\" FROM bancoloja.\"PRODUTOS_COMPRA_VENDA\"\n" +
+                        "WHERE \"CD_COMPRA_VENDA\" = "+getCompravenda().getCodigo()+" AND \"CD_OPERACAO\" = "+getCompravenda().getOperacao().getCodigo());
+        ClasseMvtoEstoque estoque = new ClasseMvtoEstoque();
+        ResultSet rs = conn.resultset;
         try {
-            conn.resultset.first();
-            conn.resultset.getString(1);
+            while(rs.next()){
+                estoque.getProduto().setCodigo(rs.getInt(1));
+                if(estoque.retornaestoqueatual() < rs.getFloat(2)){
+                    return false;
+                }
+            }
             return true;
         } catch (SQLException ex) {
-            return false;
+            return true;
         }
     }
 

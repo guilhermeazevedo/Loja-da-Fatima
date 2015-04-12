@@ -71,6 +71,11 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         analisausuario();
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         TbProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        if(prodcompravenda.getCompravenda().getOperacao().getTpfinanceiro().equals("S")){
+            jLabel13.setVisible(false);
+            jLabel16.setVisible(false);
+            TfDesconto.setVisible(false);
+        }
     }
 
     /**
@@ -138,6 +143,10 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         TfValorUnitario = new JNumberField.JNumberField();
         TfValorProduto = new JNumberField.JNumberField();
         TfValorTotalOperacao = new JNumberField.JNumberField();
+        jLabel6 = new javax.swing.JLabel();
+        TfDesconto = new JNumberField.JNumberField(2);
+        ;
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Operação de Estoque e Financeiro - Software Loja da Fátima");
@@ -272,7 +281,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
         jLabel14.setText("Valor Total do Produto");
 
-        jLabel16.setText("Valor Total da Compra");
+        jLabel16.setText("Valor Total da Operacao");
 
         TbProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -402,6 +411,17 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
         TfValorTotalOperacao.setEditable(false);
 
+        jLabel6.setText("%");
+
+        TfDesconto.setEditable(false);
+        TfDesconto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TfDescontoKeyReleased(evt);
+            }
+        });
+
+        jLabel13.setText("Desconto");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -428,24 +448,61 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(CbPessoa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(BtIncluirProdutoTabela)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtRemoverProdutoTabela))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel9))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel10)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addGap(51, 51, 51)
+                                        .addComponent(jLabel12))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(TfCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(BtPesqProduto))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(29, 29, 29)
+                                                .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(41, 41, 41)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TfValorTotalOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel16))
+                                .addGap(36, 36, 36)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(TfDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6))
+                                    .addComponent(jLabel13)))
                             .addComponent(PnBotoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(171, 171, 171)
                                 .addComponent(TfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(BtCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(TfValorTotalOperacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(17, 17, 17))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -485,41 +542,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtCadPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(BtIncluirProdutoTabela)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtRemoverProdutoTabela))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel9))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel10))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel11)
-                                                .addGap(51, 51, 51)
-                                                .addComponent(jLabel12))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(TfCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(BtPesqProduto))
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addGap(29, 29, 29)
-                                                        .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                        .addGap(61, 61, 61)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel14)
-                                            .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(BtCadPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGap(51, 51, 51))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -589,13 +612,16 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                     .addComponent(jLabel11)
                     .addComponent(jLabel12)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel16))
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfValorTotalOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TfValorTotalOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(TfDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtIncluirProdutoTabela)
@@ -706,43 +732,21 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         if (!TfCodProduto.getText().equals("")) {
             prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
             if (prodcompravenda.getForneproduto().getProduto().eprodutoativo()) {
-                if (prodcompravenda.getCompravenda().getOperacao().getTpestoque().equals("E")) {
-                    if (CbPessoa.getSelectedItem().toString().equals("Fornecedor")) {
-                        if (!TfCodPessoa.getText().equals("")) {
-                            if (prodcompravenda.getForneproduto().produtodestefornecedor()) {
-                                TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
-                                TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto()));
-                                TfQuantidade.setValue(BigDecimal.valueOf(0));
-                                TfValorProduto.setValue(BigDecimal.valueOf(0));
-                            } else {
-                                TfProduto.setText("");
-                                TfValorUnitario.setValue(BigDecimal.valueOf(0));
-                                TfQuantidade.setValue(BigDecimal.valueOf(0));
-                                TfValorProduto.setText("");
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Insira o fornecedor para que o sistema faca a busca\napenas dos produtos deste fornecedor!", "Insira o fornecedor", JOptionPane.INFORMATION_MESSAGE);
-                            TfCodProduto.setText("");
-                            TfCodPessoa.grabFocus();
-                        }
-                    } else {
-                        TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
-                        TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto()));
-                        TfQuantidade.setValue(BigDecimal.valueOf(0));
-                        TfValorProduto.setValue(BigDecimal.valueOf(0));
-                    }
-                } else {
-                    TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
-                    TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().retornavalorunitarioproduto()));
-                    TfQuantidade.setValue(BigDecimal.valueOf(0));
-                    TfValorProduto.setValue(BigDecimal.valueOf(0));
+                TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
+                TfQuantidade.setValue(BigDecimal.valueOf(0));
+                TfValorProduto.setValue(BigDecimal.valueOf(0));
+                if(prodcompravenda.getCompravenda().getOperacao().getTpfinanceiro().equals("E")){
+                    TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().mediavalordecompraproduto() + ((prodcompravenda.getForneproduto().getProduto().mediavalordecompraproduto() * prodcompravenda.getForneproduto().getProduto().retornapercentuallucro())/100)));
+                }else{
+                    TfValorUnitario.setValue(BigDecimal.valueOf(prodcompravenda.getForneproduto().getProduto().mediavalordecompraproduto()));
                 }
             } else {
                 TfProduto.setText("");
                 TfValorUnitario.setValue(BigDecimal.valueOf(0));
                 TfQuantidade.setValue(BigDecimal.valueOf(0));
-                TfValorProduto.setText("");
+                TfValorProduto.setValue(BigDecimal.valueOf(0));
             }
+
         } else {
             TfProduto.setText("");
             TfValorUnitario.setValue(BigDecimal.valueOf(0));
@@ -1042,23 +1046,32 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private void TfCodFuncionarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodFuncionarioFocusLost
         if (TfFuncionario.getText().equals("")) {
             TfCodFuncionario.setText("");
+            JOptionPane.showMessageDialog(null, "Digite o codigo do funcionario corretamente!", "Codigo inesxistente", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            prodcompravenda.getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TfCodFuncionario.getText()));
+            if(prodcompravenda.getCompravenda().getFuncionario().percentmaxdesconto() > 0){
+                TfDesconto.setEditable(true);
+            }else{
+                TfDesconto.setEditable(false);
+            }
         }
     }//GEN-LAST:event_TfCodFuncionarioFocusLost
 
     private void TfCodPessoaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodPessoaFocusLost
         if (TfPessoa.getText().equals("")) {
             TfCodPessoa.setText("");
+            JOptionPane.showMessageDialog(null, "Digite o codigo corretamente!", "Codigo inesxistente", JOptionPane.INFORMATION_MESSAGE);
         } else {
             if (CbPessoa.getSelectedItem().toString().equals("Fornecedor") && prodcompravenda.getCompravenda().getOperacao().getTpestoque().equals("E")) {
                 prodcompravenda.getForneproduto().getFornecedor().setCodigo(Integer.parseInt(TfCodPessoa.getText()));
             }
             if (prodcompravenda.getCompravenda().getOperacao().getTpfinanceiro().equals("E")) {
                 ClasseContasPagarReceber contas = new ClasseContasPagarReceber();
-                if(CbPessoa.getSelectedItem().toString().equals("Fornecedor")){
+                if (CbPessoa.getSelectedItem().toString().equals("Fornecedor")) {
                     ClasseFornecedor forn = new ClasseFornecedor();
                     forn.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
                     contas.setCodigopessoa(forn.retornacodigopessoafornecedor());
-                }else{
+                } else {
                     ClasseCliente cliente = new ClasseCliente();
                     cliente.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
                     contas.setCodigopessoa(cliente.retornacodigopessoacliente());
@@ -1078,8 +1091,17 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private void TfCodCondicaoPgtoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodCondicaoPgtoFocusLost
         if (TfCondicaoPgto.getText().equals("")) {
             TfCodCondicaoPgto.setText("");
+            JOptionPane.showMessageDialog(null, "Digite o codigo da condicao de pagamento corretamente!", "Codigo inesxistente", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_TfCodCondicaoPgtoFocusLost
+
+    private void TfDescontoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfDescontoKeyReleased
+        if(TfValorTotalOperacao.getValue() != BigDecimal.valueOf(0)){
+            float valorcomdesconto;
+            valorcomdesconto = Float.parseFloat(TfValorTotalOperacao.getValue().toString()) + ((Float.parseFloat(TfValorTotalOperacao.getValue().toString()) * prodcompravenda.getCompravenda().getFuncionario().percentmaxdesconto())/ 100);
+            TfValorTotalOperacao.setValue(BigDecimal.valueOf(valorcomdesconto));
+        }
+    }//GEN-LAST:event_TfDescontoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1109,6 +1131,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private javax.swing.JTextField TfCondicaoPgto;
     private javax.swing.JFormattedTextField TfData;
     private javax.swing.JTextField TfDescOperacao;
+    private JNumberField.JNumberField TfDesconto;
     private javax.swing.JTextField TfFuncionario;
     private javax.swing.JTextField TfPessoa;
     private javax.swing.JTextField TfProduto;
@@ -1120,6 +1143,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
@@ -1127,6 +1151,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1136,36 +1161,36 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario() {
-        if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
-            getTelasusuario().getTela().setCodigo(1);
-            if (!getTelasusuario().eadmintela()) {
-                BtCadPessoa.setVisible(false);
-            } else {
-                BtCadPessoa.setVisible(true);
-            }
-        } else {
-            getTelasusuario().getTela().setCodigo(2);
-            if (!getTelasusuario().eadmintela()) {
-                BtCadPessoa.setVisible(false);
-            } else {
-                BtCadPessoa.setVisible(true);
-            }
-        }
-
-        getTelasusuario().getTela().setCodigo(3);
-        if (!getTelasusuario().eadmintela()) {
-            BtCadFuncionario.setVisible(false);
-        }
-
-        getTelasusuario().getTela().setCodigo(11);
-        if (!getTelasusuario().eadmintela()) {
-            BtCadProduto.setVisible(false);
-        }
-
-        getTelasusuario().getTela().setCodigo(6);
-        if (!getTelasusuario().eadmintela()) {
-            BtCadCondicaoPgto.setVisible(false);
-        }
+//        if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
+//            getTelasusuario().getTela().setCodigo(1);
+//            if (!getTelasusuario().eadmintela()) {
+//                BtCadPessoa.setVisible(false);
+//            } else {
+//                BtCadPessoa.setVisible(true);
+//            }
+//        } else {
+//            getTelasusuario().getTela().setCodigo(2);
+//            if (!getTelasusuario().eadmintela()) {
+//                BtCadPessoa.setVisible(false);
+//            } else {
+//                BtCadPessoa.setVisible(true);
+//            }
+//        }
+//
+//        getTelasusuario().getTela().setCodigo(3);
+//        if (!getTelasusuario().eadmintela()) {
+//            BtCadFuncionario.setVisible(false);
+//        }
+//
+//        getTelasusuario().getTela().setCodigo(11);
+//        if (!getTelasusuario().eadmintela()) {
+//            BtCadProduto.setVisible(false);
+//        }
+//
+//        getTelasusuario().getTela().setCodigo(6);
+//        if (!getTelasusuario().eadmintela()) {
+//            BtCadCondicaoPgto.setVisible(false);
+//        }
     }
 
     public void atualizavalortotal() {

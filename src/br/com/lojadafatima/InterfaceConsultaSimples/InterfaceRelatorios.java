@@ -499,13 +499,13 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
                     if (parcelas.getConta().getCompravenda().getCodigo() != 0) {
                         parcelas.getConta().getCompravenda().getOperacao().retornaoperacao();
                         if (prodcompravenda.getCompravenda().getOperacao().getTpestoque().equals("E")) {
-                            if (!prodcompravenda.houveretiradadosprodutosenvolvidos()) {
+                            if (prodcompravenda.estoquedisponiveldetodososprodutos()) {
                                 parcelas.getConta().cancelarconta();
                                 prodcompravenda.getCompravenda().cancelarcompravenda();
                                 prodcompravenda.reverterestoqueprodutos();
                                 consultaoperacoesfuncionario();
                             } else {
-                                JOptionPane.showMessageDialog(null, "Nao é possível realizar o cancelamento desta operação!\nOs produtos que entraram no estoque tem registro de saída.", "Cancelamento de operação nao permitido", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Nao é possível realizar o cancelamento desta operação!\nOs produtos dessa compra tem estoque disponivel menor que a quantidade a ser devolvida.", "Cancelamento de operação não permitido", JOptionPane.INFORMATION_MESSAGE);
                             }
                         } else {
                             parcelas.getConta().cancelarconta();

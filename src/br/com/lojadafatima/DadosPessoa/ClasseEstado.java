@@ -30,18 +30,22 @@ public class ClasseEstado {
         return conn.resultset;
     }
     
-    public void incluir(){
+    public boolean incluir(){
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_UF", "CD_UF"));
         if(getCodigo() != 0)
         conn.incluirSQL("INSERT INTO bancoloja.\"CAD_UF\"(\"CD_UF\", \"NM_UF\", \"DS_SIGLA\")\n" +
                         "VALUES ( "+getCodigo()+", '"+getEstado().toUpperCase()+"', '"+getSigla().toUpperCase()+"');");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
-    public void alterar(){
+    public boolean alterar(){
         conn.atualizarSQL("UPDATE bancoloja.\"CAD_UF\"\n" +
                         "SET \"NM_UF\"= '"+getEstado().toUpperCase()+"', \"DS_SIGLA\"= '"+getSigla().toUpperCase()+"'\n" +
                         "WHERE \"CD_UF\" = "+getCodigo()+";");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
     public int retornacodigo(){

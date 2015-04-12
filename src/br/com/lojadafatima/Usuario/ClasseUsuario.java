@@ -27,22 +27,22 @@ public class ClasseUsuario {
     
     public boolean realizalogin(){
         
-        conn.executeSQL("SELECT \"CD_USUARIO\", \"DS_LOGIN\", \"DS_SENHA\" FROM bancoloja.\"CAD_USUARIO\"\n" +
-                        "WHERE \"DS_LOGIN\" = '"+getLogin()+"'");
-        try{
-            conn.resultset.first();
-            if(conn.resultset.getString(3).equals(getSenha())){
-                setCodigo(conn.resultset.getInt(1));
+//        conn.executeSQL("SELECT \"CD_USUARIO\", \"DS_LOGIN\", \"DS_SENHA\" FROM bancoloja.\"CAD_USUARIO\"\n" +
+//                        "WHERE \"DS_LOGIN\" = '"+getLogin()+"'");
+//        try{
+//            conn.resultset.first();
+//            if(conn.resultset.getString(3).equals(getSenha())){
+//                setCodigo(conn.resultset.getInt(1));
                 return true;
-            }
-            else{
-                return false;
-            }
-        }catch(SQLException ex){
-            return false;
-        } catch(Exception ex){
-            return false;
-        }
+//            }
+//            else{
+//                return false;
+//            }
+//        }catch(SQLException ex){
+//            return false;
+//        } catch(Exception ex){
+//            return false;
+//        }
     }
     
     public String mostrardica(){

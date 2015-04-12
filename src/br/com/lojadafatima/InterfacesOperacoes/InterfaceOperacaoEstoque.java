@@ -632,26 +632,8 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
         if (!TfCodProduto.getText().equals("")) {
             prodcompravenda.getForneproduto().getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
             if (prodcompravenda.getForneproduto().getProduto().eprodutoativo()) {
-                if (prodcompravenda.getCompravenda().getOperacao().getTpestoque().equals("E")) {
-                    if (CbPessoa.getSelectedItem().toString().equals("Fornecedor")) {
-                        if (!TfCodPessoa.getText().equals("")) {
-                            if (prodcompravenda.getForneproduto().produtodestefornecedor()) {
-                                TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
-                                TfQuantidade.setValue(BigDecimal.valueOf(0));
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Insira o fornecedor para que o sistema faca a busca\napenas dos produtos deste fornecedor!", "Insira o fornecedor", JOptionPane.INFORMATION_MESSAGE);
-                            TfCodProduto.setText("");
-                            TfCodPessoa.grabFocus();
-                        }
-                    } else {
-                        TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
-                        TfQuantidade.setValue(BigDecimal.valueOf(0));
-                    }
-                } else {
                     TfProduto.setText(prodcompravenda.getForneproduto().getProduto().retornadescricaoproduto());
                     TfQuantidade.setValue(BigDecimal.valueOf(0));
-                }
             } else {
                 TfProduto.setText("");
                 TfQuantidade.setValue(BigDecimal.valueOf(0));
@@ -869,31 +851,31 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario() {
-        if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
-            getTelasusuario().getTela().setCodigo(1);
-            if (getTelasusuario().eadmintela()) {
-                BtCadPessoa.setVisible(false);
-            } else {
-                BtCadPessoa.setVisible(true);
-            }
-        } else {
-            getTelasusuario().getTela().setCodigo(2);
-            if (getTelasusuario().eadmintela()) {
-                BtCadPessoa.setVisible(false);
-            } else {
-                BtCadPessoa.setVisible(true);
-            }
-        }
-
-        getTelasusuario().getTela().setCodigo(3);
-        if (getTelasusuario().eadmintela()) {
-            BtCadFuncionario.setVisible(false);
-        }
-
-        getTelasusuario().getTela().setCodigo(11);
-        if (getTelasusuario().eadmintela()) {
-            BtCadProduto.setVisible(false);
-        }
+//        if (CbPessoa.getSelectedItem().toString().equals("Cliente")) {
+//            getTelasusuario().getTela().setCodigo(1);
+//            if (getTelasusuario().eadmintela()) {
+//                BtCadPessoa.setVisible(false);
+//            } else {
+//                BtCadPessoa.setVisible(true);
+//            }
+//        } else {
+//            getTelasusuario().getTela().setCodigo(2);
+//            if (getTelasusuario().eadmintela()) {
+//                BtCadPessoa.setVisible(false);
+//            } else {
+//                BtCadPessoa.setVisible(true);
+//            }
+//        }
+//
+//        getTelasusuario().getTela().setCodigo(3);
+//        if (getTelasusuario().eadmintela()) {
+//            BtCadFuncionario.setVisible(false);
+//        }
+//
+//        getTelasusuario().getTela().setCodigo(11);
+//        if (getTelasusuario().eadmintela()) {
+//            BtCadProduto.setVisible(false);
+//        }
     }
 
     public boolean camposobrigatoriospreenchidos() {

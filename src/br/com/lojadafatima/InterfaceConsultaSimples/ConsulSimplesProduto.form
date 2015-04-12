@@ -59,7 +59,7 @@
               <Component id="jScrollPane4" min="-2" pref="328" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="BtSelecionar" pref="42" max="32767" attributes="0"/>
+                  <Component id="BtSelecionar" pref="40" max="32767" attributes="0"/>
                   <Component id="BtCancelar" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -147,6 +147,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="BtPesquisar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/br/com/lojadafatima/Icones/buscar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Pesquisar"/>
       </Properties>
       <Events>
@@ -155,6 +158,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="BtSelecionar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/br/com/lojadafatima/Icones/sucesso2.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Selecionar"/>
       </Properties>
       <Events>
@@ -163,6 +169,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="BtCancelar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/br/com/lojadafatima/Icones/cancelar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <Events>

@@ -168,6 +168,9 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         TfComissao = new JNumberField.JNumberField(2);
         ;
         TfSalario = new JNumberField.JNumberField();
+        jLabel14 = new javax.swing.JLabel();
+        TfMaxDesconto = new JNumberField.JNumberField(2);
+        ;
         PnConsulta = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         CbPesquisa = new javax.swing.JComboBox();
@@ -512,6 +515,14 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             }
         });
 
+        jLabel14.setText("Máximo de desconto");
+
+        TfMaxDesconto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TfMaxDescontoKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout PnCadastroLayout = new javax.swing.GroupLayout(PnCadastro);
         PnCadastro.setLayout(PnCadastroLayout);
         PnCadastroLayout.setHorizontalGroup(
@@ -534,7 +545,11 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                                     .addComponent(TfComissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TfMaxDesconto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -672,12 +687,14 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel16))
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel14))
                         .addGap(3, 3, 3)
                         .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
                             .addComponent(TfComissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TfMaxDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PnCadastroLayout.createSequentialGroup()
                         .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PnCadastroLayout.createSequentialGroup()
@@ -1225,6 +1242,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             TfFuncao.setText(funcionario.getFuncao());
             TfSalario.setValue(BigDecimal.valueOf(funcionario.getSalario()));
             TfComissao.setValue(BigDecimal.valueOf(funcionario.getComissao()));
+            TfMaxDesconto.setValue(BigDecimal.valueOf(funcionario.getMaxdesconto()));
             funcionario.getPessoafis().retornapessoafisica();
             TfCodigo.setText("" + funcionario.getCodigo() + "");
             TfDtCadastro.setText(funcionario.getPessoafis().getPessoa().getDatacadastro());
@@ -1291,6 +1309,10 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void TfMaxDescontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfMaxDescontoKeyTyped
+        valida.limitemaximo(evt, TfMaxDesconto.getText(), 10);
+    }//GEN-LAST:event_TfMaxDescontoKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtAlterar;
     private javax.swing.JButton BtCadCidade;
@@ -1324,6 +1346,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField TfDtNasc;
     private javax.swing.JTextField TfFuncao;
     private javax.swing.JTextField TfLogradouro;
+    private JNumberField.JNumberField TfMaxDesconto;
     private javax.swing.JTextField TfNomeFisica;
     private javax.swing.JFormattedTextField TfNrCPF;
     private javax.swing.JFormattedTextField TfNrRG;
@@ -1343,6 +1366,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -1368,20 +1392,20 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-        getTelasusuario().getTela().setCodigo(3);
-        if(!getTelasusuario().eadmintela()){
-            PnBotoes.setVisible(false);
-        }
-        
-        getTelasusuario().getTela().setCodigo(4);
-        if(!getTelasusuario().eadmintela()){
-            BtCadEstado.setVisible(false);
-        }
-        
-        getTelasusuario().getTela().setCodigo(5);
-        if(!getTelasusuario().eadmintela()){
-            BtCadCidade.setVisible(false);
-        }
+//        getTelasusuario().getTela().setCodigo(3);
+//        if(!getTelasusuario().eadmintela()){
+//            PnBotoes.setVisible(false);
+//        }
+//        
+//        getTelasusuario().getTela().setCodigo(4);
+//        if(!getTelasusuario().eadmintela()){
+//            BtCadEstado.setVisible(false);
+//        }
+//        
+//        getTelasusuario().getTela().setCodigo(5);
+//        if(!getTelasusuario().eadmintela()){
+//            BtCadCidade.setVisible(false);
+//        }
     }
     
     public boolean camposobrigatoriospreenchidos() {
@@ -1458,6 +1482,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         funcionario.setFuncao(TfFuncao.getText());
         funcionario.setComissao(Float.parseFloat(TfComissao.getValue().toString()));
         funcionario.setSalario(Float.parseFloat(TfSalario.getValue().toString()));
+        funcionario.setMaxdesconto(Float.parseFloat(TfMaxDesconto.getValue().toString()));
         if (RbMasculino.isSelected()) {
             funcionario.getPessoafis().setSexo("M");
         }

@@ -34,6 +34,7 @@ import br.com.lojadafatima.Usuario.ClasseUsuario;
 import java.awt.Menu;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
@@ -52,7 +53,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         initComponents();
         getTelasusuario().setUsuario(usuario);
         LbNmUsuario.setText(getTelasusuario().getUsuario().getLogin());
-        liberatelas();
+//        liberatelas();
         atualizasituacao();
     }
 
@@ -78,18 +79,11 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         BtPagamentoFuncionarios = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         LbQtProdutosBaixos = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         LbContasReceberVencidas = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         LbContasReceberAbertas = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         LbContasPagarVencida = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         LbContasPagarAbertas = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         BtRelatorios = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         MnCadastros = new javax.swing.JMenu();
         MnItCadCliente = new javax.swing.JMenuItem();
@@ -118,7 +112,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtVenda.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtVenda.setText("Venda");
-        BtVenda.setEnabled(false);
         BtVenda.setName("16"); // NOI18N
         BtVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,6 +120,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         });
 
         LbSair.setForeground(javax.swing.UIManager.getDefaults().getColor("CheckBoxMenuItem.selectionBackground"));
+        LbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sair.png"))); // NOI18N
         LbSair.setText("Trocar Usuário");
         LbSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LbSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -137,7 +131,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtCompra.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtCompra.setText("Compra");
-        BtCompra.setEnabled(false);
         BtCompra.setName("17"); // NOI18N
         BtCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +140,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtContasReceber.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtContasReceber.setText("Contas à Receber");
-        BtContasReceber.setEnabled(false);
         BtContasReceber.setName("9"); // NOI18N
         BtContasReceber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +149,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtContasPagar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtContasPagar.setText("Contas à Pagar");
-        BtContasPagar.setEnabled(false);
         BtContasPagar.setName("10"); // NOI18N
         BtContasPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,7 +158,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtMvtoCaixa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtMvtoCaixa.setText("Movimentação de Caixa");
-        BtMvtoCaixa.setEnabled(false);
         BtMvtoCaixa.setName("11"); // NOI18N
         BtMvtoCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,7 +167,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtEstoque.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtEstoque.setText("Estoque");
-        BtEstoque.setEnabled(false);
         BtEstoque.setName("15"); // NOI18N
         BtEstoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,11 +174,11 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             }
         });
 
+        LbNmUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/boneco.png"))); // NOI18N
         LbNmUsuario.setText("admin");
 
         BtRealizarOperacao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtRealizarOperacao.setText("Realizar Operação");
-        BtRealizarOperacao.setEnabled(false);
         BtRealizarOperacao.setName("18"); // NOI18N
         BtRealizarOperacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,7 +188,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtPagamentoFuncionarios.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtPagamentoFuncionarios.setText("Pagamento de Funcionarios");
-        BtPagamentoFuncionarios.setEnabled(false);
         BtPagamentoFuncionarios.setName("18"); // NOI18N
         BtPagamentoFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,30 +207,12 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("produtos baixos no estoque");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-
         LbContasReceberVencidas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbContasReceberVencidas.setText("jLabel3");
         LbContasReceberVencidas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LbContasReceberVencidas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LbContasReceberVencidasMouseClicked(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Contas a receber vencidas de");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
             }
         });
 
@@ -255,30 +225,12 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Contas a receber em aberto de");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
-            }
-        });
-
         LbContasPagarVencida.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbContasPagarVencida.setText("jLabel5");
         LbContasPagarVencida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LbContasPagarVencida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LbContasPagarVencidaMouseClicked(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("contas a pagar vencidas");
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
             }
         });
 
@@ -291,39 +243,11 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("contas a pagar em aberto");
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
-            }
-        });
-
         BtRelatorios.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtRelatorios.setText("Relatórios");
-        BtRelatorios.setEnabled(false);
         BtRelatorios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtRelatoriosActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("pessoa(s)");
-        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("pessoa(s)");
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
             }
         });
 
@@ -337,7 +261,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(LbNmUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(38, 38, 38)
                         .addComponent(LbSair))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -362,30 +286,11 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(LbQtProdutosBaixos)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(LbContasPagarVencida)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(LbContasPagarAbertas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LbContasReceberVencidas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LbContasReceberAbertas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8)))
+                            .addComponent(LbQtProdutosBaixos)
+                            .addComponent(LbContasPagarVencida)
+                            .addComponent(LbContasPagarAbertas)
+                            .addComponent(LbContasReceberVencidas)
+                            .addComponent(LbContasReceberAbertas))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -413,27 +318,15 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LbQtProdutosBaixos)
-                    .addComponent(jLabel2))
+                .addComponent(LbQtProdutosBaixos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LbContasReceberVencidas)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel7))
+                .addComponent(LbContasReceberVencidas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LbContasReceberAbertas)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel8))
+                .addComponent(LbContasReceberAbertas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LbContasPagarVencida)
-                    .addComponent(jLabel5))
+                .addComponent(LbContasPagarVencida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LbContasPagarAbertas)
-                    .addComponent(jLabel6))
+                .addComponent(LbContasPagarAbertas)
                 .addContainerGap())
         );
 
@@ -441,7 +334,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItCadCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItCadCliente.setText("Cliente");
-        MnItCadCliente.setEnabled(false);
         MnItCadCliente.setName("6"); // NOI18N
         MnItCadCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -452,7 +344,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItCadFornecedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItCadFornecedor.setText("Fornecedor");
-        MnItCadFornecedor.setEnabled(false);
         MnItCadFornecedor.setName("7"); // NOI18N
         MnItCadFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -463,7 +354,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItFuncionario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItFuncionario.setText("Funcionário");
-        MnItFuncionario.setEnabled(false);
         MnItFuncionario.setName("8"); // NOI18N
         MnItFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -473,7 +363,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         MnCadastros.add(MnItFuncionario);
 
         MnItCadCondicaoPagto.setText("Condição de Pagamento");
-        MnItCadCondicaoPagto.setEnabled(false);
         MnItCadCondicaoPagto.setName("3"); // NOI18N
         MnItCadCondicaoPagto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -483,7 +372,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         MnCadastros.add(MnItCadCondicaoPagto);
 
         MnItCadFormaPgto.setText("Forma de Pagamento");
-        MnItCadFormaPgto.setEnabled(false);
         MnItCadFormaPgto.setName("4"); // NOI18N
         MnItCadFormaPgto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -494,7 +382,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItCadUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItCadUsuario.setText("Usuário");
-        MnItCadUsuario.setEnabled(false);
         MnItCadUsuario.setName("5"); // NOI18N
         MnItCadUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -504,7 +391,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         MnCadastros.add(MnItCadUsuario);
 
         MnItCadEstado.setText("Estado");
-        MnItCadEstado.setEnabled(false);
         MnItCadEstado.setName("1"); // NOI18N
         MnItCadEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -514,7 +400,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         MnCadastros.add(MnItCadEstado);
 
         MnItCadCidade.setText("Cidade");
-        MnItCadCidade.setEnabled(false);
         MnItCadCidade.setName("2"); // NOI18N
         MnItCadCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -525,7 +410,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItCadMultas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItCadMultas.setText("Multas");
-        MnItCadMultas.setEnabled(false);
         MnItCadMultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnItCadMultasActionPerformed(evt);
@@ -534,7 +418,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         MnCadastros.add(MnItCadMultas);
 
         MnItCadOperacoes.setText("Operações");
-        MnItCadOperacoes.setEnabled(false);
         MnItCadOperacoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnItCadOperacoesActionPerformed(evt);
@@ -548,7 +431,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItContasReceber.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
         MnItContasReceber.setText("Contas à Receber");
-        MnItContasReceber.setEnabled(false);
         MnItContasReceber.setName("9"); // NOI18N
         MnItContasReceber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -559,7 +441,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItContasPagar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
         MnItContasPagar.setText("Contas à Pagar");
-        MnItContasPagar.setEnabled(false);
         MnItContasPagar.setName("10"); // NOI18N
         MnItContasPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -570,7 +451,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItMovimentacaoCaixa.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_MASK));
         MnItMovimentacaoCaixa.setText("Movimentação de Caixa");
-        MnItMovimentacaoCaixa.setEnabled(false);
         MnItMovimentacaoCaixa.setName("11"); // NOI18N
         MnItMovimentacaoCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -585,7 +465,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItCadProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItCadProduto.setText("Produto");
-        MnItCadProduto.setEnabled(false);
         MnItCadProduto.setName("12"); // NOI18N
         MnItCadProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -596,7 +475,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItCadTipoProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItCadTipoProduto.setText("Tipo de Produto");
-        MnItCadTipoProduto.setEnabled(false);
         MnItCadTipoProduto.setName("13"); // NOI18N
         MnItCadTipoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -606,7 +484,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         MnProduto.add(MnItCadTipoProduto);
 
         MnItCadTabelas.setText("Características e Especificações");
-        MnItCadTabelas.setEnabled(false);
         MnItCadTabelas.setName("14"); // NOI18N
         MnItCadTabelas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -617,7 +494,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItEstoque.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
         MnItEstoque.setText("Estoque");
-        MnItEstoque.setEnabled(false);
         MnItEstoque.setName("15"); // NOI18N
         MnItEstoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -886,60 +762,25 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         BtEstoqueActionPerformed(null);
     }//GEN-LAST:event_LbQtProdutosBaixosMouseClicked
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        if(BtEstoque.isEnabled())
-        BtEstoqueActionPerformed(null);
-    }//GEN-LAST:event_jLabel2MouseClicked
-
     private void LbContasReceberVencidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LbContasReceberVencidasMouseClicked
         if(BtContasReceber.isEnabled())
         BtContasReceberActionPerformed(null);
     }//GEN-LAST:event_LbContasReceberVencidasMouseClicked
-
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        if(BtContasReceber.isEnabled())
-        BtContasReceberActionPerformed(null);
-    }//GEN-LAST:event_jLabel3MouseClicked
 
     private void LbContasReceberAbertasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LbContasReceberAbertasMouseClicked
         if(BtContasReceber.isEnabled())
         BtContasReceberActionPerformed(null);
     }//GEN-LAST:event_LbContasReceberAbertasMouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        if(BtContasReceber.isEnabled())
-        BtContasReceberActionPerformed(null);
-    }//GEN-LAST:event_jLabel4MouseClicked
-
     private void LbContasPagarVencidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LbContasPagarVencidaMouseClicked
         if(BtContasPagar.isEnabled())
         BtContasPagarActionPerformed(null);
     }//GEN-LAST:event_LbContasPagarVencidaMouseClicked
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        if(BtContasPagar.isEnabled())
-        BtContasPagarActionPerformed(null);
-    }//GEN-LAST:event_jLabel5MouseClicked
-
     private void LbContasPagarAbertasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LbContasPagarAbertasMouseClicked
         if(BtContasPagar.isEnabled())
         BtContasPagarActionPerformed(null);
     }//GEN-LAST:event_LbContasPagarAbertasMouseClicked
-
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        if(BtContasPagar.isEnabled())
-        BtContasPagarActionPerformed(null);
-    }//GEN-LAST:event_jLabel6MouseClicked
-
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        if(BtContasReceber.isEnabled())
-        BtContasReceberActionPerformed(null);
-    }//GEN-LAST:event_jLabel7MouseClicked
-
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        if(BtContasReceber.isEnabled())
-        BtContasReceberActionPerformed(null);
-    }//GEN-LAST:event_jLabel8MouseClicked
 
     private void BtRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtRelatoriosActionPerformed
         final InterfaceRelatorios tela = new InterfaceRelatorios(getPrimeiratela(), true);
@@ -990,13 +831,6 @@ public class InterfacePrincipal extends javax.swing.JDialog {
     private javax.swing.JMenuItem MnItMovimentacaoCaixa;
     private javax.swing.JMenu MnProduto;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
@@ -1111,14 +945,54 @@ public class InterfacePrincipal extends javax.swing.JDialog {
     }
 
     public void atualizasituacao(){
+        int aux;
         ClasseMvtoEstoque mvtoestoque = new ClasseMvtoEstoque();
         ClasseParcelas parcelas = new ClasseParcelas();
         parcelas.atualizaparcelasecontas();
-        LbContasReceberAbertas.setText(""+parcelas.getConta().retornanumerocontasreceberabertas());
-        LbContasReceberVencidas.setText(""+parcelas.getConta().retornanumerocontasrecebervencidas());
-        LbContasPagarAbertas.setText(""+parcelas.getConta().retornanumerocontaspagarabertas());
-        LbContasPagarVencida.setText(""+parcelas.getConta().retornanumerocontaspagarvencidas());
-        LbQtProdutosBaixos.setText(""+mvtoestoque.retornanumerodeprodutoscomestoquebaixo());
+        aux = parcelas.getConta().retornanumerocontasreceberabertas();
+        if (aux == 0){
+            LbContasReceberAbertas.setText("Nenhuma Conta a Receber em Aberto");
+            LbContasReceberAbertas.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_verde.png")));
+        } else {
+            LbContasReceberAbertas.setText("Existem "+aux+" Contas a Receber em Aberto");
+            LbContasReceberAbertas.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_amarela.png")));
+        }
+        
+        aux = parcelas.getConta().retornanumerocontasrecebervencidas();
+        if (aux == 0){
+            LbContasReceberVencidas.setText("Nenhuma Conta a Receber Vencida");
+            LbContasReceberVencidas.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_verde.png")));
+        } else {
+            LbContasReceberVencidas.setText("Existem "+aux+" Contas a Receber Vencidas");
+            LbContasReceberVencidas.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_vermelha.png")));
+        }
+        
+        aux = parcelas.getConta().retornanumerocontaspagarabertas();
+        if (aux == 0){
+            LbContasPagarAbertas.setText("Nenhuma Conta a Pagar em Aberto");
+            LbContasPagarAbertas.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_verde.png")));
+        } else {
+            LbContasPagarAbertas.setText("Existem "+aux+" Contas a Pagar em Aberto");
+            LbContasPagarAbertas.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_amarela.png")));
+        }
+        
+        aux = parcelas.getConta().retornanumerocontaspagarvencidas();
+        if (aux == 0){
+            LbContasPagarVencida.setText("Nenhuma Conta a Pagar Vencida");
+            LbContasPagarVencida.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_verde.png")));
+        } else {
+            LbContasPagarVencida.setText("Existem "+aux+" Contas a Pagar Vencidas");
+            LbContasPagarVencida.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_vermelha.png")));
+        }
+        
+        aux = mvtoestoque.retornanumerodeprodutoscomestoquebaixo();
+        if (aux == 0){
+            LbQtProdutosBaixos.setText("Nenhum Produto com Estoque Baixo");
+            LbQtProdutosBaixos.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_verde.png")));
+        } else {
+            LbQtProdutosBaixos.setText("Existem "+aux+" Produtos com Estoque Baixo");
+            LbQtProdutosBaixos.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_vermelha.png")));
+        }
     }
     
     public java.awt.Frame getPrimeiratela() {

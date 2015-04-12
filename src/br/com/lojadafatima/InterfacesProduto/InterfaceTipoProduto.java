@@ -11,6 +11,7 @@ import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Produto.ClasseTipoProduto;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
+import java.math.BigDecimal;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -36,9 +37,10 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         setTelasusuario(usuario);
         analisausuario();
 
-        int[] tam = new int[2];
+        int[] tam = new int[3];
         tam[0] = 50;
         tam[1] = 200;
+        tam[2] = 50;
         preenche.FormataJtable(TbConsulta, tam);
         preenche.PreencherJtable(TbConsulta, tipoproduto.buscartiposproduto());
         preenche.FormataJtable(TbCarcTipoProduto, tam);
@@ -84,6 +86,9 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         TbConsulta = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         BtCadTabela = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        TfPercentLucro = new JNumberField.JNumberField(2);
+        ;
 
         MnItCarregarDados.setText("Carregar dados");
         MnItCarregarDados.addActionListener(new java.awt.event.ActionListener() {
@@ -258,11 +263,11 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Código", "Tipo de Produto"
+                "Código", "Tipo de Produto", "Percentual de lucro"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -284,6 +289,14 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
             }
         });
 
+        jLabel6.setText("Percentual de lucro");
+
+        TfPercentLucro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TfPercentLucroKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -296,27 +309,36 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
                     .addComponent(jSeparator1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(54, 54, 54)
-                                .addComponent(jLabel2))
-                            .addComponent(jLabel5)
-                            .addComponent(BtCadTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfTipoProduto)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TfTipoProduto))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(BtCadTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(54, 54, 54)
+                                        .addComponent(jLabel2)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(TfPercentLucro, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -325,11 +347,13 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TfTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfPercentLucro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -388,6 +412,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
             TfCodigo.setText(TbConsulta.getValueAt(index, 0).toString());
             tipoproduto.setCodigo(Integer.parseInt(TbConsulta.getValueAt(index, 0).toString()));
             TfTipoProduto.setText(TbConsulta.getValueAt(index, 1).toString());
+            TfPercentLucro.setValue(BigDecimal.valueOf(tipoproduto.retornapercentuallucro()));
             preenche.PreencherJtable(TbCarcTipoProduto, tipoproduto.buscartabelasdotipoproduto());
         }
     }//GEN-LAST:event_MnItCarregarDadosActionPerformed
@@ -397,6 +422,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
             if (TbCarcTipoProduto.getRowCount() >= 1) {
                 if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja gravar os dados deste tipo de produto?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     tipoproduto.setTipoproduto(TfTipoProduto.getText());
+                    tipoproduto.setPercentlucro(Float.parseFloat(TfPercentLucro.getValue().toString()));
                     if (TfCodigo.getText().equals("")) {
                         tipoproduto.incluir();
                         for (int i = 0; i < TbCarcTipoProduto.getRowCount(); i++) {
@@ -546,6 +572,10 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void TfPercentLucroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfPercentLucroKeyTyped
+        valida.limitemaximo(evt, TfPercentLucro.getText(), 10);
+    }//GEN-LAST:event_TfPercentLucroKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtAlterar;
@@ -560,12 +590,14 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
     private javax.swing.JTable TbCarcTipoProduto;
     private javax.swing.JTable TbConsulta;
     private javax.swing.JTextField TfCodigo;
+    private JNumberField.JNumberField TfPercentLucro;
     private javax.swing.JTextField TfTipoProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -575,15 +607,15 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-        getTelasusuario().getTela().setCodigo(12);
-        if(!getTelasusuario().eadmintela()){
-            PnBotoes.setVisible(false);
-        }
-        
-        getTelasusuario().getTela().setCodigo(13);
-        if(!getTelasusuario().eadmintela()){
-            BtCadTabela.setVisible(false);
-        }
+//        getTelasusuario().getTela().setCodigo(12);
+//        if(!getTelasusuario().eadmintela()){
+//            PnBotoes.setVisible(false);
+//        }
+//        
+//        getTelasusuario().getTela().setCodigo(13);
+//        if(!getTelasusuario().eadmintela()){
+//            BtCadTabela.setVisible(false);
+//        }
     }
     
     public java.awt.Frame getPrimeiratela() {

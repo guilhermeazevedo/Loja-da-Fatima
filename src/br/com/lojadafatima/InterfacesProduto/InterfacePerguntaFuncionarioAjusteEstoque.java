@@ -238,10 +238,10 @@ public class InterfacePerguntaFuncionarioAjusteEstoque extends javax.swing.JDial
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-        getTelasusuario().getTela().setCodigo(3);
-        if(!getTelasusuario().eadmintela()){
-            BtCadFuncionario.setVisible(false);
-        }
+//        getTelasusuario().getTela().setCodigo(3);
+//        if(!getTelasusuario().eadmintela()){
+//            BtCadFuncionario.setVisible(false);
+//        }
     }
     
     public ClasseFuncionario getFuncionario() {
