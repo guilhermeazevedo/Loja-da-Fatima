@@ -36,10 +36,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -125,7 +122,7 @@
                           <Component id="TfValorTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="26" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -183,6 +180,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="BtFinalizar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/br/com/lojadafatima/Icones/sucesso2.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Finalizar"/>
           </Properties>
           <Events>
@@ -232,6 +232,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="BtAlterar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/br/com/lojadafatima/Icones/editar.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Alterar data e/ou valor desta parcela"/>
           </Properties>
           <Events>

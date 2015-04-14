@@ -2,6 +2,7 @@ package br.com.lojadafatima.InterfacesFinanceiro;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Financeiro.ClasseCondicaoPagamento;
@@ -21,6 +22,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
     LimpaCamposTela limpar = new LimpaCamposTela();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
     private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
+    MensagensUsuario msg = new MensagensUsuario();
 
     public InterfaceCondicaoPagto(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
@@ -63,6 +65,8 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         RbComEntrada = new javax.swing.JRadioButton();
         RbSemEntrada = new javax.swing.JRadioButton();
+        jPanel2 = new javax.swing.JPanel();
+        LbNotificacao = new javax.swing.JLabel();
 
         jMenuItem1.setText("Carregar dados");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +92,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
             }
         });
 
+        BtGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/salvar.png"))); // NOI18N
         BtGravar.setText("Gravar");
         BtGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +100,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
             }
         });
 
+        BtLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
         BtLimpar.setText("Limpar");
         BtLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,16 +149,37 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
             }
         });
 
+        LbNotificacao.setText(" ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(LbNotificacao)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LbNotificacao)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
+                    .addComponent(RbComEntrada)
+                    .addComponent(RbSemEntrada)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(BtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -164,13 +191,8 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
                             .addComponent(TfCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)))
-                    .addComponent(RbComEntrada)
-                    .addComponent(RbSemEntrada)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,8 +223,10 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtGravar)
                     .addComponent(BtLimpar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -210,11 +234,13 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -230,14 +256,14 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
             if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja gravar os dados desta condição de pagamento?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 enviardados();
                 if (TfCodigo.getText().equals("")) {
-                    condicao.incluir();
-                    limpar.Limpar(jPanel1);
-                    SpIntervalo.setValue(0);
-                    SpNrParcelas.setValue(0);
-                    preenche.PreencherJtable(TbConsulta, condicao.retornacondicoespagamentojtable());
+                    if(condicao.incluir()){
+                        msg.Sucesso(LbNotificacao, "Dados da Condição de Pagamento gravados com sucesso!");
+                    }
                 } else {
                     condicao.setCodigo(Integer.parseInt(TfCodigo.getText()));
-                    condicao.alterar();
+                    if(condicao.alterar()){
+                        msg.Sucesso(LbNotificacao, "Dados da Condição de Pagamento alterados com sucesso!");
+                    }
                 }
                 limpar.Limpar(jPanel1);
                 SpIntervalo.setValue(0);
@@ -268,6 +294,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
             } else {
                 RbSemEntrada.setSelected(true);
             }
+            msg.StatusEditar(LbNotificacao, "Editando informações...");
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -275,6 +302,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtGravar;
     private javax.swing.JButton BtLimpar;
+    private javax.swing.JLabel LbNotificacao;
     private javax.swing.JRadioButton RbComEntrada;
     private javax.swing.JRadioButton RbSemEntrada;
     private javax.swing.ButtonGroup RgComSemEntrada;
@@ -290,6 +318,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
@@ -303,17 +332,17 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
     
     public boolean camposobrigatoriospreenchidos() {
         if (TfCondicaoPgto.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Digite uma descrição para a condição de pagamento!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite uma descrição para a condição de pagamento!");
             TfCondicaoPgto.grabFocus();
             return false;
         }
         if (Integer.parseInt(SpNrParcelas.getValue().toString()) <= 0) {
-            JOptionPane.showMessageDialog(null, "O número de parcelas deve ser maior que 0!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "O número de parcelas deve ser maior que 0!");
             SpNrParcelas.grabFocus();;
             return false;
         }
         if (Integer.parseInt(SpIntervalo.getValue().toString()) <= 0) {
-            JOptionPane.showMessageDialog(null, "O número do intervalo de dias deve ser maior que 0!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "O número do intervalo de dias deve ser maior que 0!");
             SpNrParcelas.grabFocus();;
             return false;
         }

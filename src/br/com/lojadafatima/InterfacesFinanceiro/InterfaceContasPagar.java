@@ -202,6 +202,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
             }
         });
 
+        BtPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/dinheiro.png"))); // NOI18N
         BtPagar.setText("Pagar");
         BtPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

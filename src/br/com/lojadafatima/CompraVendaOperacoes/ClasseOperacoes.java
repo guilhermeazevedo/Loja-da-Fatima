@@ -21,18 +21,22 @@ public class ClasseOperacoes {
     private String inestoque;
     private String tpestoque;
 
-    public void incluir() {
+    public boolean incluir() {
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_OPERACOES", "CD_OPERACAO"));
         conn.incluirSQL("INSERT INTO bancoloja.\"CAD_OPERACOES\"(\n"
                 + "\"CD_OPERACAO\", \"DS_OPERACAO\", \"IN_FINANCEIRO\", \"TP_FINANCEIRO\", \"IN_ESTOQUE\", \"TP_ESTOQUE\")\n"
                 + "VALUES (" + getCodigo() + ", '" + getDescricao().toUpperCase() + "', '" + getInfinanceiro() + "', '" + getTpfinanceiro() + "', '" + getInestoque() + "', '" + getTpestoque() + "')");
+        if(conn.retorno == 1) return true;
+        else                  return false;
     }
 
-    public void alterar() {
+    public boolean alterar() {
         conn.atualizarSQL("UPDATE bancoloja.\"CAD_OPERACOES\"\n"
                 + "SET \"DS_OPERACAO\"='" + getDescricao().toUpperCase() + "', \"IN_FINANCEIRO\"='" + getInfinanceiro() + "', \"TP_FINANCEIRO\"='" + getTpfinanceiro() + "', \"IN_ESTOQUE\"='" + getInestoque() + "', \"TP_ESTOQUE\"='" + getTpestoque() + "'\n"
                 + "WHERE \"CD_OPERACAO\"= " + getCodigo());
+        if(conn.retorno == 1) return true;
+        else                  return false;
     }
 
     public ResultSet consultaoperacoes() {

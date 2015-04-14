@@ -24,18 +24,22 @@ public class ClasseCondicaoPagamento {
     private int intervalodias;
     private String entrada;
     
-    public void incluir(){
+    public boolean incluir(){
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_CONDICAO_PGTO", "CD_CONDICAO_PGTO"));
         conn.incluirSQL("INSERT INTO bancoloja.\"CAD_CONDICAO_PGTO\"(\n" +
                         "\"CD_CONDICAO_PGTO\", \"DS_CONDICAO_PGTO\", \"NR_VEZES_PGTO\", \"NR_INTERVALO_DIAS\", \"IN_ENTRADA\")\n" +
                         "VALUES ("+getCodigo()+", '"+getCondicaodepgto().toUpperCase()+"', "+getNrparcelas()+", "+getIntervalodias()+", '"+getEntrada()+"')");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
-    public void alterar(){
+    public boolean alterar(){
         conn.atualizarSQL("UPDATE bancoloja.\"CAD_CONDICAO_PGTO\"\n" +
                           "SET \"DS_CONDICAO_PGTO\"='"+getCondicaodepgto().toUpperCase()+"', \"NR_VEZES_PGTO\"="+getNrparcelas()+", \"NR_INTERVALO_DIAS\"="+getIntervalodias()+", \"IN_ENTRADA\"='"+getEntrada()+"'\n" +
                           "WHERE \"CD_CONDICAO_PGTO\" = "+getCodigo());
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
     public ResultSet retornacondicoespagamentojtable(){

@@ -23,18 +23,22 @@ public class ClasseFormaPagamento {
     private int codigo;
     private String formapgto;
     
-    public void incluir(){
+    public boolean incluir(){
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_FORMA_PGTO", "CD_FORMA_PGTO"));
         conn.incluirSQL("INSERT INTO bancoloja.\"CAD_FORMA_PGTO\"(\n" +
                         "\"CD_FORMA_PGTO\", \"DS_FORMA_PGTO\")\n" +
                         "VALUES ("+getCodigo()+", '"+getFormapgto().toUpperCase()+"')");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
-    public void alterar(){
+    public boolean alterar(){
         conn.atualizarSQL("UPDATE bancoloja.\"CAD_FORMA_PGTO\"\n" +
                           "SET \"DS_FORMA_PGTO\"='"+getFormapgto().toUpperCase()+"'\n" +
                           "WHERE \"CD_FORMA_PGTO\"="+getCodigo()+"");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
     public ResultSet retornaformapgtojtable(){

@@ -56,18 +56,22 @@ public class ClasseUsuario {
         }
     }
     
-    public void incluir(){
+    public boolean incluir(){
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_USUARIO", "CD_USUARIO"));
         conn.incluirSQL("INSERT INTO bancoloja.\"CAD_USUARIO\"(\n" +
                         "\"CD_USUARIO\", \"DS_LOGIN\", \"DS_SENHA\", \"DS_DICA\")\n" +
                         "VALUES ("+getCodigo()+", '"+getLogin()+"', '"+getSenha()+"', '"+getDica()+"')");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
-    public void alterar(){
+    public boolean alterar(){
         conn.atualizarSQL("UPDATE bancoloja.\"CAD_USUARIO\"\n" +
                           "SET \"DS_LOGIN\"='"+getLogin()+"', \"DS_SENHA\"='"+getSenha()+"', \"DS_DICA\"='"+getDica()+"'\n" +
                           "WHERE \"CD_USUARIO\"="+getCodigo()+"");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
     public ResultSet consultausuarios(){
@@ -76,9 +80,11 @@ public class ClasseUsuario {
         return conn.resultset;
     }
     
-    public void excluir(){
+    public boolean excluir(){
         conn.deleteSQL("DELETE FROM bancoloja.\"CAD_USUARIO\"\n" +
                         "WHERE \"CD_USUARIO\" = "+getCodigo());
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
     public void retornausuario(){

@@ -7,6 +7,7 @@ package br.com.lojadafatima.InterfacesOperacoes;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseOperacoes;
@@ -26,6 +27,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
     LimpaCamposTela limpar = new LimpaCamposTela();
     private java.awt.Frame primeiratela;
     private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
+    MensagensUsuario msg = new MensagensUsuario();
 
     public InterfaceOperacoes(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super (telaorigem, modal);
@@ -73,6 +75,8 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbOperacoes = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        LbNotificacao = new javax.swing.JLabel();
 
         jMenuItem1.setText("Carregar dados");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +128,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
         buttonGroup2.add(RbSaiFinanceiro);
         RbSaiFinanceiro.setText("Saida");
 
+        BtGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
         BtGravar.setText("Gravar");
         BtGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,6 +136,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
             }
         });
 
+        BtLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
         BtLimpar.setText("Limpar");
         BtLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,47 +170,60 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
             TbOperacoes.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        LbNotificacao.setText(" ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(LbNotificacao)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LbNotificacao)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(TfOperacao))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(BtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ChkEstoque)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(BtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(55, 55, 55)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ChkEstoque)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(RbSaiEstoque)
-                                            .addComponent(RbEntEstoque))))
-                                .addGap(18, 18, 18)
+                                    .addComponent(RbSaiEstoque)
+                                    .addComponent(RbEntEstoque))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ChkFinanceiro)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ChkFinanceiro)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(RbSaiFinanceiro)
-                                            .addComponent(RbEntFinanceiro)))))
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 5, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(RbSaiFinanceiro)
+                                    .addComponent(RbEntFinanceiro)))))
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +255,9 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -248,7 +269,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -291,17 +312,21 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
                 if (JOptionPane.showConfirmDialog(null, "Deseja realmente gravar os dados desta operacao?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     enviardados();
                     if (TfCodigo.getText().equals("")) {
-                        operacao.incluir();
+                        if(operacao.incluir()){
+                            msg.Sucesso(LbNotificacao, "Dados da Operação gravados com sucesso!");
+                        }
                     } else {
                         operacao.setCodigo(Integer.parseInt(TfCodigo.getText()));
-                        operacao.alterar();
+                        if(operacao.alterar()){
+                            msg.Sucesso(LbNotificacao, "Dados da Operação alterados com sucesso!");
+                        }
                     }
                     limpar.Limpar(jPanel1);
                     preenche.PreencherJtable(TbOperacoes, operacao.consultaoperacoes());
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Digite um \"nome\" para a operacao!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite um \"nome\" para a operacao!");
             TfOperacao.grabFocus();
         }
     }//GEN-LAST:event_BtGravarActionPerformed
@@ -334,6 +359,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
             }
             ChkEstoqueActionPerformed(evt);
             ChkFinanceiroActionPerformed(evt);
+            msg.StatusEditar(LbNotificacao, "Editando informações...");
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -344,6 +370,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
     private javax.swing.JButton BtLimpar;
     private javax.swing.JCheckBox ChkEstoque;
     private javax.swing.JCheckBox ChkFinanceiro;
+    private javax.swing.JLabel LbNotificacao;
     private javax.swing.JRadioButton RbEntEstoque;
     private javax.swing.JRadioButton RbEntFinanceiro;
     private javax.swing.JRadioButton RbSaiEstoque;
@@ -358,6 +385,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

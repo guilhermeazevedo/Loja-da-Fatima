@@ -7,6 +7,7 @@ package br.com.lojadafatima.InterfacesUsuario;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.ClassesFerramentas.TeclasPermitidas;
@@ -28,6 +29,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
     LimpaCamposTela limpa = new LimpaCamposTela();
     Preenche preenche = new Preenche();
     ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
+    MensagensUsuario msg = new MensagensUsuario();
 
     public InterfaceUsuario(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
@@ -95,6 +97,8 @@ public class InterfaceUsuario extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TbPermitidas = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        LbNotificacao = new javax.swing.JLabel();
         PnConsulta = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TbConsulta = new javax.swing.JTable();
@@ -111,6 +115,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
         setTitle("Usuário - Software Loja da Fátima");
         setResizable(false);
 
+        BtGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/salvar.png"))); // NOI18N
         BtGravar.setText("Gravar");
         BtGravar.setName("Gravar"); // NOI18N
         BtGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -119,6 +124,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             }
         });
 
+        BtAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/editar.png"))); // NOI18N
         BtAlterar.setText("Alterar");
         BtAlterar.setName("Alterar"); // NOI18N
         BtAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +133,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             }
         });
 
+        BtIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
         BtIncluir.setText("Novo");
         BtIncluir.setName("Incluir"); // NOI18N
         BtIncluir.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +142,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             }
         });
 
+        BtExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/lixeira.png"))); // NOI18N
         BtExcluir.setText("Excluir");
         BtExcluir.setName("Excluir"); // NOI18N
         BtExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -143,6 +151,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             }
         });
 
+        BtCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/cancelar.png"))); // NOI18N
         BtCancelar.setText("Cancelar");
         BtCancelar.setName("Cancelar"); // NOI18N
         BtCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -156,16 +165,15 @@ public class InterfaceUsuario extends javax.swing.JDialog {
         PnBotoesLayout.setHorizontalGroup(
             PnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnBotoesLayout.createSequentialGroup()
-                .addComponent(BtIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtAlterar)
+                .addComponent(BtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtExcluir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtGravar)
+                .addComponent(BtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(BtCancelar))
         );
         PnBotoesLayout.setVerticalGroup(
             PnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,17 +229,17 @@ public class InterfaceUsuario extends javax.swing.JDialog {
                 .addGroup(PnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TfDica)
                     .addGroup(PnLoginLayout.createSequentialGroup()
-                        .addGroup(PnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(PnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel1)
-                            .addComponent(TfLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(TfSenha)
-                            .addComponent(TfConfirmSenha))
-                        .addGap(0, 140, Short.MAX_VALUE)))
+                            .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 238, Short.MAX_VALUE))
+                    .addComponent(TfConfirmSenha)
+                    .addComponent(TfSenha)
+                    .addComponent(TfLogin))
                 .addContainerGap())
         );
         PnLoginLayout.setVerticalGroup(
@@ -339,7 +347,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             .addGroup(PnTelasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PnTelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(PnTelasLayout.createSequentialGroup()
                         .addGroup(PnTelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,17 +372,32 @@ public class InterfaceUsuario extends javax.swing.JDialog {
 
         TabbedCadastro.addTab("Telas e Interfaces", PnTelas);
 
+        LbNotificacao.setText(" ");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(LbNotificacao)
+                .addGap(0, 329, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LbNotificacao)
+        );
+
         javax.swing.GroupLayout PnCadastroLayout = new javax.swing.GroupLayout(PnCadastro);
         PnCadastro.setLayout(PnCadastroLayout);
         PnCadastroLayout.setHorizontalGroup(
             PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnCadastroLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TabbedCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(120, 120, 120))
-            .addGroup(PnCadastroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PnBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(TabbedCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PnBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PnCadastroLayout.setVerticalGroup(
@@ -384,6 +407,8 @@ public class InterfaceUsuario extends javax.swing.JDialog {
                 .addComponent(TabbedCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PnBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -419,7 +444,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             PnConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnConsultaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PnConsultaLayout.setVerticalGroup(
@@ -427,7 +452,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             .addGroup(PnConsultaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         TabbedMultas.addTab("Consulta", PnConsulta);
@@ -436,7 +461,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabbedMultas, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+            .addComponent(TabbedMultas, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,12 +474,13 @@ public class InterfaceUsuario extends javax.swing.JDialog {
 
     private void BtAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtAlterarActionPerformed
         if (TfCodigo.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Selecione um Usuario na aba \"Consulta\" e carregue os dados para que esta operacao seja realizada!");
+            msg.CampoNaoPreenchido(LbNotificacao, "Selecione um Usuário na aba \"Consulta\" e carregue os dados para que esta operação seja realizada!");
             TabbedMultas.setSelectedIndex(1);
             TbConsulta.grabFocus();
         } else {
             valida.validacamposCadastrar(PnLogin, PnBotoes);
             valida.validacamposCadastrar(PnTelas, PnBotoes);
+            msg.StatusEditar(LbNotificacao, "Editando informaçoes...");
         }
     }//GEN-LAST:event_BtAlterarActionPerformed
 
@@ -465,6 +491,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             limpa.Limpar(TbPermitidas);
             valida.validacamposCancelar(PnLogin, PnBotoes);
             valida.validacamposCancelar(PnTelas, PnBotoes);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Operação cancelada");
         }
     }//GEN-LAST:event_BtCancelarActionPerformed
 
@@ -491,6 +518,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
         valida.validacamposCadastrar(PnLogin, PnBotoes);
         valida.validacamposCadastrar(PnTelas, PnBotoes);
         preenche.PreencheJtableSEL(TbInterfaces, telasusuario.getTela().retornatelascadastradas());
+        msg.StatusNovo(LbNotificacao, "Digite as informações do novo Usuário");
     }//GEN-LAST:event_BtIncluirActionPerformed
 
     private void BtExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtExcluirActionPerformed
@@ -502,7 +530,9 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir TODOS os dados deste usuario?", "Deseja excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 telasusuario.getUsuario().setCodigo(Integer.parseInt(TfCodigo.getText()));
                 telasusuario.deletartelasusuario();
-                telasusuario.getUsuario().excluir();
+                if(telasusuario.getUsuario().excluir()){
+                    msg.StatusExcluido(LbNotificacao, "Exclusão realizada com sucesso!");
+                }
                 limpa.Limpar(PnLogin);
                 limpa.Limpar(TbInterfaces);
                 limpa.Limpar(TbPermitidas);
@@ -518,11 +548,15 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             if (JOptionPane.showConfirmDialog(null, "Deseja realmente gravar os dados deste usuario?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 enviardados();
                 if (TfCodigo.getText().equals("")) {
-                    telasusuario.getUsuario().incluir();
+                    if(telasusuario.getUsuario().incluir()){
+                        msg.Sucesso(LbNotificacao, "Dados do Usuário gravados com sucesso!");
+                    }
                     incluirtelasusuario();
                 } else {
                     telasusuario.getUsuario().setCodigo(Integer.parseInt(TfCodigo.getText()));
-                    telasusuario.getUsuario().alterar();
+                    if(telasusuario.getUsuario().alterar()){
+                        msg.Sucesso(LbNotificacao, "Dados do Usuário alterados com sucesso!");
+                    }
                     telasusuario.deletartelasusuario();
                     incluirtelasusuario();
                 }
@@ -580,6 +614,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             TabbedCadastro.setSelectedIndex(0);
             valida.validacamposCancelar(PnLogin, PnBotoes);
             valida.validacamposCancelar(PnTelas, PnBotoes);
+            msg.StatusBusca(LbNotificacao, "Informações do Usuário carregadas na tela...");
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -622,6 +657,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
     private javax.swing.JButton BtExcluir;
     private javax.swing.JButton BtGravar;
     private javax.swing.JButton BtIncluir;
+    private javax.swing.JLabel LbNotificacao;
     private javax.swing.JPanel PnBotoes;
     private javax.swing.JPanel PnCadastro;
     private javax.swing.JPanel PnConsulta;
@@ -645,6 +681,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -660,31 +697,31 @@ public class InterfaceUsuario extends javax.swing.JDialog {
     
     public boolean camposobrigatoriospreenchidos() {
         if (TfLogin.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Digite o Login que o usuario utilizara!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Login que o usuario utilizara!");
             TabbedCadastro.setSelectedIndex(0);
             TfLogin.grabFocus();
             return false;
         }
         if (TfSenha.getText().equals("") || TfSenha.getText().length() < 5) {
-            JOptionPane.showMessageDialog(null, "O campo Senha deve ter no minimo 4 caracteres!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "O campo Senha deve ter no minimo 4 caracteres!");
             TabbedCadastro.setSelectedIndex(0);
             TfSenha.grabFocus();
             return false;
         }
         if (!TfSenha.getText().equals(TfConfirmSenha.getText())) {
-            JOptionPane.showMessageDialog(null, "A Confirmaacao de Senha esta diferente da Senha que voce digitou!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "A Confirmaacao de Senha esta diferente da Senha que voce digitou!");
             TabbedCadastro.setSelectedIndex(0);
             TfConfirmSenha.grabFocus();
             return false;
         }
         if (TfDica.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Digite uma dica de senha, para o caso do usuario esquece-la", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite uma dica de senha, para o caso do usuario esquece-la");
             TabbedCadastro.setSelectedIndex(0);
             TfDica.grabFocus();
             return false;
         }
         if (TbPermitidas.getRowCount() <= 0) {
-            JOptionPane.showMessageDialog(null, "Inclua as tela do sistema permitidas ao usuario!", "Campos obigatorios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Inclua as tela do sistema permitidas ao usuario!");
             TabbedCadastro.setSelectedIndex(1);
             return false;
         }
