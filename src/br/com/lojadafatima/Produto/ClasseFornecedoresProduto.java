@@ -34,6 +34,18 @@ public class ClasseFornecedoresProduto {
                 + "WHERE \"CD_PRODUTO\" = " + getProduto().getCodigo() + "");
         return conn.resultset;
     }
+    
+    public boolean produtodestefornecedor() {
+        conn.executeSQL("SELECT * FROM bancoloja.\"CAD_FORNECEDORES_PRODUTO\"\n"
+                + "WHERE \"CD_PRODUTO\" = "+getProduto().getCodigo()+" AND \"CD_FORNECEDOR\" = "+getFornecedor().getCodigo());
+        try {
+            conn.resultset.first();
+            conn.resultset.getInt(1);
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
 
     public ClasseFornecedor getFornecedor() {
         return fornecedor;
