@@ -25,6 +25,7 @@ public class ClasseTipoProduto {
     private int codigo;
     private String tipoproduto;
     private float percentlucro;
+    private boolean servico;
     private ClasseTabelas tabela = new ClasseTabelas();
     ConexaoPostgre conn = new ConexaoPostgre();
 
@@ -35,24 +36,37 @@ public class ClasseTipoProduto {
         return getTabela().conn.resultset;
     }
 
-    public void incluir() {
+    public boolean incluir() {
         GeraCodigos geracodigo = new GeraCodigos();
         setCodigo(geracodigo.gerasequencia("CAD_TIPO_PRODUTO", "CD_TIPO_PRODUTO"));
+        String eservico;
+        if (isServico()) eservico = "S";
+        else             eservico = "N";
         conn.incluirSQL("INSERT INTO bancoloja.\"CAD_TIPO_PRODUTO\"(\n"
-                + "\"CD_TIPO_PRODUTO\", \"DS_TIPO_PRODUTO\", \"PE_LUCRO_PRODUTO\")\n"
-                + "VALUES (" + getCodigo() + ", '" + getTipoproduto().toUpperCase() + "', "+getPercentlucro()+");");
+                + "\"CD_TIPO_PRODUTO\", \"DS_TIPO_PRODUTO\", \"PE_LUCRO_PRODUTO\", \"IN_SERVICO\")\n"
+                + "VALUES (" + getCodigo() + ", '" + getTipoproduto().toUpperCase() + "', "+getPercentlucro()+", '"+eservico+"');");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
 
     public void incluirtabela() {
-        conn.executeSQL("INSERT INTO bancoloja.\"CAD_TABELAS_TIPO_PRODUTO\"(\n"
+        if (getTabela().getCodigo() != 0){
+            conn.executeSQL("INSERT INTO bancoloja.\"CAD_TABELAS_TIPO_PRODUTO\"(\n"
                 + "\"CD_TIPO_PRODUTO\", \"CD_TABELA\")\n"
                 + "VALUES (" + getCodigo() + ", " + getTabela().getCodigo() + ")");
+        }else{
+            conn.executeSQL("INSERT INTO bancoloja.\"CAD_TABELAS_TIPO_PRODUTO\"(\n"
+                + "\"CD_TIPO_PRODUTO\", \"CD_TABELA\")\n"
+                + "VALUES (" + getCodigo() + ", NULL)");
+        }
     }
 
-    public void excluir() {
+    public boolean excluir() {
         excluirtabelastipoproduto();
         conn.deleteSQL("DELETE FROM bancoloja.\"CAD_TIPO_PRODUTO\"\n"
                 + "WHERE \"CD_TIPO_PRODUTO\" = " + getCodigo() + "");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
 
     public void excluirtabelastipoproduto() {
@@ -60,10 +74,15 @@ public class ClasseTipoProduto {
                 + "WHERE \"CD_TIPO_PRODUTO\" = " + getCodigo() + "");
     }
 
-    public void alterar() {
+    public boolean alterar() {
+        String eservico;
+        if (isServico()) eservico = "S";
+        else             eservico = "N";
         getTabela().conn.atualizarSQL("UPDATE bancoloja.\"CAD_TIPO_PRODUTO\"\n"
-                + "SET \"DS_TIPO_PRODUTO\"='" + getTipoproduto().toUpperCase() + "', \"PE_LUCRO_PRODUTO\"="+getPercentlucro()+"\n"
+                + "SET \"DS_TIPO_PRODUTO\"='" + getTipoproduto().toUpperCase() + "', \"PE_LUCRO_PRODUTO\"="+getPercentlucro()+", \"IN_SERVICO\" = '"+eservico+"'\n"
                 + "WHERE \"CD_TIPO_PRODUTO\"=" + getCodigo() + ";");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
 
     public ResultSet buscartipoprodutocombobox() {
@@ -116,6 +135,20 @@ public class ClasseTipoProduto {
             return 0;
         }
     }
+    
+    public String retornatiposervico(){
+        conn.executeSQL("SELECT \"IN_SERVICO\" FROM bancoloja.\"CAD_TIPO_PRODUTO\"\n"
+                + "WHERE \"CD_TIPO_PRODUTO\" = " + getCodigo());
+        try {
+            conn.resultset.first();
+            if (conn.resultset.getString(1).equals("S")) setServico(true);
+            else                                         setServico(false);
+            return conn.resultset.getString(1);
+        } catch (SQLException ex) {
+            setServico(false);
+            return "";
+        }
+    }
 
     public int getCodigo() {
         return codigo;
@@ -147,6 +180,14 @@ public class ClasseTipoProduto {
 
     public void setPercentlucro(float percentlucro) {
         this.percentlucro = percentlucro;
+    }
+
+    public boolean isServico() {
+        return servico;
+    }
+
+    public void setServico(boolean servico) {
+        this.servico = servico;
     }
 
 }

@@ -22,18 +22,22 @@ public class ClasseValores {
     private String valor;
     private int codigoTabela;
     
-    public void incluir(){
+    public boolean incluir(){
         GeraCodigos geracodigo = new GeraCodigos();
         setCodigo(geracodigo.gerasequencia("CAD_VALORES_TABELA", "CD_VALOR", "CD_TABELA", getCodigoTabela()));
         conn.incluirSQL("INSERT INTO bancoloja.\"CAD_VALORES_TABELA\"(\n" +
                         "\"CD_VALOR\", \"CD_TABELA\", \"DS_VALOR\")\n" +
                         "VALUES ("+getCodigo()+", "+getCodigoTabela()+", '"+getValor().toUpperCase()+"');");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
-    public void alterar(){
+    public boolean alterar(){
         conn.atualizarSQL("UPDATE bancoloja.\"CAD_VALORES_TABELA\"\n" +
                           "SET \"DS_VALOR\"='"+getValor().toUpperCase()+"'\n" +
                           "WHERE \"CD_VALOR\"= "+getCodigo()+" AND \"CD_TABELA\"= "+getCodigoTabela()+" ;");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
     public String retornavalor(){

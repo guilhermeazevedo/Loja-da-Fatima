@@ -28,7 +28,7 @@ public class ClasseFuncionario {
     private float comissao;
     private float maxdesconto;
 
-    public void incluir() {
+    public boolean incluir() {
         getPessoafis().getPessoa().incluir();
         getPessoafis().incluir();
         GeraCodigos geracodigos = new GeraCodigos();
@@ -36,20 +36,26 @@ public class ClasseFuncionario {
         conn.executeSQL("INSERT INTO bancoloja.\"CAD_FUNCIONARIO\"(\n"
                 + "\"CD_FUNCIONARIO\", \"CD_PESSOA_FIS\", \"DS_FUNCAO\", \"VL_SALARIO\", \"PE_COMISSAO\", \"PE_MAX_DESCONTO\")\n"
                 + "VALUES (" + getCodigo() + ", " + getPessoafis().getPessoa().getCodigo() + ", '" + getFuncao().toUpperCase() + "', " + getSalario() + ", " + getComissao() + ", " + getMaxdesconto() + ");");
+        if(conn.retorno == 1) return true;
+        else                  return false;
     }
 
-    public void alterar() {
+    public boolean alterar() {
         getPessoafis().alterar();
         getPessoafis().getPessoa().getEndereco().setCodigopessoa(getPessoafis().getPessoa().getCodigo());
         getPessoafis().getPessoa().getEndereco().alterar();
         conn.executeSQL("UPDATE bancoloja.\"CAD_FUNCIONARIO\"\n"
                 + "SET \"DS_FUNCAO\"='" + getFuncao().toUpperCase() + "', \"VL_SALARIO\"=" + getSalario() + ", \"PE_COMISSAO\"=" + getComissao() + ", \"PE_MAX_DESCONTO\"=" + getMaxdesconto() + "\n"
                 + "WHERE \"CD_FUNCIONARIO\" = " + getCodigo() + "");
+        if(conn.retorno == 1) return true;
+        else                  return false;
     }
 
-    public void excluir() {
+    public boolean excluir() {
         getPessoafis().getPessoa().setCodigo(retornacodigopessoafuncionario());
         getPessoafis().getPessoa().excluir();
+        if(conn.retorno == 1) return true;
+        else                  return false;
     }
 
     public int retornacodigopessoafuncionario() {

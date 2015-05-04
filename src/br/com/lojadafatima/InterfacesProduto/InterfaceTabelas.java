@@ -7,6 +7,7 @@ package br.com.lojadafatima.InterfacesProduto;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Produto.ClasseTabelas;
@@ -28,6 +29,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
     ClasseTabelas tabela = new ClasseTabelas();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
     private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
+    MensagensUsuario msg = new MensagensUsuario();
 
     public InterfaceTabelas(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
@@ -75,6 +77,8 @@ public class InterfaceTabelas extends javax.swing.JDialog {
         BtGravar = new javax.swing.JButton();
         BtLimpar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        LbNotificCarac = new javax.swing.JLabel();
         PnValores = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -87,6 +91,8 @@ public class InterfaceTabelas extends javax.swing.JDialog {
         TbValores = new javax.swing.JTable();
         BtGravar1 = new javax.swing.JButton();
         BtLimpar1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        LbNotificEspecific = new javax.swing.JLabel();
 
         MnItAlterar.setText("Alterar Caracteristica");
         MnItAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -144,6 +150,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
             TbTabelas.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        BtGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/salvar.png"))); // NOI18N
         BtGravar.setText("Gravar");
         BtGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +158,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
             }
         });
 
+        BtLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
         BtLimpar.setText("Limpar");
         BtLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,27 +168,43 @@ public class InterfaceTabelas extends javax.swing.JDialog {
 
         jLabel3.setText("Lista de todas as caracterísitcas cadastradas:");
 
+        LbNotificCarac.setText(" ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(LbNotificCarac)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LbNotificCarac)
+        );
+
         javax.swing.GroupLayout PnTabelasLayout = new javax.swing.GroupLayout(PnTabelas);
         PnTabelas.setLayout(PnTabelasLayout);
         PnTabelasLayout.setHorizontalGroup(
             PnTabelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnTabelasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PnTabelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PnTabelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(PnTabelasLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(60, 60, 60)
                         .addComponent(jLabel2))
                     .addGroup(PnTabelasLayout.createSequentialGroup()
                         .addGroup(PnTabelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(BtGravar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                            .addComponent(BtGravar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(TfCodigoCaract, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PnTabelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TfTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(BtLimpar)))
                     .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PnTabelasLayout.setVerticalGroup(
@@ -201,7 +225,9 @@ public class InterfaceTabelas extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -273,6 +299,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
             TbValores.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        BtGravar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/salvar.png"))); // NOI18N
         BtGravar1.setText("Gravar");
         BtGravar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,12 +307,28 @@ public class InterfaceTabelas extends javax.swing.JDialog {
             }
         });
 
+        BtLimpar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
         BtLimpar1.setText("Limpar");
         BtLimpar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtLimpar1ActionPerformed(evt);
             }
         });
+
+        LbNotificEspecific.setText(" ");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(LbNotificEspecific)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LbNotificEspecific)
+        );
 
         javax.swing.GroupLayout PnValoresLayout = new javax.swing.GroupLayout(PnValores);
         PnValores.setLayout(PnValoresLayout);
@@ -296,15 +339,6 @@ public class InterfaceTabelas extends javax.swing.JDialog {
                 .addGroup(PnValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PnValoresLayout.createSequentialGroup()
                         .addGroup(PnValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PnValoresLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(55, 55, 55)
-                                .addComponent(jLabel6)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PnValoresLayout.createSequentialGroup()
-                        .addGroup(PnValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PnValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PnValoresLayout.createSequentialGroup()
                                     .addComponent(TfCodigoEspecific, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,10 +346,23 @@ public class InterfaceTabelas extends javax.swing.JDialog {
                                     .addComponent(TfValor))
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PnValoresLayout.createSequentialGroup()
-                                .addComponent(BtGravar1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
+                                .addComponent(BtGravar1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(BtLimpar1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(PnValoresLayout.createSequentialGroup()
+                        .addGroup(PnValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(PnValoresLayout.createSequentialGroup()
+                                .addGroup(PnValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(PnValoresLayout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(55, 55, 55)
+                                        .addComponent(jLabel6)))
+                                .addGap(0, 5, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         PnValoresLayout.setVerticalGroup(
             PnValoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,7 +384,9 @@ public class InterfaceTabelas extends javax.swing.JDialog {
                     .addComponent(BtGravar1)
                     .addComponent(BtLimpar1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -368,6 +417,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
             BtLimparActionPerformed(evt);
             TfCodigoCaract.setText(TbTabelas.getValueAt(index, 0).toString());
             TfTabela.setText(TbTabelas.getValueAt(index, 1).toString());
+            msg.StatusEditar(LbNotificCarac, "Editando dados da Caracteristica...");
         }
     }//GEN-LAST:event_MnItAlterarActionPerformed
 
@@ -378,13 +428,13 @@ public class InterfaceTabelas extends javax.swing.JDialog {
             if (TfCodigoCaract.getText().equals("")) {
                 opcao = JOptionPane.showConfirmDialog(rootPane, "Incluir nova Caracteristica?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (opcao == JOptionPane.YES_OPTION) {
-                    tabela.incluir();
+                    if(tabela.incluir()) msg.Sucesso(LbNotificCarac, "Dados da Caracteristica gravados com sucesso!");
                 }
             } else {
                 tabela.setCodigo(Integer.parseInt(TfCodigoCaract.getText()));
                 opcao = JOptionPane.showConfirmDialog(rootPane, "Alterar dados de Caracteristica?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (opcao == JOptionPane.YES_OPTION) {
-                    tabela.alterar();
+                    if(tabela.alterar()) msg.Sucesso(LbNotificCarac, "Dados da Caracteristica alterados com sucesso!");
                 }
             }
             limpar.Limpar(PnTabelas);
@@ -393,7 +443,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
             limpar.Limpar(TbTabelas2);
             preenche.PreencherJtable(TbTabelas2, tabela.buscartabelas());
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Digite o Nome da Caracteristica", "Campos Obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificCarac, "Digite o Nome da Caracteristica!");
             TfTabela.grabFocus();
         }
     }//GEN-LAST:event_BtGravarActionPerformed
@@ -422,14 +472,14 @@ public class InterfaceTabelas extends javax.swing.JDialog {
                     opcao = JOptionPane.showConfirmDialog(rootPane, "Incluir nova Especificacao?", "Confirmar", JOptionPane.YES_NO_OPTION);
                     if (opcao == JOptionPane.YES_OPTION) {
                         tabela.getValor().setCodigoTabela(Integer.parseInt(TbTabelas2.getValueAt(index, 0).toString()));
-                        tabela.getValor().incluir();
+                        if(tabela.getValor().incluir()) msg.Sucesso(LbNotificEspecific, "Dados da Especificacao gravados ocm sucesso!");
                     }
                 } else {
                     tabela.getValor().setCodigo(Integer.parseInt(TfCodigoEspecific.getText()));
                     opcao = JOptionPane.showConfirmDialog(rootPane, "Alterar dados de Especificacao?", "Confirmar", JOptionPane.YES_NO_OPTION);
                     if (opcao == JOptionPane.YES_OPTION) {
                         tabela.getValor().setCodigoTabela(Integer.parseInt(TbTabelas2.getValueAt(index, 0).toString()));
-                        tabela.getValor().alterar();
+                        if(tabela.getValor().alterar()) msg.Sucesso(LbNotificEspecific, "Dados da Especificacao alterados com sucesso!");
                     }
                 }
                 limpar.Limpar(PnValores);
@@ -437,11 +487,11 @@ public class InterfaceTabelas extends javax.swing.JDialog {
                 tabela.setCodigo(Integer.parseInt(TbTabelas2.getValueAt(index, 0).toString()));
                 preenche.PreencherJtable(TbValores, tabela.buscarvalorestabela());
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Selecione a caracteristica que esta especificacao pertence!", "Campos Obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+                msg.CampoObrigatorioNaoPreenchido(LbNotificEspecific, "Selecione a caracteristica que esta especificacao pertence!");
                 TbTabelas2.grabFocus();
             }
         }else{
-            JOptionPane.showMessageDialog(rootPane, "Digite o Nome da Especificacao!", "Campos Obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificEspecific, "Digite o Nome da Especificacao!");
             TfTabela.grabFocus();
         }
     }//GEN-LAST:event_BtGravar1ActionPerformed
@@ -452,6 +502,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
             BtLimpar1ActionPerformed(evt);
             TfCodigoEspecific.setText(TbValores.getValueAt(index, 0).toString());
             TfValor.setText(TbValores.getValueAt(index, 1).toString());
+            msg.StatusEditar(LbNotificEspecific, "Editando dados da Especificacao...");
         }
     }//GEN-LAST:event_MnItAlterarValorActionPerformed
 
@@ -469,6 +520,8 @@ public class InterfaceTabelas extends javax.swing.JDialog {
     private javax.swing.JButton BtGravar1;
     private javax.swing.JButton BtLimpar;
     private javax.swing.JButton BtLimpar1;
+    private javax.swing.JLabel LbNotificCarac;
+    private javax.swing.JLabel LbNotificEspecific;
     private javax.swing.JMenuItem MnItAlterar;
     private javax.swing.JMenuItem MnItAlterarValor;
     private javax.swing.JPanel PnTabelas;
@@ -486,6 +539,8 @@ public class InterfaceTabelas extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;

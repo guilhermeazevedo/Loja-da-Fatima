@@ -29,18 +29,22 @@ public class ClasseTabelas {
         return conn.resultset;
     }
     
-    public void incluir(){
+    public boolean incluir(){
         GeraCodigos geracodigo = new GeraCodigos();
         setCodigo(geracodigo.gerasequencia("CAD_TABELAS", "CD_TABELA"));
         conn.incluirSQL("INSERT INTO bancoloja.\"CAD_TABELAS\"(\n" +
                         "\"CD_TABELA\", \"DS_TABELA\")\n" +
                         "VALUES ("+getCodigo()+", '"+getTabela().toUpperCase()+"');");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
-    public void alterar(){
+    public boolean alterar(){
         conn.atualizarSQL("UPDATE bancoloja.\"CAD_TABELAS\"\n" +
                           "SET \"DS_TABELA\"= '"+getTabela().toUpperCase()+"' \n" +
                           "WHERE \"CD_TABELA\"="+getCodigo()+";");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
     public ResultSet buscartabelascomboolean(){

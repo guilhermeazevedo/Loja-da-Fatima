@@ -21,9 +21,15 @@ public class ClasseEspecificacaoProduto {
     ConexaoPostgre conn = new ConexaoPostgre();
     
     public void incluirespecific(){
-        conn.executeSQL("INSERT INTO bancoloja.\"CAD_CARACTERISTICAS_PRODUTO\"(\n" +
-                        "\"CD_PRODUTO\", \"CD_TIPO_PRODUTO\", \"CD_TABELA\", \"CD_VALOR\")\n" +
-                        "VALUES ("+getProduto().getCodigo()+", "+getTipoproduto().getCodigo()+", "+getTipoproduto().getTabela().getCodigo()+", "+getTipoproduto().getTabela().getValor().getCodigo()+")");
+        if(getTipoproduto().getTabela().getCodigo() != 0 && getTipoproduto().getTabela().getValor().getCodigo() != 0){
+            conn.executeSQL("INSERT INTO bancoloja.\"CAD_CARACTERISTICAS_PRODUTO\"(\n" +
+                            "\"CD_PRODUTO\", \"CD_TIPO_PRODUTO\", \"CD_TABELA\", \"CD_VALOR\")\n" +
+                            "VALUES ("+getProduto().getCodigo()+", "+getTipoproduto().getCodigo()+", "+getTipoproduto().getTabela().getCodigo()+", "+getTipoproduto().getTabela().getValor().getCodigo()+")");
+        } else {
+            conn.executeSQL("INSERT INTO bancoloja.\"CAD_CARACTERISTICAS_PRODUTO\"(\n" +
+                            "\"CD_PRODUTO\", \"CD_TIPO_PRODUTO\", \"CD_TABELA\", \"CD_VALOR\")\n" +
+                            "VALUES ("+getProduto().getCodigo()+", "+getTipoproduto().getCodigo()+", NULL, NULL)");
+        }
     }
     
     public void alterarespecific(){

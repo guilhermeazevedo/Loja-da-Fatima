@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -33,6 +34,11 @@ public class GerenciadorCamposBotoes {
         for (Component component : components) {
             if (component instanceof JComboBox) {
                 JComboBox field = (JComboBox) component;
+                field.setEnabled(true);
+            }
+            
+            if (component instanceof JCheckBox) {
+                JCheckBox field = (JCheckBox) component;
                 field.setEnabled(true);
             }
             
@@ -97,6 +103,11 @@ public class GerenciadorCamposBotoes {
         for (Component component : components) {
             if (component instanceof JComboBox) {
                 JComboBox field = (JComboBox) component;
+                field.setEnabled(false);
+            }
+            
+            if (component instanceof JCheckBox) {
+                JCheckBox field = (JCheckBox) component;
                 field.setEnabled(false);
             }
             

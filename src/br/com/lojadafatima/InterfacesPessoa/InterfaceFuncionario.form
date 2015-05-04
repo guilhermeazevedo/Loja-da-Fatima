@@ -53,7 +53,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="TabbedPaneFuncionario" min="-2" pref="556" max="-2" attributes="0"/>
+          <Component id="TabbedPaneFuncionario" min="-2" pref="580" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -102,29 +102,29 @@
                                   <Component id="TfMaxDesconto" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jBtDelTelefone" min="-2" pref="80" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jCbOpEmail" alignment="1" min="-2" pref="194" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jBtAddEmail" max="32767" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jBtDelEmail" min="-2" pref="80" max="-2" attributes="0"/>
-                                          </Group>
+                                  <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jCbOpEmail" min="-2" pref="194" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jBtAddEmail" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                          <Component id="jBtDelEmail" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="TfDsEmail" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
-                                      <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jBtAddTelefone" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
-                                      <Component id="jCbOpTelefone" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
-                                      <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="TfNrTelefone" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="TfDsEmail" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
+                                  <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCbOpTelefone" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
+                                  <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="TfNrTelefone" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jBtAddTelefone" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                      <Component id="jBtDelTelefone" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -154,33 +154,37 @@
                                           <Component id="TfDtNasc" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                                           <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="TfNomeFisica" alignment="0" min="-2" pref="366" max="-2" attributes="0"/>
                                           <Component id="TfBairro" alignment="0" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="TfNomeFisica" alignment="0" max="32767" attributes="0"/>
                                                   <Group type="102" alignment="1" attributes="0">
                                                       <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="RbMasculino" min="-2" max="-2" attributes="0"/>
+                                                          <Group type="102" alignment="1" attributes="0">
+                                                              <Component id="RbMasculino" min="-2" max="-2" attributes="0"/>
+                                                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Group type="102" attributes="0">
+                                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                                  <Component id="RbFeminino" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                              </Group>
+                                                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                                          </Group>
                                                       </Group>
-                                                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="RbFeminino" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="LbCPFValido" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="102" attributes="0">
                                                       <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="TfNrCPF" min="-2" pref="120" max="-2" attributes="0"/>
-                                                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="TfNrRG" min="-2" pref="120" max="-2" attributes="0"/>
-                                                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="LbCPFValido" min="-2" max="-2" attributes="0"/>
+                                                          <Group type="102" attributes="0">
+                                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                                  <Component id="TfNrCPF" min="-2" pref="120" max="-2" attributes="0"/>
+                                                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                                              </Group>
+                                                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                                  <Component id="TfNrRG" min="-2" pref="120" max="-2" attributes="0"/>
+                                                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                                              </Group>
+                                                          </Group>
                                                       </Group>
                                                   </Group>
                                               </Group>
@@ -188,21 +192,30 @@
                                           </Group>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="TfNumero" min="-2" pref="126" max="-2" attributes="0"/>
-                                                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="TfNumero" pref="126" max="32767" attributes="0"/>
+                                                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                                  <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="TfCEP" max="32767" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                              <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="TfCEP" min="-2" pref="104" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                              <Component id="CbCidade" min="-2" pref="150" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -213,19 +226,13 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="BtCadEstado" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="CbCidade" min="-2" pref="150" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="BtCadCidade" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
                                   </Group>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="BtCadCidade" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -287,6 +294,7 @@
                                   <Component id="TfComissao" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="TfSalario" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="TfMaxDesconto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -364,7 +372,9 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="PnBotoes" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -505,6 +515,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jBtAddTelefone">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/com/lojadafatima/Icones/adicionar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Adicionar"/>
               </Properties>
               <Events>
@@ -513,6 +526,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jBtDelTelefone">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/com/lojadafatima/Icones/deletar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Excluir"/>
               </Properties>
               <Events>
@@ -569,6 +585,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jBtAddEmail">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/com/lojadafatima/Icones/adicionar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Adicionar"/>
               </Properties>
               <Events>
@@ -577,6 +596,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jBtDelEmail">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/com/lojadafatima/Icones/deletar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Excluir"/>
               </Properties>
               <Events>
@@ -703,9 +725,9 @@
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="BtAlterar" min="-2" pref="151" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="BtExcluir" min="-2" pref="143" max="-2" attributes="0"/>
+                          <Component id="BtExcluir" min="-2" pref="165" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="BtGravar" pref="178" max="32767" attributes="0"/>
+                          <Component id="BtGravar" max="32767" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="BtCancelar" min="-2" pref="159" max="-2" attributes="0"/>
                       </Group>
@@ -724,6 +746,9 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="BtGravar">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/com/lojadafatima/Icones/salvar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Gravar"/>
                     <Property name="name" type="java.lang.String" value="Gravar" noResource="true"/>
                   </Properties>
@@ -733,6 +758,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="BtAlterar">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/com/lojadafatima/Icones/editar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Alterar Dados"/>
                     <Property name="name" type="java.lang.String" value="Alterar" noResource="true"/>
                   </Properties>
@@ -742,6 +770,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="BtIncluir">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/com/lojadafatima/Icones/adicionar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Cadastrar Funcion&#xe1;rio"/>
                     <Property name="name" type="java.lang.String" value="Incluir" noResource="true"/>
                   </Properties>
@@ -751,6 +782,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="BtExcluir">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/com/lojadafatima/Icones/lixeira.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Excluir Funcion&#xe1;rio"/>
                     <Property name="name" type="java.lang.String" value="Excluir" noResource="true"/>
                   </Properties>
@@ -760,6 +794,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="BtCancelar">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/com/lojadafatima/Icones/cancelar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Cancelar"/>
                     <Property name="name" type="java.lang.String" value="Cancelar" noResource="true"/>
                   </Properties>
@@ -840,7 +877,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
               <Properties>
-                <Property name="text" type="java.lang.String" value="M&#xe1;ximo de desconto"/>
+                <Property name="text" type="java.lang.String" value="M&#xe1;ximo de % desconto"/>
               </Properties>
             </Component>
             <Component class="JNumberField.JNumberField" name="TfMaxDesconto">
@@ -851,6 +888,36 @@
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JNumberField.JNumberField(2);&#xd;&#xa;"/>
               </AuxValues>
             </Component>
+            <Component class="javax.swing.JLabel" name="jLabel21">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="%"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JPanel" name="jPanel1">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="LbNotificacao" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="LbNotificacao" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="LbNotificacao">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value=" "/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="PnConsulta">
@@ -874,7 +941,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="TfPesquisa" min="-2" pref="536" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="BtPesquisa" pref="177" max="32767" attributes="0"/>
+                              <Component id="BtPesquisa" pref="184" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -897,7 +964,7 @@
                           <Component id="BtPesquisa" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="457" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="479" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -932,6 +999,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="BtPesquisa">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/com/lojadafatima/Icones/buscar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Pesquisar"/>
               </Properties>
               <Events>

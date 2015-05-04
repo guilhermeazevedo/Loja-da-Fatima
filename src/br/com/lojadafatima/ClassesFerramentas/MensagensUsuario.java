@@ -25,6 +25,30 @@ public class MensagensUsuario {
         }, 3000);
     }
     
+    public void Adicionado(final JLabel lb, String msg){
+        lb.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png")));
+        lb.setText(msg);
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                Limpar(lb);
+            }
+        }, 3000);
+    }
+    
+    public void Removido(final JLabel lb, String msg){
+        lb.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png")));
+        lb.setText(msg);
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                Limpar(lb);
+            }
+        }, 3000);
+    }
+    
     public void CampoObrigatorioNaoPreenchido(final JLabel lb, String msg){
         lb.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
         lb.setText(msg);

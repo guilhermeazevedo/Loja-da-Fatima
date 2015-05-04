@@ -74,13 +74,14 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="PnBotoes" max="32767" attributes="0"/>
-                          <Component id="TabbedPaneCadastro" min="-2" pref="608" max="-2" attributes="0"/>
+                          <Component id="TabbedPaneCadastro" alignment="0" min="-2" pref="608" max="-2" attributes="0"/>
+                          <Component id="PnBotoes" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <EmptySpace pref="11" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -89,9 +90,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="TabbedPaneCadastro" min="-2" pref="485" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="PnBotoes" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="17" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -103,15 +106,16 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="BtIncluir" min="-2" pref="115" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="BtAlterar" max="32767" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="BtExcluir" min="-2" pref="113" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="BtGravar" min="-2" pref="103" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="BtCancelar" min="-2" pref="97" max="-2" attributes="0"/>
+                          <Component id="BtIncluir" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="BtAlterar" min="-2" pref="119" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="BtExcluir" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="BtGravar" min="-2" pref="107" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="BtCancelar" min="-2" pref="103" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -128,6 +132,9 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="BtGravar">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/com/lojadafatima/Icones/salvar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Gravar"/>
                     <Property name="name" type="java.lang.String" value="Gravar" noResource="true"/>
                   </Properties>
@@ -137,6 +144,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="BtAlterar">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/com/lojadafatima/Icones/editar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Alterar Dados"/>
                     <Property name="name" type="java.lang.String" value="Alterar" noResource="true"/>
                   </Properties>
@@ -146,6 +156,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="BtIncluir">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/com/lojadafatima/Icones/adicionar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Novo Produto"/>
                     <Property name="name" type="java.lang.String" value="Incluir" noResource="true"/>
                   </Properties>
@@ -155,6 +168,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="BtExcluir">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/com/lojadafatima/Icones/lixeira.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Excluir Produto"/>
                     <Property name="name" type="java.lang.String" value="Excluir" noResource="true"/>
                   </Properties>
@@ -164,6 +180,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="BtCancelar">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/br/com/lojadafatima/Icones/cancelar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Cancelar"/>
                     <Property name="name" type="java.lang.String" value="Cancelar" noResource="true"/>
                   </Properties>
@@ -285,7 +304,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane1" pref="123" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="124" max="32767" attributes="0"/>
                                   <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -293,7 +312,7 @@
                                   <Component id="BtCadTabela2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="BtIncluirEspecific" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane3" min="-2" pref="106" max="-2" attributes="0"/>
@@ -454,6 +473,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="BtIncluirEspecific">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/br/com/lojadafatima/Icones/adicionar.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Incluir ao Produto"/>
                       </Properties>
                       <Events>
@@ -515,6 +537,9 @@
                     </Container>
                     <Component class="javax.swing.JButton" name="BtRemoverEspecific">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/br/com/lojadafatima/Icones/deletar.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Remover"/>
                       </Properties>
                       <Events>
@@ -558,16 +583,12 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jScrollPane5" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="441" max="-2" attributes="0"/>
-                                      <Component id="BtCadFornecedor" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="BtAddFornecedor" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="BtDelFornecedor" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="TfCodFornecedor" min="-2" pref="80" max="-2" attributes="0"/>
@@ -578,8 +599,12 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="TfFornecedor" min="-2" pref="245" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                              <Component id="BtCadFornecedor" min="-2" pref="139" max="-2" attributes="0"/>
+                                          </Group>
                                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                          <Component id="TfFornecedor" min="-2" pref="262" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -610,7 +635,7 @@
                                   <Component id="BtDelFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                              <Component id="jScrollPane5" pref="347" max="32767" attributes="0"/>
+                              <Component id="jScrollPane5" pref="343" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -635,6 +660,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="BtAddFornecedor">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/br/com/lojadafatima/Icones/adicionar.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Adicionar Fornecedor"/>
                       </Properties>
                       <Events>
@@ -679,6 +707,9 @@
                     </Container>
                     <Component class="javax.swing.JButton" name="BtPesqFornecedor">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/br/com/lojadafatima/Icones/buscar.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Pesquisar"/>
                       </Properties>
                       <Events>
@@ -706,6 +737,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="BtDelFornecedor">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/br/com/lojadafatima/Icones/deletar.png"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Remover Fornecedor"/>
                       </Properties>
                       <Events>
@@ -714,6 +748,31 @@
                     </Component>
                   </SubComponents>
                 </Container>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel1">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="LbNotificacao" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="LbNotificacao" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="LbNotificacao">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value=" "/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
@@ -733,7 +792,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane4" pref="611" max="32767" attributes="0"/>
+                          <Component id="jScrollPane4" pref="610" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="CbPesquisa" min="-2" pref="150" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -762,7 +821,7 @@
                           <Component id="BtPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane4" pref="498" max="32767" attributes="0"/>
+                      <Component id="jScrollPane4" pref="503" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -796,6 +855,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="BtPesquisar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/com/lojadafatima/Icones/buscar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Pesquisar"/>
               </Properties>
               <Events>

@@ -8,6 +8,7 @@ package br.com.lojadafatima.InterfacesPessoa;
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.ClassesFerramentas.PermiteNumerosPontoBarra;
@@ -18,6 +19,7 @@ import java.awt.Color;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
@@ -42,6 +44,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
     LimpaCamposTela limpar = new LimpaCamposTela();
     ClasseDatas datas = new ClasseDatas();
     private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
+    MensagensUsuario msg = new MensagensUsuario();
 
     public InterfaceFuncionario(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
@@ -171,6 +174,9 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
         TfMaxDesconto = new JNumberField.JNumberField(2);
         ;
+        jLabel21 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        LbNotificacao = new javax.swing.JLabel();
         PnConsulta = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         CbPesquisa = new javax.swing.JComboBox();
@@ -267,6 +273,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
 
         jLabel20.setText("Tipo");
 
+        jBtAddTelefone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
         jBtAddTelefone.setText("Adicionar");
         jBtAddTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,6 +281,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             }
         });
 
+        jBtDelTelefone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
         jBtDelTelefone.setText("Excluir");
         jBtDelTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -319,6 +327,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
 
         jCbOpEmail.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PRINCIPAL", "ALTERNATIVO" }));
 
+        jBtAddEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
         jBtAddEmail.setText("Adicionar");
         jBtAddEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -326,6 +335,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             }
         });
 
+        jBtDelEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
         jBtDelEmail.setText("Excluir");
         jBtDelEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -412,6 +422,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             }
         });
 
+        BtGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/salvar.png"))); // NOI18N
         BtGravar.setText("Gravar");
         BtGravar.setName("Gravar"); // NOI18N
         BtGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -420,6 +431,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             }
         });
 
+        BtAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/editar.png"))); // NOI18N
         BtAlterar.setText("Alterar Dados");
         BtAlterar.setName("Alterar"); // NOI18N
         BtAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -428,6 +440,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             }
         });
 
+        BtIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
         BtIncluir.setText("Cadastrar Funcionário");
         BtIncluir.setName("Incluir"); // NOI18N
         BtIncluir.addActionListener(new java.awt.event.ActionListener() {
@@ -436,6 +449,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             }
         });
 
+        BtExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/lixeira.png"))); // NOI18N
         BtExcluir.setText("Excluir Funcionário");
         BtExcluir.setName("Excluir"); // NOI18N
         BtExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -444,6 +458,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             }
         });
 
+        BtCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/cancelar.png"))); // NOI18N
         BtCancelar.setText("Cancelar");
         BtCancelar.setName("Cancelar"); // NOI18N
         BtCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -461,9 +476,9 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addComponent(BtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BtGravar, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                .addComponent(BtGravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(BtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -515,13 +530,30 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             }
         });
 
-        jLabel14.setText("Máximo de desconto");
+        jLabel14.setText("Máximo de % desconto");
 
         TfMaxDesconto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TfMaxDescontoKeyTyped(evt);
             }
         });
+
+        jLabel21.setText("%");
+
+        LbNotificacao.setText(" ");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(LbNotificacao)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LbNotificacao)
+        );
 
         javax.swing.GroupLayout PnCadastroLayout = new javax.swing.GroupLayout(PnCadastro);
         PnCadastro.setLayout(PnCadastroLayout);
@@ -550,26 +582,27 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(TfMaxDesconto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel21)
+                        .addGap(18, 18, 18)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnCadastroLayout.createSequentialGroup()
-                                .addComponent(jBtDelTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel25)
-                                .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jCbOpEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnCadastroLayout.createSequentialGroup()
-                                        .addComponent(jBtAddEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jBtDelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(TfDsEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel24)
-                                .addComponent(jBtAddTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jCbOpTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel20)
-                                .addComponent(TfNrTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel25)
+                            .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jCbOpEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(PnCadastroLayout.createSequentialGroup()
+                                    .addComponent(jBtAddEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(15, 15, 15)
+                                    .addComponent(jBtDelEmail)))
+                            .addComponent(TfDsEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24)
+                            .addComponent(jCbOpTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel20)
+                            .addComponent(TfNrTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PnCadastroLayout.createSequentialGroup()
+                                .addComponent(jBtAddTelefone)
+                                .addGap(13, 13, 13)
+                                .addComponent(jBtDelTelefone)))
                         .addGap(29, 29, 29)
                         .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -593,56 +626,60 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                                     .addComponent(TfDtNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10)
                                     .addComponent(jLabel12)
-                                    .addComponent(TfNomeFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TfBairro)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnCadastroLayout.createSequentialGroup()
-                                        .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnCadastroLayout.createSequentialGroup()
-                                                .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel4)
-                                                    .addComponent(RbMasculino))
-                                                .addGap(25, 25, 25))
-                                            .addGroup(PnCadastroLayout.createSequentialGroup()
-                                                .addComponent(RbFeminino)
-                                                .addGap(29, 29, 29)))
-                                        .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(LbCPFValido)
+                                        .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(TfNomeFisica, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(PnCadastroLayout.createSequentialGroup()
                                                 .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(TfNrCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel6))
-                                                .addGap(30, 30, 30)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnCadastroLayout.createSequentialGroup()
+                                                        .addComponent(RbMasculino)
+                                                        .addGap(25, 25, 25))
+                                                    .addGroup(PnCadastroLayout.createSequentialGroup()
+                                                        .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(RbFeminino)
+                                                            .addComponent(jLabel4))
+                                                        .addGap(29, 29, 29)))
                                                 .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(TfNrRG, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel5))))
+                                                    .addComponent(LbCPFValido)
+                                                    .addGroup(PnCadastroLayout.createSequentialGroup()
+                                                        .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(TfNrCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jLabel6))
+                                                        .addGap(30, 30, 30)
+                                                        .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(TfNrRG, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jLabel5))))))
                                         .addGap(6, 6, 6)))
                                 .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(PnCadastroLayout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(TfNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                                                .addComponent(jLabel11)
+                                                .addComponent(jLabel13)))
+                                        .addGroup(PnCadastroLayout.createSequentialGroup()
+                                            .addGap(46, 46, 46)
+                                            .addComponent(jLabel23))
+                                        .addGroup(PnCadastroLayout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel18)
+                                                .addComponent(TfCEP))))
                                     .addGroup(PnCadastroLayout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(TfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel11)
-                                            .addComponent(jLabel13)))
-                                    .addGroup(PnCadastroLayout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addComponent(jLabel23))
-                                    .addGroup(PnCadastroLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(TfCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(CbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(PnCadastroLayout.createSequentialGroup()
                                 .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel17)
                                     .addComponent(CbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtCadEstado)
-                                .addGap(136, 136, 136)
-                                .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel18)
-                                    .addGroup(PnCadastroLayout.createSequentialGroup()
-                                        .addComponent(CbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtCadCidade)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(BtCadEstado)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtCadCidade)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PnCadastroLayout.setVerticalGroup(
@@ -694,7 +731,8 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                             .addComponent(jLabel19)
                             .addComponent(TfComissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TfMaxDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(TfMaxDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21)))
                     .addGroup(PnCadastroLayout.createSequentialGroup()
                         .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PnCadastroLayout.createSequentialGroup()
@@ -756,7 +794,9 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                     .addComponent(BtCadCidade))
                 .addGap(18, 18, 18)
                 .addComponent(PnBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
         );
 
         TabbedPaneFuncionario.addTab("Cadastro", PnCadastro);
@@ -772,6 +812,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
 
         TfPesquisa.setEnabled(false);
 
+        BtPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
         BtPesquisa.setText("Pesquisar");
         BtPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -815,7 +856,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))
+                        .addComponent(BtPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
                     .addGroup(PnConsultaLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -832,7 +873,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                     .addComponent(TfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtPesquisa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -846,7 +887,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabbedPaneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(TabbedPaneFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -904,7 +945,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             if (!funcionario.getPessoafis().CPFnumerosiguais()) {
                 if (funcionario.getPessoafis().CPFvalido()) {
                     LbCPFValido.setText("Valido");
-                    LbCPFValido.setForeground(Color.green);
+                    LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png")));
                     if (funcionario.getPessoafis().CPFexistente()) {
                         if (funcionario.efuncionario()) {
                             if (!TfCodigo.getText().equals("") && (funcionario.getCodigo() == Integer.parseInt(TfCodigo.getText()))) {
@@ -967,15 +1008,15 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                     }
                 } else {
                     LbCPFValido.setText("CPF Invalido");
-                    LbCPFValido.setForeground(Color.red);
+                    LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
                 }
             } else {
                 LbCPFValido.setText("Numeros Iguais");
-                LbCPFValido.setForeground(Color.red);
+                LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
             }
         } else {
             LbCPFValido.setText("Espaços em Branco");
-            LbCPFValido.setForeground(Color.red);
+            LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
         }
     }//GEN-LAST:event_TfNrCPFFocusLost
 
@@ -1039,6 +1080,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         preenche.PreencheJComboBox(CbEstado, funcionario.getPessoafis().getPessoa().getEndereco().getCidade().getEstado().buscarestadosjcombobox());
         TfDtCadastro.setText(datas.retornaratartual());
         TfNrCPFKeyReleased(null);
+        msg.StatusNovo(LbNotificacao, "Insira os dados do novo Funcionario");
     }//GEN-LAST:event_BtIncluirActionPerformed
 
     private void BtAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtAlterarActionPerformed
@@ -1048,6 +1090,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             CbPesquisa.grabFocus();
         } else {
             valida.validacamposCadastrar(PnCadastro, PnBotoes);
+            msg.StatusEditar(LbNotificacao, "Alterando dados do Funcionario...");
         }
     }//GEN-LAST:event_BtAlterarActionPerformed
 
@@ -1059,7 +1102,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         } else {
             if (JOptionPane.showConfirmDialog(null, "Voce tem certeza que deseja EXCLUIR os dados deste Funcionario?", "Deseja excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 funcionario.setCodigo(Integer.parseInt(TfCodigo.getText()));
-                funcionario.excluir();
+                if(funcionario.excluir()) msg.StatusExcluido(LbNotificacao, "Funcionario excluido com sucesso!");
                 limpar.Limpar(PnCadastro);
                 limpar.Limpar(TbTelefone);
                 limpar.Limpar(TbEmail);
@@ -1077,6 +1120,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             limpar.Limpar(TbEmail);
             valida.validacamposCancelar(PnCadastro, PnBotoes);
             TfNrCPFKeyReleased(null);
+            msg.Limpar(LbNotificacao);
         }
     }//GEN-LAST:event_BtCancelarActionPerformed
 
@@ -1145,7 +1189,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja realmente Gravar os dados deste funcionario?", "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if (TfCodigo.getText().equals("")) {
                     enviardados();
-                    funcionario.incluir();
+                    if (funcionario.incluir()) msg.Sucesso(LbNotificacao, "Dados do Funcionario gravados com sucesso!");
                     funcionario.getPessoafis().getPessoa().getTelefone().setCodigopessoa(funcionario.getPessoafis().getPessoa().getCodigo());
                     funcionario.getPessoafis().getPessoa().getEmail().setCodigopessoa(funcionario.getPessoafis().getPessoa().getCodigo());
                     JOptionPane.showMessageDialog(null, "Codigo: " + funcionario.getCodigo() + "\n"
@@ -1171,7 +1215,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                     funcionario.setCodigo(Integer.parseInt(TfCodigo.getText()));
                     funcionario.getPessoafis().getPessoa().setCodigo(funcionario.retornacodigopessoafuncionario());
                     enviardados();
-                    funcionario.alterar();
+                    if(funcionario.alterar()) msg.Sucesso(LbNotificacao, "Dados do Funcionario alterados com sucesso!");
                     funcionario.getPessoafis().getPessoa().getTelefone().setCodigopessoa(funcionario.getPessoafis().getPessoa().getCodigo());
                     funcionario.getPessoafis().getPessoa().getEmail().setCodigopessoa(funcionario.getPessoafis().getPessoa().getCodigo());
                     funcionario.getPessoafis().getPessoa().getTelefone().deletartelefones();
@@ -1266,6 +1310,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             CbCidade.setSelectedItem(funcionario.getPessoafis().getPessoa().getEndereco().getCidade().getCidade());
             TabbedPaneFuncionario.setSelectedIndex(0);
             valida.validacamposCancelar(PnCadastro, PnBotoes);
+            msg.StatusBusca(LbNotificacao, "Dados do Funcionario carregados na tela...");
         }
     }//GEN-LAST:event_MnItRetornaActionPerformed
 
@@ -1276,18 +1321,18 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             if (!funcionario.getPessoafis().CPFnumerosiguais()) {
                 if (funcionario.getPessoafis().CPFvalido()) {
                     LbCPFValido.setText("Valido");
-                    LbCPFValido.setForeground(Color.green);
+                    LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png")));
                 } else {
                     LbCPFValido.setText("CPF Invalido");
-                    LbCPFValido.setForeground(Color.red);
+                    LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
                 }
             } else {
                 LbCPFValido.setText("Numeros Iguais");
-                LbCPFValido.setForeground(Color.red);
+                LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
             }
         } else {
             LbCPFValido.setText("Espaços em Branco");
-            LbCPFValido.setForeground(Color.red);
+            LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
         }
     }//GEN-LAST:event_TfNrCPFKeyReleased
 
@@ -1326,6 +1371,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
     private javax.swing.JComboBox CbEstado;
     private javax.swing.JComboBox CbPesquisa;
     private javax.swing.JLabel LbCPFValido;
+    private javax.swing.JLabel LbNotificacao;
     private javax.swing.JMenuItem MnItRetorna;
     private javax.swing.JPanel PnBotoes;
     private javax.swing.JPanel PnCadastro;
@@ -1374,6 +1420,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1384,6 +1431,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1412,60 +1460,60 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
 
         if (!TfNomeFisica.getText().equals("")) {
         } else {
-            JOptionPane.showMessageDialog(null, "Nome do Funcionario e obrigatorio");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Nome do Funcionario e obrigatorio");
             TfNomeFisica.grabFocus();
             return false;
         }
-        Color cor = LbCPFValido.getForeground();
-        if (cor == Color.green) {
+
+        if (LbCPFValido.getText().equals("Valido")) {
         } else {
-            JOptionPane.showMessageDialog(null, "Digite um CPF valido");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao,  "Digite um CPF valido");
             TfNrCPF.grabFocus();
             return false;
         }
         if (valida.CampoTotalmentePreenchido(TfDtNasc.getText())) {
         } else {
-            JOptionPane.showMessageDialog(null, "Digite a Data de Nascimento");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a Data de Nascimento");
             TfDtNasc.grabFocus();
             return false;
         }
         if (TfLogradouro.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Digite a Rua/Avenida que o funcionario mora!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a Rua/Avenida que o funcionario mora!");
             TfLogradouro.grabFocus();
             return false;
         }
         if (TfNumero.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Digite o Numero da residencia do funcionario!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Numero da residencia do funcionario!");
             TfNumero.grabFocus();
             return false;
         }
         if (!valida.CampoTotalmentePreenchido(TfCEP.getText())) {
-            JOptionPane.showMessageDialog(null, "Digite o CEP de onde o funcionario mora!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o CEP de onde o funcionario mora!");
             TfCEP.grabFocus();
             return false;
         }
         if (TfBairro.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Digite o Bairro de onde o funcionario mora!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Bairro de onde o funcionario mora!");
             TfBairro.grabFocus();
             return false;
         }
         if (TfFuncao.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Digite a Funcao que o funcionario tera!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a Funcao que o funcionario tera!");
             TfFuncao.grabFocus();
             return false;
         }
         if (TfSalario.getValue() == BigDecimal.valueOf(0)) {
-            JOptionPane.showMessageDialog(null, "Digite o Salario que o funcionario recebera!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Salario que o funcionario recebera!");
             TfSalario.grabFocus();
             return false;
         }
         if (CbEstado.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Insira ou cadastre um Estado!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira ou cadastre um Estado!");
             BtCadEstado.grabFocus();
             return false;
         }
         if (CbCidade.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Insira ou cadastre uma Cidade!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira ou cadastre uma Cidade!");
             BtCadCidade.grabFocus();
             return false;
         }

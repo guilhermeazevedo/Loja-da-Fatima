@@ -24,7 +24,7 @@ public class ClasseCliente {
     private int codigo;
     private ClassePessoa pessoa = new ClassePessoa();
     
-    public void incluirclientefisico(ClassePessoaFisica fisica){
+    public boolean incluirclientefisico(ClassePessoaFisica fisica){
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_CLIENTE", "CD_CLIENTE"));
         fisica.getPessoa().incluir();
@@ -32,9 +32,11 @@ public class ClasseCliente {
         conn.incluirSQL("INSERT INTO bancoloja.\"CAD_CLIENTE\"(\n" +
                         "\"CD_CLIENTE\", \"CD_PESSOA\", \"SITUACAO\")\n" +
                         "VALUES ("+getCodigo()+", "+fisica.getPessoa().getCodigo()+", 'A');");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
-    public void incluirclientejuridico(ClassePessoaJuridica juridica){
+    public boolean incluirclientejuridico(ClassePessoaJuridica juridica){
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_CLIENTE", "CD_CLIENTE"));
         juridica.getPessoa().incluir();
@@ -42,24 +44,32 @@ public class ClasseCliente {
         conn.incluirSQL("INSERT INTO bancoloja.\"CAD_CLIENTE\"(\n" +
                         "\"CD_CLIENTE\", \"CD_PESSOA\", \"SITUACAO\")\n" +
                         "VALUES ("+getCodigo()+", "+juridica.getPessoa().getCodigo()+", 'A');");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
-    public void alterarclientefisico(ClassePessoaFisica fisica){
+    public boolean alterarclientefisico(ClassePessoaFisica fisica){
         fisica.alterar();
         fisica.getPessoa().getEndereco().setCodigopessoa(fisica.getPessoa().getCodigo());
         fisica.getPessoa().getEndereco().alterar();
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
-    public void alterarclientejuridico(ClassePessoaJuridica juridica){
+    public boolean alterarclientejuridico(ClassePessoaJuridica juridica){
         juridica.alterar();
         juridica.getPessoa().getEndereco().setCodigopessoa(juridica.getPessoa().getCodigo());
         juridica.getPessoa().getEndereco().alterar();
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
-    public void excluir(){
+    public boolean excluir(){
         conn.deleteSQL("UPDATE bancoloja.\"CAD_CLIENTE\"\n" +
                        "SET \"SITUACAO\" = 'I'\n" +
                        "WHERE \"CD_CLIENTE\" = "+getCodigo()+"");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
     public void recuperar(){

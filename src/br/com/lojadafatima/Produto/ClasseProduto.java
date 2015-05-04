@@ -20,24 +20,30 @@ public class ClasseProduto {
     private float estoquemin;
     private String situacao;
 
-    public void incluir() {
+    public boolean incluir() {
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_PRODUTO", "CD_PRODUTO"));
         conn.incluirSQL("INSERT INTO bancoloja.\"CAD_PRODUTO\"(\n"
                 + "\"CD_PRODUTO\", \"DS_PRODUTO\", \"QT_ESTOQUE_MIN\", \"SITUACAO\")\n"
                 + "VALUES (" + getCodigo() + ", '" + getDescricao().toUpperCase() + "', " + getEstoquemin() + ", 'A')");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
 
-    public void alterar() {
+    public boolean alterar() {
         conn.atualizarSQL("UPDATE bancoloja.\"CAD_PRODUTO\"\n"
                 + "SET \"DS_PRODUTO\"= '" + getDescricao().toUpperCase() + "', \"QT_ESTOQUE_MIN\"=" + getEstoquemin() + "\n"
                 + "WHERE \"CD_PRODUTO\" = " + getCodigo() + "");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
 
-    public void excluir() {
+    public boolean excluir() {
         conn.deleteSQL("UPDATE bancoloja.\"CAD_PRODUTO\"\n"
                 + "SET \"SITUACAO\"='I'\n"
                 + "WHERE \"CD_PRODUTO\"=" + getCodigo() + ";");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
 
     public ResultSet consultageral() {
@@ -119,7 +125,8 @@ public class ClasseProduto {
                 + "FROM bancoloja.\"PRODUTOS_COMPRA_VENDA\" \"PCV\"\n"
                 + "JOIN bancoloja.\"COMPRA_VENDA\" \"CV\" ON \"CV\".\"CD_COMPRA_VENDA\" = \"PCV\".\"CD_COMPRA_VENDA\" AND \"PCV\".\"CD_OPERACAO\" = \"CV\".\"CD_OPERACAO\"\n"
                 + "WHERE \"PCV\".\"CD_PRODUTO\" = " + getCodigo() + " AND \"PCV\".\"CD_OPERACAO\" = 1 AND\n"
-                + "\"CV\".\"DS_COMPRA_VENDA\" NOT LIKE '% - CANCELADO DIA %'\n"
+                + "\"CV\".\"DS_COMPRA_VENDA\" NOT LIKE '% - CANCELADO DIA %' AND\n"
+                + "\"PCV\".\"IN_PROMOCAO\" <> 'S'\n"
                 + "GROUP BY \"PCV\".\"CD_PRODUTO\"");
         try {
             conn.resultset.first();
@@ -139,6 +146,20 @@ public class ClasseProduto {
             return conn.resultset.getFloat(1);
         } catch (SQLException ex) {
             return 0;
+        }
+    }
+    
+    public boolean eservico(){
+        conn.executeSQL("SELECT \"TP\".\"IN_SERVICO\"\n" +
+                        "FROM bancoloja.\"CAD_TIPO_PRODUTO\" \"TP\"\n" +
+                        "JOIN bancoloja.\"CAD_CARACTERISTICAS_PRODUTO\" \"CP\" ON \"TP\".\"CD_TIPO_PRODUTO\" = \"CP\".\"CD_TIPO_PRODUTO\"\n" +
+                        "WHERE \"CP\".\"CD_PRODUTO\" = "+getCodigo());
+        try{
+            conn.resultset.first();
+            if (conn.resultset.getString(1).equals("S")) return true;
+            else                                         return false;
+        }catch(SQLException ex){
+            return true;
         }
     }
 

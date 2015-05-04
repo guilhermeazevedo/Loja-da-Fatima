@@ -22,7 +22,7 @@ public class ClasseFornecedor {
     private int codigo;
     private ClassePessoaJuridica pessoajur = new ClassePessoaJuridica();
     
-    public void incluir(){
+    public boolean incluir(){
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_FORNECEDOR", "CD_FORNECEDOR"));
         getPessoajur().getPessoa().incluir();
@@ -30,17 +30,23 @@ public class ClasseFornecedor {
         conn.incluirSQL("INSERT INTO bancoloja.\"CAD_FORNECEDOR\"(\n" +
                         "\"CD_FORNECEDOR\", \"CD_PESSOA_JUR\")\n" +
                         "VALUES ("+getCodigo()+", "+getPessoajur().getPessoa().getCodigo()+");");
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
-    public void alterar(){
+    public boolean alterar(){
         getPessoajur().alterar();
         getPessoajur().getPessoa().getEndereco().setCodigopessoa(getPessoajur().getPessoa().getCodigo());
         getPessoajur().getPessoa().getEndereco().alterar();
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
-    public void excluir(){
+    public boolean excluir(){
         getPessoajur().getPessoa().setCodigo(retornacodigopessoafornecedor());
         getPessoajur().getPessoa().excluir();
+        if (conn.retorno == 1) return true;
+        else                   return false;
     }
     
     public void importardadosnovofornecedor(){

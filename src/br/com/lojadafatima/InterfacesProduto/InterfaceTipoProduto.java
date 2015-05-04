@@ -7,6 +7,7 @@ package br.com.lojadafatima.InterfacesProduto;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Produto.ClasseTipoProduto;
@@ -29,6 +30,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
     ClasseTipoProduto tipoproduto = new ClasseTipoProduto();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
     private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
+    MensagensUsuario msg = new MensagensUsuario();
 
     public InterfaceTipoProduto(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
@@ -41,9 +43,14 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         tam[0] = 50;
         tam[1] = 200;
         tam[2] = 50;
+        
+        int[] tam2 = new int[2];
+        tam2[0] = 50;
+        tam2[1] = 200;
+        
         preenche.FormataJtable(TbConsulta, tam);
         preenche.PreencherJtable(TbConsulta, tipoproduto.buscartiposproduto());
-        preenche.FormataJtable(TbCarcTipoProduto, tam);
+        preenche.FormataJtable(TbCarcTipoProduto, tam2);
 
         valida.validacamposCancelar(jPanel1, PnBotoes);
         TbConsulta.setEnabled(true);
@@ -89,9 +96,10 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         TfPercentLucro = new JNumberField.JNumberField(2);
         ;
-        jCheckBox1 = new javax.swing.JCheckBox();
+        CbServico = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         LbNotificacoes = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         MnItCarregarDados.setText("Carregar dados");
         MnItCarregarDados.addActionListener(new java.awt.event.ActionListener() {
@@ -236,7 +244,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
             PnBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnBotoesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(120, 120, 120))
@@ -305,7 +313,17 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
             }
         });
 
-        jCheckBox1.setText("É Serviço");
+        CbServico.setText("É Serviço");
+        CbServico.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                CbServicoStateChanged(evt);
+            }
+        });
+        CbServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbServicoActionPerformed(evt);
+            }
+        });
 
         LbNotificacoes.setText(" ");
 
@@ -322,13 +340,28 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
             .addComponent(LbNotificacoes)
         );
 
+        jLabel7.setText("%");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addComponent(PnBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TfTipoProduto))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(54, 54, 54)
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CbServico, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,30 +374,19 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
                                 .addComponent(jLabel4)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfTipoProduto))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(54, 54, 54)
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TfPercentLucro, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox1))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtCadTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TfPercentLucro, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addComponent(PnBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,14 +394,18 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TfTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CbServico))
+                .addGap(3, 3, 3)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TfPercentLucro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -400,7 +426,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97))
+                .addGap(52, 52, 52))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -413,7 +439,9 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -432,6 +460,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         preenche.FormataJtable(TbCaracteristicas, tam2);
         preenche.PreencheJtableSEL(TbCaracteristicas, tipoproduto.getTabela().buscartabelascomboolean());
         TbConsulta.setEnabled(false);
+        msg.StatusNovo(LbNotificacoes, "Insira os dados do novo Tipo de Produto");
     }//GEN-LAST:event_BtIncluirActionPerformed
 
     private void MnItCarregarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnItCarregarDadosActionPerformed
@@ -441,30 +470,39 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
             tipoproduto.setCodigo(Integer.parseInt(TbConsulta.getValueAt(index, 0).toString()));
             TfTipoProduto.setText(TbConsulta.getValueAt(index, 1).toString());
             TfPercentLucro.setValue(BigDecimal.valueOf(tipoproduto.retornapercentuallucro()));
+            String eservico = tipoproduto.retornatiposervico();
+            if (eservico.equals("S")) CbServico.setSelected(true);
+            else                 CbServico.setSelected(false);
             preenche.PreencherJtable(TbCarcTipoProduto, tipoproduto.buscartabelasdotipoproduto());
+            msg.StatusBusca(LbNotificacoes, "Dados do Tipo de Produto carregados na tela!");
         }
     }//GEN-LAST:event_MnItCarregarDadosActionPerformed
 
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
         if (!TfTipoProduto.getText().equals("")) {
-            if (TbCarcTipoProduto.getRowCount() >= 1) {
+            if (!CbServico.isSelected() && TbCarcTipoProduto.getRowCount() < 1)  { msg.CampoObrigatorioNaoPreenchido(LbNotificacoes, "Insira Caracteristicas no Tipo de Produto!"); } else{
                 if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja gravar os dados deste tipo de produto?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     tipoproduto.setTipoproduto(TfTipoProduto.getText());
-                    tipoproduto.setPercentlucro(Float.parseFloat(TfPercentLucro.getValue().toString()));
+                    if (CbServico.isSelected()) tipoproduto.setServico(true);
+                    else{
+                        tipoproduto.setServico(false);
+                        tipoproduto.setPercentlucro(Float.parseFloat(TfPercentLucro.getValue().toString()));
+                    }
                     if (TfCodigo.getText().equals("")) {
-                        tipoproduto.incluir();
-                        for (int i = 0; i < TbCarcTipoProduto.getRowCount(); i++) {
-                            tipoproduto.getTabela().setCodigo(Integer.parseInt(TbCarcTipoProduto.getValueAt(i, 0).toString()));
-                            tipoproduto.incluirtabela();
-                        }
+                        if(tipoproduto.incluir()) msg.Sucesso(LbNotificacoes, "Dados do Tipo de Produto gravados com sucesso!");
                     } else {
                         tipoproduto.setCodigo(Integer.parseInt(TfCodigo.getText()));
-                        tipoproduto.alterar();
-                        tipoproduto.excluirtabelastipoproduto();
+                        if(tipoproduto.alterar()) msg.Sucesso(LbNotificacoes, "Dados do Tipo de Produto alterados com sucesso!");
+                        tipoproduto.excluirtabelastipoproduto(); 
+                    }
+                    if (!CbServico.isSelected()){
                         for (int i = 0; i < TbCarcTipoProduto.getRowCount(); i++) {
                             tipoproduto.getTabela().setCodigo(Integer.parseInt(TbCarcTipoProduto.getValueAt(i, 0).toString()));
                             tipoproduto.incluirtabela();
                         }
+                    }else{
+                        tipoproduto.getTabela().setCodigo(0);
+                        tipoproduto.incluirtabela();
                     }
                     preenche.PreencherJtable(TbConsulta, tipoproduto.buscartiposproduto());
                     valida.validacamposCancelar(jPanel1, PnBotoes);
@@ -474,11 +512,9 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
                     limpa.Limpar(TbCarcTipoProduto);
                 } else {
                 }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Insira Caracteristicas no Tipo de Produto!", "Campos Obrigatorios", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Digite o nome do Tipo de Produto!", "Campos Obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacoes, "Digite o nome do Tipo de Produto!");
             TfTipoProduto.grabFocus();
         }
     }//GEN-LAST:event_BtGravarActionPerformed
@@ -489,6 +525,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         limpa.Limpar(jPanel1);
         valida.validacamposCancelar(jPanel1, PnBotoes);
         TbConsulta.setEnabled(true);
+        msg.Limpar(LbNotificacoes);
     }//GEN-LAST:event_BtCancelarActionPerformed
 
     private void BtAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtAlterarActionPerformed
@@ -511,12 +548,13 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
                     }
                 }
                 TbConsulta.setEnabled(false);
+                msg.StatusEditar(LbNotificacoes, "Editando dados do Tipo de Produto...");
             } else {
                 JOptionPane.showMessageDialog(null, "Nao e possivel alterar os dados deste tipo de produto.\n"
                         + "Ja existem produtos cadastrados no sistema utilizando este tipo de produto!", "Operacao interrompida", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Selecione um Tipo de Produto na tabela abaixo para realizar alteracoes!", "Campos Obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoNaoPreenchido(LbNotificacoes, "Selecione um Tipo de Produto na tabela para realizar alteracoes!");
         }
     }//GEN-LAST:event_BtAlterarActionPerformed
 
@@ -546,7 +584,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
             tipoproduto.setCodigo(Integer.parseInt(TfCodigo.getText()));
             if (!tipoproduto.tipoprodutocomproduto()) {
                 if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja EXCLUIR os dados deste tipo de produto?", "Deseja excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    tipoproduto.excluir();
+                    if (tipoproduto.excluir()) msg.StatusExcluido(LbNotificacoes, "Dados do Tipo de Produto excluidos com sucesso!");
                     preenche.PreencherJtable(TbConsulta, tipoproduto.buscartiposproduto());
                     valida.validacamposCancelar(jPanel1, PnBotoes);
                     TbConsulta.setEnabled(true);
@@ -559,7 +597,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
                         + "Ja existem produtos cadastrados no sistema utilizando este tipo de produto!", "Operacao interrompida", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Selecione um Tipo de Produto na tabela abaixo para realizar alteracoes!", "Campos Obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoNaoPreenchido(LbNotificacoes, "Selecione um Tipo de Produto na tabela para realizar exclusoes!");
         }
     }//GEN-LAST:event_BtExcluirActionPerformed
 
@@ -604,6 +642,24 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         valida.limitemaximo(evt, TfPercentLucro.getText(), 10);
     }//GEN-LAST:event_TfPercentLucroKeyTyped
 
+    private void CbServicoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CbServicoStateChanged
+        
+    }//GEN-LAST:event_CbServicoStateChanged
+
+    private void CbServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbServicoActionPerformed
+        if (CbServico.isSelected()){
+            TfPercentLucro.setEnabled(false);
+            TbCaracteristicas.setEnabled(false);
+            TbCarcTipoProduto.setEnabled(false);
+            TfPercentLucro.setValue(BigDecimal.ZERO);
+            limpa.Limpar(TbCarcTipoProduto);
+        }else{
+            TfPercentLucro.setEnabled(true);
+            TbCaracteristicas.setEnabled(true);
+            TbCarcTipoProduto.setEnabled(true);
+        }
+    }//GEN-LAST:event_CbServicoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtAlterar;
@@ -612,6 +668,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
     private javax.swing.JButton BtExcluir;
     private javax.swing.JButton BtGravar;
     private javax.swing.JButton BtIncluir;
+    private javax.swing.JCheckBox CbServico;
     private javax.swing.JLabel LbNotificacoes;
     private javax.swing.JMenuItem MnItCarregarDados;
     private javax.swing.JPanel PnBotoes;
@@ -621,13 +678,13 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
     private javax.swing.JTextField TfCodigo;
     private JNumberField.JNumberField TfPercentLucro;
     private javax.swing.JTextField TfTipoProduto;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
