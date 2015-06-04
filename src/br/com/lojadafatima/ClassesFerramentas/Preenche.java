@@ -39,7 +39,7 @@ public class Preenche {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao listar no JTable");
         } catch (NullPointerException ex){
-            
+            modelo.setNumRows(0);
         }
     }
 

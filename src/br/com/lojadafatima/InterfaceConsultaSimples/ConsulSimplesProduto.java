@@ -41,6 +41,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         CbPesquisa = new javax.swing.JComboBox();
         jScrollPane4 = new javax.swing.JScrollPane();
         TbConsulta = new javax.swing.JTable();
@@ -48,11 +49,13 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
         BtPesquisar = new javax.swing.JButton();
         BtSelecionar = new javax.swing.JButton();
         BtCancelar = new javax.swing.JButton();
+        RbPesqProduto = new javax.swing.JRadioButton();
+        RbPesqServico = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Rápida de Produto - Software - Loja da Fátima");
 
-        CbPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos os produtos", "Código", "Descrição", "Código do Tipo de Produto" }));
+        CbPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Código", "Descrição", "Código do Tipo de Produto/Servico" }));
         CbPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CbPesquisaActionPerformed(evt);
@@ -64,11 +67,11 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Código", "Descrição", "Tipo de Produto", "Valor(R$)", "Estoque mínimo"
+                "Código", "Descrição", "Tipo de Produto/Servico", "Estoque mínimo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -109,6 +112,13 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
             }
         });
 
+        buttonGroup1.add(RbPesqProduto);
+        RbPesqProduto.setSelected(true);
+        RbPesqProduto.setText("Produto");
+
+        buttonGroup1.add(RbPesqServico);
+        RbPesqServico.setText("Servico");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,9 +134,13 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RbPesqServico)
+                            .addComponent(RbPesqProduto)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -138,8 +152,12 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
                     .addComponent(CbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtPesquisar))
+                .addGap(4, 4, 4)
+                .addComponent(RbPesqProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(RbPesqServico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtSelecionar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
@@ -177,16 +195,15 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
     }//GEN-LAST:event_CbPesquisaActionPerformed
 
     private void BtPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesquisarActionPerformed
-        int[] tam = new int[5];
+        int[] tam = new int[4];
         tam[0] = 15;
         tam[1] = 100;
         tam[2] = 70;
         tam[3] = 20;
-        tam[4] = 20;
         preenche.FormataJtable(TbConsulta, tam);
         switch (CbPesquisa.getSelectedIndex()) {
             case 0: {
-                preenche.PreencherJtable(TbConsulta, getEspecproduto().getProduto().consultageral());
+                preenche.PreencherJtable(TbConsulta, getEspecproduto().getProduto().consultageral(RbPesqProduto.isSelected()));
                 break;
             }
             case 1: {
@@ -195,7 +212,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
                     TfPesquisa.grabFocus();
                 } else {
                     getEspecproduto().getProduto().setCodigo(Integer.parseInt(TfPesquisa.getText()));
-                    preenche.PreencherJtable(TbConsulta, getEspecproduto().getProduto().consultacodigo());
+                    preenche.PreencherJtable(TbConsulta, getEspecproduto().getProduto().consultacodigo(RbPesqProduto.isSelected()));
                 }
                 break;
             }
@@ -205,7 +222,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
                     TfPesquisa.grabFocus();
                 } else {
                     getEspecproduto().getProduto().setDescricao(TfPesquisa.getText());
-                    preenche.PreencherJtable(TbConsulta, getEspecproduto().getProduto().consultadescricao());
+                    preenche.PreencherJtable(TbConsulta, getEspecproduto().getProduto().consultadescricao(RbPesqProduto.isSelected()));
                 }
                 break;
             }
@@ -215,7 +232,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
                     TfPesquisa.grabFocus();
                 } else {
                     getEspecproduto().getTipoproduto().setCodigo(Integer.parseInt(TfPesquisa.getText()));
-                    preenche.PreencherJtable(TbConsulta, getEspecproduto().consultatipoproduto());
+                    preenche.PreencherJtable(TbConsulta, getEspecproduto().consultatipoproduto(RbPesqProduto.isSelected()));
                 }
                 break;
             }
@@ -247,8 +264,11 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
     private javax.swing.JButton BtPesquisar;
     private javax.swing.JButton BtSelecionar;
     private javax.swing.JComboBox CbPesquisa;
+    private javax.swing.JRadioButton RbPesqProduto;
+    private javax.swing.JRadioButton RbPesqServico;
     private javax.swing.JTable TbConsulta;
     private javax.swing.JTextField TfPesquisa;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JScrollPane jScrollPane4;
     // End of variables declaration//GEN-END:variables
 

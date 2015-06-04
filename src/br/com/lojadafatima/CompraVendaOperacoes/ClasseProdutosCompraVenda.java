@@ -23,11 +23,12 @@ public class ClasseProdutosCompraVenda {
     private float valorunit;
     private float valorprodut;
     private String promocao;
+    private float desconto;
 
     public void incluirprodutocompravenda() {
         conn.executeSQL("INSERT INTO bancoloja.\"PRODUTOS_COMPRA_VENDA\"(\n"
-                + "            \"CD_COMPRA_VENDA\", \"CD_OPERACAO\", \"CD_PRODUTO\", \"QT_PRODUTO\", \"VL_PRODUTO_UNITARIO\", \"VL_PRODUTO\", \"IN_PROMOCAO\")\n"
-                + "VALUES (" + getCompravenda().getCodigo() + ", " + getCompravenda().getOperacao().getCodigo() + ", " + getForneproduto().getProduto().getCodigo() + ", " + getQuantidade() + ", " + getValorunit() + ", " + getValorprodut() + ", '"+getPromocao()+"')");
+                + "            \"CD_COMPRA_VENDA\", \"CD_OPERACAO\", \"CD_PRODUTO\", \"QT_PRODUTO\", \"VL_PRODUTO_UNITARIO\", \"VL_PRODUTO\", \"IN_PROMOCAO\", \"PE_DESCONTO\")\n"
+                + "VALUES (" + getCompravenda().getCodigo() + ", " + getCompravenda().getOperacao().getCodigo() + ", " + getForneproduto().getProduto().getCodigo() + ", " + getQuantidade() + ", " + getValorunit() + ", " + getValorprodut() + ", '"+getPromocao()+"', "+getDesconto()+")");
     }
 
     public ResultSet produtoscompravenda() {
@@ -134,6 +135,14 @@ public class ClasseProdutosCompraVenda {
 
     public void setPromocao(String promocao) {
         this.promocao = promocao;
+    }
+
+    public float getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(float desconto) {
+        this.desconto = desconto;
     }
 
 }

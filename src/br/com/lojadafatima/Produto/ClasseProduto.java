@@ -19,13 +19,20 @@ public class ClasseProduto {
     private String descricao;
     private float estoquemin;
     private String situacao;
+    private ClasseTipoProduto tiposervico = new ClasseTipoProduto();
 
     public boolean incluir() {
         GeraCodigos geracodigos = new GeraCodigos();
         setCodigo(geracodigos.gerasequencia("CAD_PRODUTO", "CD_PRODUTO"));
-        conn.incluirSQL("INSERT INTO bancoloja.\"CAD_PRODUTO\"(\n"
-                + "\"CD_PRODUTO\", \"DS_PRODUTO\", \"QT_ESTOQUE_MIN\", \"SITUACAO\")\n"
-                + "VALUES (" + getCodigo() + ", '" + getDescricao().toUpperCase() + "', " + getEstoquemin() + ", 'A')");
+        if (getTiposervico().getCodigo() == 0) {
+            conn.incluirSQL("INSERT INTO bancoloja.\"CAD_PRODUTO\"(\n"
+                + "\"CD_PRODUTO\", \"DS_PRODUTO\", \"QT_ESTOQUE_MIN\", \"SITUACAO\", \"CD_TIPO_SERVICO\")\n"
+                + "VALUES (" + getCodigo() + ", '" + getDescricao().toUpperCase() + "', " + getEstoquemin() + ", 'A', NULL)");
+        } else {
+            conn.incluirSQL("INSERT INTO bancoloja.\"CAD_PRODUTO\"(\n"
+                + "\"CD_PRODUTO\", \"DS_PRODUTO\", \"QT_ESTOQUE_MIN\", \"SITUACAO\", \"CD_TIPO_SERVICO\")\n"
+                + "VALUES (" + getCodigo() + ", '" + getDescricao().toUpperCase() + "', " + getEstoquemin() + ", 'A', "+getTiposervico().getCodigo()+")");
+        }
         if (conn.retorno == 1) return true;
         else                   return false;
     }
@@ -46,47 +53,67 @@ public class ClasseProduto {
         else                   return false;
     }
 
-    public ResultSet consultageral() {
-        conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\"\n"
-                + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
-                + "JOIN bancoloja.\"CAD_CARACTERISTICAS_PRODUTO\" \"CP\" ON \"P\".\"CD_PRODUTO\" = \"CP\".\"CD_PRODUTO\"\n"
-                + "JOIN bancoloja.\"CAD_TIPO_PRODUTO\" \"TP\" ON \"CP\".\"CD_TIPO_PRODUTO\" = \"TP\".\"CD_TIPO_PRODUTO\"\n"
-                + "WHERE \"P\".\"SITUACAO\" = 'A'\n"
-                + "GROUP BY \"P\".\"CD_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\"\n"
-                + "ORDER BY \"P\".\"CD_PRODUTO\"");
+    public ResultSet consultageral(boolean pesqproduto) {
+        if (pesqproduto) conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\"\n"
+                                       + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
+                                       + "JOIN bancoloja.\"CAD_CARACTERISTICAS_PRODUTO\" \"CP\" ON \"P\".\"CD_PRODUTO\" = \"CP\".\"CD_PRODUTO\"\n"
+                                       + "JOIN bancoloja.\"CAD_TIPO_PRODUTO\" \"TP\" ON \"CP\".\"CD_TIPO_PRODUTO\" = \"TP\".\"CD_TIPO_PRODUTO\"\n"
+                                       + "WHERE \"P\".\"SITUACAO\" = 'A'\n"
+                                       + "GROUP BY \"P\".\"CD_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\"\n"
+                                       + "ORDER BY \"P\".\"CD_PRODUTO\"");
+        else conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\"\n" +
+                             "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n" +
+                             "JOIN bancoloja.\"CAD_TIPO_PRODUTO\" \"TP\" ON \"P\".\"CD_TIPO_SERVICO\" = \"TP\".\"CD_TIPO_PRODUTO\"\n" +
+                             "WHERE \"P\".\"SITUACAO\" = 'A'\n" +
+                             "ORDER BY \"P\".\"CD_PRODUTO\"");
         return conn.resultset;
     }
 
-    public ResultSet consultacodigo() {
-        conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\"\n"
-                + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
-                + "JOIN bancoloja.\"CAD_CARACTERISTICAS_PRODUTO\" \"CP\" ON \"P\".\"CD_PRODUTO\" = \"CP\".\"CD_PRODUTO\"\n"
-                + "JOIN bancoloja.\"CAD_TIPO_PRODUTO\" \"TP\" ON \"CP\".\"CD_TIPO_PRODUTO\" = \"TP\".\"CD_TIPO_PRODUTO\"\n"
-                + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"P\".\"CD_PRODUTO\" = " + getCodigo() + "\n"
-                + "GROUP BY \"P\".\"CD_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\"\n"
-                + "ORDER BY \"P\".\"CD_PRODUTO\"");
+    public ResultSet consultacodigo(boolean pesqproduto) {
+        if(pesqproduto) conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\"\n"
+                                      + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
+                                      + "JOIN bancoloja.\"CAD_CARACTERISTICAS_PRODUTO\" \"CP\" ON \"P\".\"CD_PRODUTO\" = \"CP\".\"CD_PRODUTO\"\n"
+                                      + "JOIN bancoloja.\"CAD_TIPO_PRODUTO\" \"TP\" ON \"CP\".\"CD_TIPO_PRODUTO\" = \"TP\".\"CD_TIPO_PRODUTO\"\n"
+                                      + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"P\".\"CD_PRODUTO\" = " + getCodigo() + "\n"
+                                      + "GROUP BY \"P\".\"CD_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\"\n"
+                                      + "ORDER BY \"P\".\"CD_PRODUTO\"");
+        else conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\"\n" +
+                             "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n" +
+                             "JOIN bancoloja.\"CAD_TIPO_PRODUTO\" \"TP\" ON \"P\".\"CD_TIPO_SERVICO\" = \"TP\".\"CD_TIPO_PRODUTO\"\n" +
+                             "WHERE \"P\".\"SITUACAO\" = 'A' AND \"P\".\"CD_PRODUTO\" = "+getCodigo()+"\n" +
+                             "ORDER BY \"P\".\"CD_PRODUTO\"");
         return conn.resultset;
     }
 
-    public ResultSet consultadescricao() {
-        conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\"\n"
-                + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
-                + "JOIN bancoloja.\"CAD_CARACTERISTICAS_PRODUTO\" \"CP\" ON \"P\".\"CD_PRODUTO\" = \"CP\".\"CD_PRODUTO\"\n"
-                + "JOIN bancoloja.\"CAD_TIPO_PRODUTO\" \"TP\" ON \"CP\".\"CD_TIPO_PRODUTO\" = \"TP\".\"CD_TIPO_PRODUTO\"\n"
-                + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"P\".\"DS_PRODUTO\" LIKE '%" + getDescricao().toUpperCase() + "%'\n"
-                + "GROUP BY \"P\".\"CD_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\"\n"
-                + "ORDER BY \"P\".\"CD_PRODUTO\"");
+    public ResultSet consultadescricao(boolean pesqproduto) {
+        if (pesqproduto) conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\"\n"
+                                       + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
+                                       + "JOIN bancoloja.\"CAD_CARACTERISTICAS_PRODUTO\" \"CP\" ON \"P\".\"CD_PRODUTO\" = \"CP\".\"CD_PRODUTO\"\n"
+                                       + "JOIN bancoloja.\"CAD_TIPO_PRODUTO\" \"TP\" ON \"CP\".\"CD_TIPO_PRODUTO\" = \"TP\".\"CD_TIPO_PRODUTO\"\n"
+                                       + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"P\".\"DS_PRODUTO\" LIKE '%" + getDescricao().toUpperCase() + "%'\n"
+                                       + "GROUP BY \"P\".\"CD_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\"\n"
+                                       + "ORDER BY \"P\".\"CD_PRODUTO\"");
+        else conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"TP\".\"DS_TIPO_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\"\n" +
+                             "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n" +
+                             "JOIN bancoloja.\"CAD_TIPO_PRODUTO\" \"TP\" ON \"P\".\"CD_TIPO_SERVICO\" = \"TP\".\"CD_TIPO_PRODUTO\"\n" +
+                             "WHERE \"P\".\"SITUACAO\" = 'A' AND \"P\".\"DS_PRODUTO\" LIKE '%"+getDescricao().toUpperCase()+"%'\n" +
+                             "ORDER BY \"P\".\"CD_PRODUTO\"");
         return conn.resultset;
     }
 
     public void retornaproduto() {
-        conn.executeSQL("SELECT \"DS_PRODUTO\", \"QT_ESTOQUE_MIN\"\n"
+        conn.executeSQL("SELECT \"DS_PRODUTO\", \"QT_ESTOQUE_MIN\", \"CD_TIPO_SERVICO\"\n"
                 + "FROM bancoloja.\"CAD_PRODUTO\"\n"
                 + "WHERE \"CD_PRODUTO\" = " + getCodigo() + "");
         try {
             conn.resultset.first();
             setDescricao(conn.resultset.getString(1));
             setEstoquemin(conn.resultset.getFloat(2));
+            if (conn.resultset.getString(3) != null){
+                getTiposervico().setCodigo(conn.resultset.getInt(3));
+            }else {
+                getTiposervico().setCodigo(0);
+            }
         } catch (SQLException ex) {
 
         }
@@ -193,6 +220,14 @@ public class ClasseProduto {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    public ClasseTipoProduto getTiposervico() {
+        return tiposervico;
+    }
+
+    public void setTiposervico(ClasseTipoProduto tiposervico) {
+        this.tiposervico = tiposervico;
     }
 
 }

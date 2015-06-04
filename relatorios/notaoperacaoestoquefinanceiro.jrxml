@@ -36,16 +36,16 @@ WHERE "CD_OPERACAO" = $P{CD_OPERACAO}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="85" splitType="Stretch">
+		<band height="135" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="e340585a-a54a-444c-a5c6-6f7ed0659cc1" x="0" y="60" width="100" height="20"/>
+				<reportElement uuid="e340585a-a54a-444c-a5c6-6f7ed0659cc1" x="0" y="0" width="163" height="20"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
-				<text><![CDATA[Loja da Fátima]]></text>
+				<text><![CDATA[Software Loja da Fátima]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="d2457d2a-a489-4c52-b320-374e8b1559ea" x="0" y="0" width="555" height="43"/>
+				<reportElement uuid="d2457d2a-a489-4c52-b320-374e8b1559ea" x="27" y="30" width="425" height="43"/>
 				<textElement>
 					<font size="28"/>
 				</textElement>

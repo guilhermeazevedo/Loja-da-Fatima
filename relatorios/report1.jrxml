@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32316340-bf95-45ad-bc45-c47be5258819">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT * FROM bancoloja."COMPRA_VENDA" "CV"
+JOIN bancoloja."PRODUTOS_COMPRA_VENDA" "PCV" ON  "CV"."CD_COMPRA_VENDA" = "PCV"."CD_COMPRA_VENDA" AND "CV"."CD_OPERACAO" = "PCV"."CD_OPERACAO"
+JOIN bancoloja."CAD_PRODUTO" "P" ON "P"."CD_PRODUTO" = "PCV"."CD_PRODUTO"
+JOIN bancoloja."CAD_OPERACOES" "O" ON "O"."CD_OPERACAO" = "CV"."CD_OPERACAO"
+JOIN bancoloja."CONTAS_PAGAR_RECEBER" "CPR" ON "CPR"."CD_OPERACAO_COMPRA_VENDA" = "CV"."CD_OPERACAO" AND "CPR"."CD_COMPRA_VENDA" = "CV"."CD_COMPRA_VENDA"
+JOIN bancoloja."PARCELAS" "PA" ON "PA"."CD_CONTA" = "CPR"."CD_CONTA" AND "PA"."CD_OPERACAO" = "CPR"."CD_OPERACAO"
+WHERE "CV"."CD_COMPRA_VENDA" = 2 AND "CV"."CD_OPERACAO" = 1]]>
+	</queryString>
+	<field name="CD_COMPRA_VENDA" class="java.lang.Integer"/>
+	<field name="CD_OPERACAO" class="java.lang.Integer"/>
+	<field name="DS_COMPRA_VENDA" class="java.lang.String"/>
+	<field name="CD_PESSOA" class="java.lang.Integer"/>
+	<field name="CD_FUNCIONARIO" class="java.lang.Integer"/>
+	<field name="CD_CONDICAO_PGTO" class="java.lang.Integer"/>
+	<field name="DT_COMPRA_VENDA" class="java.sql.Timestamp"/>
+	<field name="CD_PRODUTO" class="java.lang.Integer"/>
+	<field name="QT_PRODUTO" class="java.math.BigDecimal"/>
+	<field name="VL_PRODUTO_UNITARIO" class="java.math.BigDecimal"/>
+	<field name="VL_PRODUTO" class="java.math.BigDecimal"/>
+	<field name="CD_SERVICO" class="java.lang.Integer"/>
+	<field name="IN_PROMOCAO" class="java.lang.String"/>
+	<field name="PE_DESCONTO" class="java.math.BigDecimal"/>
+	<field name="DS_PRODUTO" class="java.lang.String"/>
+	<field name="QT_ESTOQUE_MIN" class="java.math.BigDecimal"/>
+	<field name="SITUACAO" class="java.lang.String"/>
+	<field name="DS_OPERACAO" class="java.lang.String"/>
+	<field name="IN_FINANCEIRO" class="java.lang.String"/>
+	<field name="TP_FINANCEIRO" class="java.lang.String"/>
+	<field name="IN_ESTOQUE" class="java.lang.String"/>
+	<field name="TP_ESTOQUE" class="java.lang.String"/>
+	<field name="CD_CONTA" class="java.lang.Integer"/>
+	<field name="CD_OPERACAO_COMPRA_VENDA" class="java.lang.Integer"/>
+	<field name="DS_CONTA" class="java.lang.String"/>
+	<field name="CD_MULTA" class="java.lang.Integer"/>
+	<field name="VL_TOTAL" class="java.math.BigDecimal"/>
+	<field name="DT_CONTA" class="java.sql.Date"/>
+	<field name="CD_PARCELA" class="java.lang.Integer"/>
+	<field name="CD_FORMA_PGTO" class="java.lang.Integer"/>
+	<field name="DT_PAGAR" class="java.sql.Date"/>
+	<field name="DT_PAGO" class="java.sql.Date"/>
+	<field name="VL_PAGAR" class="java.math.BigDecimal"/>
+	<field name="VL_PAGO" class="java.math.BigDecimal"/>
+	<field name="CD_PARCELA_REPARCELA" class="java.lang.Integer"/>
+	<field name="CD_CONTA_REPARCELA" class="java.lang.Integer"/>
+	<field name="CD_OPERACAO_REPARCELA" class="java.lang.Integer"/>
+	<field name="IN_APLICACAO_MULTA" class="java.lang.String"/>
+	<group name="TESTE">
+		<groupExpression><![CDATA[$F{CD_COMPRA_VENDA}]]></groupExpression>
+		<groupHeader>
+			<band height="50"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="23" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement uuid="00cf889a-2698-4e62-90cb-e9d0b259531f" x="10" y="11" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CD_COMPRA_VENDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ab9e2690-2ee7-4ba8-beb2-a468c4bf6697" x="152" y="11" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DT_COMPRA_VENDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="63f8bfce-6ed2-444c-8f91-94d3cfeff8c4" x="11" y="38" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CD_PESSOA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement uuid="ea386ac5-7163-4ccc-b40f-6adb4430bec0" x="8" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CD_CONTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8d1d0965-0027-4f66-8b48-0b7eff031149" x="131" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DS_CONTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b153ac4b-cf6e-4b05-8bfc-00450909e7a0" x="251" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DT_CONTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c989959f-eeb5-49bb-b00a-c7cbce485ba7" x="351" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CD_PARCELA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="77da5317-5922-43a1-a02a-87db5ffeede9" x="474" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{VL_TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

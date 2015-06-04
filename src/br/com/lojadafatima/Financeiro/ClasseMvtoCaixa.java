@@ -77,6 +77,22 @@ public class ClasseMvtoCaixa {
             return false;
         }
     }
+    
+    public ResultSet mvtocaixa(String data_ini, String data_fim, String tipo_mvto){
+        conn.executeSQL("SELECT \"CD_MVTO\",\n" +
+                        "       \"DS_MVTO\",\n" +
+                        "       TO_CHAR(\"DT_MVTO\", 'DD/MM/YYYY ÀS HH24:MI:SS'),\n" +
+                        "       \"VL_ANTES\",\n" +
+                        "       \"VL_MVTO\",\n" +
+                        "       CASE WHEN \"TP_MVTO\" = 'E' THEN 'ENTRADA'\n" +
+                        "       ELSE 'SAIDA' END AS \"TIPO\",\n" +
+                        "       \"VL_ATUAL\"\n" +
+                        "FROM bancoloja.\"MOV_CAIXA\"\n" +
+                        "WHERE DATE(\"DT_MVTO\") BETWEEN '"+data_ini+"' AND '"+data_fim+"' AND\n" +
+                        "      \"TP_MVTO\" <> '"+tipo_mvto+"'\n" +
+                        "ORDER BY \"DT_MVTO\"");
+        return conn.resultset;
+    }
 
     public ResultSet mvtocaixadia() {
         conn.executeSQL("SELECT \"CD_MVTO\",\n"

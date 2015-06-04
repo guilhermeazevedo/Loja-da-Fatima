@@ -50,15 +50,9 @@ public class ClasseTipoProduto {
     }
 
     public void incluirtabela() {
-        if (getTabela().getCodigo() != 0){
             conn.executeSQL("INSERT INTO bancoloja.\"CAD_TABELAS_TIPO_PRODUTO\"(\n"
                 + "\"CD_TIPO_PRODUTO\", \"CD_TABELA\")\n"
                 + "VALUES (" + getCodigo() + ", " + getTabela().getCodigo() + ")");
-        }else{
-            conn.executeSQL("INSERT INTO bancoloja.\"CAD_TABELAS_TIPO_PRODUTO\"(\n"
-                + "\"CD_TIPO_PRODUTO\", \"CD_TABELA\")\n"
-                + "VALUES (" + getCodigo() + ", NULL)");
-        }
     }
 
     public boolean excluir() {
@@ -75,11 +69,8 @@ public class ClasseTipoProduto {
     }
 
     public boolean alterar() {
-        String eservico;
-        if (isServico()) eservico = "S";
-        else             eservico = "N";
         getTabela().conn.atualizarSQL("UPDATE bancoloja.\"CAD_TIPO_PRODUTO\"\n"
-                + "SET \"DS_TIPO_PRODUTO\"='" + getTipoproduto().toUpperCase() + "', \"PE_LUCRO_PRODUTO\"="+getPercentlucro()+", \"IN_SERVICO\" = '"+eservico+"'\n"
+                + "SET \"DS_TIPO_PRODUTO\"='" + getTipoproduto().toUpperCase() + "', \"PE_LUCRO_PRODUTO\"="+getPercentlucro()+"\n"
                 + "WHERE \"CD_TIPO_PRODUTO\"=" + getCodigo() + ";");
         if (conn.retorno == 1) return true;
         else                   return false;
@@ -112,17 +103,28 @@ public class ClasseTipoProduto {
     }
 
     public boolean tipoprodutocomproduto() {
-        conn.executeSQL("SELECT \"CD_PRODUTO\"\n"
-                + "FROM bancoloja.\"CAD_CARACTERISTICAS_PRODUTO\"\n"
-                + "WHERE \"CD_TIPO_PRODUTO\" = " + getCodigo() + "");
+        conn.executeSQL("SELECT \"CP\".\"CD_PRODUTO\"\n" +
+                        "FROM bancoloja.\"CAD_CARACTERISTICAS_PRODUTO\" \"CP\"\n" +
+                        "JOIN bancoloja.\"CAD_PRODUTO\" \"P\" ON \"P\".\"CD_PRODUTO\" = \"CP\".\"CD_PRODUTO\"\n" +
+                        "WHERE \"CP\".\"CD_TIPO_PRODUTO\" = " + getCodigo() + " AND\n" +
+                        "      \"P\".\"SITUACAO\" = 'A'");
         try {
             conn.resultset.first();
             conn.resultset.getInt(1);
             return true;
         } catch (SQLException ex) {
-
+            conn.executeSQL("SELECT \"CD_PRODUTO\"\n" +
+                            "FROM bancoloja.\"CAD_PRODUTO\"\n" +
+                            "WHERE \"CD_TIPO_SERVICO\" = " + getCodigo() + " AND\n" +
+                            "      \"SITUACAO\" = 'A'");
+            try{
+               conn.resultset.first();
+               conn.resultset.getInt(1);
+               return true;
+            } catch (SQLException exe){
+                return false;
+            }
         }
-        return false;
     }
 
     public float retornapercentuallucro() {

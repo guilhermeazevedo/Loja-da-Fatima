@@ -352,15 +352,13 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfTipoProduto))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(54, 54, 54)
-                                .addComponent(jLabel2)))
+                            .addComponent(jLabel1)
+                            .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(TfTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(CbServico, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -374,7 +372,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
                                 .addComponent(jLabel4)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtCadTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -460,6 +458,8 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
         preenche.FormataJtable(TbCaracteristicas, tam2);
         preenche.PreencheJtableSEL(TbCaracteristicas, tipoproduto.getTabela().buscartabelascomboolean());
         TbConsulta.setEnabled(false);
+        CbServico.setSelected(false);
+        CbServicoActionPerformed(evt);
         msg.StatusNovo(LbNotificacoes, "Insira os dados do novo Tipo de Produto");
     }//GEN-LAST:event_BtIncluirActionPerformed
 
@@ -500,9 +500,6 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
                             tipoproduto.getTabela().setCodigo(Integer.parseInt(TbCarcTipoProduto.getValueAt(i, 0).toString()));
                             tipoproduto.incluirtabela();
                         }
-                    }else{
-                        tipoproduto.getTabela().setCodigo(0);
-                        tipoproduto.incluirtabela();
                     }
                     preenche.PreencherJtable(TbConsulta, tipoproduto.buscartiposproduto());
                     valida.validacamposCancelar(jPanel1, PnBotoes);
@@ -531,28 +528,35 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
     private void BtAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtAlterarActionPerformed
         if (!TfCodigo.getText().equals("")) {
             tipoproduto.setCodigo(Integer.parseInt(TfCodigo.getText()));
+            valida.validacamposCadastrar(jPanel1, PnBotoes);
+            TbConsulta.setEnabled(false);
+            CbServico.setEnabled(false);
             if (!tipoproduto.tipoprodutocomproduto()) {
-                valida.validacamposCadastrar(jPanel1, PnBotoes);
-
-                int[] tam2 = new int[3];
-                tam2[0] = 30;
-                tam2[1] = 50;
-                tam2[2] = 200;
-                preenche.FormataJtable(TbCaracteristicas, tam2);
-                preenche.PreencheJtableSEL(TbCaracteristicas, tipoproduto.getTabela().buscartabelascomboolean());
-                for (int i = 0; i < TbCarcTipoProduto.getRowCount(); i++) {
-                    for (int j = 0; j < TbCaracteristicas.getRowCount(); j++) {
-                        if (Integer.parseInt(TbCaracteristicas.getValueAt(j, 1).toString()) == Integer.parseInt(TbCarcTipoProduto.getValueAt(i, 0).toString())) {
-                            TbCaracteristicas.setValueAt((true), j, 0);
+                if(!tipoproduto.isServico()){
+                    int[] tam2 = new int[3];
+                    tam2[0] = 30;
+                    tam2[1] = 50;
+                    tam2[2] = 200;
+                    preenche.FormataJtable(TbCaracteristicas, tam2);
+                    preenche.PreencheJtableSEL(TbCaracteristicas, tipoproduto.getTabela().buscartabelascomboolean());
+                    for (int i = 0; i < TbCarcTipoProduto.getRowCount(); i++) {
+                        for (int j = 0; j < TbCaracteristicas.getRowCount(); j++) {
+                            if (Integer.parseInt(TbCaracteristicas.getValueAt(j, 1).toString()) == Integer.parseInt(TbCarcTipoProduto.getValueAt(i, 0).toString())) {
+                                TbCaracteristicas.setValueAt((true), j, 0);
+                            }
                         }
                     }
+                    TbCaracteristicas.setEnabled(true);
+                    TbCarcTipoProduto.setEnabled(true);
+                } else {
+                    TbCaracteristicas.setEnabled(false);
+                    TbCarcTipoProduto.setEnabled(false);
                 }
-                TbConsulta.setEnabled(false);
-                msg.StatusEditar(LbNotificacoes, "Editando dados do Tipo de Produto...");
             } else {
-                JOptionPane.showMessageDialog(null, "Nao e possivel alterar os dados deste tipo de produto.\n"
-                        + "Ja existem produtos cadastrados no sistema utilizando este tipo de produto!", "Operacao interrompida", JOptionPane.INFORMATION_MESSAGE);
+                TbCaracteristicas.setEnabled(false);
+                TbCarcTipoProduto.setEnabled(false);
             }
+            msg.StatusEditar(LbNotificacoes, "Editando dados do Tipo de Produto...");
         } else {
             msg.CampoNaoPreenchido(LbNotificacoes, "Selecione um Tipo de Produto na tabela para realizar alteracoes!");
         }
@@ -653,10 +657,12 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
             TbCarcTipoProduto.setEnabled(false);
             TfPercentLucro.setValue(BigDecimal.ZERO);
             limpa.Limpar(TbCarcTipoProduto);
+            limpa.Limpar(TbCaracteristicas);
         }else{
             TfPercentLucro.setEnabled(true);
             TbCaracteristicas.setEnabled(true);
             TbCarcTipoProduto.setEnabled(true);
+            preenche.PreencheJtableSEL(TbCaracteristicas, tipoproduto.getTabela().buscartabelascomboolean());
         }
     }//GEN-LAST:event_CbServicoActionPerformed
 

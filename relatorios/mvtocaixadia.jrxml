@@ -3,19 +3,28 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="DT_INICIAL" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new Date("28/05/2015")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DT_FINAL" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new Date("02/06/2015")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TIPO_MVTO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DS_RELATORIO" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT "CD_MVTO",
-"DS_MVTO",
-TO_CHAR("DT_MVTO", 'DD/MM/YYYY ÀS HH24:MI:SS'),
-"VL_ANTES",
-"VL_ATUAL",
-"VL_MVTO",
-CASE WHEN "TP_MVTO" = 'E' THEN 'ENTRADA'
-ELSE 'SAIDA' END AS "TIPO"
+       "DS_MVTO",
+       TO_CHAR("DT_MVTO", 'DD/MM/YYYY ÀS HH24:MI:SS'),
+       "VL_ANTES",
+       "VL_MVTO",
+       CASE WHEN "TP_MVTO" = 'E' THEN 'ENTRADA'
+       ELSE 'SAIDA' END AS "TIPO",
+       "VL_ATUAL"
 FROM bancoloja."MOV_CAIXA"
-WHERE DATE_PART('DAY', "DT_MVTO") = DATE_PART('DAY', CURRENT_DATE)
-AND   DATE_PART('MONTH', "DT_MVTO") = DATE_PART('MONTH', CURRENT_DATE)
-ORDER BY "CD_MVTO"]]>
+WHERE DATE("DT_MVTO") BETWEEN $P{DT_INICIAL} AND $P{DT_FINAL} AND
+      "TP_MVTO" <> $P{TIPO_MVTO}]]>
 	</queryString>
 	<field name="CD_MVTO" class="java.lang.Integer"/>
 	<field name="DS_MVTO" class="java.lang.String"/>
@@ -34,14 +43,7 @@ ORDER BY "CD_MVTO"]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="139" splitType="Stretch">
-			<staticText>
-				<reportElement uuid="9d29c083-bfd3-4264-bf92-03c14a5a2fb8" x="100" y="35" width="372" height="37"/>
-				<textElement textAlignment="Center">
-					<font size="22" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Movimentação do Caixa do Dia]]></text>
-			</staticText>
+		<band height="124" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="6539d992-19ee-4d00-aabd-5319cb2cfc23" x="0" y="0" width="217" height="20"/>
 				<textElement>
@@ -50,25 +52,18 @@ ORDER BY "CD_MVTO"]]>
 				<text><![CDATA[Software Loja da Fátima]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="dc8d00cb-b226-4487-957e-636566757333" x="3" y="93" width="114" height="20"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement uuid="0d9b95dd-efc2-4a71-afa4-5f802745bbed" x="156" y="41" width="263" height="37"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Começou o dia com ]]></text>
+				<text><![CDATA[Movimentação do Caixa]]></text>
 			</staticText>
-			<staticText>
-				<reportElement uuid="c60777f2-7f5b-416e-8bc6-3f4238758d18" x="217" y="93" width="115" height="20"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="f8ec6c36-e5ef-4bea-8b44-c3bf3c078393" x="12" y="90" width="542" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[ em caixa.]]></text>
-			</staticText>
-			<textField evaluationTime="Report" pattern="¤ #,##0.00">
-				<reportElement uuid="d8aba713-39b3-4a9c-a3c5-191aaf9f89b1" x="117" y="93" width="100" height="20"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{VL_ANTES_1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{DS_RELATORIO}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -76,156 +71,114 @@ ORDER BY "CD_MVTO"]]>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="24" splitType="Stretch">
+		<band height="15" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="2e8ce8fa-c6b0-4f4e-ad06-6353e104350d" x="0" y="0" width="47" height="20"/>
+				<reportElement uuid="9f0742f1-d9bd-46c9-895f-0ac53c34d3dd" x="419" y="0" width="55" height="13"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nr.º]]></text>
+				<text><![CDATA[Tipo Mvto.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="7c5604ab-23da-4912-9344-c18b60290357" x="57" y="0" width="137" height="20"/>
+				<reportElement uuid="e85055cf-136b-4b85-be5c-b4e1aa15b5f8" x="348" y="0" width="60" height="13"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Mvto.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ca56dfe5-c144-42fa-b9b6-a4b6317df207" x="276" y="0" width="59" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Ant.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="70ca867a-8f8b-4479-b5a5-f760e7abc3ad" x="2" y="0" width="51" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nroº Mvto.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a01b2bea-549b-4209-9ddd-3a6a8fcccd08" x="64" y="0" width="100" height="13"/>
+				<textElement>
+					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Referente à]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="6d9cae70-74b2-4ed7-9603-b10722aa61e9" x="206" y="0" width="59" height="20"/>
+				<reportElement uuid="a35bf344-a491-4c0c-b669-d3ecbed47672" x="494" y="0" width="38" height="13"/>
 				<textElement>
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Data e Hora]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="7711be51-57db-4273-af97-27dd509bd117" x="276" y="0" width="67" height="20"/>
-				<textElement>
-					<font size="10" isBold="true"/>
+					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Saldo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="dff36cc5-15ec-41be-905d-eec0b1ee0938" x="354" y="0" width="60" height="20"/>
+				<reportElement uuid="a83b09f5-5070-4757-96aa-ab669d64354c" x="186" y="0" width="71" height="13"/>
 				<textElement>
-					<font size="10" isBold="true"/>
+					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Quant. Atual]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="c83c248b-dda4-4d16-8d21-559f47421541" x="424" y="0" width="78" height="20"/>
-				<textElement>
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Quant. Movida]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="8e8f1a49-2a32-443c-9fac-3bcbecb525c6" x="502" y="0" width="53" height="20"/>
-				<textElement>
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Tipo]]></text>
+				<text><![CDATA[Data/Horário]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="30" splitType="Stretch">
-			<textField>
-				<reportElement uuid="eed9c225-2d94-4ccd-9784-6aa1f68abf86" x="0" y="0" width="47" height="20"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{CD_MVTO}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="ef7cb2c4-8ef1-416b-9121-f96336244c0f" x="57" y="0" width="137" height="20"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
+		<band height="13" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="cffa57ea-939c-4266-81be-882bf1d368cb" x="64" y="0" width="116" height="13"/>
+				<textElement/>
 				<textFieldExpression><![CDATA[$F{DS_MVTO}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="9c000f74-2028-44ce-beab-6f4aa6b324f7" x="206" y="0" width="59" height="20"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+				<reportElement uuid="a12d0c8b-98e1-41f8-bf88-14c939050c0b" x="276" y="0" width="60" height="13"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{VL_ANTES}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="a917e360-2014-414c-80de-a211015e968a" x="186" y="0" width="71" height="13"/>
+				<textElement/>
 				<textFieldExpression><![CDATA[$F{to_char}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
-				<reportElement uuid="83207d3e-0e3d-4674-85a3-da6956a0c688" x="276" y="0" width="67" height="20"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{VL_ANTES}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
-				<reportElement uuid="d6fdff9e-7e20-40fb-ac2c-71327eda5324" x="354" y="0" width="60" height="20"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{VL_ATUAL}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
-				<reportElement uuid="07f5d184-1140-4401-b9a6-09db3ef2cc81" x="424" y="0" width="66" height="20"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
+				<reportElement uuid="e70df672-c922-4a6f-bf68-3f91a91dc779" x="348" y="0" width="60" height="13"/>
+				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{VL_MVTO}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="961dc3ef-b6ed-48b6-9e33-ca07cd368b09" x="502" y="0" width="53" height="20"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
+				<reportElement uuid="4cc7d046-91f6-4102-a6cb-688de326de0f" x="494" y="0" width="60" height="13"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{VL_ATUAL}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="9890a175-16f7-4367-9291-9959a6b4fe25" x="2" y="0" width="51" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{CD_MVTO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="b97b5b54-bc0d-48ef-8390-7165a77c1a2f" x="419" y="0" width="55" height="13"/>
+				<textElement/>
 				<textFieldExpression><![CDATA[$F{TIPO}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="5" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
-		<band height="22" splitType="Stretch">
-			<textField>
-				<reportElement uuid="dfcaa91e-c311-48b5-b7d5-ec3232df3ac9" x="435" y="0" width="80" height="20"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
-			</textField>
+		<band height="37" splitType="Stretch">
 			<textField evaluationTime="Report">
-				<reportElement uuid="76aaff67-46d9-4827-95c0-ec4499967d9d" x="515" y="0" width="40" height="20"/>
+				<reportElement uuid="df7b501a-77e7-4d6e-a785-2cf03e0a47d7" x="515" y="10" width="40" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yyyy HH.mm.ss">
-				<reportElement uuid="b477dbba-b252-44f6-a9df-a30e2b218582" x="0" y="2" width="100" height="20"/>
+			<textField>
+				<reportElement uuid="9694ecf3-abe3-4e08-aad6-df5239458494" x="435" y="10" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy - HH:mm:ss">
+				<reportElement uuid="0da2785b-aac8-4201-8cab-2954e180eb37" x="0" y="12" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
-	<summary>
-		<band height="26" splitType="Stretch">
-			<textField pattern="¤ #,##0.00">
-				<reportElement uuid="5a883850-f0e3-45d1-9509-b3e464a88ab4" x="117" y="6" width="100" height="20"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{VL_ATUAL}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="ffd1015a-2b8e-465b-bb4d-c5593a4b8fea" x="3" y="6" width="114" height="20"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Terminou o dia com ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="0e95d7e8-8120-44b1-a025-5fb28c497336" x="217" y="6" width="115" height="20"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[em caixa.]]></text>
-			</staticText>
-		</band>
-	</summary>
 </jasperReport>

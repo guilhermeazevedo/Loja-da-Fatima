@@ -76,13 +76,13 @@ public class ClasseDatas {
         return sd.format(calendar.getTime());
     }
     
-    public String formatadata(String data){
-        if(data == null){
-            return "  /  /    ";
-        }
-        data = data.substring(3,5) + "/" + data.substring(0,2) + "/" + data.substring(6,10);
-        return data;
-    }
+//    public String formatadata(String data){
+//        if(data == null){
+//            return "  /  /    ";
+//        }
+//        data = data.substring(3,5) + "/" + data.substring(0,2) + "/" + data.substring(6,10);
+//        return data;
+//    }
     
     public boolean ediautil(String str){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

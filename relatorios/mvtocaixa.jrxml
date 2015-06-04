@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mvtocaixa" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e2f5ed7c-ae54-4cd4-be61-a38ee2a55a69">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DT_INICIAL" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DT_FINAL" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TIPO_MVTO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT "CD_MVTO",
+       "DS_MVTO",
+       TO_CHAR("DT_MVTO", 'DD/MM/YYYY ÀS HH24:MI:SS'),
+       "VL_ANTES",
+       "VL_MVTO",
+       CASE WHEN "TP_MVTO" = 'E' THEN 'ENTRADA'
+       ELSE 'SAIDA' END AS "TIPO",
+       "VL_ATUAL"
+FROM bancoloja."MOV_CAIXA"
+WHERE DATE("DT_MVTO") BETWEEN '$P{DT_INICIAL}' AND '$P{DT_FINAL}' AND
+      "TP_MVTO" <> '$P{TIPO_MVTO}']]>
+	</queryString>
+	<field name="CD_MVTO" class="java.lang.Integer"/>
+	<field name="DS_MVTO" class="java.lang.String"/>
+	<field name="to_char" class="java.lang.String"/>
+	<field name="VL_ANTES" class="java.math.BigDecimal"/>
+	<field name="VL_MVTO" class="java.math.BigDecimal"/>
+	<field name="TIPO" class="java.lang.String"/>
+	<field name="VL_ATUAL" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="103" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="3251b04d-00dc-4d3c-98b5-4747abc31f5b" x="0" y="0" width="162" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Software Loja da Fátima]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="52cb69e0-4441-4e08-a2e7-e2fd67746116" x="146" y="31" width="263" height="37"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Movimentação do Caixa]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="6d777f6d-65a4-4623-a490-bc95273d867e" x="0" y="0" width="51" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nroº Mvto.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="628ddad2-5357-444c-ba11-8c86f6b79fee" x="62" y="0" width="100" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Referente à]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="acb7d257-7944-445b-9432-231f06ecc497" x="292" y="0" width="59" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Ant.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d649c09e-e519-4a66-b0db-2727ee59cbd3" x="367" y="0" width="55" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Mvto.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7c4e9942-730f-4958-ac27-dea4e573a27c" x="427" y="0" width="55" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Mvto.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="80625ee2-7166-428d-836f-c86aa90132ca" x="514" y="0" width="38" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b4ed7c24-7367-4d72-bd5f-14d7d5bd6c68" x="184" y="0" width="71" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data/Horário]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement uuid="8ea61db6-bf3d-4ace-8cc2-a2b8805a8de1" x="0" y="0" width="51" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{CD_MVTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="35e18da1-1e1a-4fcd-b31c-2a98e2a7cd63" x="62" y="0" width="116" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DS_MVTO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="7ededa1a-5e21-46ec-91d1-bfed982fa393" x="184" y="0" width="83" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{to_char}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="73d086e0-239c-4b1c-9d37-75703e9110e8" x="291" y="0" width="60" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{VL_ANTES}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="8e39ed0d-7819-432d-b0a9-57cfb1b6df0b" x="362" y="0" width="60" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{VL_MVTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a571fba6-76ff-453c-ae66-b55d096dd334" x="427" y="0" width="55" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{TIPO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="55c6ed92-3c92-4f28-8083-35ba75c64942" x="492" y="0" width="60" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{VL_ATUAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0706a3a2-cfc1-4dcd-9b69-2d0518794456" x="435" y="10" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy - HH:mm:ss">
+				<reportElement uuid="774bc420-301b-4345-a97c-0821dd92fdd9" x="0" y="12" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="472faa26-eb0b-42d1-a0dc-c501c5f50c2b" x="515" y="10" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

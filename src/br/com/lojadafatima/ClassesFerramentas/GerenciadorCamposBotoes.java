@@ -109,6 +109,7 @@ public class GerenciadorCamposBotoes {
             if (component instanceof JCheckBox) {
                 JCheckBox field = (JCheckBox) component;
                 field.setEnabled(false);
+                field.setSelected(false);
             }
             
             if (component instanceof JSpinner) {

@@ -302,6 +302,8 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
 
     private void BtLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtLimparActionPerformed
         limpar.Limpar(jPanel1);
+        ChkEstoqueActionPerformed(evt);
+        ChkFinanceiroActionPerformed(evt);
     }//GEN-LAST:event_BtLimparActionPerformed
 
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
@@ -322,6 +324,8 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
                         }
                     }
                     limpar.Limpar(jPanel1);
+                    ChkEstoqueActionPerformed(evt);
+                    ChkFinanceiroActionPerformed(evt);
                     preenche.PreencherJtable(TbOperacoes, operacao.consultaoperacoes());
                 }
             }

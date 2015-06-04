@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="notanovaoperacaoestoquefinanceiro" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3e84c754-ce25-4544-81e4-68ae045733ab">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT "CV"."CD_COMPRA_VENDA" AS "COD_COMPRA_VENDA",
+       "CV"."CD_OPERACAO"     AS "COD_OPERACAO_COMPRA_VENDA",
+       "CV"."DS_COMPRA_VENDA",
+
+       (SELECT "OPE"."DS_OPERACAO"
+        FROM bancoloja."CAD_OPERACOES" "OPE"
+        WHERE "OPE"."CD_OPERACAO" = "CV"."CD_OPERACAO"),
+
+       (SELECT "P"."NM_PESSOA"
+        FROM bancoloja."CAD_PESSOA_FISICA" "P"
+        JOIN bancoloja."CAD_FUNCIONARIO" "F" ON "F"."CD_PESSOA_FIS" = "P"."CD_PESSOA_FIS"
+        WHERE "F"."CD_FUNCIONARIO" = "CV"."CD_FUNCIONARIO") AS "FUNCIONARIO",
+
+        (SELECT CASE WHEN "P"."TP_PESSOA" = 'F'
+                THEN (SELECT "PF"."NM_PESSOA"
+                      FROM bancoloja."CAD_PESSOA_FISICA" "PF"
+                      WHERE "PF"."CD_PESSOA_FIS" = "P"."CD_PESSOA")
+                ELSE (SELECT "PJ"."NM_FANTASIA"
+                      FROM bancoloja."CAD_PESSOA_JURIDICA" "PJ"
+                      WHERE "PJ"."CD_PESSOA_JUR" = "P"."CD_PESSOA")
+                END
+         FROM bancoloja."CAD_PESSOA" "P"
+         WHERE "P"."CD_PESSOA" = "CV"."CD_PESSOA") AS "PESSOA",
+
+         CASE WHEN (SELECT COUNT(1)
+                    FROM bancoloja."CAD_CLIENTE"
+                    WHERE "CD_PESSOA" = "CV"."CD_PESSOA") <> 0
+              THEN CASE WHEN (SELECT COUNT(1)
+                              FROM bancoloja."CAD_FORNECEDOR"
+                              WHERE "CD_PESSOA_JUR" = "CV"."CD_PESSOA") != 0
+                        THEN 'Cliente:'
+                        ELSE CASE WHEN (SELECT "TP_FINANCEIRO"
+                                        FROM bancoloja."CAD_OPERACOES"
+                                        WHERE "CD_OPERACAO" = "CV"."CD_OPERACAO") = 'S'
+                                  THEN 'Fornecedor:'
+                                  ELSE 'Cliente:'
+                                  END
+                        END
+              ELSE CASE WHEN (SELECT COUNT(1)
+                              FROM bancoloja."CAD_FORNECEDOR"
+                              WHERE "CD_PESSOA_JUR" = "CV"."CD_PESSOA") <> 0
+                        THEN 'Fornecedor:'
+                        END
+              END AS "FORNECEDOR_OU_CLIENTE",
+
+         TO_CHAR("CV"."DT_COMPRA_VENDA", 'DD/MM/YYYY') AS "DT_COMPRA_VENDA",
+
+         (SELECT "DS_CONDICAO_PGTO"
+          FROM bancoloja."CAD_CONDICAO_PGTO"
+          WHERE "CD_CONDICAO_PGTO" = "CV"."CD_CONDICAO_PGTO") AS "CONDICAO_PGTO",
+
+          "PCV"."CD_COMPRA_VENDA" AS "COD_COMPRA_VENDA_PRODUTOS_COMPRA_VENDA",
+          "PCV"."CD_OPERACAO"     AS "COD_OPERACAO_PRODUTOS_COMPRA_VENDA",
+
+          (SELECT "DS_PRODUTO"
+           FROM bancoloja."CAD_PRODUTO"
+           WHERE "CD_PRODUTO" = "PCV"."CD_PRODUTO") AS "DS_PRODUTO",
+
+          "PCV"."QT_PRODUTO",
+          "PCV"."VL_PRODUTO_UNITARIO",
+          "PCV"."VL_PRODUTO",
+          COALESCE("PCV"."PE_DESCONTO", 0) AS "DESCONTO",
+          "PCV"."IN_PROMOCAO"
+
+FROM bancoloja."COMPRA_VENDA" "CV"
+JOIN bancoloja."PRODUTOS_COMPRA_VENDA" "PCV" ON "PCV"."CD_COMPRA_VENDA"          = "CV"."CD_COMPRA_VENDA" AND
+                                                "PCV"."CD_OPERACAO"              = "CV"."CD_OPERACAO"]]>
+	</queryString>
+	<field name="COD_COMPRA_VENDA" class="java.lang.Integer"/>
+	<field name="COD_OPERACAO_COMPRA_VENDA" class="java.lang.Integer"/>
+	<field name="DS_COMPRA_VENDA" class="java.lang.String"/>
+	<field name="DS_OPERACAO" class="java.lang.String"/>
+	<field name="FUNCIONARIO" class="java.lang.String"/>
+	<field name="PESSOA" class="java.lang.String"/>
+	<field name="FORNECEDOR_OU_CLIENTE" class="java.lang.String"/>
+	<field name="DT_COMPRA_VENDA" class="java.lang.String"/>
+	<field name="CONDICAO_PGTO" class="java.lang.String"/>
+	<field name="COD_COMPRA_VENDA_PRODUTOS_COMPRA_VENDA" class="java.lang.Integer"/>
+	<field name="COD_OPERACAO_PRODUTOS_COMPRA_VENDA" class="java.lang.Integer"/>
+	<field name="DS_PRODUTO" class="java.lang.String"/>
+	<field name="QT_PRODUTO" class="java.math.BigDecimal"/>
+	<field name="VL_PRODUTO_UNITARIO" class="java.math.BigDecimal"/>
+	<field name="VL_PRODUTO" class="java.math.BigDecimal"/>
+	<field name="DESCONTO" class="java.math.BigDecimal"/>
+	<field name="IN_PROMOCAO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="92" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="73a027bd-eb83-436d-9777-3746ae15fab6" x="0" y="0" width="217" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Software Loja da Fátima]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="147" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20"/>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

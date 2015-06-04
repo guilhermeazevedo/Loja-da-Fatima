@@ -35,7 +35,8 @@ public class Relatorios {
         try {
             JRResultSetDataSource jrds = new JRResultSetDataSource(rs);
             String report = caminho;
-            JasperPrint jp = JasperFillManager.fillReport(report, parametros, jrds);
+            ConexaoPostgre cone = new ConexaoPostgre();
+            JasperPrint jp = JasperFillManager.fillReport(report, parametros, cone.conecta());
             
 //            PrinterJob job = PrinterJob.getPrinterJob();
 //            PrintService service = job.getPrintService();
