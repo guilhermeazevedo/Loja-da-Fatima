@@ -70,8 +70,10 @@ public class ClasseOperacoes {
         return conn.resultset;
     }
 
-    public ResultSet retornaoperacoescombobox() {
-        conn.executeSQL("SELECT \"DS_OPERACAO\"\n"
+    public ResultSet retornaoperacoescombobox(boolean pesqtodas) {
+        if(pesqtodas) conn.executeSQL("SELECT \"DS_OPERACAO\"\n"
+                + "FROM bancoloja.\"CAD_OPERACOES\" ORDER BY \"CD_OPERACAO\"");
+        else conn.executeSQL("SELECT \"DS_OPERACAO\"\n"
                 + "FROM bancoloja.\"CAD_OPERACOES\" WHERE \"CD_OPERACAO\" > 4 ORDER BY \"CD_OPERACAO\"");
         return conn.resultset;
     }
@@ -91,6 +93,18 @@ public class ClasseOperacoes {
             return conn.resultset.getInt(1);
         } catch (SQLException ex) {
             return 0;
+        }
+    }
+    
+    public String retornadescricaooperacao() {
+        conn.executeSQL("SELECT \"DS_OPERACAO\"\n"
+                + "FROM bancoloja.\"CAD_OPERACOES\"\n"
+                + "WHERE \"CD_OPERACAO\" = '" + getCodigo() + "'");
+        try {
+            conn.resultset.first();
+            return conn.resultset.getString(1);
+        } catch (SQLException ex) {
+            return "";
         }
     }
 

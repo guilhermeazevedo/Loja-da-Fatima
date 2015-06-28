@@ -5,24 +5,39 @@
  */
 package br.com.lojadafatima.InterfacesFinanceiro;
 
+import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseProdutosCompraVenda;
+import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.DadosPessoa.ClassePessoaFisica;
 import br.com.lojadafatima.DadosPessoa.ClassePessoaJuridica;
 import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
+import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCliente;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesDetalhesConta;
+import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesFornecedor;
+import br.com.lojadafatima.InterfacesPessoa.InterfaceCliente;
+import br.com.lojadafatima.InterfacesPessoa.InterfaceFornecedor;
 import br.com.lojadafatima.Pessoa.ClasseCliente;
+import br.com.lojadafatima.Pessoa.ClasseFornecedor;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.text.MaskFormatter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -36,6 +51,10 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
     LimpaCamposTela limpar = new LimpaCamposTela();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
     private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
+    ClasseFornecedor fornecedor = new ClasseFornecedor();
+    ClasseCliente cliente = new ClasseCliente();
+    MaskFormatter data;
+    ClasseDatas datas = new ClasseDatas();
 
     /**
      * Creates new form InterfaceContasReceber
@@ -73,7 +92,8 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         preenche.FormataJtable(TbParcelas, tam3);
 
         preenche.PreencheJComboBox(CbFormaPgto, parcelas.getFormapgto().retornaformapgtocombobox());
-        CbPesqPessoaActionPerformed(null);
+        preenche.PreencheJComboBox(CbOperacao, parcelas.getConta().getOperacao().retornaoperacoescombobox(true));
+        RbClienteActionPerformed(null);
         TbContas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TbParcelas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TbPessoas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -93,12 +113,10 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         PopDetalhes = new javax.swing.JPopupMenu();
         ItMnDetalhes = new javax.swing.JMenuItem();
         ItMnCancelar = new javax.swing.JMenuItem();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbPessoas = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        CbPesqPessoa = new javax.swing.JComboBox();
-        BtGerarRelatorio = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TbContas = new javax.swing.JTable();
@@ -111,6 +129,38 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         BtPagar = new javax.swing.JButton();
         TfValor = new JNumberField.JNumberField();
         BtCadFormaPgto = new javax.swing.JButton();
+        CbBuscaEspecific = new javax.swing.JCheckBox();
+        RbCliente = new javax.swing.JRadioButton();
+        RbFornecedor = new javax.swing.JRadioButton();
+        TfPessoa = new javax.swing.JTextField();
+        TfCodPessoa = new javax.swing.JTextField();
+        BtPesqPessoa = new javax.swing.JButton();
+        LbCodPessoa = new javax.swing.JLabel();
+        LbNomePessoa = new javax.swing.JLabel();
+        BtCadPessoa = new javax.swing.JButton();
+        BtPesqPessoas = new javax.swing.JButton();
+        ChbOperacao = new javax.swing.JCheckBox();
+        CbOperacao = new javax.swing.JComboBox();
+        try{
+            data = new MaskFormatter("##/##/####");
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Nao foi possivel localizar");
+        }
+        TfDtInicial = new JFormattedTextField(data);
+        jLabel3 = new javax.swing.JLabel();
+        try{
+            data = new MaskFormatter("##/##/####");
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Nao foi possivel localizar");
+        }
+        TfDtFinal = new JFormattedTextField(data);
+        ChbPeriodo = new javax.swing.JCheckBox();
+        BtPesqContas = new javax.swing.JButton();
+        ChbCtaAbertas = new javax.swing.JCheckBox();
+        ChbCtaVencidas = new javax.swing.JCheckBox();
+        ChbCtaPagas = new javax.swing.JCheckBox();
+        BtPesqTodasPessoas = new javax.swing.JButton();
+        BtImprParcelas = new javax.swing.JButton();
 
         jMenuItem1.setText("Estornar parcela");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +195,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome/Nome Fantasia", "CPF/CNPJ"
+                "Nome/Nome Fantasia", "Cliente ou Fornecedor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -163,22 +213,6 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
             }
         });
         jScrollPane1.setViewportView(TbPessoas);
-
-        jLabel3.setText("Buscar Pessoas");
-
-        CbPesqPessoa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pessoas com Contas em Aberto e Vencidas", "Pessoas com Contas em Aberto", "Pessoas com Contas Vencidas", "Listar apenas Clientes com Contas em Aberto", "Listar apenas Clientes com Contas Vencidas", "Listar todos os Clientes" }));
-        CbPesqPessoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CbPesqPessoaActionPerformed(evt);
-            }
-        });
-
-        BtGerarRelatorio.setText("Gerar Relatorio");
-        BtGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtGerarRelatorioActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Contas da Pessoa:");
 
@@ -241,6 +275,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
 
         jLabel6.setText("Forma de Pagamento");
 
+        BtPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/dinheiro.png"))); // NOI18N
         BtPagar.setText("Pagar");
         BtPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,6 +297,141 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
             }
         });
 
+        CbBuscaEspecific.setText("Buscar Cliente/Fornecedor Especifico");
+        CbBuscaEspecific.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbBuscaEspecificActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(RbCliente);
+        RbCliente.setSelected(true);
+        RbCliente.setText("Cliente");
+        RbCliente.setEnabled(false);
+        RbCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RbClienteActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(RbFornecedor);
+        RbFornecedor.setText("Fornecedor");
+        RbFornecedor.setEnabled(false);
+        RbFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RbFornecedorActionPerformed(evt);
+            }
+        });
+
+        TfPessoa.setEditable(false);
+
+        TfCodPessoa.setEnabled(false);
+        TfCodPessoa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfCodPessoaFocusLost(evt);
+            }
+        });
+        TfCodPessoa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TfCodPessoaKeyReleased(evt);
+            }
+        });
+
+        BtPesqPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
+        BtPesqPessoa.setEnabled(false);
+        BtPesqPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtPesqPessoaActionPerformed(evt);
+            }
+        });
+
+        LbCodPessoa.setText("Cód. Pessoa");
+
+        LbNomePessoa.setText("Nome/Nome Fantasia");
+
+        BtCadPessoa.setText("Cadastrar Cliente");
+        BtCadPessoa.setEnabled(false);
+        BtCadPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtCadPessoaActionPerformed(evt);
+            }
+        });
+
+        BtPesqPessoas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
+        BtPesqPessoas.setText("Buscar");
+        BtPesqPessoas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtPesqPessoasActionPerformed(evt);
+            }
+        });
+
+        ChbOperacao.setText("Operação");
+        ChbOperacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChbOperacaoActionPerformed(evt);
+            }
+        });
+
+        CbOperacao.setEnabled(false);
+
+        TfDtInicial.setEditable(false);
+        TfDtInicial.setName("DT_NASC"); // NOI18N
+        TfDtInicial.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfDtInicialFocusLost(evt);
+            }
+        });
+
+        jLabel3.setText("a");
+
+        TfDtFinal.setEditable(false);
+        TfDtFinal.setName("DT_NASC"); // NOI18N
+        TfDtFinal.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfDtFinalFocusLost(evt);
+            }
+        });
+
+        ChbPeriodo.setText("No período");
+        ChbPeriodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChbPeriodoActionPerformed(evt);
+            }
+        });
+
+        BtPesqContas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
+        BtPesqContas.setText("Buscar");
+        BtPesqContas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtPesqContasActionPerformed(evt);
+            }
+        });
+
+        ChbCtaAbertas.setSelected(true);
+        ChbCtaAbertas.setText("Contas Abertas");
+
+        ChbCtaVencidas.setSelected(true);
+        ChbCtaVencidas.setText("Contas Vencidas");
+
+        ChbCtaPagas.setSelected(true);
+        ChbCtaPagas.setText("Contas Pagas");
+
+        BtPesqTodasPessoas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
+        BtPesqTodasPessoas.setText("Buscar Contas de Todas as Pessoas");
+        BtPesqTodasPessoas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtPesqTodasPessoasActionPerformed(evt);
+            }
+        });
+
+        BtImprParcelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/imprimir.png"))); // NOI18N
+        BtImprParcelas.setText("Imprimir Parcelas");
+        BtImprParcelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtImprParcelasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -269,18 +439,56 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1)
                     .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(TfCodPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtPesqPessoa))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LbCodPessoa)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(RbCliente)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(RbFornecedor)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtCadPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(LbNomePessoa)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ChbOperacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CbOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ChbPeriodo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addComponent(BtPesqContas))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(CbPesqPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtGerarRelatorio))
-                            .addComponent(jLabel3)
+                                .addComponent(ChbCtaAbertas)
+                                .addGap(18, 18, 18)
+                                .addComponent(ChbCtaVencidas)
+                                .addGap(18, 18, 18)
+                                .addComponent(ChbCtaPagas))
+                            .addComponent(CbBuscaEspecific)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(40, 40, 40)
@@ -293,29 +501,68 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                                         .addComponent(CbFormaPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(BtCadFormaPgto))
-                                    .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(BtPesqPessoas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtPesqTodasPessoas)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtImprParcelas)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
-                .addGap(3, 3, 3)
+                .addComponent(CbBuscaEspecific)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbPesqPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtGerarRelatorio))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RbCliente)
+                    .addComponent(RbFornecedor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LbCodPessoa)
+                    .addComponent(LbNomePessoa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtPesqPessoa)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TfCodPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtCadPessoa)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtPesqPessoas)
+                    .addComponent(BtPesqTodasPessoas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ChbCtaAbertas)
+                    .addComponent(ChbCtaVencidas)
+                    .addComponent(ChbCtaPagas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ChbOperacao)
+                    .addComponent(CbOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(ChbPeriodo)
+                    .addComponent(BtPesqContas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(BtImprParcelas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -326,8 +573,8 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                     .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtCadFormaPgto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(177, 177, 177))
+                .addComponent(BtPagar)
+                .addGap(113, 113, 113))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -341,49 +588,13 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void CbPesqPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbPesqPessoaActionPerformed
-        limpar.Limpar(TbPessoas);
-        limpar.Limpar(TbContas);
-        limpar.Limpar(TbParcelas);
-        switch (CbPesqPessoa.getSelectedIndex()) {
-            case 0: {
-                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberabertasevencidas());
-                break;
-            }
-            case 1: {
-                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberaberto());
-                break;
-            }
-            case 2: {
-                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasrecebervencidas());
-                break;
-            }
-            case 3: {
-                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberclientesaberto());
-                break;
-            }
-            case 4: {
-                preenche.PreencherJtable(TbPessoas, parcelas.getConta().contasreceberclientesvencido());
-                break;
-            }
-            case 5: {
-                preenche.PreencherJtable(TbPessoas, parcelas.getConta().listarclientes());
-                break;
-            }
-        }
-    }//GEN-LAST:event_CbPesqPessoaActionPerformed
-
-    private void BtGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGerarRelatorioActionPerformed
-
-    }//GEN-LAST:event_BtGerarRelatorioActionPerformed
 
     private void TfValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfValorKeyTyped
         valida.limitemaximo(evt, TfValor.getText(), 13);
@@ -393,16 +604,20 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         if (TbPessoas.getSelectedRow() > -1) {
             limpar.Limpar(TbParcelas);
             limpar.Limpar(TbContas);
-            ClassePessoaFisica fisica = new ClassePessoaFisica();
-            ClassePessoaJuridica juridica = new ClassePessoaJuridica();
-            fisica.setNome(TbPessoas.getValueAt(TbPessoas.getSelectedRow(), 0).toString());
-            juridica.setNomefantasia(TbPessoas.getValueAt(TbPessoas.getSelectedRow(), 0).toString());
-            if (fisica.epessoafisica()) {
-                parcelas.getConta().setCodigopessoa(fisica.getPessoa().getCodigo());
-            } else if (juridica.epessoajuridica()) {
-                parcelas.getConta().setCodigopessoa(juridica.getPessoa().getCodigo());
+            if (TbPessoas.getValueAt(TbPessoas.getSelectedRow(), 1).toString().equals("CLIENTE")){
+                ClassePessoaFisica fisica = new ClassePessoaFisica();
+                fisica.setNome(TbPessoas.getValueAt(TbPessoas.getSelectedRow(), 0).toString());
+                if (fisica.epessoafisica()) {
+                    parcelas.getConta().setCodigopessoa(fisica.getPessoa().getCodigo());
+                }
+            } else{
+                ClassePessoaJuridica juridica = new ClassePessoaJuridica();
+                juridica.setNomefantasia(TbPessoas.getValueAt(TbPessoas.getSelectedRow(), 0).toString());
+                if (juridica.epessoajuridica()) {
+                    parcelas.getConta().setCodigopessoa(juridica.getPessoa().getCodigo());
+                }
             }
-            preenche.PreencherJtable(TbContas, parcelas.getConta().contaspessoa());
+            BtPesqContasActionPerformed(null);
         }
     }//GEN-LAST:event_TbPessoasMouseReleased
 
@@ -438,6 +653,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
     }//GEN-LAST:event_TbParcelasMouseReleased
 
     private void BtPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPagarActionPerformed
+        boolean pagou = false;
         if (TbParcelas.getSelectedRow() > -1 && TfValor.getValue() != BigDecimal.valueOf(0) && TfValor.isEnabled()) {
             if (CbFormaPgto.getSelectedItem() != null) {
                 if (Float.parseFloat(TfValor.getValue().toString()) == Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString())) {
@@ -447,6 +663,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                         parcelas.getFormapgto().setFormapgto(CbFormaPgto.getSelectedItem().toString());
                         parcelas.getFormapgto().setCodigo(parcelas.getFormapgto().retornacodigo());
                         parcelas.pagaparcela();
+                        pagou = true;
                         ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
                         mvtocaixa.setParcela(parcelas);
                         mvtocaixa.setTpmvto("E");
@@ -464,6 +681,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                     parcelas.getFormapgto().setFormapgto(CbFormaPgto.getSelectedItem().toString());
                     parcelas.getFormapgto().setCodigo(parcelas.getFormapgto().retornacodigo());
                     parcelas.pagaparcela();
+                    pagou = true;
                     ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
                     mvtocaixa.setParcela(parcelas);
                     mvtocaixa.setTpmvto("E");
@@ -483,6 +701,26 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Selecione a parcela que será paga e o valor correto a ser pago!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
             TfValor.grabFocus();
         }
+        if (pagou){
+            HashMap filtro = new HashMap();
+            filtro.put("CD_OPERACAO", parcelas.getConta().getOperacao().getCodigo());
+            filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
+            filtro.put("DS_RELATORIO", "PAGAMENTO DE PARCELA");
+            ConexaoPostgre conexao = new ConexaoPostgre();
+            JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
+            dialog.setSize(1000, 700);
+            dialog.setLocationRelativeTo(null);
+            try {
+                JasperPrint print = JasperFillManager.fillReport("relatorios\\parcelapaga.jasper", filtro, conexao.conecta());
+                   
+                JasperViewer viewer = new JasperViewer(print, true);
+                dialog.getContentPane().add(viewer.getContentPane());
+                dialog.setVisible(true);
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+            BtPesqContasActionPerformed(evt);
+        }
     }//GEN-LAST:event_BtPagarActionPerformed
 
     private void BtCadFormaPgtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadFormaPgtoActionPerformed
@@ -496,6 +734,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
     }//GEN-LAST:event_BtCadFormaPgtoActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        boolean estornou = false;
         if (TbParcelas.getSelectedRow() > -1) {
             if (TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 6).toString().equals("PAGA")) {
                 if (Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()) != parcelas.retornanumeroultimaparcelavalida()) {
@@ -507,6 +746,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                                 parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
                                 parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
                                 parcelas.estornarparcela();
+                                estornou = true;
                                 parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
                                 mvtocaixa.setParcela(parcelas);
                                 mvtocaixa.setTpmvto("S");
@@ -528,6 +768,7 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                             parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
                             parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
                             parcelas.estornarparcela();
+                            estornou = true;
                             parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
                             mvtocaixa.setParcela(parcelas);
                             mvtocaixa.setTpmvto("S");
@@ -542,6 +783,26 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
                     }
                 }
             }
+        }
+        if (estornou){
+            HashMap filtro = new HashMap();
+            filtro.put("CD_OPERACAO", parcelas.getConta().getOperacao().getCodigo());
+            filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
+            filtro.put("DS_RELATORIO", "ESTORNO DE PARCELA");
+            ConexaoPostgre conexao = new ConexaoPostgre();
+            JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
+            dialog.setSize(1000, 700);
+            dialog.setLocationRelativeTo(null);
+            try {
+                JasperPrint print = JasperFillManager.fillReport("relatorios\\parcelapaga.jasper", filtro, conexao.conecta());
+                   
+                JasperViewer viewer = new JasperViewer(print, true);
+                dialog.getContentPane().add(viewer.getContentPane());
+                dialog.setVisible(true);
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+            BtPesqContasActionPerformed(evt);
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -591,20 +852,261 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_ItMnCancelarActionPerformed
 
+    private void TfCodPessoaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodPessoaFocusLost
+        
+    }//GEN-LAST:event_TfCodPessoaFocusLost
+
+    private void TfCodPessoaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfCodPessoaKeyReleased
+        limpar.Limpar(TbPessoas);
+        limpar.Limpar(TbContas);
+        limpar.Limpar(TbParcelas);
+        if (RbCliente.isSelected()) {
+            if (!TfCodPessoa.getText().equals("")) {
+                cliente.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
+                if (cliente.eativo()) {
+                    TfPessoa.setText(cliente.retornanomecliente());
+                } else {
+                    TfPessoa.setText("");
+                }
+            } else {
+                TfPessoa.setText("");
+            }
+        } else {
+            if (!TfCodPessoa.getText().equals("")) {
+                fornecedor.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
+                if (fornecedor.efornecedorativo()) {
+                    fornecedor.getPessoajur().getPessoa().setCodigo(fornecedor.retornacodigopessoafornecedor());
+                    TfPessoa.setText(fornecedor.getPessoajur().retornanomeporCodigo());
+                } else {
+                    TfPessoa.setText("");
+                }
+            } else {
+                TfPessoa.setText("");
+            }
+        }
+    }//GEN-LAST:event_TfCodPessoaKeyReleased
+
+    private void BtPesqPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqPessoaActionPerformed
+        if (RbCliente.isSelected()) {
+            final ConsulSimplesCliente tela = new ConsulSimplesCliente(getPrimeiratela(), true, cliente);
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+                    if (cliente.getCodigo() != 0) {
+                        TfCodPessoa.setText("" + cliente.getCodigo());
+                        TfCodPessoaKeyReleased(null);
+                    } else {
+                        TfCodPessoa.setText("");
+                        TfPessoa.setText("");
+                    }
+                }
+            });
+        } else {
+            final ConsulSimplesFornecedor tela = new ConsulSimplesFornecedor(getPrimeiratela(), true, fornecedor);
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+                    if (fornecedor.getCodigo() != 0) {
+                        TfCodPessoa.setText("" + fornecedor.getCodigo());
+                        TfCodPessoaKeyReleased(null);
+                    } else {
+                        TfCodPessoa.setText("");
+                        TfPessoa.setText("");
+                    }
+                }
+            });
+        }
+    }//GEN-LAST:event_BtPesqPessoaActionPerformed
+
+    private void BtCadPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadPessoaActionPerformed
+        if (RbCliente.isSelected()) {
+            final InterfaceCliente tela = new InterfaceCliente(getPrimeiratela(), true, getTelasusuario());
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+
+                }
+            });
+        } else {
+            final InterfaceFornecedor tela = new InterfaceFornecedor(getPrimeiratela(), true, getTelasusuario());
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+
+                }
+            });
+        }
+    }//GEN-LAST:event_BtCadPessoaActionPerformed
+
+    private void RbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RbClienteActionPerformed
+        if (RbCliente.isSelected()) {
+            LbCodPessoa.setText("Cód. Cliente");
+            LbNomePessoa.setText("Cliente");
+            BtCadPessoa.setText("Cadastrar Cliente");
+        } else {
+            LbCodPessoa.setText("Cód. Fornecedor");
+            LbNomePessoa.setText("Fornecedor");
+            BtCadPessoa.setText("Cadastrar Fornecedor");
+        }
+        analisausuario();
+        TfCodPessoaKeyReleased(null);
+    }//GEN-LAST:event_RbClienteActionPerformed
+
+    private void RbFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RbFornecedorActionPerformed
+        if (RbCliente.isSelected()) {
+            LbCodPessoa.setText("Cód. Cliente");
+            LbNomePessoa.setText("Cliente");
+            BtCadPessoa.setText("Cadastrar Cliente");
+        } else {
+            LbCodPessoa.setText("Cód. Fornecedor");
+            LbNomePessoa.setText("Fornecedor");
+            BtCadPessoa.setText("Cadastrar Fornecedor");
+        }
+        analisausuario();
+        TfCodPessoaKeyReleased(null);
+    }//GEN-LAST:event_RbFornecedorActionPerformed
+
+    private void CbBuscaEspecificActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbBuscaEspecificActionPerformed
+        RbCliente.setEnabled(CbBuscaEspecific.isSelected());
+        RbFornecedor.setEnabled(CbBuscaEspecific.isSelected());
+        TfCodPessoa.setEnabled(CbBuscaEspecific.isSelected());
+        BtPesqPessoa.setEnabled(CbBuscaEspecific.isSelected());
+        BtCadPessoa.setEnabled(CbBuscaEspecific.isSelected());
+    }//GEN-LAST:event_CbBuscaEspecificActionPerformed
+
+    private void BtPesqPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqPessoasActionPerformed
+        if (!CbBuscaEspecific.isSelected()){
+            limpar.Limpar(TbContas);
+            limpar.Limpar(TbParcelas);
+            limpar.Limpar(TbPessoas);
+            preenche.PreencherJtable(TbPessoas, parcelas.getConta().retornatodasaspessoa());
+        }else{
+            if (!TfCodPessoa.getText().equals("") && !TfPessoa.getText().equals("")){
+                limpar.Limpar(TbContas);
+                limpar.Limpar(TbParcelas);
+                limpar.Limpar(TbPessoas);
+                if(RbCliente.isSelected()) preenche.PreencherJtable(TbPessoas, parcelas.getConta().retornacliente(Integer.parseInt(TfCodPessoa.getText())));
+                else                       preenche.PreencherJtable(TbPessoas, parcelas.getConta().retornafornecedor(Integer.parseInt(TfCodPessoa.getText())));
+            } else{
+                limpar.Limpar(TbContas);
+                limpar.Limpar(TbParcelas);
+                limpar.Limpar(TbPessoas);
+                if(RbCliente.isSelected()) preenche.PreencherJtable(TbPessoas, parcelas.getConta().retornatodososcliente());
+                else                       preenche.PreencherJtable(TbPessoas, parcelas.getConta().retornatodososfornecedor());
+            }
+        }
+    }//GEN-LAST:event_BtPesqPessoasActionPerformed
+
+    private void TfDtInicialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfDtInicialFocusLost
+        if (valida.CampoTotalmentePreenchido(TfDtInicial.getText())) {
+            if (datas.validadatas(TfDtInicial.getText())) {
+
+            } else {
+                TfDtInicial.setValue(null);
+            }
+        }
+    }//GEN-LAST:event_TfDtInicialFocusLost
+
+    private void TfDtFinalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfDtFinalFocusLost
+        if (valida.CampoTotalmentePreenchido(TfDtFinal.getText())) {
+            if (datas.validadatas(TfDtFinal.getText())) {
+
+            } else {
+                TfDtFinal.setValue(null);
+            }
+        }
+    }//GEN-LAST:event_TfDtFinalFocusLost
+
+    private void ChbOperacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChbOperacaoActionPerformed
+        CbOperacao.setEnabled(ChbOperacao.isSelected());
+    }//GEN-LAST:event_ChbOperacaoActionPerformed
+
+    private void ChbPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChbPeriodoActionPerformed
+        TfDtInicial.setEditable(ChbPeriodo.isSelected());
+        TfDtFinal.setEditable(ChbPeriodo.isSelected());
+    }//GEN-LAST:event_ChbPeriodoActionPerformed
+
+    private void BtPesqContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqContasActionPerformed
+        String tp1, tp2, tp3, data_ini, data_fim;
+        int cdoperacao;
+        if (ChbCtaAbertas.isSelected())  tp1 = "A"; else tp1 = "";
+        if (ChbCtaPagas.isSelected())    tp2 = "P"; else tp2 = "";
+        if (ChbCtaVencidas.isSelected()) tp3 = "V"; else tp3 = "";
+        if (ChbPeriodo.isSelected() && datascorretas()){
+            data_ini = TfDtInicial.getText();
+            data_fim = TfDtFinal.getText();
+        }else{
+            data_ini = "";
+            data_fim = "";
+        }
+        if (ChbOperacao.isSelected()){
+            parcelas.getConta().getOperacao().setDescricao(CbOperacao.getSelectedItem().toString());
+            cdoperacao = parcelas.getConta().getOperacao().retornacodigooperacao();
+        }else cdoperacao = 0;
+        preenche.PreencherJtable(TbContas, parcelas.getConta().retornacontasreceber(tp1, tp2, tp3, data_ini, data_fim, cdoperacao));
+    }//GEN-LAST:event_BtPesqContasActionPerformed
+
+    private void BtPesqTodasPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqTodasPessoasActionPerformed
+        parcelas.getConta().setCodigopessoa(0);
+        BtPesqContasActionPerformed(evt);
+    }//GEN-LAST:event_BtPesqTodasPessoasActionPerformed
+
+    private void BtImprParcelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtImprParcelasActionPerformed
+        if (TbParcelas.getRowCount() > 0){    
+            HashMap filtro = new HashMap();
+            filtro.put("CD_OPERACAO", parcelas.getConta().getOperacao().getCodigo());
+            filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
+            filtro.put("DS_RELATORIO", "PAGAMENTO DE PARCELA");
+            ConexaoPostgre conexao = new ConexaoPostgre();
+            JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
+            dialog.setSize(1000, 700);
+            dialog.setLocationRelativeTo(null);
+            try {
+                JasperPrint print = JasperFillManager.fillReport("relatorios\\parcelapaga.jasper", filtro, conexao.conecta());
+                   
+                JasperViewer viewer = new JasperViewer(print, true);
+                dialog.getContentPane().add(viewer.getContentPane());
+                dialog.setVisible(true);
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        }
+    }//GEN-LAST:event_BtImprParcelasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadFormaPgto;
-    private javax.swing.JButton BtGerarRelatorio;
+    private javax.swing.JButton BtCadPessoa;
+    private javax.swing.JButton BtImprParcelas;
     private javax.swing.JButton BtPagar;
+    private javax.swing.JButton BtPesqContas;
+    private javax.swing.JButton BtPesqPessoa;
+    private javax.swing.JButton BtPesqPessoas;
+    private javax.swing.JButton BtPesqTodasPessoas;
+    private javax.swing.JCheckBox CbBuscaEspecific;
     private javax.swing.JComboBox CbFormaPgto;
-    private javax.swing.JComboBox CbPesqPessoa;
+    private javax.swing.JComboBox CbOperacao;
+    private javax.swing.JCheckBox ChbCtaAbertas;
+    private javax.swing.JCheckBox ChbCtaPagas;
+    private javax.swing.JCheckBox ChbCtaVencidas;
+    private javax.swing.JCheckBox ChbOperacao;
+    private javax.swing.JCheckBox ChbPeriodo;
     private javax.swing.JMenuItem ItMnCancelar;
     private javax.swing.JMenuItem ItMnDetalhes;
+    private javax.swing.JLabel LbCodPessoa;
+    private javax.swing.JLabel LbNomePessoa;
     private javax.swing.JPopupMenu PopDetalhes;
+    private javax.swing.JRadioButton RbCliente;
+    private javax.swing.JRadioButton RbFornecedor;
     private javax.swing.JTable TbContas;
     private javax.swing.JTable TbParcelas;
     private javax.swing.JTable TbPessoas;
+    private javax.swing.JTextField TfCodPessoa;
+    private javax.swing.JFormattedTextField TfDtFinal;
+    private javax.swing.JFormattedTextField TfDtInicial;
+    private javax.swing.JTextField TfPessoa;
     private JNumberField.JNumberField TfValor;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -637,6 +1139,26 @@ public class InterfaceContasReceber extends javax.swing.JDialog {
             }
         }
         return false;
+    }
+    
+    public boolean datascorretas() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        format.setLenient(false);
+        Date date1 = null, date2 = null;
+        String data1, data2;
+        data1 = TfDtInicial.getText();
+        data2 = TfDtFinal.getText();           
+        try {
+            date1 = format.parse(data1);
+            date2 = format.parse(data2);
+        } catch (ParseException ex) {
+            return false;
+        }
+        if (date1.after(date2)) {
+            return false;
+        }
+        
+        return true;
     }
 
     public java.awt.Frame getPrimeiratela() {

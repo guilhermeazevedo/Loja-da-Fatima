@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="parcelapaga" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="73ac1940-8927-46a1-af5f-354df63e9d8b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DS_RELATORIO" class="java.lang.String"/>
+	<parameter name="CD_CONTA" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CD_OPERACAO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT "C"."CD_CONTA",
+
+       (SELECT "DS_OPERACAO" FROM bancoloja."CAD_OPERACOES"
+        WHERE "CD_OPERACAO" = "C"."CD_OPERACAO"
+       ) AS "OPERACAO",
+
+       ( SELECT CASE WHEN "P"."TP_PESSOA" = 'F'
+                     THEN (SELECT "NM_PESSOA" FROM bancoloja."CAD_PESSOA_FISICA" WHERE "CD_PESSOA_FIS" = "P"."CD_PESSOA")
+                     ELSE (SELECT "NM_FANTASIA" FROM bancoloja."CAD_PESSOA_JURIDICA" WHERE "CD_PESSOA_JUR" = "P"."CD_PESSOA")
+                     END
+         FROM bancoloja."CAD_PESSOA" "P"
+         WHERE "P"."CD_PESSOA" = "C"."CD_PESSOA"
+       ) AS "PESSOA",
+
+       (SELECT "DS_CONDICAO_PGTO" FROM bancoloja."CAD_CONDICAO_PGTO" WHERE "CD_CONDICAO_PGTO" = "C"."CD_CONDICAO_PGTO") AS "CONDICAO_PGTO",
+
+       TO_CHAR("DT_CONTA", 'DD/MM/YYYY') AS "DT_CONTA",
+
+       "PAR"."CD_PARCELA",
+       TO_CHAR("PAR"."DT_PAGAR", 'DD/MM/YYYY') AS "DT_PAGAR",
+       "PAR"."VL_PAGAR",
+
+       CASE WHEN (("PAR"."DT_PAGO" IS NULL) AND ("PAR"."VL_PAGO" IS NULL))
+            THEN CASE WHEN "PAR"."DT_PAGAR" < (SELECT CURRENT_DATE)
+                      THEN 'VENCIDO'
+                      ELSE 'A PAGAR' END
+            ELSE 'PAGO'
+            END AS "SITUACAO_PAR",
+
+       TO_CHAR("PAR"."DT_PAGO", 'DD/MM/YYYY') AS "DT_PAGO",
+       "PAR"."VL_PAGO",
+       "PAR"."CD_PARCELA_REPARCELA"
+FROM bancoloja."CONTAS_PAGAR_RECEBER" "C"
+JOIN bancoloja."PARCELAS" "PAR" ON "PAR"."CD_CONTA" = "C"."CD_CONTA" AND "PAR"."CD_OPERACAO" = "C"."CD_OPERACAO"
+WHERE "C"."CD_CONTA" = $P{CD_CONTA} AND "C"."CD_OPERACAO" = $P{CD_OPERACAO} AND "PAR"."VL_PAGAR" IS NOT NULL
+ORDER BY "PAR"."CD_PARCELA"]]>
+	</queryString>
+	<field name="CD_CONTA" class="java.lang.Integer"/>
+	<field name="OPERACAO" class="java.lang.String"/>
+	<field name="PESSOA" class="java.lang.String"/>
+	<field name="CONDICAO_PGTO" class="java.lang.String"/>
+	<field name="DT_CONTA" class="java.lang.String"/>
+	<field name="CD_PARCELA" class="java.lang.Integer"/>
+	<field name="DT_PAGAR" class="java.lang.String"/>
+	<field name="VL_PAGAR" class="java.math.BigDecimal"/>
+	<field name="SITUACAO_PAR" class="java.lang.String"/>
+	<field name="DT_PAGO" class="java.lang.String"/>
+	<field name="VL_PAGO" class="java.math.BigDecimal"/>
+	<field name="CD_PARCELA_REPARCELA" class="java.lang.Integer"/>
+	<variable name="VL_PAGAR_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{VL_PAGAR}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="160" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a55e510a-29cf-4b9f-8ca9-e137c60910cf" x="0" y="0" width="217" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Software Loja da Fátima]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="00dd9581-ff16-4888-8038-a2667fa5cba5" x="28" y="31" width="527" height="25"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="82461e2d-8d6a-4e85-9475-e49e0ff0fb75" x="11" y="74" width="83" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Nrº da Conta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="1f604d99-22e7-41c3-9b4d-24b979575a68" x="94" y="74" width="40" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CD_CONTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bec37c8b-5083-452b-8372-8395f94646cb" x="154" y="74" width="401" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OPERACAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7843d27c-84e0-488f-bb0f-f7ef62a9d7e5" x="11" y="94" width="544" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PESSOA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8b0e8fb0-2d59-4eca-8561-7b1e6a7f63b4" x="11" y="114" width="143" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Condição de Pagamento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="9261f6ae-173f-4f58-85a4-980d514126d2" x="168" y="114" width="387" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONDICAO_PGTO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="29898902-1863-4acb-b08e-28307c3e625d" x="11" y="134" width="36" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="00053534-83e4-4360-a5d8-6daeb4f4e985" x="57" y="134" width="173" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_CONTA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="13" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="59715564-7c9b-406f-8370-723f65253163" x="0" y="0" width="62" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nroº Parcela]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="604420ff-7fd0-4e9f-99c5-6c1aedf30a57" x="67" y="0" width="68" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Venc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3124f923-e7d6-4f0f-ae31-6b45b6748d22" x="145" y="0" width="27" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="803ca876-c79f-44e8-9115-13234b3fec85" x="200" y="0" width="43" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Situação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6832743e-e6e0-46f3-890b-b32947da2478" x="250" y="0" width="50" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e229bc99-1f5c-4c25-a99d-5b8bffbfcb0f" x="320" y="0" width="55" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="48c62c84-364a-45b0-be72-a396554cdaa9" x="400" y="0" width="144" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reparcela da Parcela Nroº]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement uuid="dffd16ba-b3f7-45aa-9845-bb72250f3de0" x="0" y="0" width="59" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{CD_PARCELA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="931afeda-7ca2-4f54-bf75-e76e488acde1" x="67" y="0" width="68" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DT_PAGAR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="4b365d2f-1d79-4ffb-92d2-f4f5696c7553" x="145" y="0" width="47" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{VL_PAGAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a9e30aef-fc19-494b-b612-9770132d7540" x="200" y="0" width="48" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{SITUACAO_PAR}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="6e6794ce-0158-4b91-9a39-60091aac1baa" x="250" y="0" width="62" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DT_PAGO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement uuid="d5b23c6a-b810-427e-b363-b9876b0361c0" x="321" y="0" width="69" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{VL_PAGO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="f32b6a83-50b8-4359-bf96-34c8fc54889e" x="411" y="0" width="79" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CD_PARCELA_REPARCELA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="35">
+			<textField>
+				<reportElement uuid="b2228a4e-e5ec-4b03-a868-8c9fe790e02a" x="435" y="9" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy - HH:mm:ss">
+				<reportElement uuid="d9d0e782-781e-47ec-a7ba-81964e7059fd" x="0" y="11" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="dca52457-1bb5-4505-b0f7-ddc1637eb84f" x="515" y="9" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d60157f2-477a-4c5b-8a14-e629bc2593a2" x="360" y="10" width="69" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Valor Total:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="5085e603-5251-4bc1-add5-f13b177d38a4" x="429" y="10" width="115" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{VL_PAGAR_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

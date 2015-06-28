@@ -14,6 +14,7 @@ import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseOperacoes;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseProdutosCompraVenda;
+import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.Financeiro.ClasseContasPagarReceber;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCliente;
@@ -31,12 +32,16 @@ import br.com.lojadafatima.Pessoa.ClasseFornecedor;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -72,7 +77,6 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         TfCodFuncionario.setDocument(new PermiteApenasNumeros());
         TfCodProduto.setDocument(new PermiteApenasNumeros());
         TfCodServico.setDocument(new PermiteApenasNumeros());
-        TfDescOperacao.setText(prodcompravenda.getCompravenda().getOperacao().getDescricao());
         analisausuario();
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         TbProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -546,11 +550,12 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtPesqProduto)
-                    .addComponent(TfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtCadProduto)
-                    .addComponent(TfCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TfCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtCadProduto)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -761,11 +766,12 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                     .addComponent(jLabel15)
                     .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtPesqServico)
-                    .addComponent(TfServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtCadServico)
-                    .addComponent(TfCodServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TfCodServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TfServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtCadServico)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
@@ -888,31 +894,34 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                             .addComponent(LbCodPessoa)
                             .addComponent(LbNomePessoa))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TfCodPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtPesqPessoa)
-                            .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtCadPessoa))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(TfCodPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtCadPessoa)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TfCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtPesqFuncionario)
-                            .addComponent(TfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BtPesqFuncionario, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(TfCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(BtCadFuncionario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfCodCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtPesqCondicaoPgto)
-                    .addComponent(TfCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtCadCondicaoPgto))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TfCodCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TfCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtCadCondicaoPgto)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1170,7 +1179,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                 prodcompravenda.getCompravenda().incluir();
 
                 ClasseMvtoEstoque mvestoque = new ClasseMvtoEstoque();
-                ClasseParcelas parcelas = new ClasseParcelas();
+                final ClasseParcelas parcelas = new ClasseParcelas();
                 mvestoque.setCompravenda(prodcompravenda.getCompravenda());
                 mvestoque.setDtmvto(datas.retornadataehora());
                 mvestoque.setTpmvto(prodcompravenda.getCompravenda().getOperacao().getTpestoque());
@@ -1220,7 +1229,26 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                 tela.setVisible(true);
                 tela.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosed(java.awt.event.WindowEvent evt) {
-                        //imprimir nota de operacao iReport
+                        HashMap filtro = new HashMap();
+                        filtro.put("CD_COMPRA_VENDA", prodcompravenda.getCompravenda().getCodigo());
+                        filtro.put("CD_OPERACAO", prodcompravenda.getCompravenda().getOperacao().getCodigo());
+                        filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
+                        filtro.put("DS_NOTA", "NOTA DE "+prodcompravenda.getCompravenda().getOperacao().getDescricao());
+                        if(CbPessoa.getSelectedItem().toString().equals("Fornecedor")) filtro.put("TP_PESSOA", "Fornecedor:");
+                        else                                                           filtro.put("TP_PESSOA", "Cliente:");
+                        ConexaoPostgre conexao = new ConexaoPostgre();
+                        JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
+                        dialog.setSize(1000, 700);
+                        dialog.setLocationRelativeTo(null);
+                        try {
+                            JasperPrint print = JasperFillManager.fillReport("relatorios\\notaoperacaoestoquefinanceiro.jasper", filtro, conexao.conecta());
+                            
+                            JasperViewer viewer = new JasperViewer(print, true);
+                            dialog.getContentPane().add(viewer.getContentPane());
+                            dialog.setVisible(true);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
                     }
                 });
 
@@ -1239,6 +1267,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private void BtIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirActionPerformed
         TfData.setText(datas.retornaratartual());
         GeraCodigos geracodigos = new GeraCodigos();
+        TfDescOperacao.setText(prodcompravenda.getCompravenda().getOperacao().getDescricao());
         TfCodigo.setText("" + geracodigos.gerasequencia("COMPRA_VENDA", "CD_COMPRA_VENDA", "CD_OPERACAO", prodcompravenda.getCompravenda().getOperacao().getCodigo()));
         valida.validacamposCadastrar(jPanel1, PnBotoes);
         valida.validacamposCadastrar(jPanel3, PnBotoes);

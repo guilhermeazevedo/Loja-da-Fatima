@@ -32,7 +32,7 @@ public class ClasseProdutosCompraVenda {
     }
 
     public ResultSet produtoscompravenda() {
-        conn.executeSQL("SELECT \"PCV\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"PCV\".\"QT_PRODUTO\", \"PCV\".\"VL_PRODUTO_UNITARIO\", \"PCV\".\"VL_PRODUTO\"\n"
+        conn.executeSQL("SELECT \"PCV\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"PCV\".\"QT_PRODUTO\", \"PCV\".\"VL_PRODUTO_UNITARIO\", TO_CHAR(\"PE_DESCONTO\", '999990D99%'), \"PCV\".\"VL_PRODUTO\", CASE WHEN \"PCV\".\"IN_PROMOCAO\" = 'S' THEN 'SIM' ELSE 'NÃO' END\n"
                 + "FROM bancoloja.\"PRODUTOS_COMPRA_VENDA\" \"PCV\"\n"
                 + "JOIN bancoloja.\"CAD_PRODUTO\" \"P\"\n"
                 + "ON \"P\".\"CD_PRODUTO\" = \"PCV\".\"CD_PRODUTO\"\n"
@@ -85,7 +85,7 @@ public class ClasseProdutosCompraVenda {
             }
             return true;
         } catch (SQLException ex) {
-            return true;
+            return false;
         }
     }
 

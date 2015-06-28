@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="notaoperacaoestoque" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4e98cbe1-eebf-40f9-8959-19485e2dcc77">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CD_COMPRA_VENDA" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CD_OPERACAO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DS_NOTA" class="java.lang.String"/>
+	<parameter name="TP_PESSOA" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT (SELECT CASE WHEN "P"."TP_PESSOA" = 'F'
+               THEN (SELECT "NM_PESSOA" FROM bancoloja."CAD_PESSOA_FISICA" WHERE "CD_PESSOA_FIS" = "P"."CD_PESSOA")
+               ELSE (SELECT "NM_FANTASIA" FROM bancoloja."CAD_PESSOA_JURIDICA" WHERE "CD_PESSOA_JUR" = "P"."CD_PESSOA")
+               END AS "PESSOA"
+        FROM bancoloja."CAD_PESSOA" "P"
+        WHERE "P"."CD_PESSOA" = "CV"."CD_PESSOA"
+       ) AS "PESSOA",
+
+       (SELECT "PF"."NM_PESSOA"
+        FROM bancoloja."CAD_PESSOA_FISICA" "PF"
+        JOIN bancoloja."CAD_FUNCIONARIO" "F" ON "F"."CD_PESSOA_FIS" = "PF"."CD_PESSOA_FIS"
+        WHERE "F"."CD_FUNCIONARIO" = "CV"."CD_FUNCIONARIO"
+       ) AS "FUNCIONARIO",
+
+       (SELECT "DS_CONDICAO_PGTO" FROM bancoloja."CAD_CONDICAO_PGTO"
+        WHERE "CD_CONDICAO_PGTO" = "CV"."CD_CONDICAO_PGTO"
+       ) AS "CONDICAO_PGTO",
+
+       TO_CHAR("CV"."DT_COMPRA_VENDA", 'DD/MM/YYYY') AS "DT_COMPRA_VENDA",
+
+       "PCV"."CD_PRODUTO",
+       "PROD"."DS_PRODUTO",
+       "PCV"."QT_PRODUTO"
+
+FROM bancoloja."COMPRA_VENDA" "CV"
+JOIN bancoloja."PRODUTOS_COMPRA_VENDA" "PCV" ON "PCV"."CD_COMPRA_VENDA" = "CV"."CD_COMPRA_VENDA" AND "PCV"."CD_OPERACAO" = "CV"."CD_OPERACAO"
+JOIN bancoloja."CAD_PRODUTO" "PROD" ON "PROD"."CD_PRODUTO" = "PCV"."CD_PRODUTO"
+WHERE "CV"."CD_COMPRA_VENDA" = $P{CD_COMPRA_VENDA} AND "CV"."CD_OPERACAO" = $P{CD_OPERACAO}]]>
+	</queryString>
+	<field name="PESSOA" class="java.lang.String"/>
+	<field name="FUNCIONARIO" class="java.lang.String"/>
+	<field name="CONDICAO_PGTO" class="java.lang.String"/>
+	<field name="DT_COMPRA_VENDA" class="java.lang.String"/>
+	<field name="CD_PRODUTO" class="java.lang.Integer"/>
+	<field name="DS_PRODUTO" class="java.lang.String"/>
+	<field name="QT_PRODUTO" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="140" splitType="Stretch">
+			<textField>
+				<reportElement uuid="64b72b3b-dfe9-41f2-a134-ac64246b116e" x="151" y="89" width="391" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FUNCIONARIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="61fdc75a-08d0-4a6a-aa96-9f93eceabc34" x="0" y="0" width="163" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Software Loja da Fátima]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="3a21cf38-7986-43c1-80b7-f32a1bc74967" x="151" y="69" width="391" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PESSOA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="c03b1e9e-752e-4b5b-a612-435edce3bb6b" x="13" y="33" width="529" height="26"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_NOTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f7d50e4a-7cf7-4d1a-9a49-0f33dd9bf5aa" x="13" y="69" width="126" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TP_PESSOA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d5e7e606-c1db-4c36-b6a2-f78c3735ba2c" x="13" y="109" width="205" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_COMPRA_VENDA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="95c70a6a-9e19-497a-b4b4-13ea85163d89" x="13" y="89" width="126" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Funcionário:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="15">
+			<staticText>
+				<reportElement uuid="7097d6aa-680b-4fea-b573-3fef078e5e67" x="0" y="0" width="69" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cód. Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="56584a27-db6d-457b-9735-d60410dc28b0" x="85" y="0" width="100" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fa523197-8a6a-4cf7-a7f3-35c8765f0301" x="304" y="0" width="100" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement uuid="1799d3ba-b4ec-40b7-b3b1-ca5a0df83886" x="0" y="1" width="59" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{CD_PRODUTO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="84ac0146-a15f-4766-a243-33b5a486210a" x="85" y="1" width="209" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DS_PRODUTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="57c7001a-0251-4399-a2bd-e6c383eb5c52" x="304" y="1" width="51" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{QT_PRODUTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d2f21605-39a7-4818-9b9c-960486e81a92" x="438" y="8" width="80" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="f64a2c9e-f991-4a40-a3d8-832a3ff49f82" x="518" y="8" width="40" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement uuid="8b823249-a556-40c4-83c3-5f6c153a0702" x="0" y="8" width="185" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

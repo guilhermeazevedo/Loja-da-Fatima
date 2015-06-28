@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatoriodecontaseparcelas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="46b96466-5af7-411b-923f-1aea4dd013f5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DS_NOTA" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[RELATÓRIO DE CONTAS]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SITUACAO1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[A]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SITUACAO2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[P]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SITUACAO3" class="java.lang.String">
+		<defaultValueExpression><![CDATA[V]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="75" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="4114d14e-2c05-42ec-8b7d-ea19ccf31b56" x="2" y="9" width="163" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Software Loja da Fátima]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="2195efb6-7e98-43e2-b95a-840cf45d5b17" x="15" y="42" width="529" height="26"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_NOTA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="47" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch"/>
+	</detail>
+	<pageFooter>
+		<band height="27" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement uuid="5c5dccc7-d704-45dc-8758-ef7080553375" x="0" y="10" width="185" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="5253cfab-ee1c-41b3-84f6-da8375cc507d" x="515" y="10" width="40" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a3af92fe-55e0-4d93-b710-e5db861e523b" x="435" y="10" width="80" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

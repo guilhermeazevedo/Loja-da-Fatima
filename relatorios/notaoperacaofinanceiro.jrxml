@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="notaoperacaofinanceiro" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3770cc30-4453-4612-9ec9-932f0e20d08c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CD_CONTA" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CD_OPERACAO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DS_NOTA" class="java.lang.String"/>
+	<parameter name="TP_PESSOA" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT (SELECT CASE WHEN "P"."TP_PESSOA" = 'F'
+               THEN (SELECT "NM_PESSOA" FROM bancoloja."CAD_PESSOA_FISICA" WHERE "CD_PESSOA_FIS" = "CPR"."CD_PESSOA")
+               ELSE (SELECT "NM_FANTASIA" FROM bancoloja."CAD_PESSOA_JURIDICA" WHERE "CD_PESSOA_JUR" = "CPR"."CD_PESSOA")
+               END AS "PESSOA"
+        FROM bancoloja."CAD_PESSOA" "P"
+        WHERE "P"."CD_PESSOA" = "CPR"."CD_PESSOA"
+       ) AS "PESSOA",
+
+       (SELECT "DS_CONDICAO_PGTO" FROM bancoloja."CAD_CONDICAO_PGTO"
+        WHERE "CD_CONDICAO_PGTO" = "CPR"."CD_CONDICAO_PGTO"
+       ) AS "CONDICAO_PGTO",
+
+       TO_CHAR("CPR"."DT_CONTA", 'DD/MM/YYYY') AS "DT_CONTA",
+
+       "PAR"."CD_PARCELA",
+       TO_CHAR("PAR"."DT_PAGAR", 'DD/MM/YYYY'),
+       "PAR"."VL_PAGAR"
+
+FROM bancoloja."CONTAS_PAGAR_RECEBER" "CPR"
+JOIN bancoloja."PARCELAS" "PAR" ON "CPR"."CD_CONTA" = "PAR"."CD_CONTA" AND "CPR"."CD_OPERACAO" = "PAR"."CD_OPERACAO"
+WHERE "CPR"."CD_CONTA" = $P{CD_CONTA} AND "CPR"."CD_OPERACAO" = $P{CD_OPERACAO}
+ORDER BY "PAR"."CD_PARCELA"]]>
+	</queryString>
+	<field name="PESSOA" class="java.lang.String"/>
+	<field name="CONDICAO_PGTO" class="java.lang.String"/>
+	<field name="DT_CONTA" class="java.lang.String"/>
+	<field name="CD_PARCELA" class="java.lang.Integer"/>
+	<field name="to_char" class="java.lang.String"/>
+	<field name="VL_PAGAR" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="139" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="ab9d64d4-d0a3-411d-b204-0e449ff7583f" x="0" y="0" width="163" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Software Loja da Fátima]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="5a304daa-31a7-4dc7-9f13-6837cda7fafb" x="151" y="69" width="391" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PESSOA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="56a5c1ee-6ab2-428d-ae02-f3002aecd7eb" x="151" y="89" width="391" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONDICAO_PGTO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c13cd361-647a-4997-9baa-05cf28adff27" x="13" y="89" width="126" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Condição de Pagamento:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="b071cdd5-8476-4ba4-82e0-ce225d394076" x="13" y="33" width="529" height="26"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_NOTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5a6d3243-27ee-4151-b6f2-f1f48e66a2d4" x="13" y="69" width="126" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TP_PESSOA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6c1e37ac-ef26-40e2-9f6b-a70fd8e058ab" x="13" y="109" width="327" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DT_CONTA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="17" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="fad88c2c-326c-4451-8d82-30b2005211f5" x="0" y="2" width="59" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nrº Parcela]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0d498530-f0fd-48d7-80d4-43cea2677bcb" x="63" y="2" width="100" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Vencimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f728264a-e6a0-43a4-b9ba-9b53090f3dbb" x="176" y="2" width="100" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement uuid="ed420df2-5ea4-4731-9155-93bbdaf7c5e5" x="0" y="0" width="49" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{CD_PARCELA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="e50f5219-2d51-436f-92c5-f7783098c326" x="176" y="0" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{VL_PAGAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="31f4761c-2b4b-446b-aeaf-e0b0c4d24790" x="63" y="0" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{to_char}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

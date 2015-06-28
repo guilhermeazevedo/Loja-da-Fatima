@@ -119,7 +119,7 @@ public class ClasseFuncionario {
                 + "VALUES (" + getCodigo() + ", " + getPessoafis().getPessoa().getCodigo() + ", '" + getFuncao().toUpperCase() + "', " + getSalario() + ", " + getComissao() + ", " + getMaxdesconto() + ");");
     }
 
-    public float retornasalariomaiscomissao() {
+    public float retornasalariomaiscomissao(String data_ini, String data_fim) {
         conn.executeSQL("SELECT \"C\".\"VL_TOTAL\"\n"
                 + "FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n"
                 + "JOIN bancoloja.\"COMPRA_VENDA\" \"CV\"\n"
@@ -132,7 +132,6 @@ public class ClasseFuncionario {
         try {
             while (conn.resultset.next()) {
                 comissaosobrevendas = comissaosobrevendas + ((conn.resultset.getFloat(1) * getComissao()) / 100);
-                System.out.println(comissaosobrevendas);
             }
             return comissaosobrevendas + getSalario();
         } catch (SQLException ex) {

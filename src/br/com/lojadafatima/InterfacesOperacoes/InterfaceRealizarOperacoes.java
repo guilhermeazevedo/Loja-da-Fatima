@@ -26,7 +26,7 @@ public class InterfaceRealizarOperacoes extends javax.swing.JDialog {
         initComponents();
         setTelasusuario(usuario);
         analisausuario();
-        preenche.PreencheJComboBox(CbOperacoes, operacoes.retornaoperacoescombobox());
+        preenche.PreencheJComboBox(CbOperacoes, operacoes.retornaoperacoescombobox(false));
     }
 
     /**

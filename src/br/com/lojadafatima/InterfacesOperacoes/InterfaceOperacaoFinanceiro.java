@@ -13,6 +13,7 @@ import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseOperacoes;
+import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.Financeiro.ClasseContasPagarReceber;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCliente;
@@ -25,10 +26,14 @@ import br.com.lojadafatima.Pessoa.ClasseCliente;
 import br.com.lojadafatima.Pessoa.ClasseFornecedor;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -294,36 +299,35 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
                                         .addComponent(jLabel18)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(TfDescOperacao)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(55, 55, 55)
-                                    .addComponent(jLabel2))
-                                .addComponent(jLabel16)
-                                .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(TfCodCondicaoPgto)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(BtPesqCondicaoPgto))
-                                        .addComponent(jLabel7))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel8)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(TfCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(BtCadCondicaoPgto))
-                                        .addComponent(LbNomePessoa)))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(TfCodPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(BtPesqPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(BtCadPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(55, 55, 55)
+                                .addComponent(jLabel2))
+                            .addComponent(jLabel16)
+                            .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(TfCodCondicaoPgto)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(BtPesqCondicaoPgto))
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(TfCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(BtCadCondicaoPgto))
+                                    .addComponent(LbNomePessoa)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(TfCodPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtPesqPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtCadPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(10, 10, 10))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -353,21 +357,23 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
                     .addComponent(LbCodPessoa)
                     .addComponent(LbNomePessoa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfCodPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtPesqPessoa)
-                    .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtCadPessoa))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TfCodPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtCadPessoa)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfCodCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtPesqCondicaoPgto)
-                    .addComponent(TfCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtCadCondicaoPgto))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TfCodCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TfCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtCadCondicaoPgto)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -444,7 +450,25 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
                 tela.setVisible(true);
                 tela.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosed(java.awt.event.WindowEvent evt) {
-                        //imprimir nota de operacao iReport
+                        HashMap filtro = new HashMap();
+                        filtro.put("CD_OPERACAO", parcelas.getConta().getOperacao().getCodigo());
+                        filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
+                        filtro.put("DS_NOTA", "NOTA DE COMPRA");
+                        if(CbPessoa.getSelectedItem().toString().equals("Fornecedor")) filtro.put("TP_PESSOA", "Fornecedor:");
+                        else                                                           filtro.put("TP_PESSOA", "Cliente:");
+                        ConexaoPostgre conexao = new ConexaoPostgre();
+                        JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
+                        dialog.setSize(1000, 700);
+                        dialog.setLocationRelativeTo(null);
+                        try {
+                            JasperPrint print = JasperFillManager.fillReport("relatorios\\notaoperacaofinanceiro.jasper", filtro, conexao.conecta());
+                            
+                            JasperViewer viewer = new JasperViewer(print, true);
+                            dialog.getContentPane().add(viewer.getContentPane());
+                            dialog.setVisible(true);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
                     }
                 });
 

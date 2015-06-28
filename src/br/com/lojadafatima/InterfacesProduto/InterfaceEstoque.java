@@ -13,11 +13,17 @@ import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseProdutosCompraVenda;
+import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesDetalhesOperacao;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -30,6 +36,8 @@ public class InterfaceEstoque extends javax.swing.JDialog {
     ClasseMvtoEstoque mvtoestoque = new ClasseMvtoEstoque();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
     private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
+    ClasseDatas datas = new ClasseDatas();
+    MaskFormatter data;
 
     public InterfaceEstoque(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
@@ -59,6 +67,8 @@ public class InterfaceEstoque extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         PnPesqEstoque = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -81,6 +91,40 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         TbAjuste = new javax.swing.JTable();
         BtEncerrar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        CbPesqProdutoHist = new javax.swing.JComboBox();
+        TfPesqProdutoHist = new javax.swing.JTextField();
+        BtPesqProdutoHist = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TbProdutosHist = new javax.swing.JTable();
+        try{
+            data = new MaskFormatter("##/##/####");
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Nao foi possivel localizar");
+        }
+        TfDtInicial = new JFormattedTextField(data);
+        jLabel6 = new javax.swing.JLabel();
+        try{
+            data = new MaskFormatter("##/##/####");
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Nao foi possivel localizar");
+        }
+        TfDtFinal = new JFormattedTextField(data);
+        BtSelecionar = new javax.swing.JButton();
+        CbPeriodo = new javax.swing.JCheckBox();
+        CbEntradas = new javax.swing.JCheckBox();
+        CbSaidas = new javax.swing.JCheckBox();
+        CbAjustes = new javax.swing.JCheckBox();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TbHistorico = new javax.swing.JTable();
+
+        jMenuItem1.setText("Detalhes...");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Estoque de Produtos - Software Loja da Fátima");
@@ -95,6 +139,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
             }
         });
 
+        BtPesqProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
         BtPesqProduto.setText("Pesquisar");
         BtPesqProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,7 +194,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                     .addComponent(TfPesqProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtPesqProduto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -167,6 +212,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
 
         jLabel4.setText("Descricao do Produto");
 
+        BtAjustar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
         BtAjustar.setText("Ajustar");
         BtAjustar.setEnabled(false);
         BtAjustar.addActionListener(new java.awt.event.ActionListener() {
@@ -175,6 +221,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
             }
         });
 
+        BtIniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
         BtIniciar.setText("Iniciar");
         BtIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,6 +253,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(TbAjuste);
 
+        BtEncerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
         BtEncerrar.setText("Encerrar");
         BtEncerrar.setEnabled(false);
         BtEncerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -253,7 +301,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                     .addComponent(BtEncerrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TfDsProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,6 +318,183 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         );
 
         jTabbedPane1.addTab("Ajuste de Estoque", PnAjusteEstoque);
+
+        CbPesqProdutoHist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos os Produtos", "Código do Produto", "Descrição do Produto", "Produtos Abaixo da Quantidade Mínima", "Produtos Disponíveis" }));
+        CbPesqProdutoHist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbPesqProdutoHistActionPerformed(evt);
+            }
+        });
+
+        BtPesqProdutoHist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
+        BtPesqProdutoHist.setText("Pesquisar");
+        BtPesqProdutoHist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtPesqProdutoHistActionPerformed(evt);
+            }
+        });
+
+        TbProdutosHist.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código do Produto", "Descrição do Produto", "Quant. Mínima de Estoque", "Quant. Estoque Atual", "Situação"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TbProdutosHist.getTableHeader().setReorderingAllowed(false);
+        TbProdutosHist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                TbProdutosHistMouseReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(TbProdutosHist);
+
+        TfDtInicial.setEditable(false);
+        TfDtInicial.setName("DT_NASC"); // NOI18N
+        TfDtInicial.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfDtInicialFocusLost(evt);
+            }
+        });
+
+        jLabel6.setText("a");
+
+        TfDtFinal.setEditable(false);
+        TfDtFinal.setName("DT_NASC"); // NOI18N
+        TfDtFinal.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfDtFinalFocusLost(evt);
+            }
+        });
+
+        BtSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
+        BtSelecionar.setText("Selecionar");
+        BtSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtSelecionarActionPerformed(evt);
+            }
+        });
+
+        CbPeriodo.setText("Período:");
+        CbPeriodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbPeriodoActionPerformed(evt);
+            }
+        });
+
+        CbEntradas.setSelected(true);
+        CbEntradas.setText("Entradas");
+
+        CbSaidas.setSelected(true);
+        CbSaidas.setText("Saídas");
+
+        CbAjustes.setSelected(true);
+        CbAjustes.setText("Ajustes");
+
+        TbHistorico.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nro. Mvto.", "Nro. Operação", "Cód. Operação", "Data Mvto.", "Qtde. Antes", "Qtde. Mvto.", "Qtde. Depois", "Tipo Mvto"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TbHistorico.setComponentPopupMenu(jPopupMenu1);
+        TbHistorico.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(TbHistorico);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(CbPeriodo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(CbEntradas)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(CbSaidas)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(CbAjustes)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(CbPesqProdutoHist, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TfPesqProdutoHist, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtPesqProdutoHist)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CbPesqProdutoHist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfPesqProdutoHist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtPesqProdutoHist))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtSelecionar)
+                    .addComponent(jLabel6)
+                    .addComponent(CbPeriodo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CbEntradas)
+                    .addComponent(CbSaidas)
+                    .addComponent(CbAjustes))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(40, 40, 40)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(250, Short.MAX_VALUE)))
+        );
+
+        jTabbedPane1.addTab("Histórico de Movimentação de Estoque", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -406,6 +631,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
             prodcompravenda.setCompravenda(mvtoestoque.getCompravenda());
             prodcompravenda.getForneproduto().setProduto(mvtoestoque.getProduto());
             prodcompravenda.setQuantidade(Float.parseFloat(TfQuantEstoqueFisico.getValue().toString()));
+            prodcompravenda.setPromocao("");
             prodcompravenda.incluirprodutocompravenda();
             BtAjustar.setEnabled(false);
             preenche.PreencherJtable(TbAjuste, mvtoestoque.consultaestoquetodososprodutos());
@@ -420,6 +646,12 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 mvtoestoque.setDtmvto(mvtoestoque.getCompravenda().getData());
                 mvtoestoque.setQtmvto(0);
                 mvtoestoque.incluirmvto();
+                ClasseProdutosCompraVenda prodcompravenda = new ClasseProdutosCompraVenda();
+                prodcompravenda.setCompravenda(mvtoestoque.getCompravenda());
+                prodcompravenda.getForneproduto().setProduto(mvtoestoque.getProduto());
+                prodcompravenda.setQuantidade(Float.parseFloat(TfQuantEstoqueFisico.getValue().toString()));
+                prodcompravenda.setPromocao("");
+                prodcompravenda.incluirprodutocompravenda();
                 BtAjustar.setEnabled(false);
                 preenche.PreencherJtable(TbAjuste, mvtoestoque.consultaestoquetodososprodutos());
                 TfDsProduto.setText("");
@@ -429,27 +661,181 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtAjustarActionPerformed
 
+    private void CbPesqProdutoHistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbPesqProdutoHistActionPerformed
+        switch (CbPesqProdutoHist.getSelectedIndex()) {
+            case 0: {
+                TfPesqProdutoHist.setEnabled(false);
+                break;
+            }
+            case 1: {
+                TfPesqProdutoHist.setEnabled(true);
+                TfPesqProdutoHist.setDocument(new PermiteApenasNumeros());
+                break;
+            }
+            case 2: {
+                TfPesqProdutoHist.setEnabled(true);
+                TfPesqProdutoHist.setDocument(new NaoPermiteAspasSimples());
+                break;
+            }
+            case 3: {
+                TfPesqProdutoHist.setEnabled(false);
+                break;
+            }
+            case 4: {
+                TfPesqProdutoHist.setEnabled(false);
+                break;
+            }
+        }
+    }//GEN-LAST:event_CbPesqProdutoHistActionPerformed
+
+    private void BtPesqProdutoHistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqProdutoHistActionPerformed
+        switch (CbPesqProdutoHist.getSelectedIndex()) {
+            case 0: {
+                preenche.PreencherJtable(TbProdutosHist, mvtoestoque.consultaestoquetodososprodutos());
+                break;
+            }
+            case 1: {
+                if (!TfPesqProdutoHist.getText().equals("")) {
+                    mvtoestoque.getProduto().setCodigo(Integer.parseInt(TfPesqProdutoHist.getText()));
+                    preenche.PreencherJtable(TbProdutosHist, mvtoestoque.consultaestoqueporcodigo());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Digite o codigo do produto para consulta!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                }
+                break;
+            }
+            case 2: {
+                if (!TfPesqProdutoHist.getText().equals("")) {
+                    mvtoestoque.getProduto().setDescricao(TfPesqProdutoHist.getText().toUpperCase());
+                    preenche.PreencherJtable(TbProdutosHist, mvtoestoque.consultaestoquepordescricao());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Digite a descricao do produto para consulta!", "Digite a descricao", JOptionPane.INFORMATION_MESSAGE);
+                }
+                break;
+            }
+            case 3: {
+                preenche.PreencherJtable(TbProdutosHist, mvtoestoque.consultaestoquebaixo());
+                break;
+            }
+            case 4: {
+                preenche.PreencherJtable(TbProdutosHist, mvtoestoque.consultaestoquedisponivel());
+                break;
+            }
+        }
+    }//GEN-LAST:event_BtPesqProdutoHistActionPerformed
+
+    private void TfDtInicialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfDtInicialFocusLost
+        if (valida.CampoTotalmentePreenchido(TfDtInicial.getText())) {
+            if (datas.validadatas(TfDtInicial.getText())) {
+
+            } else {
+                TfDtInicial.setValue(null);
+            }
+        }
+    }//GEN-LAST:event_TfDtInicialFocusLost
+
+    private void TfDtFinalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfDtFinalFocusLost
+        if (valida.CampoTotalmentePreenchido(TfDtFinal.getText())) {
+            if (datas.validadatas(TfDtFinal.getText())) {
+
+            } else {
+                TfDtFinal.setValue(null);
+            }
+        }
+    }//GEN-LAST:event_TfDtFinalFocusLost
+
+    private void BtSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtSelecionarActionPerformed
+        int linha = TbProdutosHist.getSelectedRow();
+        if(linha > -1){
+            String data_ini, data_fim, pesq1, pesq2, pesq3;
+            if(CbPeriodo.isSelected() && (!TfDtInicial.getText().equals("  /  /    ") && !TfDtFinal.getText().equals("  /  /    ")) && datascorretas() && datas.validadatas(TfDtInicial.getText()) && datas.validadatas(TfDtFinal.getText())){
+                data_ini = TfDtInicial.getText();
+                data_fim = TfDtFinal.getText();
+            }else{
+                data_ini = "";
+                data_fim = "";
+            }
+            if(CbEntradas.isSelected()) pesq1 = "E";
+            else pesq1 = "";
+            
+            if(CbSaidas.isSelected()) pesq2 = "S";
+            else pesq2 = "";
+            
+            if(CbAjustes.isSelected()) pesq3 = "A";
+            else pesq3 = "";
+            
+            mvtoestoque.getProduto().setCodigo(Integer.parseInt(TbProdutosHist.getValueAt(linha, 0).toString()));
+            preenche.PreencherJtable(TbHistorico, mvtoestoque.consultahistoricomvto(pesq1, pesq2, pesq3, data_ini, data_fim));
+        }
+    }//GEN-LAST:event_BtSelecionarActionPerformed
+
+    private void TbProdutosHistMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbProdutosHistMouseReleased
+        BtSelecionarActionPerformed(null);
+    }//GEN-LAST:event_TbProdutosHistMouseReleased
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        int linha = TbHistorico.getSelectedRow();
+        if(linha > -1){
+            ClasseProdutosCompraVenda prodcompravenda = new ClasseProdutosCompraVenda();
+            prodcompravenda.getCompravenda().setCodigo(Integer.parseInt(TbHistorico.getValueAt(linha, 1).toString()));
+            prodcompravenda.getCompravenda().getOperacao().setCodigo(Integer.parseInt(TbHistorico.getValueAt(linha, 2).toString()));
+            prodcompravenda.getCompravenda().getOperacao().setDescricao(prodcompravenda.getCompravenda().getOperacao().retornadescricaooperacao());
+            
+            final ConsulSimplesDetalhesOperacao tela = new ConsulSimplesDetalhesOperacao(getPrimeiratela(), true, prodcompravenda);
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+
+                }
+            });
+        
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void CbPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbPeriodoActionPerformed
+        TfDtInicial.setEditable(CbPeriodo.isSelected());
+        TfDtFinal.setEditable(CbPeriodo.isSelected());
+        if(TfDtInicial.isEditable()) TfDtInicial.grabFocus();
+    }//GEN-LAST:event_CbPeriodoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtAjustar;
     private javax.swing.JButton BtEncerrar;
     private javax.swing.JButton BtIniciar;
     private javax.swing.JButton BtPesqProduto;
+    private javax.swing.JButton BtPesqProdutoHist;
+    private javax.swing.JButton BtSelecionar;
+    private javax.swing.JCheckBox CbAjustes;
+    private javax.swing.JCheckBox CbEntradas;
+    private javax.swing.JCheckBox CbPeriodo;
     private javax.swing.JComboBox CbPesqProduto;
+    private javax.swing.JComboBox CbPesqProdutoHist;
+    private javax.swing.JCheckBox CbSaidas;
     private javax.swing.JPanel PnAjusteEstoque;
     private javax.swing.JPanel PnPesqEstoque;
     private javax.swing.JTable TbAjuste;
+    private javax.swing.JTable TbHistorico;
     private javax.swing.JTable TbProdutos;
+    private javax.swing.JTable TbProdutosHist;
     private javax.swing.JTextField TfDsProduto;
+    private javax.swing.JFormattedTextField TfDtFinal;
+    private javax.swing.JFormattedTextField TfDtInicial;
     private javax.swing.JTextField TfPesqProduto;
+    private javax.swing.JTextField TfPesqProdutoHist;
     private JNumberField.JNumberField TfQuantEstoqueFisico;
     private JNumberField.JNumberField TfQuantEstoqueSistema;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 
@@ -460,6 +846,26 @@ public class InterfaceEstoque extends javax.swing.JDialog {
 //            BtEncerrar.setVisible(false);
 //            BtAjustar.setVisible(false);
 //        }
+    }
+    
+    public boolean datascorretas() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        format.setLenient(false);
+        Date date1 = null, date2 = null;
+        String data1, data2;
+        data1 = TfDtInicial.getText();
+        data2 = TfDtFinal.getText();           
+        try {
+            date1 = format.parse(data1);
+            date2 = format.parse(data2);
+        } catch (ParseException ex) {
+            return false;
+        }
+        if (date1.after(date2)) {
+            return false;
+        }
+        
+        return true;
     }
     
     public java.awt.Frame getPrimeiratela() {

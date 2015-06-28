@@ -67,22 +67,38 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="CbMes" min="-2" pref="68" max="-2" attributes="0"/>
+                                      <Component id="TfDtInicial" min="-2" pref="116" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel8" min="-2" pref="6" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="CbAno" min="-2" pref="77" max="-2" attributes="0"/>
+                                      <Component id="TfDtFinal" min="-2" pref="116" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="BtCalcComissao" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="TfSalario" min="-2" pref="133" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="BtPagar" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="CbMes" min="-2" pref="68" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="CbAno" min="-2" pref="77" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="TfSalario" min="-2" pref="133" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="BtPagar" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -94,7 +110,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="282" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="251" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="TfDtInicial" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="TfDtFinal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtCalcComissao" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -233,6 +257,54 @@
                 </Property>
               </Properties>
             </Component>
+            <Component class="javax.swing.JFormattedTextField" name="TfDtInicial">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="DT_NASC" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TfDtInicialFocusLost"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(data);"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try{&#xd;&#xa;data = new MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;} catch(Exception ex){&#xd;&#xa;JOptionPane.showMessageDialog(null, &quot;Nao foi possivel localizar&quot;);&#xd;&#xa;}"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel7">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Aplicar comiss&#xe3;o com base nas vendas realizadas no per&#xed;do do dia:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel8">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="a"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="TfDtFinal">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="DT_NASC" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="TfDtFinalFocusLost"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(data);"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try{&#xd;&#xa;data = new MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;} catch(Exception ex){&#xd;&#xa;JOptionPane.showMessageDialog(null, &quot;Nao foi possivel localizar&quot;);&#xd;&#xa;}"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="BtCalcComissao">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/com/lojadafatima/Icones/sucesso2.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Calcular Comiss&#xe3;o"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtCalcComissaoActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="PnPesqPgto">
@@ -328,13 +400,19 @@
                 <Component class="javax.swing.JTable" name="TbPagamentos">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="2" rowCount="0">
+                      <Table columnCount="3" rowCount="0">
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
                         <Column editable="false" title="Valor Pago ao Funcion&#xe1;rio (R$)" type="java.lang.Object"/>
+                        <Column editable="false" title="Data de Realizacao do Pagamento" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>

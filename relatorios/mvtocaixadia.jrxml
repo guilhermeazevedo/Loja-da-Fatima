@@ -43,7 +43,7 @@ WHERE DATE("DT_MVTO") BETWEEN $P{DT_INICIAL} AND $P{DT_FINAL} AND
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="124" splitType="Stretch">
+		<band height="103" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="6539d992-19ee-4d00-aabd-5319cb2cfc23" x="0" y="0" width="217" height="20"/>
 				<textElement>
@@ -52,14 +52,14 @@ WHERE DATE("DT_MVTO") BETWEEN $P{DT_INICIAL} AND $P{DT_FINAL} AND
 				<text><![CDATA[Software Loja da Fátima]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="0d9b95dd-efc2-4a71-afa4-5f802745bbed" x="156" y="41" width="263" height="37"/>
+				<reportElement uuid="0d9b95dd-efc2-4a71-afa4-5f802745bbed" x="127" y="35" width="300" height="25"/>
 				<textElement textAlignment="Center">
-					<font size="22" isBold="false"/>
+					<font size="18" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Movimentação do Caixa]]></text>
+				<text><![CDATA[Relatório de Movimentação do Caixa]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement uuid="f8ec6c36-e5ef-4bea-8b44-c3bf3c078393" x="12" y="90" width="542" height="20"/>
+				<reportElement uuid="f8ec6c36-e5ef-4bea-8b44-c3bf3c078393" x="12" y="75" width="542" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>

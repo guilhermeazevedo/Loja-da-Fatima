@@ -1208,9 +1208,8 @@ public class InterfaceVenda extends javax.swing.JDialog {
                         filtro.put("CD_COMPRA_VENDA", prodcompravenda.getCompravenda().getCodigo());
                         filtro.put("CD_OPERACAO", prodcompravenda.getCompravenda().getOperacao().getCodigo());
                         filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
-                        filtro.put("PESSOA", cliente.retornanomecliente());
-                        filtro.put("FUNCIONARIO", prodcompravenda.getCompravenda().getFuncionario().getPessoafis().retornanomeporCodigo());
-                        filtro.put("CONDICAO", prodcompravenda.getCompravenda().getCondicao().retornadescricaocondicao());
+                        filtro.put("DS_NOTA", "NOTA DE VENDA");
+                        filtro.put("TP_PESSOA", "Cliente:");
                         ConexaoPostgre conexao = new ConexaoPostgre();
                         JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
                         dialog.setSize(1000, 700);

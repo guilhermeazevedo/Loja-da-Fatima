@@ -9,15 +9,21 @@ import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseProdutosCompraVenda;
+import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesDetalhesConta;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.text.MaskFormatter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -62,7 +68,6 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         tam3[7] = 70;
         preenche.FormataJtable(TbParcelas, tam3);
         preenche.PreencheJComboBox(CbFormaPgto, parcelas.getFormapgto().retornaformapgtocombobox());
-        CbPesqContasActionPerformed(null);
         TbContas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TbParcelas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
@@ -83,7 +88,6 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         ItMnCancelar = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        CbPesqContas = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbContas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -125,13 +129,6 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         setResizable(false);
 
         jLabel7.setText("Buscar Contas:");
-
-        CbPesqContas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todas as Contas Abertas e Vencidas", "Todas as Contas Abertas", "Todas as Contas Vencidas", "Todas as Contas do Mes", "Todas as Contas do Mes Anterior", "Todas as Contas Do Ano Atual", "Todas as Contas" }));
-        CbPesqContas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CbPesqContasActionPerformed(evt);
-            }
-        });
 
         TbContas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -222,7 +219,6 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addComponent(CbPesqContas, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,9 +240,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CbPesqContas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
@@ -329,6 +323,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     }//GEN-LAST:event_BtCadFormaPgtoActionPerformed
 
     private void BtPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPagarActionPerformed
+        boolean pagou = false;
         if (TbParcelas.getSelectedRow() > -1 && TfValor.getValue() != BigDecimal.valueOf(0) && TfValor.isEnabled()) {
             if (CbFormaPgto.getSelectedItem() != null) {
                 if (Float.parseFloat(TfValor.getValue().toString()) == Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString())) {
@@ -340,6 +335,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                             parcelas.getFormapgto().setFormapgto(CbFormaPgto.getSelectedItem().toString());
                             parcelas.getFormapgto().setCodigo(parcelas.getFormapgto().retornacodigo());
                             parcelas.pagaparcela();
+                            pagou = true;
                             mvtocaixa.setParcela(parcelas);
                             mvtocaixa.setTpmvto("S");
                             mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
@@ -359,6 +355,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                             parcelas.getFormapgto().setFormapgto(CbFormaPgto.getSelectedItem().toString());
                             parcelas.getFormapgto().setCodigo(parcelas.getFormapgto().retornacodigo());
                             parcelas.pagaparcela();
+                            pagou = true;
                             mvtocaixa.setParcela(parcelas);
                             mvtocaixa.setTpmvto("S");
                             mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
@@ -377,6 +374,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                         parcelas.getFormapgto().setFormapgto(CbFormaPgto.getSelectedItem().toString());
                         parcelas.getFormapgto().setCodigo(parcelas.getFormapgto().retornacodigo());
                         parcelas.pagaparcela();
+                        pagou = true;
                         mvtocaixa.setParcela(parcelas);
                         mvtocaixa.setTpmvto("S");
                         mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
@@ -394,6 +392,25 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(null, "Selecione a parcela que será paga e o valor correto a ser pago!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
             TfValor.grabFocus();
+        }
+        if (pagou){
+            HashMap filtro = new HashMap();
+            filtro.put("CD_OPERACAO", parcelas.getConta().getOperacao().getCodigo());
+            filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
+            filtro.put("DS_RELATORIO", "PAGAMENTO DE PARCELA");
+            ConexaoPostgre conexao = new ConexaoPostgre();
+            JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
+            dialog.setSize(1000, 700);
+            dialog.setLocationRelativeTo(null);
+            try {
+                JasperPrint print = JasperFillManager.fillReport("relatorios\\parcelapaga.jasper", filtro, conexao.conecta());
+                   
+                JasperViewer viewer = new JasperViewer(print, true);
+                dialog.getContentPane().add(viewer.getContentPane());
+                dialog.setVisible(true);
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
         }
     }//GEN-LAST:event_BtPagarActionPerformed
 
@@ -437,41 +454,6 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void CbPesqContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbPesqContasActionPerformed
-        limpar.Limpar(TbContas);
-        limpar.Limpar(TbParcelas);
-        switch (CbPesqContas.getSelectedIndex()) {
-            case 0: {
-                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagarabertasevencidas());
-                break;
-            }
-            case 1: {
-                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagaraberta());
-                break;
-            }
-            case 2: {
-                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagarvencidas());
-                break;
-            }
-            case 3: {
-                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagardomes());
-                break;
-            }
-            case 4: {
-                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagardomesanterior());
-                break;
-            }
-            case 5: {
-                preenche.PreencherJtable(TbContas, parcelas.getConta().contaspagardoano());
-                break;
-            }
-            case 6: {
-                preenche.PreencherJtable(TbContas, parcelas.getConta().todascontaspagar());
-                break;
-            }
-        }
-    }//GEN-LAST:event_CbPesqContasActionPerformed
-
     private void ItMnDetalhesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItMnDetalhesActionPerformed
         if (TbContas.getSelectedRow() > -1) {
             final ConsulSimplesDetalhesConta tela = new ConsulSimplesDetalhesConta(getPrimeiratela(), true, parcelas);
@@ -499,7 +481,6 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                             parcelas.getConta().cancelarconta();
                             prodcompravenda.getCompravenda().cancelarcompravenda();
                             prodcompravenda.reverterestoqueprodutos();
-                            CbPesqContasActionPerformed(evt);
                         } else {
                             JOptionPane.showMessageDialog(null, "Não é possivel realizar o cancelamento desta operação!\nOs produtos dessa operacao tem estoque disponivel menor que a quantidade para devolucao.", "Cancelamento de operação não permitido", JOptionPane.INFORMATION_MESSAGE);
                         }
@@ -507,11 +488,9 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                         parcelas.getConta().cancelarconta();
                         prodcompravenda.getCompravenda().cancelarcompravenda();
                         prodcompravenda.reverterestoqueprodutos();
-                        CbPesqContasActionPerformed(evt);
                     }
                 } else {
                     parcelas.getConta().cancelarconta();
-                    CbPesqContasActionPerformed(evt);
                 }
             }
         } else {
@@ -524,7 +503,6 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     private javax.swing.JButton BtCadFormaPgto;
     private javax.swing.JButton BtPagar;
     private javax.swing.JComboBox CbFormaPgto;
-    private javax.swing.JComboBox CbPesqContas;
     private javax.swing.JMenuItem ItMnCancelar;
     private javax.swing.JMenuItem ItMnDetalhes;
     private javax.swing.JPopupMenu PopDetalhes;

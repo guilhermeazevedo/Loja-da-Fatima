@@ -158,11 +158,13 @@
                               <Component id="LbNomePessoa" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="TfCodPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="BtPesqPessoa" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="TfPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="BtCadPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="TfCodPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="TfPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="BtCadPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -170,10 +172,12 @@
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="TfCodFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="BtPesqFuncionario" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="TfFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="TfCodFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="TfFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <Component id="BtCadFuncionario" min="-2" max="-2" attributes="0"/>
@@ -184,11 +188,13 @@
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="TfCodCondicaoPgto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="BtPesqCondicaoPgto" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="TfCondicaoPgto" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="BtCadCondicaoPgto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="TfCodCondicaoPgto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="TfCondicaoPgto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtCadCondicaoPgto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
@@ -566,11 +572,13 @@
                               <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="BtPesqProduto" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="TfProduto" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="BtCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="TfCodProduto" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="TfProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="BtCadProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -911,11 +919,13 @@
                               <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="BtPesqServico" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="TfServico" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="BtCadServico" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="TfCodServico" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="TfServico" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="BtCadServico" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">

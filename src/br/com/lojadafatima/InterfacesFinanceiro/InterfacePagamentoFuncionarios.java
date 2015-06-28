@@ -6,12 +6,18 @@
 package br.com.lojadafatima.InterfacesFinanceiro;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
+import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -20,10 +26,12 @@ import javax.swing.ListSelectionModel;
 public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
 
     ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
+    MaskFormatter data;
     Preenche preenche = new Preenche();
     ClasseDatas datas = new ClasseDatas();
     private java.awt.Frame primeiratela;
     private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
+    GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
 
     public InterfacePagamentoFuncionarios(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super(telaorigem, modal);
@@ -46,9 +54,10 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         tam2[3] = 70;
         preenche.FormataJtable(TbPesquisa, tam2);
 
-        int[] tam3 = new int[2];
+        int[] tam3 = new int[3];
         tam3[0] = 200;
         tam3[1] = 80;
+        tam3[2] = 80;
         preenche.FormataJtable(TbPagamentos, tam3);
 
         preenche.PreencherJtable(TbPesquisa, mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().consultageral());
@@ -80,6 +89,21 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         CbMes = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         CbAno = new javax.swing.JComboBox();
+        try{
+            data = new MaskFormatter("##/##/####");
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Nao foi possivel localizar");
+        }
+        TfDtInicial = new JFormattedTextField(data);
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        try{
+            data = new MaskFormatter("##/##/####");
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Nao foi possivel localizar");
+        }
+        TfDtFinal = new JFormattedTextField(data);
+        BtCalcComissao = new javax.swing.JButton();
         PnPesqPgto = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TbPesquisa = new javax.swing.JTable();
@@ -135,6 +159,35 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
 
         jLabel4.setText("do ano");
 
+        TfDtInicial.setEditable(false);
+        TfDtInicial.setName("DT_NASC"); // NOI18N
+        TfDtInicial.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfDtInicialFocusLost(evt);
+            }
+        });
+
+        jLabel7.setText("Aplicar comissão com base nas vendas realizadas no perído do dia:");
+
+        jLabel8.setText("a");
+
+        TfDtFinal.setEditable(false);
+        TfDtFinal.setName("DT_NASC"); // NOI18N
+        TfDtFinal.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfDtFinalFocusLost(evt);
+            }
+        });
+
+        BtCalcComissao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
+        BtCalcComissao.setText("Calcular Comissão");
+        BtCalcComissao.setEnabled(false);
+        BtCalcComissao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtCalcComissaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PnRealizaPgtoLayout = new javax.swing.GroupLayout(PnRealizaPgto);
         PnRealizaPgto.setLayout(PnRealizaPgtoLayout);
         PnRealizaPgtoLayout.setHorizontalGroup(
@@ -152,19 +205,32 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                     .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
                         .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CbAno, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2)
+                                .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtCalcComissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
-                                .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtPagar)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(CbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(CbAno, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2)
+                                    .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
+                                        .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(BtPagar)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(10, 10, 10))))
         );
         PnRealizaPgtoLayout.setVerticalGroup(
             PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +238,14 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(BtCalcComissao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -223,11 +296,11 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Descrição", "Valor Pago ao Funcionário (R$)"
+                "Descrição", "Valor Pago ao Funcionário (R$)", "Data de Realizacao do Pagamento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -289,7 +362,10 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
             mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 0).toString()));
             mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().setSalario(Float.parseFloat(TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 3).toString()));
             mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().setComissao(Float.parseFloat(TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 4).toString()));
-            TfSalario.setValue(BigDecimal.valueOf(mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().retornasalariomaiscomissao()));
+            TfSalario.setValue(BigDecimal.valueOf(Float.parseFloat(TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 3).toString())));
+            TfDtInicial.setEditable(true);
+            TfDtFinal.setEditable(true);
+            BtCalcComissao.setEnabled(true);
             BtPagar.setEnabled(true);
         }
     }//GEN-LAST:event_TbFuncionariosCadMouseReleased
@@ -301,26 +377,30 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                     + "Funcionario: " + TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString() + "\n"
                     + "Salario: " + TfSalario.getText() + "\n"
                     + "Rerente a: " + CbMes.getSelectedItem().toString() + "/" + CbAno.getSelectedItem().toString(), "Realizar pagamento?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                mvtocaixa.getParcela().getConta().getCompravenda().setCodigo(0);
-                mvtocaixa.getParcela().getConta().getOperacao().setCodigo(4);
-                mvtocaixa.getParcela().getConta().setDescricao("PAGAMENTO DE SALARIO AO FUNCIONARIO " + TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString() + ", REFERENTE AO TRABALHO DO MES " + CbMes.getSelectedItem().toString() + "/" + CbAno.getSelectedItem().toString());
-                mvtocaixa.getParcela().getConta().setDtconta(datas.retornaratartual());
-                mvtocaixa.getParcela().getConta().setTotal(Float.parseFloat(TfSalario.getValue().toString()));
-                mvtocaixa.getParcela().getConta().setCodigopessoa(0);
-                mvtocaixa.getParcela().getConta().getCondicao().setCodigo(1);
-                mvtocaixa.getParcela().getConta().incluir();
-                mvtocaixa.getParcela().gerarparcelas();
-                mvtocaixa.getParcela().setCodigo(1);
-                mvtocaixa.getParcela().getFormapgto().setCodigo(1);
-                mvtocaixa.getParcela().setDtpago(datas.retornaratartual());
-                mvtocaixa.getParcela().setVlpago(Float.parseFloat(TfSalario.getValue().toString()));
-                mvtocaixa.getParcela().pagaparcela();
-                mvtocaixa.setTpmvto("S");
-                mvtocaixa.setVlmvto(Float.parseFloat(TfSalario.getValue().toString()));
-                mvtocaixa.setDsmvto(mvtocaixa.getParcela().getConta().getDescricao());
-                mvtocaixa.incluir();
-                BtPagar.setEnabled(false);
-                TfSalario.setText("");
+                if(mvtocaixa.retornacaixaatual() >= Float.parseFloat(TfSalario.getValue().toString())){
+                    mvtocaixa.getParcela().getConta().getCompravenda().setCodigo(0);
+                    mvtocaixa.getParcela().getConta().getOperacao().setCodigo(4);
+                    mvtocaixa.getParcela().getConta().setDescricao("PAGAMENTO DE SALARIO AO FUNCIONARIO " + TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString() + ", REFERENTE AO MES " + CbMes.getSelectedItem().toString() + "/" + CbAno.getSelectedItem().toString());
+                    mvtocaixa.getParcela().getConta().setDtconta(datas.retornaratartual());
+                    mvtocaixa.getParcela().getConta().setTotal(Float.parseFloat(TfSalario.getValue().toString()));
+                    mvtocaixa.getParcela().getConta().setCodigopessoa(0);
+                    mvtocaixa.getParcela().getConta().getCondicao().setCodigo(1);
+                    mvtocaixa.getParcela().getConta().incluir();
+                    mvtocaixa.getParcela().gerarparcelas();
+                    mvtocaixa.getParcela().setCodigo(1);
+                    mvtocaixa.getParcela().getFormapgto().setCodigo(1);
+                    mvtocaixa.getParcela().setDtpago(datas.retornaratartual());
+                    mvtocaixa.getParcela().setVlpago(Float.parseFloat(TfSalario.getValue().toString()));
+                    mvtocaixa.getParcela().pagaparcela();
+                    mvtocaixa.setTpmvto("S");
+                    mvtocaixa.setVlmvto(Float.parseFloat(TfSalario.getValue().toString()));
+                    mvtocaixa.setDsmvto(mvtocaixa.getParcela().getConta().getDescricao());
+                    mvtocaixa.incluir();
+                    BtPagar.setEnabled(false);
+                    TfSalario.setText("");
+                } else{
+                    JOptionPane.showMessageDialog(null, "Impossível realizar o pagamento deste funcionario.\nO saldo do caixa é menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         }else{
             JOptionPane.showMessageDialog(null, "O pagamento referente a este mes e ano ja foi realizado!", "Pagamento ja realizado", JOptionPane.INFORMATION_MESSAGE);
@@ -334,8 +414,36 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_TbPesquisaMouseReleased
 
+    private void TfDtInicialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfDtInicialFocusLost
+        if (valida.CampoTotalmentePreenchido(TfDtInicial.getText())) {
+            if (datas.validadatas(TfDtInicial.getText())) {
+
+            } else {
+                TfDtInicial.setValue(null);
+            }
+        }
+    }//GEN-LAST:event_TfDtInicialFocusLost
+
+    private void TfDtFinalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfDtFinalFocusLost
+        if (valida.CampoTotalmentePreenchido(TfDtFinal.getText())) {
+            if (datas.validadatas(TfDtFinal.getText())) {
+
+            } else {
+                TfDtFinal.setValue(null);
+            }
+        }
+    }//GEN-LAST:event_TfDtFinalFocusLost
+
+    private void BtCalcComissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCalcComissaoActionPerformed
+        if (datascorretas()) {
+            TfSalario.setValue(BigDecimal.valueOf(mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().retornasalariomaiscomissao(TfDtInicial.getText(), TfDtFinal.getText())));
+            BtPagar.setEnabled(true);
+        }
+    }//GEN-LAST:event_BtCalcComissaoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtCalcComissao;
     private javax.swing.JButton BtPagar;
     private javax.swing.JComboBox CbAno;
     private javax.swing.JComboBox CbMes;
@@ -344,6 +452,8 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
     private javax.swing.JTable TbFuncionariosCad;
     private javax.swing.JTable TbPagamentos;
     private javax.swing.JTable TbPesquisa;
+    private javax.swing.JFormattedTextField TfDtFinal;
+    private javax.swing.JFormattedTextField TfDtInicial;
     private JNumberField.JNumberField TfSalario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -351,6 +461,8 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -369,6 +481,26 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         for (int i = 1; i <= (datas.anoatual() - 2014); i++) {
             CbAno.addItem(datas.anoatual() - i);
         }
+    }
+    
+    public boolean datascorretas() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        format.setLenient(false);
+        Date date1 = null, date2 = null;
+        String data1, data2;
+        data1 = TfDtInicial.getText();
+        data2 = TfDtFinal.getText();           
+        try {
+            date1 = format.parse(data1);
+            date2 = format.parse(data2);
+        } catch (ParseException ex) {
+            return false;
+        }
+        if (date1.after(date2)) {
+            return false;
+        }
+        
+        return true;
     }
 
     public java.awt.Frame getPrimeiratela() {

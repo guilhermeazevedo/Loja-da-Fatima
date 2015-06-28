@@ -13,6 +13,7 @@ import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseProdutosCompraVenda;
+import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCondicaoPgto;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesFornecedor;
@@ -25,12 +26,16 @@ import br.com.lojadafatima.InterfacesProduto.InterfaceProduto;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -1168,7 +1173,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 prodcompravenda.getCompravenda().incluir();
 
                 ClasseMvtoEstoque mvestoque = new ClasseMvtoEstoque();
-                ClasseParcelas parcelas = new ClasseParcelas();
+                final ClasseParcelas parcelas = new ClasseParcelas();
                 mvestoque.setCompravenda(prodcompravenda.getCompravenda());
                 mvestoque.setDtmvto(datas.retornadataehora());
                 mvestoque.setTpmvto("E");
@@ -1226,7 +1231,25 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 tela.setVisible(true);
                 tela.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosed(java.awt.event.WindowEvent evt) {
-                        //imprimir nota de compra iReport
+                        HashMap filtro = new HashMap();
+                        filtro.put("CD_COMPRA_VENDA", prodcompravenda.getCompravenda().getCodigo());
+                        filtro.put("CD_OPERACAO", prodcompravenda.getCompravenda().getOperacao().getCodigo());
+                        filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
+                        filtro.put("DS_NOTA", "NOTA DE COMPRA");
+                        filtro.put("TP_PESSOA", "Fornecedor:");
+                        ConexaoPostgre conexao = new ConexaoPostgre();
+                        JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
+                        dialog.setSize(1000, 700);
+                        dialog.setLocationRelativeTo(null);
+                        try {
+                            JasperPrint print = JasperFillManager.fillReport("relatorios\\notaoperacaoestoquefinanceiro.jasper", filtro, conexao.conecta());
+                            
+                            JasperViewer viewer = new JasperViewer(print, true);
+                            dialog.getContentPane().add(viewer.getContentPane());
+                            dialog.setVisible(true);
+                        } catch (Exception ex) {
+                            System.out.println(ex);
+                        }
                     }
                 });
 

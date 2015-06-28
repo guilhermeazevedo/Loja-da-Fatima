@@ -3,40 +3,51 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<subDataset name="dataset1" uuid="07e545c1-dd1d-48d3-b68d-6d0714012d90">
-		<parameter name="CD_OPERACAO" class="java.lang.Integer"/>
-		<parameter name="CD_COMPRA_VENDA" class="java.lang.Integer"/>
-		<queryString>
-			<![CDATA[SELECT "P"."DS_PRODUTO", "PV"."QT_PRODUTO", "PV"."VL_PRODUTO"
-FROM bancoloja."PRODUTOS_COMPRA_VENDA" "PV"
-JOIN bancoloja."CAD_PRODUTO" "P"
-ON "P"."CD_PRODUTO" = "PV"."CD_PRODUTO"
-WHERE "PV"."CD_COMPRA_VENDA" = $P{CD_COMPRA_VENDA} AND "PV"."CD_OPERACAO" = $P{CD_OPERACAO}]]>
-		</queryString>
-		<field name="DS_PRODUTO" class="java.lang.String"/>
-		<field name="QT_PRODUTO" class="java.math.BigDecimal"/>
-		<field name="VL_PRODUTO" class="java.math.BigDecimal"/>
-	</subDataset>
-	<parameter name="CD_COMPRA_VENDA" class="java.lang.Integer"/>
-	<parameter name="CD_OPERACAO" class="java.lang.Integer"/>
-	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Program Files\\Software Loja da Fátima\\Loja da Fatima\\relatorios\\"]]></defaultValueExpression>
+	<parameter name="CD_COMPRA_VENDA" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CD_OPERACAO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["//"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="CD_CONTA" class="java.lang.Integer"/>
-	<parameter name="PESSOA" class="java.lang.String"/>
-	<parameter name="FUNCIONARIO" class="java.lang.String"/>
-	<parameter name="CONDICAO" class="java.lang.String"/>
+	<parameter name="DS_NOTA" class="java.lang.String"/>
+	<parameter name="TP_PESSOA" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT "DS_OPERACAO"
-FROM bancoloja."CAD_OPERACOES"
-WHERE "CD_OPERACAO" = $P{CD_OPERACAO}]]>
+		<![CDATA[SELECT (SELECT CASE WHEN "P"."TP_PESSOA" = 'F'
+               THEN (SELECT "NM_PESSOA" FROM bancoloja."CAD_PESSOA_FISICA" WHERE "CD_PESSOA_FIS" = "P"."CD_PESSOA")
+               ELSE (SELECT "NM_FANTASIA" FROM bancoloja."CAD_PESSOA_JURIDICA" WHERE "CD_PESSOA_JUR" = "P"."CD_PESSOA")
+               END AS "PESSOA"
+        FROM bancoloja."CAD_PESSOA" "P"
+        WHERE "P"."CD_PESSOA" = "CV"."CD_PESSOA"
+       ) AS "PESSOA",
+
+       (SELECT "PF"."NM_PESSOA"
+        FROM bancoloja."CAD_PESSOA_FISICA" "PF"
+        JOIN bancoloja."CAD_FUNCIONARIO" "F" ON "F"."CD_PESSOA_FIS" = "PF"."CD_PESSOA_FIS"
+        WHERE "F"."CD_FUNCIONARIO" = "CV"."CD_FUNCIONARIO"
+       ) AS "FUNCIONARIO",
+
+       (SELECT "DS_CONDICAO_PGTO" FROM bancoloja."CAD_CONDICAO_PGTO"
+        WHERE "CD_CONDICAO_PGTO" = "CV"."CD_CONDICAO_PGTO"
+       ) AS "CONDICAO_PGTO",
+
+       TO_CHAR("CV"."DT_COMPRA_VENDA", 'DD/MM/YYYY') AS "DT_COMPRA_VENDA"
+
+FROM bancoloja."COMPRA_VENDA" "CV"
+WHERE "CV"."CD_COMPRA_VENDA" = $P{CD_COMPRA_VENDA} AND "CV"."CD_OPERACAO" = $P{CD_OPERACAO}]]>
 	</queryString>
-	<field name="DS_OPERACAO" class="java.lang.String"/>
+	<field name="PESSOA" class="java.lang.String"/>
+	<field name="FUNCIONARIO" class="java.lang.String"/>
+	<field name="CONDICAO_PGTO" class="java.lang.String"/>
+	<field name="DT_COMPRA_VENDA" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="135" splitType="Stretch">
+		<band height="157" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="e340585a-a54a-444c-a5c6-6f7ed0659cc1" x="0" y="0" width="163" height="20"/>
 				<textElement>
@@ -44,54 +55,64 @@ WHERE "CD_OPERACAO" = $P{CD_OPERACAO}]]>
 				</textElement>
 				<text><![CDATA[Software Loja da Fátima]]></text>
 			</staticText>
-			<textField>
-				<reportElement uuid="d2457d2a-a489-4c52-b320-374e8b1559ea" x="27" y="30" width="425" height="43"/>
-				<textElement>
-					<font size="28"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{DS_OPERACAO}]]></textFieldExpression>
-			</textField>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="75" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="d388e27a-cfea-4b2c-91dc-1360cb0ad0f4" x="0" y="10" width="555" height="20"/>
+				<reportElement uuid="0625a114-10c2-4384-bd34-b1c875e35818" x="13" y="33" width="529" height="26"/>
 				<textElement>
-					<font size="12"/>
+					<font size="18"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{PESSOA}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{DS_NOTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7fe2d39c-d177-4b45-8f38-f4bfcc11d610" x="151" y="69" width="391" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PESSOA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1a5a20df-f7a9-4185-9119-139d52fd3b76" x="151" y="89" width="391" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FUNCIONARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2345319d-86a9-46b1-bad5-a24f099411de" x="13" y="69" width="126" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TP_PESSOA}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="28d22a5e-231c-4e70-8d2d-96731a4e1be3" x="0" y="30" width="74" height="20"/>
+				<reportElement uuid="4a9ebfb8-18d6-4134-abd3-4ff1b17329ba" x="13" y="89" width="126" height="20"/>
 				<textElement>
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<text><![CDATA[Funcionário:]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="d7143030-3d98-4dce-b7c8-ed9fdcd3903a" x="74" y="30" width="481" height="20"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{FUNCIONARIO}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement uuid="6b7fce71-a96f-4845-aeaa-00ef9e396054" x="0" y="50" width="147" height="20"/>
+				<reportElement uuid="a4d7bce9-1734-43e3-a48b-b2092cb3230f" x="13" y="109" width="126" height="20"/>
 				<textElement>
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<text><![CDATA[Condição de Pagamento:]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="3ad454c2-9018-45e2-b0ea-54d3465635e9" x="147" y="50" width="408" height="20"/>
+			<textField>
+				<reportElement uuid="257ae1b7-86df-409d-a537-cc7e4b6b8d66" x="151" y="109" width="391" height="20"/>
 				<textElement>
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{CONDICAO}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{CONDICAO_PGTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ed6b8894-85ee-4a8d-bb32-a086a300ca44" x="13" y="129" width="205" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DT_COMPRA_VENDA}]]></textFieldExpression>
 			</textField>
 		</band>
-	</pageHeader>
+	</title>
 	<detail>
 		<band height="27" splitType="Stretch">
 			<subreport>
@@ -106,7 +127,7 @@ WHERE "CD_OPERACAO" = $P{CD_OPERACAO}]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "notaoperacao_subprodutos.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="29">
+		<band height="25">
 			<subreport>
 				<reportElement uuid="86bd06a7-8770-4fbe-99b7-08c935051186" x="0" y="0" width="555" height="25"/>
 				<subreportParameter name="CD_CONTA">
@@ -123,17 +144,17 @@ WHERE "CD_OPERACAO" = $P{CD_OPERACAO}]]>
 	<pageFooter>
 		<band height="23" splitType="Stretch">
 			<textField>
-				<reportElement uuid="3d8c2dac-95af-409c-842f-3a0e307a043a" x="435" y="0" width="80" height="20"/>
+				<reportElement uuid="3d8c2dac-95af-409c-842f-3a0e307a043a" x="435" y="10" width="80" height="13"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement uuid="59de655d-21a8-4fa2-a901-1a722a74ae64" x="515" y="0" width="40" height="20"/>
+				<reportElement uuid="59de655d-21a8-4fa2-a901-1a722a74ae64" x="515" y="10" width="40" height="13"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement uuid="b2c0764a-a68a-4abc-84b4-d5d59e950a64" x="0" y="0" width="185" height="20"/>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement uuid="b2c0764a-a68a-4abc-84b4-d5d59e950a64" x="0" y="10" width="185" height="13"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>

@@ -205,11 +205,11 @@ public class ConsulSimplesDetalhesOperacao extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Cód. Produto", "Produto", "Quantidade", "Valor Unitário (R$)", "Valor (R$)"
+                "Cód. Produto", "Produto", "Quantidade", "Valor Unitário (R$)", "Desconto", "Valor (R$)", "Promoção"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

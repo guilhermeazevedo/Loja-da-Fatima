@@ -14,6 +14,7 @@ import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseOperacoes;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseProdutosCompraVenda;
+import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCliente;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesFornecedor;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesFuncionario;
@@ -26,12 +27,16 @@ import br.com.lojadafatima.Pessoa.ClasseCliente;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -954,6 +959,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                         prodcompravenda.setQuantidade(Float.parseFloat(TfQuantidade.getValue().toString()));
                         prodcompravenda.setValorunit(0);
                         prodcompravenda.setValorprodut(0);
+                        prodcompravenda.setPromocao("");
                         prodcompravenda.incluirprodutocompravenda();
 
                         mvestoque.getProduto().setCodigo(Integer.parseInt(TbProdutos.getValueAt(i, 1).toString()));
@@ -968,8 +974,29 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                         prodcompravenda.setQuantidade(Float.parseFloat(TfQuantidadeServ.getValue().toString()));
                         prodcompravenda.setValorunit(0);
                         prodcompravenda.setValorprodut(0);
+                        prodcompravenda.setPromocao("");
                         prodcompravenda.incluirprodutocompravenda();
                     }
+                }
+                
+                HashMap filtro = new HashMap();
+                filtro.put("CD_COMPRA_VENDA", prodcompravenda.getCompravenda().getCodigo());
+                filtro.put("CD_OPERACAO", prodcompravenda.getCompravenda().getOperacao().getCodigo());
+                filtro.put("DS_NOTA", "NOTA DE "+prodcompravenda.getCompravenda().getOperacao().getDescricao());
+                if(CbPessoa.getSelectedItem().toString().equals("Fornecedor:")) filtro.put("TP_PESSOA", "Fornecedor:");
+                else                                                            filtro.put("TP_PESSOA", "Cliente:");
+                ConexaoPostgre conexao = new ConexaoPostgre();
+                JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
+                dialog.setSize(1000, 700);
+                dialog.setLocationRelativeTo(null);
+                try {
+                    JasperPrint print = JasperFillManager.fillReport("relatorios\\notaoperacaoestoque.jasper", filtro, conexao.conecta());
+                    
+                    JasperViewer viewer = new JasperViewer(print, true);
+                    dialog.getContentPane().add(viewer.getContentPane());
+                    dialog.setVisible(true);
+                } catch (Exception ex) {
+                    System.out.println(ex);
                 }
 
                 limpar.Limpar(jPanel1);

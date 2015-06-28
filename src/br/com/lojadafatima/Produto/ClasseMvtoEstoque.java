@@ -74,7 +74,7 @@ public class ClasseMvtoEstoque {
                 + "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n"
                 + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"E\".\"CD_PRODUTO\" IN ((SELECT \"CD_PRODUTO\" FROM bancoloja.\"CAD_PRODUTO\"))\n"
                 + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
-                + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) ORDER BY \"P\".\"DS_PRODUTO\"");
+                + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) AND \"P\".\"CD_TIPO_SERVICO\" IS NULL ORDER BY \"P\".\"DS_PRODUTO\"");
         return conn.resultset;
     }
     
@@ -87,7 +87,7 @@ public class ClasseMvtoEstoque {
                 + "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n"
                 + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"E\".\"CD_PRODUTO\" = " + getProduto().getCodigo() + "\n"
                 + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
-                + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) ORDER BY \"P\".\"DS_PRODUTO\"");
+                + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) AND \"P\".\"CD_TIPO_SERVICO\" IS NULL ORDER BY \"P\".\"DS_PRODUTO\"");
         return conn.resultset;
     }
     
@@ -100,7 +100,7 @@ public class ClasseMvtoEstoque {
                 + "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n"
                 + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"P\".\"DS_PRODUTO\" LIKE '%" + getProduto().getDescricao() + "%' \n"
                 + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
-                + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) ORDER BY \"P\".\"DS_PRODUTO\"");
+                + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) AND \"P\".\"CD_TIPO_SERVICO\" IS NULL ORDER BY \"P\".\"DS_PRODUTO\"");
         return conn.resultset;
     }
     
@@ -114,7 +114,7 @@ public class ClasseMvtoEstoque {
                 + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"E\".\"CD_PRODUTO\" IN ((SELECT \"CD_PRODUTO\" FROM bancoloja.\"CAD_PRODUTO\"))\n"
                 + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
                 + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"))\n"
-                + "AND \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" ORDER BY \"P\".\"DS_PRODUTO\"");
+                + "AND \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" AND \"P\".\"CD_TIPO_SERVICO\" IS NULL ORDER BY \"P\".\"DS_PRODUTO\"");
         return conn.resultset;
     }
     
@@ -128,7 +128,33 @@ public class ClasseMvtoEstoque {
                 + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"E\".\"CD_PRODUTO\" IN ((SELECT \"CD_PRODUTO\" FROM bancoloja.\"CAD_PRODUTO\"))\n"
                 + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
                 + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"))\n"
-                + "AND \"E\".\"QT_ATUAL\" >= \"P\".\"QT_ESTOQUE_MIN\" ORDER BY \"P\".\"DS_PRODUTO\"");
+                + "AND \"E\".\"QT_ATUAL\" >= \"P\".\"QT_ESTOQUE_MIN\" AND \"P\".\"CD_TIPO_SERVICO\" IS NULL ORDER BY \"P\".\"DS_PRODUTO\"");
+        return conn.resultset;
+    }
+    
+    public ResultSet consultahistoricomvto(String pesq1, String pesq2, String pesq3, String data_ini, String data_fim){
+        String sql = "SELECT \"CD_MVTO\",\n" +
+                     "       \"CD_COMPRA_VENDA\",\n" +
+                     "       \"CD_OPERACAO\",\n" +
+                     "       TO_CHAR(\"DT_MVTO\", 'DD/MM/YYYY'),\n" +
+                     "       \"QT_ANTES\",\n" +
+                     "       \"QT_MVTO\",\n" +
+                     "       \"QT_ATUAL\",\n" +
+                     "       CASE WHEN \"TP_MVTO\" = 'S'\n" +
+                     "            THEN 'SAÍDA'\n" +
+                     "            ELSE CASE WHEN \"TP_MVTO\" = 'E'\n" +
+                     "                      THEN 'ENTRADA'\n" +
+                     "                      ELSE 'AJUSTE'\n" +
+                     "                      END\n" +
+                     "            END\n" +
+                     "FROM bancoloja.\"MOV_ESTOQUE\"\n" +
+                     "WHERE \"CD_PRODUTO\" = "+getProduto().getCodigo()+"\n" +
+                     "AND (\"TP_MVTO\" = '"+pesq1+"' OR \"TP_MVTO\" = '"+pesq2+"' OR \"TP_MVTO\" = '"+pesq3+"') ";
+        if(!data_ini.equals("") && !data_fim.equals("")){
+            sql = sql + " AND DATE(\"DT_MVTO\") BETWEEN '"+data_ini+"' AND '"+data_fim+"' ";
+        }
+        sql = sql + " ORDER BY \"DT_MVTO\"";
+        conn.executeSQL(sql);
         return conn.resultset;
     }
     
