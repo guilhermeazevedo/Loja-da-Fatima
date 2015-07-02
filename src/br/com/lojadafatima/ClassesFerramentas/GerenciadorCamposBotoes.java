@@ -1,21 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.ClassesFerramentas;
 
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.KeyEvent;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
@@ -25,7 +16,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class GerenciadorCamposBotoes {
 

@@ -152,7 +152,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o da condi&#xe7;&#xe3;o de pagamento*"/>
+            <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o da condi&#xe7;&#xe3;o de pagamento"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TfCondicaoPgto">
@@ -241,12 +241,12 @@
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="N&#xfa;mero de parcelas*"/>
+            <Property name="text" type="java.lang.String" value="N&#xfa;mero de parcelas"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Intervalo de dias entre as parcelas*"/>
+            <Property name="text" type="java.lang.String" value="Intervalo de dias entre as parcelas"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="SpNrParcelas">

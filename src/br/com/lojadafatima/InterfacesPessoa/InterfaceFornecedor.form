@@ -336,7 +336,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Razao Social"/>
+                <Property name="text" type="java.lang.String" value="Raz&#xe3;o Social"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="TfRazaoSocial">
@@ -564,7 +564,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Numero*"/>
+                <Property name="text" type="java.lang.String" value="N&#xfa;mero*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">

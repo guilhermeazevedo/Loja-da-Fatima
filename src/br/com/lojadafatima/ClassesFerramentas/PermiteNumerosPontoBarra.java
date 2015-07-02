@@ -5,7 +5,7 @@ import javax.swing.text.PlainDocument;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class PermiteNumerosPontoBarra extends PlainDocument{
     

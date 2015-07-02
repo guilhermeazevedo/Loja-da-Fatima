@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class ClasseMulta {
     

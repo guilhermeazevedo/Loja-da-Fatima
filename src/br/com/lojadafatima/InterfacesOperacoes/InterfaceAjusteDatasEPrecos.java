@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesOperacoes;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
@@ -14,8 +9,6 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -24,7 +17,7 @@ import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
 
@@ -129,7 +122,7 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
 
         TfValorTotal.setEditable(false);
 
-        jLabel3.setText("Nº da Parcela");
+        jLabel3.setText("Nrº da Parcela");
 
         TfNrParcela.setEditable(false);
 
@@ -162,10 +155,7 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(49, 49, 49)
-                                .addComponent(jLabel4)))
+                            .addComponent(jLabel3))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -179,7 +169,9 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TfDtVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TfDtVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
@@ -237,7 +229,7 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
     private void BtFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtFinalizarActionPerformed
         if (valortotalcorreto()) {
             if (datascorretas()) {
-                if (JOptionPane.showConfirmDialog(null, "Tem certeza que as datas e valores estao corretos?", "Confirmar datas e valores", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(null, "Tem certeza que as datas e valores estão corretos?", "Confirmar datas e valores", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     for (int i = 0; i < TbParcelas.getRowCount(); i++) {
                         getParcelas().setCodigo(Integer.parseInt(TbParcelas.getValueAt(i, 0).toString()));
                         getParcelas().setDtpagar(TbParcelas.getValueAt(i, 1).toString());
@@ -248,10 +240,10 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
                     dispose();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Verifique se as datas estao digitadas corretamente!", "Datas digitadas incorretamente", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Verifique se as datas estão digitadas corretamente!", "Datas digitadas incorretamente", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Verifique se os valores estao digitados corretamente e se estao de acordo com o total da operacao!", "Valores diferentes", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Verifique se os valores estão digitados corretamente e se estão de acordo com o total da operação!", "Valores diferentes", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_BtFinalizarActionPerformed
 
@@ -290,7 +282,7 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nCaso voce feche essa janela, todas as alteracoes feitas\nnos valores e datas das parcelas serao ignoradas.\n\nDeseja realmente fechar esta janela?", "Deseja fechar esta janela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+        if(JOptionPane.showConfirmDialog(null, "Voce está prestes a fechar esta janela.\nCaso você feche essa janela, todas as alteraões feitas\nnos valores e datas das parcelas serão ignoradas.\n\nDeseja realmente fechar esta janela?", "Deseja fechar esta janela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             dispose();
         }
     }//GEN-LAST:event_formWindowClosing
@@ -340,7 +332,7 @@ public class InterfaceAjusteDatasEPrecos extends javax.swing.JDialog {
         String data1, data2;
         for (int i = 0; i < TbParcelas.getRowCount(); i++) {
             if (i == 0) {
-                data1 = datas.retornaratartual();
+                data1 = datas.retornadataatual();
                 data2 = TbParcelas.getValueAt(i, 1).toString();
             } else {
                 data1 = TbParcelas.getValueAt(i - 1, 1).toString();

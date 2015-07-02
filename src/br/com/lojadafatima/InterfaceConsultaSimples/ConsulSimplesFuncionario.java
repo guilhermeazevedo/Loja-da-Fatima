@@ -1,5 +1,6 @@
 package br.com.lojadafatima.InterfaceConsultaSimples;
 
+import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.ClassesFerramentas.PermiteNumerosPontoBarra;
@@ -10,13 +11,14 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class ConsulSimplesFuncionario extends javax.swing.JDialog {
 
     Preenche preenche = new Preenche();
     private ClasseFuncionario funcionario = new ClasseFuncionario();
     private java.awt.Frame primeiratela;
+    MensagensUsuario msg = new MensagensUsuario();
     
     public ConsulSimplesFuncionario(java.awt.Frame telaorigem, boolean modal, ClasseFuncionario func) {
         super(telaorigem, modal);
@@ -43,6 +45,8 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
         BtPesquisa = new javax.swing.JButton();
         BtSelecionar = new javax.swing.JButton();
         BtCancelar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        LbNotificacao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Rápida de Funcionário - Software Loja da Fátima");
@@ -116,7 +120,7 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(471, 471, 471)
-                .addComponent(BtPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -127,7 +131,7 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
                             .addComponent(CbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(TfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 107, Short.MAX_VALUE)))
+                            .addGap(0, 117, Short.MAX_VALUE)))
                     .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
@@ -151,18 +155,38 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
                     .addContainerGap(65, Short.MAX_VALUE)))
         );
 
+        LbNotificacao.setText(" ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(LbNotificacao)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LbNotificacao)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -214,7 +238,7 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
             }
             case 1: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o código do funcionário que deseja consultar!", "Digite o código", JOptionPane.INFORMATION_MESSAGE);
+                    msg.CampoNaoPreenchido(LbNotificacao, "Digite o código do funcionário que deseja consultar!");
                     TfPesquisa.grabFocus();
                 } else {
                     funcionario.setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -224,7 +248,7 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
             }
             case 2: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o nome do funcionário que deseja consultar!", "Digite o nome", JOptionPane.INFORMATION_MESSAGE);
+                    msg.CampoNaoPreenchido(LbNotificacao, "Digite o nome do funcionário que deseja consultar!");
                     TfPesquisa.grabFocus();
                 } else {
                     funcionario.getPessoafis().setNome(TfPesquisa.getText());
@@ -244,7 +268,7 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
             }
             case 4: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o CPF do funcionário que deseja consultar!", "Digite o CPF", JOptionPane.INFORMATION_MESSAGE);
+                    msg.CampoNaoPreenchido(LbNotificacao, "Digite o CPF do funcionário que deseja consultar!");
                     TfPesquisa.grabFocus();
                 } else {
                     funcionario.getPessoafis().setCpf(TfPesquisa.getText());
@@ -280,9 +304,11 @@ public class ConsulSimplesFuncionario extends javax.swing.JDialog {
     private javax.swing.JButton BtPesquisa;
     private javax.swing.JButton BtSelecionar;
     private javax.swing.JComboBox CbPesquisa;
+    private javax.swing.JLabel LbNotificacao;
     private javax.swing.JTable TbPesquisa;
     private javax.swing.JTextField TfPesquisa;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 

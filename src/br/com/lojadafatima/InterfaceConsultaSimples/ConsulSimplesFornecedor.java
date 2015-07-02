@@ -1,5 +1,6 @@
 package br.com.lojadafatima.InterfaceConsultaSimples;
 
+import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.ClassesFerramentas.PermiteNumerosPontoBarra;
@@ -10,13 +11,14 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class ConsulSimplesFornecedor extends javax.swing.JDialog {
     
     private java.awt.Frame primeiratela;
     Preenche preenche = new Preenche();
     private ClasseFornecedor fornecedor = new ClasseFornecedor();
+    MensagensUsuario msg = new MensagensUsuario();
     
    public ConsulSimplesFornecedor(java.awt.Frame telaorigem, boolean modal, ClasseFornecedor forn) {
         super(telaorigem, modal);
@@ -38,6 +40,8 @@ public class ConsulSimplesFornecedor extends javax.swing.JDialog {
         TbPesquisa = new javax.swing.JTable();
         BtSelecionar = new javax.swing.JButton();
         BtCancelar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        LbNotificacao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Rápida de Fornecedor - Software Loja da Fátima");
@@ -100,6 +104,21 @@ public class ConsulSimplesFornecedor extends javax.swing.JDialog {
             }
         });
 
+        LbNotificacao.setText(" ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(LbNotificacao)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LbNotificacao)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -117,7 +136,10 @@ public class ConsulSimplesFornecedor extends javax.swing.JDialog {
                         .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -136,18 +158,20 @@ public class ConsulSimplesFornecedor extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(BtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(TfPesquisa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                .addGap(170, 170, 170)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(CbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(65, Short.MAX_VALUE)))
+                    .addContainerGap(85, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,7 +184,9 @@ public class ConsulSimplesFornecedor extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -207,7 +233,7 @@ public class ConsulSimplesFornecedor extends javax.swing.JDialog {
             }
             case 1: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o código do fornecedor que deseja consultar!", "Digite o código", JOptionPane.INFORMATION_MESSAGE);
+                    msg.CampoNaoPreenchido(LbNotificacao, "Digite o código do fornecedor que deseja consultar!");
                     TfPesquisa.grabFocus();
                 } else {
                     fornecedor.setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -217,7 +243,7 @@ public class ConsulSimplesFornecedor extends javax.swing.JDialog {
             }
             case 2:{
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o nome fantasia do fornecedor que deseja consultar!", "Digite o nome fantasia", JOptionPane.INFORMATION_MESSAGE);
+                    msg.CampoNaoPreenchido(LbNotificacao, "Digite o nome fantasia do fornecedor que deseja consultar!");
                     TfPesquisa.grabFocus();
                 } else {
                     fornecedor.getPessoajur().setNomefantasia(TfPesquisa.getText());
@@ -227,7 +253,7 @@ public class ConsulSimplesFornecedor extends javax.swing.JDialog {
             }
             case 3:{
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o CNPJ do fornecedor que deseja consultar!", "Digite o CNPJ", JOptionPane.INFORMATION_MESSAGE);
+                    msg.CampoNaoPreenchido(LbNotificacao, "Digite o CNPJ do fornecedor que deseja consultar!");
                     TfPesquisa.grabFocus();
                 } else {
                     fornecedor.getPessoajur().setCnpj(TfPesquisa.getText());
@@ -262,9 +288,11 @@ public class ConsulSimplesFornecedor extends javax.swing.JDialog {
     private javax.swing.JButton BtPesquisa;
     private javax.swing.JButton BtSelecionar;
     private javax.swing.JComboBox CbPesquisa;
+    private javax.swing.JLabel LbNotificacao;
     private javax.swing.JTable TbPesquisa;
     private javax.swing.JTextField TfPesquisa;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 

@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.lojadafatima.InterfaceConsultaSimples;
 
+import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
@@ -16,13 +11,14 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class ConsulSimplesProduto extends javax.swing.JDialog {
 
     Preenche preenche = new Preenche();
     private ClasseEspecificacaoProduto especproduto = new ClasseEspecificacaoProduto();
     private java.awt.Frame primeiratela;
+    MensagensUsuario msg = new MensagensUsuario();
     
     public ConsulSimplesProduto(java.awt.Frame telaorigem, boolean modal, ClasseProduto prod) {
         super(telaorigem, modal);
@@ -42,23 +38,35 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        CbPesquisa = new javax.swing.JComboBox();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        TbConsulta = new javax.swing.JTable();
-        TfPesquisa = new javax.swing.JTextField();
-        BtPesquisar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         BtSelecionar = new javax.swing.JButton();
         BtCancelar = new javax.swing.JButton();
-        RbPesqProduto = new javax.swing.JRadioButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TbConsulta = new javax.swing.JTable();
         RbPesqServico = new javax.swing.JRadioButton();
+        RbPesqProduto = new javax.swing.JRadioButton();
+        CbPesquisa = new javax.swing.JComboBox();
+        TfPesquisa = new javax.swing.JTextField();
+        BtPesquisar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        LbNotificacao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Rápida de Produto - Software - Loja da Fátima");
 
-        CbPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Código", "Descrição", "Código do Tipo de Produto/Servico" }));
-        CbPesquisa.addActionListener(new java.awt.event.ActionListener() {
+        BtSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
+        BtSelecionar.setText("Selecionar");
+        BtSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CbPesquisaActionPerformed(evt);
+                BtSelecionarActionPerformed(evt);
+            }
+        });
+
+        BtCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/cancelar.png"))); // NOI18N
+        BtCancelar.setText("Cancelar");
+        BtCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtCancelarActionPerformed(evt);
             }
         });
 
@@ -67,7 +75,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Código", "Descrição", "Tipo de Produto/Servico", "Estoque mínimo"
+                "Código", "Descrição", "Tipo de Produto/Serviço", "Estoque mínimo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -86,6 +94,20 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
         });
         jScrollPane4.setViewportView(TbConsulta);
 
+        buttonGroup1.add(RbPesqServico);
+        RbPesqServico.setText("Serviço");
+
+        buttonGroup1.add(RbPesqProduto);
+        RbPesqProduto.setSelected(true);
+        RbPesqProduto.setText("Produto");
+
+        CbPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Código", "Descrição", "Código do Tipo de Produto/Serviço" }));
+        CbPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbPesquisaActionPerformed(evt);
+            }
+        });
+
         TfPesquisa.setEnabled(false);
 
         BtPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
@@ -96,59 +118,52 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
             }
         });
 
-        BtSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
-        BtSelecionar.setText("Selecionar");
-        BtSelecionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtSelecionarActionPerformed(evt);
-            }
-        });
+        LbNotificacao.setText(" ");
 
-        BtCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/cancelar.png"))); // NOI18N
-        BtCancelar.setText("Cancelar");
-        BtCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtCancelarActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(LbNotificacao)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LbNotificacao)
+        );
 
-        buttonGroup1.add(RbPesqProduto);
-        RbPesqProduto.setSelected(true);
-        RbPesqProduto.setText("Produto");
-
-        buttonGroup1.add(RbPesqServico);
-        RbPesqServico.setText("Servico");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(CbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TfPesquisa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(RbPesqServico)
                             .addComponent(RbPesqProduto)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(BtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtPesquisar))
@@ -159,10 +174,25 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtSelecionar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(BtCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(BtCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -208,7 +238,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
             }
             case 1: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o código do produto que deseja consultar!", "Digite o código", JOptionPane.INFORMATION_MESSAGE);
+                    msg.CampoNaoPreenchido(LbNotificacao, "Digite o código do produto/serviço que deseja consultar!");
                     TfPesquisa.grabFocus();
                 } else {
                     getEspecproduto().getProduto().setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -218,7 +248,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
             }
             case 2: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite a descrição do produto que deseja consultar!", "Digite a descrição", JOptionPane.INFORMATION_MESSAGE);
+                    msg.CampoNaoPreenchido(LbNotificacao, "Digite a descrição do produto/serviço que deseja consultar!");
                     TfPesquisa.grabFocus();
                 } else {
                     getEspecproduto().getProduto().setDescricao(TfPesquisa.getText());
@@ -228,7 +258,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
             }
             case 3: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o código do tipo de produto que deseja consultar!", "Digite o código do tipo de produto", JOptionPane.INFORMATION_MESSAGE);
+                    msg.CampoNaoPreenchido(LbNotificacao, "Digite o código do tipo de produto/serviço que deseja consultar!");
                     TfPesquisa.grabFocus();
                 } else {
                     getEspecproduto().getTipoproduto().setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -264,11 +294,14 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
     private javax.swing.JButton BtPesquisar;
     private javax.swing.JButton BtSelecionar;
     private javax.swing.JComboBox CbPesquisa;
+    private javax.swing.JLabel LbNotificacao;
     private javax.swing.JRadioButton RbPesqProduto;
     private javax.swing.JRadioButton RbPesqServico;
     private javax.swing.JTable TbConsulta;
     private javax.swing.JTextField TfPesquisa;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane4;
     // End of variables declaration//GEN-END:variables
 

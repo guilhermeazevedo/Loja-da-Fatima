@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.lojadafatima.InterfacesProduto;
 
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
@@ -15,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfacePerguntaFuncionarioAjusteEstoque extends javax.swing.JDialog {
 
@@ -70,7 +64,6 @@ public class InterfacePerguntaFuncionarioAjusteEstoque extends javax.swing.JDial
         });
 
         BtPesqFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
-        BtPesqFuncionario.setText("Pesquisar");
         BtPesqFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtPesqFuncionarioActionPerformed(evt);
@@ -214,7 +207,7 @@ public class InterfacePerguntaFuncionarioAjusteEstoque extends javax.swing.JDial
             getFuncionario().setCodigo(Integer.parseInt(TfCodFuncionario4.getText()));
             dispose();
         }else{
-            JOptionPane.showMessageDialog(null, "Digite o codigo do funcionario!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Digite o código do funcionário!", "Digite o código", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_BtSelecionarActionPerformed
 

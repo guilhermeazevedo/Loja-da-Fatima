@@ -101,7 +101,7 @@ WHERE DATE("DT_MVTO") BETWEEN $P{DT_INICIAL} AND $P{DT_FINAL} AND
 				<text><![CDATA[Nroº Mvto.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="a01b2bea-549b-4209-9ddd-3a6a8fcccd08" x="64" y="0" width="100" height="13"/>
+				<reportElement uuid="a01b2bea-549b-4209-9ddd-3a6a8fcccd08" x="64" y="0" width="74" height="13"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -115,7 +115,7 @@ WHERE DATE("DT_MVTO") BETWEEN $P{DT_INICIAL} AND $P{DT_FINAL} AND
 				<text><![CDATA[Saldo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="a83b09f5-5070-4757-96aa-ab669d64354c" x="186" y="0" width="71" height="13"/>
+				<reportElement uuid="a83b09f5-5070-4757-96aa-ab669d64354c" x="146" y="0" width="71" height="13"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -124,29 +124,29 @@ WHERE DATE("DT_MVTO") BETWEEN $P{DT_INICIAL} AND $P{DT_FINAL} AND
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="13" splitType="Stretch">
+		<band height="46" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement uuid="cffa57ea-939c-4266-81be-882bf1d368cb" x="64" y="0" width="116" height="13"/>
+				<reportElement uuid="cffa57ea-939c-4266-81be-882bf1d368cb" x="64" y="0" width="480" height="26" isPrintWhenDetailOverflows="true"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{DS_MVTO}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
-				<reportElement uuid="a12d0c8b-98e1-41f8-bf88-14c939050c0b" x="276" y="0" width="60" height="13"/>
+				<reportElement uuid="a12d0c8b-98e1-41f8-bf88-14c939050c0b" x="276" y="30" width="60" height="13"/>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{VL_ANTES}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement uuid="a917e360-2014-414c-80de-a211015e968a" x="186" y="0" width="71" height="13"/>
+				<reportElement uuid="a917e360-2014-414c-80de-a211015e968a" x="146" y="30" width="118" height="13"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{to_char}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
-				<reportElement uuid="e70df672-c922-4a6f-bf68-3f91a91dc779" x="348" y="0" width="60" height="13"/>
+				<reportElement uuid="e70df672-c922-4a6f-bf68-3f91a91dc779" x="348" y="30" width="60" height="13"/>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{VL_MVTO}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00">
-				<reportElement uuid="4cc7d046-91f6-4102-a6cb-688de326de0f" x="494" y="0" width="60" height="13"/>
+				<reportElement uuid="4cc7d046-91f6-4102-a6cb-688de326de0f" x="494" y="30" width="60" height="13"/>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{VL_ATUAL}]]></textFieldExpression>
 			</textField>
@@ -156,7 +156,7 @@ WHERE DATE("DT_MVTO") BETWEEN $P{DT_INICIAL} AND $P{DT_FINAL} AND
 				<textFieldExpression><![CDATA[$F{CD_MVTO}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="b97b5b54-bc0d-48ef-8390-7165a77c1a2f" x="419" y="0" width="55" height="13"/>
+				<reportElement uuid="b97b5b54-bc0d-48ef-8390-7165a77c1a2f" x="419" y="30" width="55" height="13"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{TIPO}]]></textFieldExpression>
 			</textField>

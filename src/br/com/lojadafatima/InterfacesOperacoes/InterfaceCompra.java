@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesOperacoes;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
@@ -39,7 +34,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceCompra extends javax.swing.JDialog {
 
@@ -271,7 +266,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
         TfCondicaoPgto.setEditable(false);
 
-        BtCadCondicaoPgto.setText("Cadastrar Condicao de Pagamento");
+        BtCadCondicaoPgto.setText("Cadastrar Condição de Pagamento");
         BtCadCondicaoPgto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtCadCondicaoPgtoActionPerformed(evt);
@@ -323,7 +318,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
             .addComponent(BtGravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jLabel18.setText("Codigo da Nota do Fornecedor");
+        jLabel18.setText("Código da Nota do Fornecedor");
 
         TfDescNotaCompra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -411,7 +406,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
         jLabel14.setText("Valor Total do Produto");
 
-        CbPromocao.setText("Promocao");
+        CbPromocao.setText("Promoção");
 
         BtIncluirProdutoCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
         BtIncluirProdutoCompra.setText("Incluir Produto na Compra");
@@ -562,7 +557,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Produtos", jPanel3);
 
-        jLabel17.setText("Cód. Servico");
+        jLabel17.setText("Cód. Serviço");
 
         TfCodServico.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -579,9 +574,9 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
         TfServico.setEditable(false);
 
-        jLabel19.setText("Servico");
+        jLabel19.setText("Serviço");
 
-        BtCadServico.setText("Cadastrar Servico");
+        BtCadServico.setText("Cadastrar Serviço");
         BtCadServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtCadServicoActionPerformed(evt);
@@ -599,10 +594,10 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
         jLabel20.setText("Quantidade");
 
-        CbPromocaoServ.setText("Promocao");
+        CbPromocaoServ.setText("Promoção");
 
         BtIncluirServicoCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
-        BtIncluirServicoCompra.setText("Incluir Servico na Compra");
+        BtIncluirServicoCompra.setText("Incluir Serviço na Compra");
         BtIncluirServicoCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtIncluirServicoCompraActionPerformed(evt);
@@ -610,7 +605,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
         });
 
         BtRemoverServicoCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
-        BtRemoverServicoCompra.setText("Remover Servico");
+        BtRemoverServicoCompra.setText("Remover Serviço");
         BtRemoverServicoCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtRemoverServicoCompraActionPerformed(evt);
@@ -641,7 +636,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
         TfValorProdutoServ.setEditable(false);
 
-        jLabel23.setText("Valor Total do Servico");
+        jLabel23.setText("Valor Total do Serviço");
 
         TfValorTotalCompraServ.setEditable(false);
 
@@ -652,7 +647,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Código Compra", "Cód. Servico", "Servico", "Quantidade", "Valor Unitário", "Desconto", "Valor Total do Servico", "Promoção"
+                "Código Compra", "Cód. Serviço", "Serviço", "Quantidade", "Valor Unitário", "Desconto", "Valor Total do Serviço", "Promoção"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -774,7 +769,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Servicos", jPanel4);
+        jTabbedPane1.addTab("Serviços", jPanel4);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1054,7 +1049,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                     TfValorProduto.setValue(BigDecimal.valueOf(0));
                 }
             } else {
-                msg.CampoNaoPreenchido(LbNotificacao, "Insira o Fornecedor da Compra para que o sistema faca a busca dos Produtos!");
+                msg.CampoNaoPreenchido(LbNotificacao, "Insira o Fornecedor da Compra para que o sistema faça a busca dos Produtos!");
                 TfCodFornecedor.grabFocus();
             }
         } else {
@@ -1090,7 +1085,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 for (int i = 0; i < TbCompra.getRowCount(); i++) {
                     if (Integer.parseInt(TbCompra.getValueAt(i, 1).toString()) == Integer.parseInt(TfCodProduto.getText())) {
                         inclui = false;
-                        if (JOptionPane.showConfirmDialog(null, "Este produto ja foi adiconado a esta compra!\n"
+                        if (JOptionPane.showConfirmDialog(null, "Este produto já foi adicionado a esta compra!\n"
                                 + "Deseja substituir a quantidade adquirida deste produto?", "Produto adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             TbCompra.setValueAt(TfQuantidade.getText(), i, 3);
                             TbCompra.setValueAt(TfValorUnitario.getText(), i, 4);
@@ -1128,7 +1123,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 CbPromocao.setSelected(false);
                 atualizavalortotal();
             } else {
-                msg.CampoNaoPreenchido(LbNotificacao, "Digite o valor unitario do produto e a quantidade corretamente!");
+                msg.CampoNaoPreenchido(LbNotificacao, "Digite o valor unitário do produto e a quantidade corretamente!");
             }
         } else {
             msg.CampoNaoPreenchido(LbNotificacao, "Informe o produto a ser adicionado nesta compra!");
@@ -1148,7 +1143,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
     }//GEN-LAST:event_BtRemoverProdutoCompraActionPerformed
 
     private void BtIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirActionPerformed
-        TfData.setText(datas.retornaratartual());
+        TfData.setText(datas.retornadataatual());
         GeraCodigos geracodigos = new GeraCodigos();
         TfCodigo.setText("" + geracodigos.gerasequencia("COMPRA_VENDA", "CD_COMPRA_VENDA", "CD_OPERACAO", 1));
         valida.validacamposCadastrar(jPanel1, PnBotoes);
@@ -1168,7 +1163,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
         if (camposobrigatoriospreenchidos()) {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Gravar esta compra e de que todas as informacoes estao corretas?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Gravar esta compra e de que todas as informações estão corretas?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 enviardados();
                 prodcompravenda.getCompravenda().incluir();
 
@@ -1266,7 +1261,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
     private void BtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCancelarActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar esta compra?\n"
-                + "(Caso sim, TODOS os dados digitados serao limpos da tela)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                + "(Caso sim, TODOS os dados digitados serão limpos da tela)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             limpar.Limpar(jPanel1);
             limpar.Limpar(TbCompra);
             valida.validacamposCancelar(jPanel1, PnBotoes);
@@ -1298,7 +1293,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
     private void TfCodFuncionarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodFuncionarioFocusLost
         if (TfFuncionario.getText().equals("")) {
             TfCodFuncionario.setText("");
-            msg.CampoNaoPreenchido(LbNotificacao, "Digite o codigo do funcionario corretamente!");
+            msg.CampoNaoPreenchido(LbNotificacao, "Digite o código do funcionário corretamente!");
             TfDesconto.setEditable(false);
         } else {
             prodcompravenda.getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TfCodFuncionario.getText()));
@@ -1309,7 +1304,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
     private void TfCodFornecedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodFornecedorFocusLost
         if (TfFornecedor.getText().equals("")) {
             TfCodFornecedor.setText("");
-            msg.CampoNaoPreenchido(LbNotificacao, "Digite o codigo do fornecedor corretamente!");
+            msg.CampoNaoPreenchido(LbNotificacao, "Digite o código do fornecedor corretamente!");
         } else {
             prodcompravenda.getForneproduto().getFornecedor().setCodigo(Integer.parseInt(TfCodFornecedor.getText().toString()));
         }
@@ -1318,13 +1313,13 @@ public class InterfaceCompra extends javax.swing.JDialog {
     private void TfCodCondicaoPgtoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodCondicaoPgtoFocusLost
         if (TfCondicaoPgto.getText().equals("")) {
             TfCodCondicaoPgto.setText("");
-            msg.CampoNaoPreenchido(LbNotificacao, "Digite o codigo da condicao de pagamento corretamente!");
+            msg.CampoNaoPreenchido(LbNotificacao, "Digite o código da condição de pagamento corretamente!");
         }
     }//GEN-LAST:event_TfCodCondicaoPgtoFocusLost
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if (PnBotoes.isVisible() && BtGravar.isEnabled()) {
-            if (JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Você está prestes a fechar esta janela.\nAo fechar esta janela, tudo que você digitou será esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 dispose();
             }
         } else {
@@ -1342,7 +1337,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 TfQuantidade.grabFocus();
             }
         }else{
-            msg.CampoNaoPreenchido(LbNotificacao, "Digite o valor unitario do produto!");
+            msg.CampoNaoPreenchido(LbNotificacao, "Digite o valor unitário do produto!");
             TfDesconto.setValue(BigDecimal.ZERO);
             TfValorUnitario.grabFocus();
         }
@@ -1364,7 +1359,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                     TfValorProdutoServ.setValue(BigDecimal.valueOf(0));
                 }
             } else {
-                msg.CampoNaoPreenchido(LbNotificacao, "Insira o Fornecedor da Compra para que o sistema faca a busca dos Servicos!");
+                msg.CampoNaoPreenchido(LbNotificacao, "Insira o Fornecedor da Compra para que o sistema faça a busca dos Serviços!");
                 TfCodFornecedor.grabFocus();
             }
         } else {
@@ -1416,8 +1411,8 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 for (int i = 0; i < TbCompraServ.getRowCount(); i++) {
                     if (Integer.parseInt(TbCompraServ.getValueAt(i, 1).toString()) == Integer.parseInt(TfCodServico.getText())) {
                         inclui = false;
-                        if (JOptionPane.showConfirmDialog(null, "Este servico ja foi adiconado a esta compra!\n"
-                                + "Deseja substituir a quantidade adquirida deste servico?", "Servico adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        if (JOptionPane.showConfirmDialog(null, "Este serviço já foi adiconado a esta compra!\n"
+                                + "Deseja substituir a quantidade adquirida deste serviço?", "Serviço adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             TbCompraServ.setValueAt(TfQuantidadeServ.getText(), i, 3);
                             TbCompraServ.setValueAt(TfValorUnitarioServ.getText(), i, 4);
                             TbCompraServ.setValueAt(TfDescontoServ.getText(), i, 5);
@@ -1454,10 +1449,10 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 CbPromocaoServ.setSelected(false);
                 atualizavalortotalserv();
             } else {
-                msg.CampoNaoPreenchido(LbNotificacao, "Digite o valor unitario do servico e a quantidade corretamente!");
+                msg.CampoNaoPreenchido(LbNotificacao, "Digite o valor unitário do serviço e a quantidade corretamente!");
             }
         } else {
-            msg.CampoNaoPreenchido(LbNotificacao, "Informe o servico a ser adicionado nesta compra!");
+            msg.CampoNaoPreenchido(LbNotificacao, "Informe o serviço a ser adicionado nesta compra!");
             TfCodServico.grabFocus();
         }
     }//GEN-LAST:event_BtIncluirServicoCompraActionPerformed
@@ -1465,7 +1460,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
     private void BtRemoverServicoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtRemoverServicoCompraActionPerformed
         int linha = TbCompraServ.getSelectedRow();
         if (linha > -1) {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover este servico da compra?", "Deseja remover?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover este serviço da compra?", "Deseja remover?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 DefaultTableModel tabela = (DefaultTableModel) TbCompraServ.getModel();
                 tabela.removeRow(linha);
                 atualizavalortotalserv();
@@ -1486,12 +1481,12 @@ public class InterfaceCompra extends javax.swing.JDialog {
             if (TfQuantidadeServ.getValue() != BigDecimal.valueOf(0)){
                 TfQuantidadeServKeyReleased(evt);
             }else{
-                msg.CampoNaoPreenchido(LbNotificacao, "Digite a quantidade do servico!");
+                msg.CampoNaoPreenchido(LbNotificacao, "Digite a quantidade do serviço!");
                 TfDescontoServ.setValue(BigDecimal.ZERO);
                 TfQuantidadeServ.grabFocus();
             }
         }else{
-            msg.CampoNaoPreenchido(LbNotificacao, "Digite o valor unitario do servico!");
+            msg.CampoNaoPreenchido(LbNotificacao, "Digite o valor unitário do serviço!");
             TfDescontoServ.setValue(BigDecimal.ZERO);
             TfValorUnitarioServ.grabFocus();
         }
@@ -1635,12 +1630,12 @@ public class InterfaceCompra extends javax.swing.JDialog {
 
     public boolean camposobrigatoriospreenchidos() {
         if (TfDescNotaCompra.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o codigo da nota do fornecedor!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o código da nota do fornecedor!");
             TfDescNotaCompra.grabFocus();
             return false;
         }
         if (TfCodFuncionario.getText().equals("") || TfFuncionario.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira o Funcionario que esta realizando o antendimento nesta compra!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira o Funcionário que esta realizando o antendimento nesta compra!");
             TfCodFuncionario.grabFocus();
             return false;
         }
@@ -1650,12 +1645,12 @@ public class InterfaceCompra extends javax.swing.JDialog {
             return false;
         }
         if (TfCodCondicaoPgto.getText().equals("") || TfCondicaoPgto.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira a condicao de pagamento escolhida para esta compra!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira a condição de pagamento escolhida para esta compra!");
             TfCodCondicaoPgto.grabFocus();
             return false;
         }
         if (TbCompra.getRowCount() < 1 && TbCompraServ.getRowCount() < 1) {            
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira os produtos ou servicos desta compra!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira os produtos ou serviços desta compra!");
             return false;
         }
         return true;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesPessoa;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
@@ -18,9 +13,7 @@ import br.com.lojadafatima.DadosPessoa.ClassePessoaFisica;
 import br.com.lojadafatima.DadosPessoa.ClassePessoaJuridica;
 import br.com.lojadafatima.Pessoa.ClasseCliente;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
-import java.awt.Color;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -29,7 +22,7 @@ import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceCliente extends javax.swing.JDialog {
 
@@ -989,7 +982,7 @@ public class InterfaceCliente extends javax.swing.JDialog {
         if(valida.CampoTotalmentePreenchido(TfNrTelefone.getText()))
         preenche.PreencheJTableEmailOuTelefone(TfNrTelefone, jCbOpTelefone, TbTelefone);
         else
-            JOptionPane.showMessageDialog(null, "Digite o numero do telefone corretamente!", "Digite corretamente", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoNaoPreenchido(LbNotificacao, "Digite o número do telefone corretamente!");
     }//GEN-LAST:event_jBtAddTelefoneActionPerformed
 
     private void jBtDelTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtDelTelefoneActionPerformed
@@ -1011,8 +1004,8 @@ public class InterfaceCliente extends javax.swing.JDialog {
                 TfPesquisa.setEditable(false);
                 CbPesquisa2.removeAllItems();
                 CbPesquisa2.addItem("");
-                CbPesquisa2.addItem("Pessoa Fisica");
-                CbPesquisa2.addItem("Pessoa Juridica");
+                CbPesquisa2.addItem("Pessoa Física");
+                CbPesquisa2.addItem("Pessoa Jurídica");
                 TfPesquisa.setDocument(TfNomeFisica.getDocument());
                 break;
             }
@@ -1029,8 +1022,8 @@ public class InterfaceCliente extends javax.swing.JDialog {
                 TfPesquisa.setEditable(true);
                 CbPesquisa2.removeAllItems();
                 CbPesquisa2.addItem("");
-                CbPesquisa2.addItem("Pessoa Fisica");
-                CbPesquisa2.addItem("Pessoa Juridica");
+                CbPesquisa2.addItem("Pessoa Física");
+                CbPesquisa2.addItem("Pessoa Jurídica");
                 TfPesquisa.setDocument(TfNomeFisica.getDocument());
                 break;
             }
@@ -1075,7 +1068,7 @@ public class InterfaceCliente extends javax.swing.JDialog {
             }
             case 1: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o Codigo do cliente que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o Código do cliente que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     cliente.setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -1189,7 +1182,7 @@ public class InterfaceCliente extends javax.swing.JDialog {
         if (valida.CampoTotalmentePreenchido(fisica.getCpf())) {
             if (!fisica.CPFnumerosiguais()) {
                 if (fisica.CPFvalido()) {
-                    LbCPFValido.setText("Valido");
+                    LbCPFValido.setText("Válido");
                     LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png")));
                     if (fisica.CPFexistente()) {
                         if (cliente.eclienteCPF(fisica.getCpf())) {
@@ -1197,18 +1190,18 @@ public class InterfaceCliente extends javax.swing.JDialog {
                                 
                             } else
                             if (cliente.eativo()) {
-                                JOptionPane.showMessageDialog(null, "Este CPF pertence a um cliente ja cadastrado no sistema!\n"
-                                        + "Consulte os dados deste cliente na aba \"Consulta\" e informe o codigo ao cliente, caso ele tenha esquecido!", "CPF existente", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Este CPF pertence a um cliente já cadastrado no sistema!\n"
+                                        + "Consulte os dados deste cliente na aba \"Consulta\" e informe o código ao cliente, caso ele tenha esquecido!", "CPF existente", JOptionPane.INFORMATION_MESSAGE);
                                 TfNrCPF.setText("");
                                 TfNrCPFKeyReleased(null);
                             } else {
                                 int op = JOptionPane.showConfirmDialog(null, "Este CPF pertence a " + fisica.retornanomeporCPF() + ". "
-                                        + "Os dados desta pessoa foram excluidas do sistema!\n\n"
+                                        + "Os dados desta pessoa foram excluídas do sistema!\n\n"
                                         + "Deseja recuperar os dados desta pessoa?", "O que deseja fazer?", JOptionPane.YES_NO_OPTION);
                                 if (op == JOptionPane.YES_OPTION) {
                                     cliente.recuperar();
-                                    JOptionPane.showMessageDialog(null, "Recuperacao realizada com sucesso!\nAs informacoes do cliente permanecem iguais as que estavam cadastradas no momento da exclusao\n\n"
-                                            + "Codigo: " + cliente.getCodigo() + "\nNome: " + fisica.retornanomeporCPF(), "Recuperacao realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(null, "Recuperação realizada com sucesso!\nAs informações do cliente permanecem iguais as que estavam cadastradas no momento da exclusão\n\n"
+                                            + "Código: " + cliente.getCodigo() + "\nNome: " + fisica.retornanomeporCPF(), "Recuperação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
                                     limpar.Limpar(PnCadastro);
                                     limpar.Limpar(TbTelefone);
                                     limpar.Limpar(TbEmail);
@@ -1223,13 +1216,13 @@ public class InterfaceCliente extends javax.swing.JDialog {
                             }
                         } else {
                             int op = JOptionPane.showConfirmDialog(null, "Este CPF pertence a " + fisica.retornanomeporCPF() + ". "
-                                    + "Os dados desta pessoa estao cadastrados no sistema!\n\n"
+                                    + "Os dados desta pessoa estão cadastrados no sistema!\n\n"
                                     + "Deseja importar os dados desta pessoa para criar um novo cliente?\n"
-                                    + "(Caso queira, o cliente sera criado automaticamente com as informacoes contidas no sistema)", "O que deseja fazer?", JOptionPane.YES_NO_OPTION);
+                                    + "(Caso queira, o cliente será criado automaticamente com as informações contidas no sistema)", "O que deseja fazer?", JOptionPane.YES_NO_OPTION);
                             if (op == JOptionPane.YES_OPTION) {
                                 cliente.importardadosnovoclienteCPF(fisica.getCpf());
-                                JOptionPane.showMessageDialog(null, "Importacao dos dados realizada com sucesso!\n"
-                                        + "Um novo cliente esta gravado no sistema com as informacoes contidas no CPF da pessoa.\n"
+                                JOptionPane.showMessageDialog(null, "Importação dos dados realizada com sucesso!\n"
+                                        + "Um novo cliente está gravado no sistema com as informações contidas no CPF da pessoa.\n"
                                         + "Caso deseja conferir ou alterar os dados do cliente, faca a busca na aba \"Consulta\".\n\n"
                                         + "Codigo: " + cliente.getCodigo() + "\nNome: " + fisica.retornanomeporCPF());
                                 limpar.Limpar(PnCadastro);
@@ -1246,11 +1239,11 @@ public class InterfaceCliente extends javax.swing.JDialog {
                         }
                     }
                 } else {
-                    LbCPFValido.setText("CPF Invalido");
+                    LbCPFValido.setText("CPF Inválido");
                     LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
                 }
             } else {
-                LbCPFValido.setText("Numeros Iguais");
+                LbCPFValido.setText("Números Iguais");
                 LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
             }
         } else {
@@ -1280,7 +1273,7 @@ public class InterfaceCliente extends javax.swing.JDialog {
         if (valida.CampoTotalmentePreenchido(juridica.getCnpj())) {
             if (!juridica.CNPJnumerosiguais()) {
                 if (juridica.CNPJvalido()) {
-                    LbCNPJValido.setText("Valido");
+                    LbCNPJValido.setText("Válido");
                     LbCNPJValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png")));
                     if (juridica.CNPJexistente()) {
                         if (cliente.eclienteCNPJ(juridica.getCnpj())) {
@@ -1288,18 +1281,18 @@ public class InterfaceCliente extends javax.swing.JDialog {
                                 
                             }else
                             if (cliente.eativo()) {
-                                JOptionPane.showMessageDialog(null, "Este CNPJ pertence a um cliente ja cadastrado no sistema!\n"
-                                        + "Consulte os dados deste cliente na aba \"Consulta\" e informe o codigo ao cliente, caso ele tenha esquecido!", "CNPJ existente", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Este CNPJ pertence a um cliente já cadastrado no sistema!\n"
+                                        + "Consulte os dados deste cliente na aba \"Consulta\" e informe o código ao cliente, caso ele tenha esquecido!", "CNPJ existente", JOptionPane.INFORMATION_MESSAGE);
                                 TfNrCNPJ.setText("");
                                 TfNrCNPJKeyReleased(null);
                             } else {
                                 int op = JOptionPane.showConfirmDialog(null, "Este CNPJ pertence a " + juridica.retornanomeporCNPJ() + ". "
-                                        + "Os dados desta empresa foram excluidas do sistema!\n\n"
+                                        + "Os dados desta empresa foram excluídas do sistema!\n\n"
                                         + "Deseja recuperar os dados desta empresa?", "O que deseja fazer?", JOptionPane.YES_NO_OPTION);
                                 if (op == JOptionPane.YES_OPTION) {
                                     cliente.recuperar();
-                                    JOptionPane.showMessageDialog(null, "Recuperacao realizada com sucesso!\nAs informacoes do cliente permanecem iguais as que estavam cadastradas no momento da exclusao\n\n"
-                                            + "Codigo: " + cliente.getCodigo() + "\nNome: " + juridica.retornanomeporCNPJ(), "Recuperacao realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(null, "Recuperação realizada com sucesso!\nAs informações do cliente permanecem iguais as que estavam cadastradas no momento da exclusão\n\n"
+                                            + "Código: " + cliente.getCodigo() + "\nNome: " + juridica.retornanomeporCNPJ(), "Recuperação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
                                     limpar.Limpar(PnCadastro);
                                     limpar.Limpar(TbTelefone);
                                     limpar.Limpar(TbEmail);
@@ -1314,15 +1307,15 @@ public class InterfaceCliente extends javax.swing.JDialog {
                             }
                         } else {
                             int op = JOptionPane.showConfirmDialog(null, "Este CNPJ pertence a " + juridica.retornanomeporCNPJ() + ". "
-                                    + "Os dados desta empresa estao cadastrados no sistema!\n\n"
+                                    + "Os dados desta empresa estão cadastrados no sistema!\n\n"
                                     + "Deseja importar os dados desta empresa para criar um novo cliente?\n"
-                                    + "(Caso queira, o cliente sera criado automaticamente com as informacoes contidas no sistema)", "O que deseja fazer?", JOptionPane.YES_NO_OPTION);
+                                    + "(Caso queira, o cliente sera criado automaticamente com as informações contidas no sistema)", "O que deseja fazer?", JOptionPane.YES_NO_OPTION);
                             if (op == JOptionPane.YES_OPTION) {
                                 cliente.importardadosnovoclienteCNPJ(juridica.getCnpj());
-                                JOptionPane.showMessageDialog(null, "Importacao dos dados realizada com sucesso!\n"
-                                        + "Um novo cliente esta gravado no sistema com as informacoes contidas no CNPJ da empresa.\n"
+                                JOptionPane.showMessageDialog(null, "Importação dos dados realizada com sucesso!\n"
+                                        + "Um novo cliente está gravado no sistema com as informações contidas no CNPJ da empresa.\n"
                                         + "Caso deseja conferir ou alterar os dados do cliente, faca a busca na aba \"Consulta\".\n\n"
-                                        + "Codigo: " + cliente.getCodigo() + "\nNome: " + juridica.retornanomeporCNPJ());
+                                        + "Código: " + cliente.getCodigo() + "\nNome: " + juridica.retornanomeporCNPJ());
                                 limpar.Limpar(PnCadastro);
                                 limpar.Limpar(TbTelefone);
                                 limpar.Limpar(TbEmail);
@@ -1337,11 +1330,11 @@ public class InterfaceCliente extends javax.swing.JDialog {
                         }
                     }
                 } else {
-                    LbCNPJValido.setText("CNPJ Invalido");
+                    LbCNPJValido.setText("CNPJ Inválido");
                     LbCNPJValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
                 }
             } else {
-                LbCNPJValido.setText("Numeros Iguais");
+                LbCNPJValido.setText("Números Iguais");
                 LbCNPJValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
             }
         } else {
@@ -1372,7 +1365,7 @@ public class InterfaceCliente extends javax.swing.JDialog {
         preenche.PreencheJComboBox(CbEstado, cliente.getPessoa().getEndereco().getCidade().getEstado().buscarestadosjcombobox());
         RbPeFisica.setSelected(true);
         RbPeFisicaActionPerformed(evt);
-        TfDtCadastro.setText(datas.retornaratartual());
+        TfDtCadastro.setText(datas.retornadataatual());
         TfNrCPFKeyReleased(null);
         TfNrCNPJKeyReleased(null);
         msg.StatusNovo(LbNotificacao, "Insira os dados do novo Cliente");
@@ -1400,9 +1393,9 @@ public class InterfaceCliente extends javax.swing.JDialog {
             TabbedPaneCliente.setSelectedIndex(1);
             CbPesquisa.grabFocus();
         } else {
-            if (JOptionPane.showConfirmDialog(null, "Voce tem certeza que deseja EXCLUIR os dados deste Cliente?", "Deseja excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Você tem certeza que deseja EXCLUIR os dados deste Cliente?", "Deseja excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 cliente.setCodigo(Integer.parseInt(TfCodigo.getText()));
-                if(cliente.excluir()) msg.StatusExcluido(LbNotificacao, "Cliente excluido com sucesso!");
+                if(cliente.excluir()) msg.StatusExcluido(LbNotificacao, "Cliente excluído com sucesso!");
                 limpar.Limpar(PnCadastro);
                 limpar.Limpar(TbTelefone);
                 limpar.Limpar(TbEmail);
@@ -1436,16 +1429,16 @@ public class InterfaceCliente extends javax.swing.JDialog {
                         if(cliente.incluirclientefisico(fisica)) msg.Sucesso(LbNotificacao, "Dados do Cliente gravados com sucesso!");
                         cliente.getPessoa().getTelefone().setCodigopessoa(fisica.getPessoa().getCodigo());
                         cliente.getPessoa().getEmail().setCodigopessoa(fisica.getPessoa().getCodigo());
-                        JOptionPane.showMessageDialog(null, "Codigo: " + cliente.getCodigo() + "\n"
-                                + "Cliente: " + fisica.getNome().toUpperCase(), "Informe o Codigo", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Código: " + cliente.getCodigo() + "\n"
+                                + "Cliente: " + fisica.getNome().toUpperCase(), "Informe o Código", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         ClassePessoaJuridica juridica = new ClassePessoaJuridica();
                         enviardadospejuridica(juridica);
                         if(cliente.incluirclientejuridico(juridica)) msg.Sucesso(LbNotificacao, "Dados do Cliente gravados com sucesso!");
                         cliente.getPessoa().getTelefone().setCodigopessoa(juridica.getPessoa().getCodigo());
                         cliente.getPessoa().getEmail().setCodigopessoa(juridica.getPessoa().getCodigo());
-                        JOptionPane.showMessageDialog(null, "Codigo: " + cliente.getCodigo() + "\n"
-                                + "Cliente: " + juridica.getNomefantasia().toUpperCase(), "Informe o Codigo", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Código: " + cliente.getCodigo() + "\n"
+                                + "Cliente: " + juridica.getNomefantasia().toUpperCase(), "Informe o Código", JOptionPane.INFORMATION_MESSAGE);
 
                     }
                     for (int i = 0; i < TbTelefone.getRowCount(); i++) {
@@ -1506,7 +1499,7 @@ public class InterfaceCliente extends javax.swing.JDialog {
                         valida.validacamposCancelar(PnCadastro, PnBotoes);
                     } else {
                         JOptionPane.showMessageDialog(null, "O tipo do cliente deve ser o mesmo que cadastrado da primeira vez!\n"
-                                + "(EX: Se antes o cliente era Pessoa Fisica, voce devera mante-la como Pessoa Fisica na alteracao dos dados)", "O cliente deve ter o mesmo tipo", JOptionPane.INFORMATION_MESSAGE);
+                                + "(EX: Se antes o cliente era Pessoa Física, você deverá mante-la como Pessoa Física na alteração dos dados)", "O cliente deve ter o mesmo tipo", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }
@@ -1629,14 +1622,14 @@ public class InterfaceCliente extends javax.swing.JDialog {
         if (valida.CampoTotalmentePreenchido(fisica.getCpf())) {
             if (!fisica.CPFnumerosiguais()) {
                 if (fisica.CPFvalido()) {
-                    LbCPFValido.setText("Valido");
+                    LbCPFValido.setText("Válido");
                     LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png")));
                 } else {
-                    LbCPFValido.setText("CPF Invalido");
+                    LbCPFValido.setText("CPF Inválido");
                     LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
                 }
             } else {
-                LbCPFValido.setText("Numeros Iguais");
+                LbCPFValido.setText("Números Iguais");
                 LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
             }
         } else {
@@ -1652,14 +1645,14 @@ public class InterfaceCliente extends javax.swing.JDialog {
         if (valida.CampoTotalmentePreenchido(juridica.getCnpj())) {
             if (!juridica.CNPJnumerosiguais()) {
                 if (juridica.CNPJvalido()) {
-                    LbCNPJValido.setText("Valido");
+                    LbCNPJValido.setText("Válido");
                     LbCNPJValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png")));
                 } else {
-                    LbCNPJValido.setText("CNPJ Invalido");
+                    LbCNPJValido.setText("CNPJ Inválido");
                     LbCNPJValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
                 }
             } else {
-                LbCNPJValido.setText("Numeros Iguais");
+                LbCNPJValido.setText("Números Iguais");
                 LbCNPJValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
             }
         } else {
@@ -1670,7 +1663,7 @@ public class InterfaceCliente extends javax.swing.JDialog {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if(PnBotoes.isVisible() && BtGravar.isEnabled()){
-            if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(null, "Você está prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou será esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 dispose();
             }
         }else{
@@ -1799,14 +1792,14 @@ public class InterfaceCliente extends javax.swing.JDialog {
         if (RbPeFisica.isSelected()) {
             if (!TfNomeFisica.getText().equals("")) {
             } else {
-                msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Nome da Pessoa Fisica e obrigatorio");
+                msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Nome da Pessoa Física e obrigatório");
                 TfNomeFisica.grabFocus();
                 return false;
             }
             
-            if (LbCPFValido.getText().equals("Valido")) {
+            if (LbCPFValido.getText().equals("Válido")) {
             } else {
-                msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite um CPF valido");
+                msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite um CPF válido");
                 TfNrCPF.grabFocus();
                 return false;
             }
@@ -1820,14 +1813,14 @@ public class InterfaceCliente extends javax.swing.JDialog {
         if (RbPeJuridica.isSelected()) {
             if (!TfNomeFantasia.getText().equals("")) {
             } else {
-                msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Nome Fantasia e obrigatorio");
+                msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Nome Fantasia e obrigatório");
                 TfNomeFantasia.grabFocus();
                 return false;
             }
             
             if (LbCNPJValido.getText().equals("Valido")) {
             } else {
-                msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite um CNPJ valido!");
+                msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite um CNPJ válido!");
                 TfNrCNPJ.grabFocus();
                 return false;
             }
@@ -1838,7 +1831,7 @@ public class InterfaceCliente extends javax.swing.JDialog {
             return false;
         }
         if (TfNumero.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Numero da residencia do cliente!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Número da residencia do cliente!");
             TfNumero.grabFocus();
             return false;
         }

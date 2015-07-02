@@ -12,7 +12,7 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceCondicaoPagto extends javax.swing.JDialog {
 
@@ -84,7 +84,7 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
 
         TfCodigo.setEditable(false);
 
-        jLabel2.setText("Descrição da condição de pagamento*");
+        jLabel2.setText("Descrição da condição de pagamento");
 
         TfCondicaoPgto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -131,9 +131,9 @@ public class InterfaceCondicaoPagto extends javax.swing.JDialog {
             TbConsulta.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        jLabel3.setText("Número de parcelas*");
+        jLabel3.setText("Número de parcelas");
 
-        jLabel4.setText("Intervalo de dias entre as parcelas*");
+        jLabel4.setText("Intervalo de dias entre as parcelas");
 
         jLabel5.setText("Entrada:");
 

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.lojadafatima.Financeiro;
 
 import br.com.lojadafatima.ClassesFerramentas.GeraCodigos;
@@ -13,7 +7,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class ClasseCondicaoPagamento {
     

@@ -3,16 +3,13 @@ package br.com.lojadafatima.CompraVendaOperacoes;
 import br.com.lojadafatima.ClassesFerramentas.GeraCodigos;
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.Financeiro.ClasseCondicaoPagamento;
-import br.com.lojadafatima.Financeiro.ClasseMulta;
 import br.com.lojadafatima.Pessoa.ClasseFuncionario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class ClasseCompraVenda {
 

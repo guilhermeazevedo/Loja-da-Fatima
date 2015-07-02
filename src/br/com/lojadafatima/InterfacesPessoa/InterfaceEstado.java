@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesPessoa;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
@@ -12,7 +7,6 @@ import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.DadosPessoa.ClasseEstado;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
-import javax.management.Notification;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -20,7 +14,7 @@ import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceEstado extends javax.swing.JDialog {
 

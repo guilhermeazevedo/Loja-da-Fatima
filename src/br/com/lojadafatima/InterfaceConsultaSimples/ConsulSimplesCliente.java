@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.lojadafatima.InterfaceConsultaSimples;
 
+import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.ClassesFerramentas.PermiteNumerosPontoBarra;
@@ -16,13 +11,14 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class ConsulSimplesCliente extends javax.swing.JDialog {
 
     private java.awt.Frame primeiratela;
     private ClasseCliente cliente = new ClasseCliente();
     Preenche preenche = new Preenche();
+    MensagensUsuario msg = new MensagensUsuario();
     
     public ConsulSimplesCliente(java.awt.Frame telaorigem, boolean modal, ClasseCliente cli) {
         super(telaorigem, modal);
@@ -53,11 +49,13 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
         BtPesquisa = new javax.swing.JButton();
         BtSelecionar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        LbNotificacao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Rápida de Cliente - Software Loja da Fátima");
 
-        CbPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Geral", "Codigo", "Nome/Nome Fantasia", "CPF/CNPJ" }));
+        CbPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Geral", "Código", "Nome/Nome Fantasia", "CPF/CNPJ" }));
         CbPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CbPesquisaActionPerformed(evt);
@@ -116,28 +114,43 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
             }
         });
 
+        LbNotificacao.setText(" ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(LbNotificacao)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LbNotificacao)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(CbPesquisa, 0, 188, Short.MAX_VALUE)
-                                .addComponent(CbPesquisa2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(TfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(BtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel19)
-                        .addComponent(jScrollPane1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CbPesquisa, 0, 188, Short.MAX_VALUE)
+                            .addComponent(CbPesquisa2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel19)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -155,10 +168,12 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
                     .addComponent(BtSelecionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,7 +186,9 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,8 +202,8 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
                 TfPesquisa.setEditable(false);
                 CbPesquisa2.removeAllItems();
                 CbPesquisa2.addItem("");
-                CbPesquisa2.addItem("Pessoa Fisica");
-                CbPesquisa2.addItem("Pessoa Juridica");
+                CbPesquisa2.addItem("Pessoa Física");
+                CbPesquisa2.addItem("Pessoa Jurídica");
                 TfPesquisa.setDocument(new NaoPermiteAspasSimples());
                 break;
             }
@@ -203,8 +220,8 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
                 TfPesquisa.setEditable(true);
                 CbPesquisa2.removeAllItems();
                 CbPesquisa2.addItem("");
-                CbPesquisa2.addItem("Pessoa Fisica");
-                CbPesquisa2.addItem("Pessoa Juridica");
+                CbPesquisa2.addItem("Pessoa Física");
+                CbPesquisa2.addItem("Pessoa Jurídica");
                 TfPesquisa.setDocument(new NaoPermiteAspasSimples());
                 break;
             }
@@ -249,7 +266,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
             }
             case 1: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o código do cliente que deseja consultar!", "Digite o código", JOptionPane.INFORMATION_MESSAGE);
+                    msg.CampoNaoPreenchido(LbNotificacao, "Digite o código do cliente que deseja consultar!");
                     TfPesquisa.grabFocus();
                 } else {
                     getCliente().setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -261,7 +278,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
                 switch (CbPesquisa2.getSelectedIndex()) {
                     case 0: {
                         if (TfPesquisa.getText().equals("")) {
-                            JOptionPane.showMessageDialog(null, "Digite o nome/nome fantasia do cliente que deseja consultar!", "Digite o nome", JOptionPane.INFORMATION_MESSAGE);
+                            msg.CampoNaoPreenchido(LbNotificacao, "Digite o nome/nome fantasia do cliente que deseja consultar!");
                             TfPesquisa.grabFocus();
                         } else {
                             preenche.PreencherJtable(TbPesquisa, getCliente().consultadescricaogeral(TfPesquisa.getText().toUpperCase()));
@@ -270,7 +287,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
                     }
                     case 1: {
                         if (TfPesquisa.getText().equals("")) {
-                            JOptionPane.showMessageDialog(null, "Digite o nome do cliente que deseja consultar!", "Digite o nome", JOptionPane.INFORMATION_MESSAGE);
+                            msg.CampoNaoPreenchido(LbNotificacao, "Digite o nome do cliente que deseja consultar!");
                             TfPesquisa.grabFocus();
                         } else {
                             preenche.PreencherJtable(TbPesquisa, getCliente().consultadescricaofisica(TfPesquisa.getText().toUpperCase()));
@@ -279,7 +296,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
                     }
                     case 2: {
                         if (TfPesquisa.getText().equals("")) {
-                            JOptionPane.showMessageDialog(null, "Digite o nome fantasia do cliente que deseja consultar!", "Digite o nome", JOptionPane.INFORMATION_MESSAGE);
+                            msg.CampoNaoPreenchido(LbNotificacao, "Digite o nome fantasia do cliente que deseja consultar!");
                             TfPesquisa.grabFocus();
                         } else {
                             preenche.PreencherJtable(TbPesquisa, getCliente().consultadescricaojuridica(TfPesquisa.getText().toUpperCase()));
@@ -293,7 +310,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
                 switch (CbPesquisa2.getSelectedIndex()) {
                     case 0: {
                         if (TfPesquisa.getText().equals("")) {
-                            JOptionPane.showMessageDialog(null, "Digite o CPF/CNPJ do cliente que deseja consultar!", "Digite o CPF/CNPJ", JOptionPane.INFORMATION_MESSAGE);
+                            msg.CampoNaoPreenchido(LbNotificacao, "Digite o CPF/CNPJ do cliente que deseja consultar!");
                             TfPesquisa.grabFocus();
                         } else {
                             preenche.PreencherJtable(TbPesquisa, getCliente().consultaCPFouCNPJ(TfPesquisa.getText()));
@@ -302,7 +319,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
                     }
                     case 1: {
                         if (TfPesquisa.getText().equals("")) {
-                            JOptionPane.showMessageDialog(null, "Digite o CPF do cliente que deseja consultar!", "Digite o CPF", JOptionPane.INFORMATION_MESSAGE);
+                            msg.CampoNaoPreenchido(LbNotificacao, "Digite o CPF do cliente que deseja consultar!");
                             TfPesquisa.grabFocus();
                         } else {
                             preenche.PreencherJtable(TbPesquisa, getCliente().consultaCPF(TfPesquisa.getText()));
@@ -311,7 +328,7 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
                     }
                     case 2: {
                         if (TfPesquisa.getText().equals("")) {
-                            JOptionPane.showMessageDialog(null, "Digite o CNPJ do cliente que deseja consultar!", "Digite o CNPJ", JOptionPane.INFORMATION_MESSAGE);
+                            msg.CampoNaoPreenchido(LbNotificacao, "Digite o CNPJ do cliente que deseja consultar!");
                             TfPesquisa.grabFocus();
                         } else {
                             preenche.PreencherJtable(TbPesquisa, getCliente().consultaCNPJ(TfPesquisa.getText()));
@@ -349,11 +366,13 @@ public class ConsulSimplesCliente extends javax.swing.JDialog {
     private javax.swing.JButton BtSelecionar;
     private javax.swing.JComboBox CbPesquisa;
     private javax.swing.JComboBox CbPesquisa2;
+    private javax.swing.JLabel LbNotificacao;
     private javax.swing.JTable TbPesquisa;
     private javax.swing.JTextField TfPesquisa;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesProduto;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
@@ -20,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceTipoProduto extends javax.swing.JDialog {
 
@@ -558,7 +553,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
             }
             msg.StatusEditar(LbNotificacoes, "Editando dados do Tipo de Produto...");
         } else {
-            msg.CampoNaoPreenchido(LbNotificacoes, "Selecione um Tipo de Produto na tabela para realizar alteracoes!");
+            msg.CampoNaoPreenchido(LbNotificacoes, "Selecione um Tipo de Produto na tabela para realizar alterações!");
         }
     }//GEN-LAST:event_BtAlterarActionPerformed
 
@@ -588,7 +583,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
             tipoproduto.setCodigo(Integer.parseInt(TfCodigo.getText()));
             if (!tipoproduto.tipoprodutocomproduto()) {
                 if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja EXCLUIR os dados deste tipo de produto?", "Deseja excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    if (tipoproduto.excluir()) msg.StatusExcluido(LbNotificacoes, "Dados do Tipo de Produto excluidos com sucesso!");
+                    if (tipoproduto.excluir()) msg.StatusExcluido(LbNotificacoes, "Dados do Tipo de Produto excluídos com sucesso!");
                     preenche.PreencherJtable(TbConsulta, tipoproduto.buscartiposproduto());
                     valida.validacamposCancelar(jPanel1, PnBotoes);
                     TbConsulta.setEnabled(true);
@@ -597,11 +592,11 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
                     limpa.Limpar(TbCarcTipoProduto);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Nao e possivel excluir os dados deste tipo de produto.\n"
-                        + "Ja existem produtos cadastrados no sistema utilizando este tipo de produto!", "Operacao interrompida", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Nao é possivel excluir os dados deste tipo de produto.\n"
+                        + "Já existem produtos cadastrados no sistema utilizando este tipo de produto!", "Operação interrompida", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-            msg.CampoNaoPreenchido(LbNotificacoes, "Selecione um Tipo de Produto na tabela para realizar exclusoes!");
+            msg.CampoNaoPreenchido(LbNotificacoes, "Selecione um Tipo de Produto na tabela para realizar exclusões!");
         }
     }//GEN-LAST:event_BtExcluirActionPerformed
 
@@ -634,7 +629,7 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if(PnBotoes.isVisible() && BtGravar.isEnabled()){
-            if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(null, "Você esta prestes a fechar esta janela.\nAo fechar esta janela tudo que você digitou será esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 dispose();
             }
         }else{

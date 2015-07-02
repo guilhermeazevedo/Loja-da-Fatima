@@ -329,7 +329,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="BtCadCondicaoPgto">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cadastrar Condicao de Pagamento"/>
+            <Property name="text" type="java.lang.String" value="Cadastrar Condi&#xe7;&#xe3;o de Pagamento"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtCadCondicaoPgtoActionPerformed"/>
@@ -400,7 +400,7 @@
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel18">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Codigo da Nota do Fornecedor"/>
+            <Property name="text" type="java.lang.String" value="C&#xf3;digo da Nota do Fornecedor"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TfDescNotaCompra">
@@ -681,7 +681,7 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="CbPromocao">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Promocao"/>
+                    <Property name="text" type="java.lang.String" value="Promo&#xe7;&#xe3;o"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="BtIncluirProdutoCompra">
@@ -798,8 +798,8 @@
             <Container class="javax.swing.JPanel" name="jPanel4">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Servicos">
-                    <Property name="tabTitle" type="java.lang.String" value="Servicos"/>
+                  <JTabbedPaneConstraints tabName="Servi&#xe7;os">
+                    <Property name="tabTitle" type="java.lang.String" value="Servi&#xe7;os"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -947,7 +947,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel17">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="C&#xf3;d. Servico"/>
+                    <Property name="text" type="java.lang.String" value="C&#xf3;d. Servi&#xe7;o"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="TfCodServico">
@@ -972,12 +972,12 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel19">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Servico"/>
+                    <Property name="text" type="java.lang.String" value="Servi&#xe7;o"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="BtCadServico">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cadastrar Servico"/>
+                    <Property name="text" type="java.lang.String" value="Cadastrar Servi&#xe7;o"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtCadServicoActionPerformed"/>
@@ -999,7 +999,7 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="CbPromocaoServ">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Promocao"/>
+                    <Property name="text" type="java.lang.String" value="Promo&#xe7;&#xe3;o"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="BtIncluirServicoCompra">
@@ -1007,7 +1007,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/br/com/lojadafatima/Icones/adicionar.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Incluir Servico na Compra"/>
+                    <Property name="text" type="java.lang.String" value="Incluir Servi&#xe7;o na Compra"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtIncluirServicoCompraActionPerformed"/>
@@ -1018,7 +1018,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/br/com/lojadafatima/Icones/deletar.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Remover Servico"/>
+                    <Property name="text" type="java.lang.String" value="Remover Servi&#xe7;o"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtRemoverServicoCompraActionPerformed"/>
@@ -1056,7 +1056,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel23">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Valor Total do Servico"/>
+                    <Property name="text" type="java.lang.String" value="Valor Total do Servi&#xe7;o"/>
                   </Properties>
                 </Component>
                 <Component class="JNumberField.JNumberField" name="TfValorTotalCompraServ">
@@ -1081,12 +1081,12 @@
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="8" rowCount="0">
                             <Column editable="false" title="C&#xf3;digo Compra" type="java.lang.Object"/>
-                            <Column editable="false" title="C&#xf3;d. Servico" type="java.lang.Object"/>
-                            <Column editable="false" title="Servico" type="java.lang.Object"/>
+                            <Column editable="false" title="C&#xf3;d. Servi&#xe7;o" type="java.lang.Object"/>
+                            <Column editable="false" title="Servi&#xe7;o" type="java.lang.Object"/>
                             <Column editable="false" title="Quantidade" type="java.lang.Object"/>
                             <Column editable="false" title="Valor Unit&#xe1;rio" type="java.lang.Object"/>
                             <Column editable="false" title="Desconto" type="java.lang.Object"/>
-                            <Column editable="false" title="Valor Total do Servico" type="java.lang.Object"/>
+                            <Column editable="false" title="Valor Total do Servi&#xe7;o" type="java.lang.Object"/>
                             <Column editable="false" title="Promo&#xe7;&#xe3;o" type="java.lang.Object"/>
                           </Table>
                         </Property>

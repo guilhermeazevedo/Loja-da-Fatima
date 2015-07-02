@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.ClassesFerramentas;
 
 import java.sql.ResultSet;
@@ -15,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class Preenche {
 
@@ -37,7 +32,7 @@ public class Preenche {
 
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar no JTable");
+            JOptionPane.showMessageDialog(null, "Erro ao listar na tabela. Verifique com o desenvolvedor", "ERRO", JOptionPane.ERROR_MESSAGE);
         } catch (NullPointerException ex){
             modelo.setNumRows(0);
         }
@@ -64,7 +59,7 @@ public class Preenche {
             if (!resultado.first()) {
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar no JTable");
+            JOptionPane.showMessageDialog(null, "Erro ao listar na tabela. Verifique com o desenvolvedor", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -78,7 +73,7 @@ public class Preenche {
                 tabela.getColumnModel().getColumn(x).setPreferredWidth(valores[x]);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Verifique os parametros passados!");
+            JOptionPane.showMessageDialog(null, "Erro ao espaçar as colunas da tabela. Verifique com o desenvolvedor", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -97,7 +92,7 @@ public class Preenche {
                 }
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERRO: " + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao preencher as informações da ComboBox. Verifique com o desenvolvedor\n\nERRO: " + ex);
         }
     }
 
@@ -112,7 +107,7 @@ public class Preenche {
                 String aux = (String) table.getValueAt(conta, 1);
                 String aux2 = (String) table.getValueAt(conta, 2);
                 if (field.getText().equals(aux) && combo.getSelectedItem().equals(aux2)) {
-                    JOptionPane.showMessageDialog(null, "Foram encontrados valores identicos na tabela");
+                    JOptionPane.showMessageDialog(null, "Você já adicionou essas informações na tabela!", "Você já incluiu essas informações", JOptionPane.OK_OPTION);
                     incluir = false;
                 }
                 conta = conta + 1;
@@ -143,7 +138,8 @@ public class Preenche {
                 }
             }
             if (!excluiu == true) {
-                JOptionPane.showMessageDialog(null, "Nao ha linhas selecionadas para exclusao");
+                JOptionPane.showMessageDialog(null, "Não existem linhas selecionadas para remossão!\n\n"
+                                                  + "Para remover, selecione as linhas que deseja antes de clicar no botão Remover", "Não existem linhas para remossão", JOptionPane.OK_OPTION);
             }
         }
     }

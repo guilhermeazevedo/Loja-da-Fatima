@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesOperacoes;
 
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
@@ -11,7 +6,7 @@ import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceRealizarOperacoes extends javax.swing.JDialog {
 
@@ -49,6 +44,7 @@ public class InterfaceRealizarOperacoes extends javax.swing.JDialog {
 
         jLabel1.setText("Selecione a Operação que deseja realizar:");
 
+        BtAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
         BtAbrir.setText("Abrir");
         BtAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

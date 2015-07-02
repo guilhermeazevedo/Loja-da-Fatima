@@ -272,7 +272,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Aplicar comiss&#xe3;o com base nas vendas realizadas no per&#xed;do do dia:"/>
+                <Property name="text" type="java.lang.String" value="Aplicar comiss&#xe3;o com base nas vendas realizadas no per&#xed;odo do dia:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
@@ -382,12 +382,12 @@
             </Container>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Funcion&#xe1;rios cadatrados:"/>
+                <Property name="text" type="java.lang.String" value="Funcion&#xe1;rios cadastrados:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Salarios ja pagos:"/>
+                <Property name="text" type="java.lang.String" value="Sal&#xe1;rios j&#xe1; pagos:"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane3">
@@ -403,7 +403,7 @@
                       <Table columnCount="3" rowCount="0">
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
                         <Column editable="false" title="Valor Pago ao Funcion&#xe1;rio (R$)" type="java.lang.Object"/>
-                        <Column editable="false" title="Data de Realizacao do Pagamento" type="java.lang.Object"/>
+                        <Column editable="false" title="Data de Realiza&#xe7;&#xe3;o do Pagamento" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

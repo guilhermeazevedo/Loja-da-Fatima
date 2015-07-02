@@ -1,23 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.lojadafatima.InterfacesFinanceiro;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
+import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.Financeiro.ClasseMulta;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
-import java.awt.Frame;
 import java.math.BigDecimal;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceMultas extends javax.swing.JDialog {
 
@@ -26,6 +19,7 @@ public class InterfaceMultas extends javax.swing.JDialog {
     ClasseMulta multa = new ClasseMulta();
     private java.awt.Frame primeiratela;
     private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
+    MensagensUsuario msg = new MensagensUsuario();
     
     public InterfaceMultas(java.awt.Frame telaorigem, boolean modal, ClasseTelasUsuario usuario) {
         super (telaorigem, modal);
@@ -63,6 +57,8 @@ public class InterfaceMultas extends javax.swing.JDialog {
         BtCancelar = new javax.swing.JButton();
         TfPercMulta = new JNumberField.JNumberField(2);
         ;
+        jPanel2 = new javax.swing.JPanel();
+        LbNotificacao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -80,6 +76,7 @@ public class InterfaceMultas extends javax.swing.JDialog {
 
         jLabel6.setText("%   sobre o valor da conta.");
 
+        BtAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/editar.png"))); // NOI18N
         BtAlterar.setText("Alterar");
         BtAlterar.setName("Alterar"); // NOI18N
         BtAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +85,7 @@ public class InterfaceMultas extends javax.swing.JDialog {
             }
         });
 
+        BtGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/salvar.png"))); // NOI18N
         BtGravar.setText("Gravar");
         BtGravar.setName("Gravar"); // NOI18N
         BtGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +94,7 @@ public class InterfaceMultas extends javax.swing.JDialog {
             }
         });
 
+        BtCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/cancelar.png"))); // NOI18N
         BtCancelar.setText("Cancelar");
         BtCancelar.setName("Cancelar"); // NOI18N
         BtCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +103,21 @@ public class InterfaceMultas extends javax.swing.JDialog {
             }
         });
 
+        LbNotificacao.setText(" ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(LbNotificacao)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LbNotificacao)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -111,31 +125,35 @@ public class InterfaceMultas extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SpDiasAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SpDiasAcresc, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfPercMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SpDiasAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SpDiasAcresc, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TfPercMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(BtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,12 +173,14 @@ public class InterfaceMultas extends javax.swing.JDialog {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(TfPercMulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BtAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(BtAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BtGravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(BtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,7 +191,9 @@ public class InterfaceMultas extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -205,6 +227,7 @@ public class InterfaceMultas extends javax.swing.JDialog {
     private javax.swing.JButton BtAlterar;
     private javax.swing.JButton BtCancelar;
     private javax.swing.JButton BtGravar;
+    private javax.swing.JLabel LbNotificacao;
     private javax.swing.JSpinner SpDiasAcresc;
     private javax.swing.JSpinner SpDiasAlerta;
     private JNumberField.JNumberField TfPercMulta;
@@ -215,6 +238,7 @@ public class InterfaceMultas extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
@@ -228,24 +252,19 @@ public class InterfaceMultas extends javax.swing.JDialog {
     
     public boolean camposobrigatoriospreenchidos(){
         if(Integer.parseInt(SpDiasAlerta.getValue().toString()) < 0){
-            JOptionPane.showMessageDialog(null, "Nao é permitido um número negativo de dias!", "Campos obrigatórios",JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Não é permitido um número negativo de dias!");
             SpDiasAlerta.setValue(0);
             SpDiasAlerta.grabFocus();
             return false;
         }
         if(Integer.parseInt(SpDiasAcresc.getValue().toString()) < 0){
-            JOptionPane.showMessageDialog(null, "Nao é permitido um número negativo de dias!", "Campos obrigatórios",JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoNaoPreenchido(LbNotificacao, "Não é permitido um número negativo de dias!");
             SpDiasAcresc.setValue(0);
             SpDiasAcresc.grabFocus();
             return false;
         }
         if(Integer.parseInt(SpDiasAlerta.getValue().toString()) > Integer.parseInt(SpDiasAcresc.getValue().toString())){
-            JOptionPane.showMessageDialog(null, "O número de dias para o aviso ao usuário deve ser\nmenor que o dia de acréscimo do valor!", "Campos obrigatórios",JOptionPane.INFORMATION_MESSAGE);
-            return false;
-        }
-        if(TfPercMulta.getValue() == BigDecimal.valueOf(0)){
-            JOptionPane.showMessageDialog(null, "Digite a porcentagem corretamente!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
-            TfPercMulta.grabFocus();
+            msg.CampoNaoPreenchido(LbNotificacao, "O número de dias para o aviso ao usuário deve ser\nmenor que o dia de acréscimo do valor!");
             return false;
         }
         return true;

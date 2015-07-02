@@ -1,6 +1,5 @@
 package br.com.lojadafatima.ClassesFerramentas;
 
-import com.lowagie.text.pdf.PdfName;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;

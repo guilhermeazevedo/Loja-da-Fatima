@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesOperacoes;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
@@ -17,7 +12,7 @@ import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceOperacoes extends javax.swing.JDialog {
 
@@ -88,11 +83,11 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Codigo");
+        jLabel1.setText("Código");
 
         TfCodigo.setEnabled(false);
 
-        jLabel2.setText("Operacao");
+        jLabel2.setText("Operação");
 
         TfOperacao.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -112,7 +107,12 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
         RbEntEstoque.setText("Entrada no estoque");
 
         buttonGroup1.add(RbSaiEstoque);
-        RbSaiEstoque.setText("Saida no estoque");
+        RbSaiEstoque.setText("Saída no estoque");
+        RbSaiEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RbSaiEstoqueActionPerformed(evt);
+            }
+        });
 
         ChkFinanceiro.setText("Modifica valores financeiros");
         ChkFinanceiro.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +126,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
         RbEntFinanceiro.setText("Entrada");
 
         buttonGroup2.add(RbSaiFinanceiro);
-        RbSaiFinanceiro.setText("Saida");
+        RbSaiFinanceiro.setText("Saída");
 
         BtGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
         BtGravar.setText("Gravar");
@@ -144,18 +144,18 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setText("Operacoes cadastradas:");
+        jLabel3.setText("Operações cadastradas:");
 
         TbOperacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Operacao"
+                "Código", "Operação"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -309,9 +309,9 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
         if (!TfOperacao.getText().equals("")) {
             if (!ChkEstoque.isSelected() && !ChkFinanceiro.isSelected()) {
-                JOptionPane.showMessageDialog(null, "A operacao deve fazer alguma modificacao no sistema!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "A operação deve fazer alguma modificação no sistema!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                if (JOptionPane.showConfirmDialog(null, "Deseja realmente gravar os dados desta operacao?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(null, "Deseja realmente gravar os dados desta operação?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     enviardados();
                     if (TfCodigo.getText().equals("")) {
                         if(operacao.incluir()){
@@ -330,7 +330,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
                 }
             }
         } else {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite um \"nome\" para a operacao!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite um \"nome\" para a operação!");
             TfOperacao.grabFocus();
         }
     }//GEN-LAST:event_BtGravarActionPerformed
@@ -366,6 +366,10 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
             msg.StatusEditar(LbNotificacao, "Editando informações...");
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void RbSaiEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RbSaiEstoqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RbSaiEstoqueActionPerformed
 
     
 

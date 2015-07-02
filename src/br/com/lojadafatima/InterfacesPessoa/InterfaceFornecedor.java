@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesPessoa;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
@@ -15,21 +10,16 @@ import br.com.lojadafatima.ClassesFerramentas.PermiteNumerosPontoBarra;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Pessoa.ClasseFornecedor;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
-import java.awt.Color;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceFornecedor extends javax.swing.JDialog {
 
@@ -190,7 +180,7 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
             }
         });
 
-        jLabel8.setText("Razao Social");
+        jLabel8.setText("Razão Social");
 
         TfRazaoSocial.setName("DS_RAZAO_SOCIAL"); // NOI18N
         TfRazaoSocial.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -354,7 +344,7 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
             }
         });
 
-        jLabel11.setText("Numero*");
+        jLabel11.setText("Número*");
 
         jLabel13.setText("CEP*");
 
@@ -812,7 +802,7 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
         if (valida.CampoTotalmentePreenchido(fornecedor.getPessoajur().getCnpj())) {
             if (!fornecedor.getPessoajur().CNPJnumerosiguais()) {
                 if (fornecedor.getPessoajur().CNPJvalido()) {
-                    LbCNPJValido.setText("Valido");
+                    LbCNPJValido.setText("Válido");
                     LbCNPJValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png")));
                     if(fornecedor.getPessoajur().CNPJexistente()){
                         if(fornecedor.efornecedor()){
@@ -820,19 +810,19 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
                                 
                             }else
                             if(fornecedor.efornecedorativo()){
-                                JOptionPane.showMessageDialog(null, "Este CNPJ pertence a um fornecedor ja cadastrado no sistema!\n"
-                                        + "Consulte os dados deste fornecedor na aba \"Consulta\" e informe o codigo ao fornecedor, caso ele tenha esquecido!", "CNPJ existente", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Este CNPJ pertence a um fornecedor já cadastrado no sistema!\n"
+                                        + "Consulte os dados deste fornecedor na aba \"Consulta\" e informe o código ao fornecedor, caso ele tenha esquecido!", "CNPJ existente", JOptionPane.INFORMATION_MESSAGE);
                                 TfNrCNPJ.setText("");
                                 TfNrCNPJKeyReleased(null);
                             } else {
                                 int op = JOptionPane.showConfirmDialog(null, "Este CNPJ pertence a " + fornecedor.getPessoajur().retornanomeporCNPJ() + ". "
-                                        + "Os dados desta empresa foram excluidas do sistema!\n\n"
+                                        + "Os dados desta empresa foram excluídas do sistema!\n\n"
                                         + "Deseja recuperar os dados desta empresa?", "O que deseja fazer?", JOptionPane.YES_NO_OPTION);
                                 if (op == JOptionPane.YES_OPTION){
                                     fornecedor.getPessoajur().getPessoa().setCodigo(fornecedor.retornacodigopessoafornecedor());
                                     fornecedor.getPessoajur().getPessoa().recuperar();
-                                    JOptionPane.showMessageDialog(null, "Recuperacao realizada com sucesso!\nAs informacoes do fornecedor permanecem iguais as que estavam cadastradas no momento da exclusao\n\n"
-                                            + "Codigo: " + fornecedor.getCodigo() + "\nNome: " + fornecedor.getPessoajur().retornanomeporCNPJ(), "Recuperacao realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(null, "Recuperação realizada com sucesso!\nAs informações do fornecedor permanecem iguais as que estavam cadastradas no momento da exclusão\n\n"
+                                            + "Código: " + fornecedor.getCodigo() + "\nNome: " + fornecedor.getPessoajur().retornanomeporCNPJ(), "Recuperação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
                                     limpar.Limpar(PnCadastro);
                                     limpar.Limpar(TbTelefone);
                                     limpar.Limpar(TbEmail);
@@ -846,15 +836,15 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
                             }
                         } else {
                             int op = JOptionPane.showConfirmDialog(null, "Este CNPJ pertence a " + fornecedor.getPessoajur().retornanomeporCNPJ() + ". "
-                                    + "Os dados desta empresa estao cadastrados no sistema!\n\n"
+                                    + "Os dados desta empresa estão cadastrados no sistema!\n\n"
                                     + "Deseja importar os dados desta empresa para criar um novo fornecedor?\n"
-                                    + "(Caso queira, o fornecedor sera criado automaticamente com as informacoes contidas no sistema)", "O que deseja fazer?", JOptionPane.YES_NO_OPTION);
+                                    + "(Caso queira, o fornecedor será criado automaticamente com as informações contidas no sistema)", "O que deseja fazer?", JOptionPane.YES_NO_OPTION);
                             if (op == JOptionPane.YES_OPTION){
                                 fornecedor.importardadosnovofornecedor();
-                                JOptionPane.showMessageDialog(null, "Importacao dos dados realizada com sucesso!\n"
-                                        + "Um novo fornecedor esta gravado no sistema com as informacoes contidas no CNPJ da empresa.\n"
-                                        + "Caso deseja conferir ou alterar os dados do fornecedor, faca a busca na aba \"Consulta\".\n\n"
-                                        + "Codigo: " + fornecedor.getCodigo() + "\nNome: " + fornecedor.getPessoajur().retornanomeporCNPJ());
+                                JOptionPane.showMessageDialog(null, "Importação dos dados realizada com sucesso!\n"
+                                        + "Um novo fornecedor está gravado no sistema com as informações contidas no CNPJ da empresa.\n"
+                                        + "Caso deseja conferir ou alterar os dados do fornecedor, faça a busca na aba \"Consulta\".\n\n"
+                                        + "Código: " + fornecedor.getCodigo() + "\nNome: " + fornecedor.getPessoajur().retornanomeporCNPJ());
                                 limpar.Limpar(PnCadastro);
                                 limpar.Limpar(TbTelefone);
                                 limpar.Limpar(TbEmail);
@@ -868,11 +858,11 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
                         }
                     }
                 } else {
-                    LbCNPJValido.setText("CNPJ Invalido");
+                    LbCNPJValido.setText("CNPJ Inválido");
                     LbCNPJValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
                 }
             } else {
-                LbCNPJValido.setText("Numeros Iguais");
+                LbCNPJValido.setText("Números Iguais");
                 LbCNPJValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
             }
         } else {
@@ -934,7 +924,7 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
         limpar.Limpar(TbEmail);
         preenche.PreencheJComboBox(CbEstado, fornecedor.getPessoajur().getPessoa().getEndereco().getCidade().getEstado().buscarestadosjcombobox());
         TfNrCNPJKeyReleased(null);
-        TfDtCadastro.setText(datas.retornaratartual());
+        TfDtCadastro.setText(datas.retornadataatual());
         msg.StatusNovo(LbNotificacao, "Insira os dados do novo Fornecedor");
     }//GEN-LAST:event_BtIncluirActionPerformed
 
@@ -955,9 +945,9 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
             TabbedPaneFornecedor.setSelectedIndex(1);
             CbPesquisa.grabFocus();
         } else {
-            if (JOptionPane.showConfirmDialog(null, "Voce tem certeza que deseja EXCLUIR os dados deste Fornecedor?", "Deseja excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Você tem certeza que deseja EXCLUIR os dados deste Fornecedor?", "Deseja excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 fornecedor.setCodigo(Integer.parseInt(TfCodigo.getText()));
-                if(fornecedor.excluir()) msg.StatusExcluido(LbNotificacao, "Fornecedor excluido com sucesso!");
+                if(fornecedor.excluir()) msg.StatusExcluido(LbNotificacao, "Fornecedor excluído com sucesso!");
                 limpar.Limpar(PnCadastro);
                 limpar.Limpar(TbTelefone);
                 limpar.Limpar(TbEmail);
@@ -1011,8 +1001,8 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
                     if(fornecedor.incluir()) msg.Sucesso(LbNotificacao, "Dados do Fornecedor gravados com sucesso!");
                     fornecedor.getPessoajur().getPessoa().getTelefone().setCodigopessoa(fornecedor.getPessoajur().getPessoa().getCodigo());
                     fornecedor.getPessoajur().getPessoa().getEmail().setCodigopessoa(fornecedor.getPessoajur().getPessoa().getCodigo());
-                    JOptionPane.showMessageDialog(null, "Codigo: " + fornecedor.getCodigo() + "\n"
-                            + "Fornecedor: " + fornecedor.getPessoajur().getNomefantasia().toUpperCase(), "Informe o Codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Código: " + fornecedor.getCodigo() + "\n"
+                            + "Fornecedor: " + fornecedor.getPessoajur().getNomefantasia().toUpperCase(), "Informe o Código", JOptionPane.INFORMATION_MESSAGE);
                     for (int i = 0; i < TbTelefone.getRowCount(); i++) {
                         fornecedor.getPessoajur().getPessoa().getTelefone().setCodigo(i + 1);
                         fornecedor.getPessoajur().getPessoa().getTelefone().setNrtelefone(TbTelefone.getValueAt(i, 1).toString());
@@ -1080,7 +1070,7 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
             }
             case 1: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o Codigo do fornecedor que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o Código do fornecedor que deseja consultar!", "Digite o código", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     fornecedor.setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -1173,14 +1163,14 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
         if (valida.CampoTotalmentePreenchido(fornecedor.getPessoajur().getCnpj())) {
             if (!fornecedor.getPessoajur().CNPJnumerosiguais()) {
                 if (fornecedor.getPessoajur().CNPJvalido()) {
-                    LbCNPJValido.setText("Valido");
+                    LbCNPJValido.setText("Válido");
                     LbCNPJValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png")));
                 } else {
-                    LbCNPJValido.setText("CNPJ Invalido");
+                    LbCNPJValido.setText("CNPJ Inválido");
                     LbCNPJValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
                 }
             } else {
-                LbCNPJValido.setText("Numeros Iguais");
+                LbCNPJValido.setText("Números Iguais");
                 LbCNPJValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
             }
         } else {
@@ -1191,7 +1181,7 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if(PnBotoes.isVisible() && BtGravar.isEnabled()){
-            if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(null, "Você esta prestes a fechar esta janela.\nAo fechar esta janela tudo que você digitou será esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 dispose();
             }
         }else{
@@ -1287,34 +1277,34 @@ public class InterfaceFornecedor extends javax.swing.JDialog {
 
         if (!TfNomeFantasia.getText().equals("")) {
         } else {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Nome Fantasia do fornecedor e obrigatorio");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Nome Fantasia do fornecedor e obrigatório");
             TfNomeFantasia.grabFocus();
             return false;
         }
 
-        if (LbCNPJValido.getText().equals("Valido")) {
+        if (LbCNPJValido.getText().equals("Válido")) {
         } else {
-            JOptionPane.showMessageDialog(null, "Digite um CNPJ valido!");
+            JOptionPane.showMessageDialog(null, "Digite um CNPJ válido!");
             TfNrCNPJ.grabFocus();
             return false;
         }
         if (TfLogradouro.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a Rua/Avenida de localizacao do fornecedor!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a Rua/Avenida de localização do fornecedor!");
             TfLogradouro.grabFocus();
             return false;
         }
         if (TfNumero.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Numero da localizacao do fornecedor!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Número da localização do fornecedor!");
             TfNumero.grabFocus();
             return false;
         }
         if (!valida.CampoTotalmentePreenchido(TfCEP.getText())) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o CEP da localizacao do fornecedor!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o CEP da localização do fornecedor!");
             TfCEP.grabFocus();
             return false;
         }
         if (TfBairro.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Bairro de localizacao do fornecedor!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Bairro de localização do fornecedor!");
             TfBairro.grabFocus();
             return false;
         }

@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.lojadafatima.InterfacesFinanceiro;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
-import br.com.lojadafatima.ClassesFerramentas.Relatorios;
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
@@ -30,7 +23,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
 
@@ -58,8 +51,8 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
         tam[6] = 100;
         preenche.FormataJtable(TbMvtoCaixa, tam);
         TbMvtoCaixa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        TfDtInicial.setText(datas.retornaratartual());
-        TfDtFinal.setText(datas.retornaratartual());
+        TfDtInicial.setText(datas.retornadataatual());
+        TfDtFinal.setText(datas.retornadataatual());
     }
 
     /**

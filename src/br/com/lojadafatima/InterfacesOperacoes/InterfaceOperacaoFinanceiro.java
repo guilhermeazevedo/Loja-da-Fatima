@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesOperacoes;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
@@ -132,9 +127,9 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
             }
         });
 
-        jLabel18.setText("Descricao da Operacao");
+        jLabel18.setText("Descrição da Operação");
 
-        jLabel7.setText("Cód. Condicao de Pagamento");
+        jLabel7.setText("Cód. Condição de Pagamento");
 
         TfCodCondicaoPgto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -156,16 +151,16 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
 
         TfCondicaoPgto.setEditable(false);
 
-        jLabel8.setText("Condicao de Pagamento");
+        jLabel8.setText("Condição de Pagamento");
 
-        BtCadCondicaoPgto.setText("Cadastrar Condicao de Pagamento");
+        BtCadCondicaoPgto.setText("Cadastrar Condição de Pagamento");
         BtCadCondicaoPgto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtCadCondicaoPgtoActionPerformed(evt);
             }
         });
 
-        jLabel16.setText("Valor Total da Operacao");
+        jLabel16.setText("Valor Total da Operação");
 
         TfValorTotal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -238,7 +233,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
             }
         });
 
-        jLabel5.setText("Quem esta envolvido nesta operacao?");
+        jLabel5.setText("Quem está envolvido nesta operação?");
 
         LbNomePessoa.setText("Nome/Nome Fantasia");
 
@@ -440,7 +435,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
 
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
         if (camposobrigatoriospreenchidos()) {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Gravar esta operacao e de que todas as informacoes estao corretas?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Gravar esta operação e de que todas as informações estao corretas?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 enviardados();
                 parcelas.getConta().incluir();
 
@@ -479,7 +474,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
     }//GEN-LAST:event_BtGravarActionPerformed
 
     private void BtIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirActionPerformed
-        TfData.setText(datas.retornaratartual());
+        TfData.setText(datas.retornadataatual());
         GeraCodigos geracodigos = new GeraCodigos();
         TfDescOperacao.setText(parcelas.getConta().getOperacao().getDescricao());
         TfCodigo.setText("" + geracodigos.gerasequencia("CONTAS_PAGAR_RECEBER", "CD_CONTA", "CD_OPERACAO", parcelas.getConta().getOperacao().getCodigo()));
@@ -487,8 +482,8 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
     }//GEN-LAST:event_BtIncluirActionPerformed
 
     private void BtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCancelarActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar esta operacao?\n"
-            + "(Caso sim, TODOS os dados digitados serao limpos da tela)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar esta operação?\n"
+            + "(Caso sim, TODOS os dados digitados serão limpos da tela)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
         limpar.Limpar(jPanel1);
         valida.validacamposCancelar(jPanel1, PnBotoes);
         }
@@ -593,7 +588,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if(PnBotoes.isVisible() && BtGravar.isEnabled()){
-            if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(null, "Você está prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou será esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 dispose();
             }
         }else{
@@ -623,7 +618,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
                     contas.setCodigopessoa(cliente2.retornacodigopessoacliente());
                 }
                 if (contas.epessoainadimplente()) {
-                    if (JOptionPane.showConfirmDialog(null, "Existem contas a receber em aberto ou vencidas desta pessoa, deseja continuar?", "Pessoa inadimplente", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+                    if (JOptionPane.showConfirmDialog(null, "Existem contas à receber em aberto ou vencidas desta pessoa, deseja continuar?", "Pessoa inadimplente", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
                         TfCodPessoa.setText("");
                         TfCodPessoaKeyReleased(null);
                     }
@@ -690,22 +685,22 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
     
     public boolean camposobrigatoriospreenchidos(){
         if(TfDescOperacao.getText().equals("")){
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a descricao desta operacao!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a descrição desta operação!");
             TfDescOperacao.grabFocus();
             return false;
         }
         if(TfCodCondicaoPgto.getText().equals("") || TfCondicaoPgto.getText().equals("")){
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a condicao de pagamento escolhida!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a condição de pagamento escolhida!");
             TfCodCondicaoPgto.grabFocus();
             return false;
         }
         if(TfValorTotal.getValue() == BigDecimal.valueOf(0)){
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o valor total desta operacao!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o valor total desta operação!");
             TfValorTotal.grabFocus();
             return false;
         }
         if(parcelas.getConta().getOperacao().getTpfinanceiro().equals("E") && (TfCodPessoa.getText().equals("") || TfPessoa.getText().equals(""))){
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a Pessoa que fara parte desta conta!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a Pessoa que fará parte desta conta!");
             TfCodPessoa.grabFocus();
             return false;
         }

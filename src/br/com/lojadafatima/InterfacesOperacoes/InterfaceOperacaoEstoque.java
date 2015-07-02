@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesOperacoes;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
@@ -40,7 +35,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
 
@@ -61,7 +56,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
         initComponents();
         setTelasusuario(telasusuario);
         prodcompravenda.getCompravenda().setOperacao(ope);
-        TfData.setText(datas.retornaratartual());
+        TfData.setText(datas.retornadataatual());
         TfCodFuncionario.setDocument(new PermiteApenasNumeros());
         TfCodPessoa.setDocument(new PermiteApenasNumeros());
         TfCodProduto.setDocument(new PermiteApenasNumeros());
@@ -170,9 +165,9 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
             }
         });
 
-        jLabel18.setText("Descricao da Operacao");
+        jLabel18.setText("Descrição da Operação");
 
-        jLabel5.setText("Quem esta envolvido nesta operacao?");
+        jLabel5.setText("Quem está envolvido nesta operação?");
 
         CbPessoa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente", "Fornecedor" }));
         CbPessoa.addActionListener(new java.awt.event.ActionListener() {
@@ -452,13 +447,13 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
             }
         });
 
-        jLabel12.setText("Cód. Servico");
+        jLabel12.setText("Cód. Serviço");
 
         TfServico.setEditable(false);
 
-        jLabel13.setText("Servico");
+        jLabel13.setText("Serviço");
 
-        BtCadServico.setText("Cadastrar Servico");
+        BtCadServico.setText("Cadastrar Serviço");
         BtCadServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtCadServicoActionPerformed(evt);
@@ -479,7 +474,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
         jLabel14.setText("Quantidade");
 
         BtIncluirServicoTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
-        BtIncluirServicoTabela.setText("Incluir Servico");
+        BtIncluirServicoTabela.setText("Incluir Serviço");
         BtIncluirServicoTabela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtIncluirServicoTabelaActionPerformed(evt);
@@ -487,7 +482,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
         });
 
         BtRemoverServicoTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
-        BtRemoverServicoTabela.setText("Remover Servico");
+        BtRemoverServicoTabela.setText("Remover Serviço");
         BtRemoverServicoTabela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtRemoverServicoTabelaActionPerformed(evt);
@@ -499,7 +494,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Código Operação", "Cód. Servico", "Servico", "Quantidade"
+                "Código Operação", "Cód. Serviço", "Serviço", "Quantidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -573,7 +568,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Servicos", jPanel4);
+        jTabbedPane1.addTab("Serviços", jPanel4);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -903,7 +898,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                     for (int i = 0; i < TbProdutos.getRowCount(); i++) {
                         if (Integer.parseInt(TbProdutos.getValueAt(i, 1).toString()) == Integer.parseInt(TfCodProduto.getText())) {
                             inclui = false;
-                            if (JOptionPane.showConfirmDialog(null, "Este produto ja foi adiconado!\n"
+                            if (JOptionPane.showConfirmDialog(null, "Este produto já foi adiconado!\n"
                                     + "Deseja substituir a quantidade deste produto?", "Produto adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                                 TbProdutos.setValueAt(TfQuantidade.getText(), i, 3);
                             }
@@ -934,7 +929,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     private void BtRemoverProdutoTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtRemoverProdutoTabelaActionPerformed
         int linha = TbProdutos.getSelectedRow();
         if (linha > -1) {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover este produto da operacao?", "Deseja remover?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover este produto da operação?", "Deseja remover?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 DefaultTableModel tabela = (DefaultTableModel) TbProdutos.getModel();
                 tabela.removeRow(linha);
             }
@@ -943,7 +938,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
 
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
         if (camposobrigatoriospreenchidos()) {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Gravar esta operacao e de que todas as informacoes estao corretas?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Gravar esta operação e de que todas as informações estao corretas?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 enviardados();
                 prodcompravenda.getCompravenda().incluir();
 
@@ -1012,7 +1007,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     }//GEN-LAST:event_BtGravarActionPerformed
 
     private void BtIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirActionPerformed
-        TfData.setText(datas.retornaratartual());
+        TfData.setText(datas.retornadataatual());
         GeraCodigos geracodigos = new GeraCodigos();
         TfCodigo.setText("" + geracodigos.gerasequencia("COMPRA_VENDA", "CD_COMPRA_VENDA", "CD_OPERACAO", prodcompravenda.getCompravenda().getOperacao().getCodigo()));
         valida.validacamposCadastrar(jPanel1, PnBotoes);
@@ -1023,7 +1018,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
 
     private void BtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCancelarActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar esta compra?\n"
-                + "(Caso sim, TODOS os dados digitados serao limpos da tela)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                + "(Caso sim, TODOS os dados digitados serão limpos da tela)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             limpar.Limpar(jPanel1);
             limpar.Limpar(jPanel3);
             limpar.Limpar(jPanel4);
@@ -1042,7 +1037,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                 ClasseMvtoEstoque estoque = new ClasseMvtoEstoque();
                 estoque.getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
                 if (Float.parseFloat(TfQuantidade.getValue().toString()) > estoque.retornaestoqueatual()) {
-                    JOptionPane.showMessageDialog(null, "A quantidade digitada e maior que o estoque atual disponivel deste produto!\nEstoque atual: " + estoque.retornaestoqueatual(), "Estoque indiponivel", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "A quantidade digitada é maior que o estoque atual disponível deste produto!\nEstoque atual: " + estoque.retornaestoqueatual(), "Estoque indiponivel", JOptionPane.INFORMATION_MESSAGE);
                     TfQuantidade.setValue(BigDecimal.valueOf(0));
                 } else {
                     estoqueok = true;
@@ -1057,7 +1052,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if (PnBotoes.isVisible() && BtGravar.isEnabled()) {
-            if (JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Você está prestes a fechar esta janela.\nAo fechar esta janela tudo que você digitou será esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 dispose();
             }
         } else {
@@ -1095,7 +1090,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                             TfQuantidadeServ.setValue(BigDecimal.valueOf(0));
                         }
                     } else{
-                        msg.CampoNaoPreenchido(LbNotificacao, "Digite o Fornecedor para que o sistema busque os servicos apenas deste Fornecedor!");
+                        msg.CampoNaoPreenchido(LbNotificacao, "Digite o Fornecedor para que o sistema busque os serviços apenas deste Fornecedor!");
                         limpar.Limpar(jPanel4);
                         TfCodPessoa.grabFocus();
                     }
@@ -1151,8 +1146,8 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                     for (int i = 0; i < TbServicos.getRowCount(); i++) {
                         if (Integer.parseInt(TbServicos.getValueAt(i, 1).toString()) == Integer.parseInt(TfCodServico.getText())) {
                             inclui = false;
-                            if (JOptionPane.showConfirmDialog(null, "Este servico ja foi adiconado!\n"
-                                    + "Deseja substituir a quantidade deste servico?", "Servico adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            if (JOptionPane.showConfirmDialog(null, "Este serviço já foi adiconado!\n"
+                                    + "Deseja substituir a quantidade deste serviço?", "Serviço adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                                 TbServicos.setValueAt(TfQuantidadeServ.getText(), i, 3);
                             }
                         }
@@ -1173,7 +1168,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                     msg.CampoNaoPreenchido(LbNotificacao, "Digite a quantidade corretamente!");
                 }
             } else {
-                msg.CampoNaoPreenchido(LbNotificacao, "Informe o servico a ser adicionado!");
+                msg.CampoNaoPreenchido(LbNotificacao, "Informe o serviço a ser adicionado!");
                 TfCodServico.grabFocus();
             }
         }
@@ -1182,7 +1177,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     private void BtRemoverServicoTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtRemoverServicoTabelaActionPerformed
         int linha = TbServicos.getSelectedRow();
         if (linha > -1) {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover este servico da operacao?", "Deseja remover?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover este serviço da operação?", "Deseja remover?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 DefaultTableModel tabela = (DefaultTableModel) TbServicos.getModel();
                 tabela.removeRow(linha);
             }
@@ -1276,22 +1271,22 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
 
     public boolean camposobrigatoriospreenchidos() {
         if (TfDescOperacao.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a descricao desta operacao!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a descrição desta operação!");
             TfDescOperacao.grabFocus();
             return false;
         }
         if (TfCodFuncionario.getText().equals("") || TfFuncionario.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira o Funcionario que esta realizando o antendimento nesta operacao!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira o Funcionário que está realizando o antendimento nesta operaçao!");
             TfCodFuncionario.grabFocus();
             return false;
         }
         if (TfCodPessoa.getText().equals("") || TfPessoa.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira qual a pessoa envolvida nesta operacao!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira qual a pessoa envolvida nesta operação!");
             TfCodPessoa.grabFocus();
             return false;
         }
         if (TbProdutos.getRowCount() < 1 && TbServicos.getRowCount() < 1) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira os produtos ou servicos que fazem parte desta operacao!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira os produtos ou serviços que fazem parte desta operação!");
             TfCodProduto.grabFocus();
             return false;
         }

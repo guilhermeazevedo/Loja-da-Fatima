@@ -10,21 +10,18 @@ import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesFornecedor;
 import br.com.lojadafatima.Produto.ClasseEspecificacaoProduto;
 import br.com.lojadafatima.Produto.ClasseFornecedoresProduto;
-import br.com.lojadafatima.Produto.ClasseProduto;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceProduto extends javax.swing.JDialog {
 
@@ -242,7 +239,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
             }
         });
 
-        jLabel5.setText("Descrição do Produto/Servico*");
+        jLabel5.setText("Descrição do Produto/Serviço*");
 
         jLabel9.setText("Percentual de lucro");
 
@@ -266,7 +263,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Tipo de Produto/Servico*");
+        jLabel2.setText("Tipo de Produto/Serviço*");
 
         jLabel6.setText("Características do tipo do produto:");
 
@@ -345,7 +342,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Cod. Caracteristica", "Caracteristica", "Cod Especificacao", "Especificação"
+                "Cód. Característica", "Característica", "Cód. Especificação", "Especificação"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -358,9 +355,6 @@ public class InterfaceProduto extends javax.swing.JDialog {
         });
         TbProduto.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(TbProduto);
-        if (TbProduto.getColumnModel().getColumnCount() > 0) {
-            TbProduto.getColumnModel().getColumn(2).setResizable(false);
-        }
 
         BtRemoverEspecific.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
         BtRemoverEspecific.setText("Remover");
@@ -511,7 +505,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Codigo", "Fornecedor"
+                "Código", "Fornecedor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -526,7 +520,6 @@ public class InterfaceProduto extends javax.swing.JDialog {
         jScrollPane5.setViewportView(TbFornecedoresProd);
 
         BtPesqFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
-        BtPesqFornecedor.setText("Pesquisar");
         BtPesqFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtPesqFornecedorActionPerformed(evt);
@@ -559,8 +552,8 @@ public class InterfaceProduto extends javax.swing.JDialog {
             PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnFornecedorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane5)
+                .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
                     .addGroup(PnFornecedorLayout.createSequentialGroup()
                         .addComponent(BtAddFornecedor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -575,11 +568,13 @@ public class InterfaceProduto extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PnFornecedorLayout.createSequentialGroup()
-                                .addComponent(TfFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(BtCadFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4))))
-                .addContainerGap(13, Short.MAX_VALUE))
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(PnFornecedorLayout.createSequentialGroup()
+                                .addComponent(TfFornecedor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtCadFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
         PnFornecedorLayout.setVerticalGroup(
             PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -588,19 +583,18 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
-                .addGap(8, 8, 8)
-                .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TfCodFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtPesqFornecedor)
-                        .addComponent(TfFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(BtCadFornecedor, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(7, 7, 7)
+                .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TfCodFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtPesqFornecedor)
+                    .addComponent(TfFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtCadFornecedor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtAddFornecedor)
                     .addComponent(BtDelFornecedor))
                 .addGap(9, 9, 9)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -649,7 +643,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
 
         jLabel13.setText("Consulta por:");
 
-        CbPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Código", "Descrição", "Código do Tipo de Produto/Servico" }));
+        CbPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Código", "Descrição", "Código do Tipo de Produto/Serviço" }));
         CbPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CbPesquisaActionPerformed(evt);
@@ -671,7 +665,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Código", "Descrição", "Tipo de Produto/Servico", "Estoque minimo"
+                "Código", "Descrição", "Tipo de Produto/Serviço", "Estoque mínimo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -685,16 +679,13 @@ public class InterfaceProduto extends javax.swing.JDialog {
         TbConsulta.setComponentPopupMenu(jPopupMenu1);
         TbConsulta.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(TbConsulta);
-        if (TbConsulta.getColumnModel().getColumnCount() > 0) {
-            TbConsulta.getColumnModel().getColumn(0).setResizable(false);
-        }
 
         buttonGroup1.add(RbPesqProduto);
         RbPesqProduto.setSelected(true);
         RbPesqProduto.setText("Produto");
 
         buttonGroup1.add(RbPesqServico);
-        RbPesqServico.setText("Servico");
+        RbPesqServico.setText("Serviço");
 
         javax.swing.GroupLayout PnConsultaLayout = new javax.swing.GroupLayout(PnConsulta);
         PnConsulta.setLayout(PnConsultaLayout);
@@ -783,9 +774,9 @@ public class InterfaceProduto extends javax.swing.JDialog {
             valida.validacamposCadastrar(PnFornecedor, PnBotoes);
             CbTipoProduto.setEnabled(false);
             BtCadTipoProduto.setEnabled(false);
-            msg.StatusEditar(LbNotificacao, "Editando informacoes do Produto...");
+            msg.StatusEditar(LbNotificacao, "Editando informações do Produto...");
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione um produto na aba \"Consulta\" e carregue os dados para que a operacao seja realizada!", "Selecione um produto", JOptionPane.YES_NO_OPTION);
+            JOptionPane.showMessageDialog(null, "Selecione um produto na aba \"Consulta\" e carregue os dados para que a operação seja realizada!", "Selecione um produto", JOptionPane.YES_NO_OPTION);
             TabbedPaneProduto.setSelectedIndex(1);
             CbPesquisa.grabFocus();
         }
@@ -837,7 +828,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 tabela.setValueAt(TbCarcteristica.getValueAt(index, 0).toString(), linhas, 0);
                 tabela.setValueAt(TbCarcteristica.getValueAt(index, 1).toString(), linhas, 1);
             }
-            msg.Adicionado(LbNotificacao, "Especificacao adicionada");
+            msg.Adicionado(LbNotificacao, "Especificação adicionada");
         }
     }//GEN-LAST:event_BtIncluirEspecificActionPerformed
 
@@ -878,8 +869,8 @@ public class InterfaceProduto extends javax.swing.JDialog {
                         forneproduto.getFornecedor().setCodigo(Integer.parseInt(TbFornecedoresProd.getValueAt(i, 0).toString()));
                         forneproduto.incluirfornecedor();
                     }
-                    JOptionPane.showMessageDialog(null, "Codigo: " + especproduto.getProduto().getCodigo() + "\n"
-                            + "Produto: " + especproduto.getProduto().getDescricao().toUpperCase(), "Codigo do produto", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Código: " + especproduto.getProduto().getCodigo() + "\n"
+                            + "Produto: " + especproduto.getProduto().getDescricao().toUpperCase(), "Código do produto", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     especproduto.getProduto().setCodigo(Integer.parseInt(TfCodigo.getText()));
                     forneproduto.getProduto().setCodigo(Integer.parseInt(TfCodigo.getText()));
@@ -976,8 +967,8 @@ public class InterfaceProduto extends javax.swing.JDialog {
     }//GEN-LAST:event_TfCodFornecedorKeyReleased
 
     private void BtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCancelarActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar esta operacao?\n"
-                + "(Caso queira, TODOS os dados serao limpos da tela)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar esta operação?\n"
+                + "(Caso queira, TODOS os dados serão limpos da tela)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             limpar.Limpar(PnProduto);
             limpar.Limpar(PnFornecedor);
             limpar.Limpar(TbFornecedoresProd);
@@ -994,7 +985,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
         if (!TfCodigo.getText().equals("")) {
             if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja EXCLUIR os dados deste produto?", "Deseja excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 especproduto.getProduto().setCodigo(Integer.parseInt(TfCodigo.getText()));
-                if(especproduto.getProduto().excluir()) msg.StatusExcluido(LbNotificacao, "Produto excluido com sucesso!");
+                if(especproduto.getProduto().excluir()) msg.StatusExcluido(LbNotificacao, "Produto excluído com sucesso!");
                 BtPesquisarActionPerformed(evt);
                 limpar.Limpar(PnProduto);
                 limpar.Limpar(PnFornecedor);
@@ -1006,7 +997,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 valida.validacamposCancelar(PnFornecedor, PnBotoes);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione um produto na aba \"Consulta\" e carregue os dados para que a operacao seja realizada!", "Selecione um produto", JOptionPane.YES_NO_OPTION);
+            JOptionPane.showMessageDialog(null, "Selecione um produto na aba \"Consulta\" e carregue os dados para que a operação seja realizada!", "Selecione um produto", JOptionPane.YES_NO_OPTION);
             TabbedPaneProduto.setSelectedIndex(1);
             CbPesquisa.grabFocus();
         }
@@ -1075,7 +1066,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
             }
             case 1: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o codigo do produto que deseja consultar!", "Digite a informacao", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o código do produto que deseja consultar!", "Digite a informação", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     especproduto.getProduto().setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -1085,7 +1076,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
             }
             case 2: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite a descricao do produto que deseja consultar!", "Digite a informacao", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite a descrição do produto que deseja consultar!", "Digite a informação", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     especproduto.getProduto().setDescricao(TfPesquisa.getText());
@@ -1095,7 +1086,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
             }
             case 3: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o codigo do tipo de produto que deseja consultar!", "Digite a informacao", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o código do tipo de produto que deseja consultar!", "Digite a informação", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     especproduto.getTipoproduto().setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -1157,7 +1148,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
             valida.validacamposCancelar(PnFornecedor, PnBotoes);
             TabbedPaneProduto.setSelectedIndex(0);
             TabbedPaneCadastro.setSelectedIndex(0);
-            msg.StatusBusca(LbNotificacao, "Os dados do Produto estao carregados na tela...");
+            msg.StatusBusca(LbNotificacao, "Os dados do Produto estão carregados na tela...");
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -1175,7 +1166,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if(PnBotoes.isVisible() && BtGravar.isEnabled()){
-            if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(null, "Você esta prestes a fechar esta janela.\nAo fechar esta janela tudo que você digitou será esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 dispose();
             }
         }else{
@@ -1269,13 +1260,13 @@ public class InterfaceProduto extends javax.swing.JDialog {
     
     public boolean camposobrigatoriospreenchidos() {
         if (TfDescricao.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a descricao do produto!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a descrição do produto!");
             TfDescricao.grabFocus();
             return false;
         }
 
         if (!especproduto.getTipoproduto().isServico() && TfQtEstoqueMin.getValue() == BigDecimal.valueOf(0)) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a quantidade minima do estoque do produto!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a quantidade mínima do estoque do produto!");
             TfQtEstoqueMin.grabFocus();
             return false;
         }
@@ -1285,11 +1276,11 @@ public class InterfaceProduto extends javax.swing.JDialog {
             return false;
         }
         if (!especproduto.getTipoproduto().isServico() && TbProduto.getRowCount() == 0) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Selecione ou insira as caracteristicas do produto!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Selecione ou insira as características do produto!");
             return false;
         }
         if (!especproduto.getTipoproduto().isServico() && TbProduto.getRowCount() != TbCarcteristica.getRowCount()) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Selecione ou insira todas as caracteristicas do produto!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Selecione ou insira todas as características do produto!");
             return false;
         }
         if (TbFornecedoresProd.getRowCount() == 0) {

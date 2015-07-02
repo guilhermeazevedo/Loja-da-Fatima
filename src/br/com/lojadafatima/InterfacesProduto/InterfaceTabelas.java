@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesProduto;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
@@ -11,15 +6,13 @@ import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Produto.ClasseTabelas;
-import br.com.lojadafatima.Produto.ClasseValores;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceTabelas extends javax.swing.JDialog {
 
@@ -231,7 +224,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Caracteristicas", PnTabelas);
+        jTabbedPane1.addTab("Características", PnTabelas);
 
         jLabel4.setText("Características:");
 
@@ -390,7 +383,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Especificacoes", PnValores);
+        jTabbedPane1.addTab("Especificações", PnValores);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -417,7 +410,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
             BtLimparActionPerformed(evt);
             TfCodigoCaract.setText(TbTabelas.getValueAt(index, 0).toString());
             TfTabela.setText(TbTabelas.getValueAt(index, 1).toString());
-            msg.StatusEditar(LbNotificCarac, "Editando dados da Caracteristica...");
+            msg.StatusEditar(LbNotificCarac, "Editando dados da Característica...");
         }
     }//GEN-LAST:event_MnItAlterarActionPerformed
 
@@ -426,15 +419,15 @@ public class InterfaceTabelas extends javax.swing.JDialog {
             int opcao;
             tabela.setTabela(TfTabela.getText());
             if (TfCodigoCaract.getText().equals("")) {
-                opcao = JOptionPane.showConfirmDialog(rootPane, "Incluir nova Caracteristica?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                opcao = JOptionPane.showConfirmDialog(rootPane, "Incluir nova Característica?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (opcao == JOptionPane.YES_OPTION) {
-                    if(tabela.incluir()) msg.Sucesso(LbNotificCarac, "Dados da Caracteristica gravados com sucesso!");
+                    if(tabela.incluir()) msg.Sucesso(LbNotificCarac, "Dados da Característica gravados com sucesso!");
                 }
             } else {
                 tabela.setCodigo(Integer.parseInt(TfCodigoCaract.getText()));
-                opcao = JOptionPane.showConfirmDialog(rootPane, "Alterar dados de Caracteristica?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                opcao = JOptionPane.showConfirmDialog(rootPane, "Alterar dados de Característica?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (opcao == JOptionPane.YES_OPTION) {
-                    if(tabela.alterar()) msg.Sucesso(LbNotificCarac, "Dados da Caracteristica alterados com sucesso!");
+                    if(tabela.alterar()) msg.Sucesso(LbNotificCarac, "Dados da Característica alterados com sucesso!");
                 }
             }
             limpar.Limpar(PnTabelas);
@@ -443,7 +436,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
             limpar.Limpar(TbTabelas2);
             preenche.PreencherJtable(TbTabelas2, tabela.buscartabelas());
         } else {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificCarac, "Digite o Nome da Caracteristica!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificCarac, "Digite o Nome da Característica!");
             TfTabela.grabFocus();
         }
     }//GEN-LAST:event_BtGravarActionPerformed
@@ -469,17 +462,17 @@ public class InterfaceTabelas extends javax.swing.JDialog {
                 tabela.getValor().setValor(TfValor.getText());
                 int index = TbTabelas2.getSelectedRow();
                 if (TfCodigoEspecific.getText().equals("")) {
-                    opcao = JOptionPane.showConfirmDialog(rootPane, "Incluir nova Especificacao?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                    opcao = JOptionPane.showConfirmDialog(rootPane, "Incluir nova Especificação?", "Confirmar", JOptionPane.YES_NO_OPTION);
                     if (opcao == JOptionPane.YES_OPTION) {
                         tabela.getValor().setCodigoTabela(Integer.parseInt(TbTabelas2.getValueAt(index, 0).toString()));
-                        if(tabela.getValor().incluir()) msg.Sucesso(LbNotificEspecific, "Dados da Especificacao gravados ocm sucesso!");
+                        if(tabela.getValor().incluir()) msg.Sucesso(LbNotificEspecific, "Dados da Especificação gravados ocm sucesso!");
                     }
                 } else {
                     tabela.getValor().setCodigo(Integer.parseInt(TfCodigoEspecific.getText()));
-                    opcao = JOptionPane.showConfirmDialog(rootPane, "Alterar dados de Especificacao?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                    opcao = JOptionPane.showConfirmDialog(rootPane, "Alterar dados de Especificação?", "Confirmar", JOptionPane.YES_NO_OPTION);
                     if (opcao == JOptionPane.YES_OPTION) {
                         tabela.getValor().setCodigoTabela(Integer.parseInt(TbTabelas2.getValueAt(index, 0).toString()));
-                        if(tabela.getValor().alterar()) msg.Sucesso(LbNotificEspecific, "Dados da Especificacao alterados com sucesso!");
+                        if(tabela.getValor().alterar()) msg.Sucesso(LbNotificEspecific, "Dados da Especificação alterados com sucesso!");
                     }
                 }
                 limpar.Limpar(PnValores);
@@ -487,11 +480,11 @@ public class InterfaceTabelas extends javax.swing.JDialog {
                 tabela.setCodigo(Integer.parseInt(TbTabelas2.getValueAt(index, 0).toString()));
                 preenche.PreencherJtable(TbValores, tabela.buscarvalorestabela());
             } else {
-                msg.CampoObrigatorioNaoPreenchido(LbNotificEspecific, "Selecione a caracteristica que esta especificacao pertence!");
+                msg.CampoObrigatorioNaoPreenchido(LbNotificEspecific, "Selecione a característica que esta especificação pertence!");
                 TbTabelas2.grabFocus();
             }
         }else{
-            msg.CampoObrigatorioNaoPreenchido(LbNotificEspecific, "Digite o Nome da Especificacao!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificEspecific, "Digite o Nome da Especificação!");
             TfTabela.grabFocus();
         }
     }//GEN-LAST:event_BtGravar1ActionPerformed
@@ -502,7 +495,7 @@ public class InterfaceTabelas extends javax.swing.JDialog {
             BtLimpar1ActionPerformed(evt);
             TfCodigoEspecific.setText(TbValores.getValueAt(index, 0).toString());
             TfValor.setText(TbValores.getValueAt(index, 1).toString());
-            msg.StatusEditar(LbNotificEspecific, "Editando dados da Especificacao...");
+            msg.StatusEditar(LbNotificEspecific, "Editando dados da Especificação...");
         }
     }//GEN-LAST:event_MnItAlterarValorActionPerformed
 

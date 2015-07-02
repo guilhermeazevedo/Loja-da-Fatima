@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.lojadafatima.ClassesFerramentas;
 
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
@@ -12,7 +6,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class GeraCodigos {
     
@@ -24,7 +18,7 @@ public class GeraCodigos {
             conn.resultset.first();
             return conn.resultset.getInt(1);
         } catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro ao gerar sequencia \n o erro passado foi "+ex);
+            JOptionPane.showMessageDialog(null, "Erro ao gerar sequência do código!\nO erro passado foi: "+ex, "O sistema não conseguiu gerar o próximo código", JOptionPane.YES_OPTION);
             return 0;
         }
     }
@@ -37,7 +31,7 @@ public class GeraCodigos {
             conn.resultset.first();
             return conn.resultset.getInt(1);
         } catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro ao gerar sequencia \n o erro passado foi "+ex);
+            JOptionPane.showMessageDialog(null, "Erro ao gerar sequência do código!\nO erro passado foi: "+ex, "O sistema não conseguiu gerar o próximo código", JOptionPane.YES_OPTION);
             return 0;
         }
     }

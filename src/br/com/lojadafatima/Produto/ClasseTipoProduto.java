@@ -1,24 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.Produto;
 
 import br.com.lojadafatima.ClassesFerramentas.GeraCodigos;
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class ClasseTipoProduto {
 

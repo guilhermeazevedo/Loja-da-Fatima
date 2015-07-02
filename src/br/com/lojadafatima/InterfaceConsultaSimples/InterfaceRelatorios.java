@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfaceConsultaSimples;
 
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
@@ -12,7 +7,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceRelatorios extends javax.swing.JDialog {
 
@@ -28,7 +23,6 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
         CbOrdenarFornecedoresActionPerformed(null);
         preenche.PreencherJtable(TbFuncionarios, prodcompravenda.getCompravenda().getFuncionario().consultageral());
         preenche.PreencheJComboBox(CbFiltroOperacoesFuncionario, prodcompravenda.getCompravenda().getOperacao().retornaoperacoesdeestoquecombobox());
-        preenche.PreencherJtable(TbOperacoesFuncionario1, prodcompravenda.getCompravenda().operacoesdeestoque());
     }
 
     /**
@@ -67,13 +61,6 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TbOperacoesFuncionario = new javax.swing.JTable();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        TbOperacoesFuncionario1 = new javax.swing.JTable();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        TbProdutos = new javax.swing.JTable();
 
         ItMnDetalhes.setText("Detalhes...");
         ItMnDetalhes.addActionListener(new java.awt.event.ActionListener() {
@@ -342,86 +329,6 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Funcionário", jPanel3);
 
-        TbOperacoesFuncionario1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Operação", "Descrição", "Data e Hora"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TbOperacoesFuncionario1.getTableHeader().setReorderingAllowed(false);
-        TbOperacoesFuncionario1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                TbOperacoesFuncionario1MouseReleased(evt);
-            }
-        });
-        jScrollPane5.setViewportView(TbOperacoesFuncionario1);
-
-        jLabel9.setText("Todas as operações apenas de estoque realizadas:");
-
-        jLabel10.setText("Produtos:");
-
-        TbProdutos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Cód. Produto", "Produto", "Quantidade"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TbProdutos.setEnabled(false);
-        TbProdutos.getTableHeader().setReorderingAllowed(false);
-        jScrollPane6.setViewportView(TbProdutos);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane6))
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab("Operações de Estoque", jPanel6);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -530,15 +437,6 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
         prodcompravenda.getCompravenda().getOperacao().setCodigo(prodcompravenda.getCompravenda().getOperacao().retornacodigooperacao());
     }//GEN-LAST:event_TbOperacoesFuncionarioMouseReleased
 
-    private void TbOperacoesFuncionario1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbOperacoesFuncionario1MouseReleased
-        if (TbOperacoesFuncionario1.getSelectedRow() > -1) {
-            prodcompravenda.getCompravenda().setCodigo(Integer.parseInt(TbOperacoesFuncionario1.getValueAt(TbOperacoesFuncionario1.getSelectedRow(), 0).toString()));
-            prodcompravenda.getCompravenda().getOperacao().setDescricao(TbOperacoesFuncionario1.getValueAt(TbOperacoesFuncionario1.getSelectedRow(), 1).toString());
-            prodcompravenda.getCompravenda().getOperacao().setCodigo(prodcompravenda.getCompravenda().getOperacao().retornacodigooperacao());
-            preenche.PreencherJtable(TbProdutos, prodcompravenda.produtoscompravendaest());
-        }
-    }//GEN-LAST:event_TbOperacoesFuncionario1MouseReleased
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox CbFiltroOperacoesFuncionario;
     private javax.swing.JComboBox CbFiltroPeriodoFuncionario;
@@ -551,10 +449,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
     private javax.swing.JTable TbFornecedores;
     private javax.swing.JTable TbFuncionarios;
     private javax.swing.JTable TbOperacoesFuncionario;
-    private javax.swing.JTable TbOperacoesFuncionario1;
-    private javax.swing.JTable TbProdutos;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -562,17 +457,13 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 

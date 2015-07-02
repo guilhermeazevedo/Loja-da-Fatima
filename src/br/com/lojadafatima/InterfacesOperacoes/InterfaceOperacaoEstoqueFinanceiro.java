@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesOperacoes;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
@@ -45,7 +40,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
@@ -205,7 +200,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
             }
         });
 
-        jLabel18.setText("Descricao da Operacao");
+        jLabel18.setText("Descrição da Operação");
 
         jLabel3.setText("Cód. Funcionário");
 
@@ -249,7 +244,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
             }
         });
 
-        jLabel7.setText("Cód. Condicao de Pagamento");
+        jLabel7.setText("Cód. Condição de Pagamento");
 
         BtPesqCondicaoPgto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
         BtPesqCondicaoPgto.addActionListener(new java.awt.event.ActionListener() {
@@ -260,9 +255,9 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
         TfCondicaoPgto.setEditable(false);
 
-        jLabel8.setText("Condicao de Pagamento");
+        jLabel8.setText("Condição de Pagamento");
 
-        BtCadCondicaoPgto.setText("Cadastrar Condicao de Pagamento");
+        BtCadCondicaoPgto.setText("Cadastrar Condição de Pagamento");
         BtCadCondicaoPgto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtCadCondicaoPgtoActionPerformed(evt);
@@ -314,7 +309,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
             .addComponent(BtGravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jLabel5.setText("Quem esta envolvido nesta operacao?");
+        jLabel5.setText("Quem está envolvido nesta operação?");
 
         CbPessoa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente", "Fornecedor" }));
         CbPessoa.addActionListener(new java.awt.event.ActionListener() {
@@ -411,7 +406,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
         jLabel11.setText("Quantidade");
 
-        CbPromocao.setText("Promocao");
+        CbPromocao.setText("Promoção");
 
         TfValorUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -466,7 +461,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Código Operação", "Cód. Produto", "Produto", "Quantidade", "Valor Unitário", "Desconto", "Valor Total do Produto na Venda", "Promocao"
+                "Código Operação", "Cód. Produto", "Produto", "Quantidade", "Valor Unitário", "Desconto", "Valor Total do Produto na Venda", "Promoção"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -502,7 +497,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6))
                             .addComponent(jLabel13))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14))
@@ -585,7 +580,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Produto", jPanel3);
 
-        jLabel15.setText("Cód. Servicos");
+        jLabel15.setText("Cód. Serviço");
 
         TfCodServico.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -602,9 +597,9 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
         TfServico.setEditable(false);
 
-        jLabel17.setText("Servico");
+        jLabel17.setText("Serviço");
 
-        BtCadServico.setText("Cadastrar Servico");
+        BtCadServico.setText("Cadastrar Serviço");
         BtCadServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtCadServicoActionPerformed(evt);
@@ -653,12 +648,17 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
         TfValorServ.setEditable(false);
 
-        jLabel23.setText("Valor Total do Servico");
+        jLabel23.setText("Valor Total do Serviço");
 
-        CbPromocaoServ.setText("Promocao");
+        CbPromocaoServ.setText("Promoção");
+        CbPromocaoServ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbPromocaoServActionPerformed(evt);
+            }
+        });
 
         BtIncluirServTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
-        BtIncluirServTabela.setText("Incluir Servico");
+        BtIncluirServTabela.setText("Incluir Serviço");
         BtIncluirServTabela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtIncluirServTabelaActionPerformed(evt);
@@ -666,7 +666,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
         });
 
         BtRemoverServTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
-        BtRemoverServTabela.setText("Remover Servico");
+        BtRemoverServTabela.setText("Remover Serviço");
         BtRemoverServTabela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtRemoverServTabelaActionPerformed(evt);
@@ -675,14 +675,14 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
         TfValorTotalOperacaoServ.setEditable(false);
 
-        jLabel24.setText("Valor Total dos Servicos");
+        jLabel24.setText("Valor Total dos Serviços");
 
         TbServicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código Operação", "Cód. Servico", "Servico", "Quantidade", "Valor Unitário", "Desconto", "Valor Total do Servico na Venda", "Promocao"
+                "Código Operação", "Cód. Serviço", "Serviço", "Quantidade", "Valor Unitário", "Desconto", "Valor Total do Servico na Venda", "Promoção"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -718,7 +718,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel22))
                             .addComponent(jLabel21))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TfValorServ, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel23))
@@ -799,7 +799,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Servico", jPanel4);
+        jTabbedPane1.addTab("Serviço", jPanel4);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1113,7 +1113,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                     for (int i = 0; i < TbProdutos.getRowCount(); i++) {
                         if (Integer.parseInt(TbProdutos.getValueAt(i, 1).toString()) == Integer.parseInt(TfCodProduto.getText())) {
                             inclui = false;
-                            if (JOptionPane.showConfirmDialog(null, "Este produto ja foi adiconado a esta operacao!\n"
+                            if (JOptionPane.showConfirmDialog(null, "Este produto já foi adicionado a esta operação!\n"
                                     + "Deseja substituir a quantidade deste produto?", "Produto adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                                 TbProdutos.setValueAt(TfQuantidade.getText(), i, 3);
                                 TbProdutos.setValueAt(TfValorUnitario.getText(), i, 4);
@@ -1152,10 +1152,10 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                     TfValorProduto.setValue(BigDecimal.valueOf(0));
                     atualizavalortotal();
                 } else {
-                    msg.CampoNaoPreenchido(LbNotificacao, "Digite o valor unitario do produto e a quantidade corretamente!");
+                    msg.CampoNaoPreenchido(LbNotificacao, "Digite o valor unitário do produto e a quantidade corretamente!");
                 }
             } else {
-                msg.CampoNaoPreenchido(LbNotificacao, "Informe o produto a ser adicionado nesta operacao!");
+                msg.CampoNaoPreenchido(LbNotificacao, "Informe o produto a ser adicionado nesta operação!");
                 TfCodProduto.grabFocus();
             }
         }
@@ -1164,7 +1164,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private void BtRemoverProdutoTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtRemoverProdutoTabelaActionPerformed
         int linha = TbProdutos.getSelectedRow();
         if (linha > -1) {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover este produto da operacao?", "Deseja remover?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover este produto da operação?", "Deseja remover?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 DefaultTableModel tabela = (DefaultTableModel) TbProdutos.getModel();
                 tabela.removeRow(linha);
                 atualizavalortotal();
@@ -1174,7 +1174,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
         if (camposobrigatoriospreenchidos()) {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Gravar esta operacao e de que todas as informacoes estao corretas?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Gravar esta operação e de que todas as informações estçao corretas?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 enviardados();
                 prodcompravenda.getCompravenda().incluir();
 
@@ -1265,7 +1265,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     }//GEN-LAST:event_BtGravarActionPerformed
 
     private void BtIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirActionPerformed
-        TfData.setText(datas.retornaratartual());
+        TfData.setText(datas.retornadataatual());
         GeraCodigos geracodigos = new GeraCodigos();
         TfDescOperacao.setText(prodcompravenda.getCompravenda().getOperacao().getDescricao());
         TfCodigo.setText("" + geracodigos.gerasequencia("COMPRA_VENDA", "CD_COMPRA_VENDA", "CD_OPERACAO", prodcompravenda.getCompravenda().getOperacao().getCodigo()));
@@ -1276,7 +1276,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
     private void BtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCancelarActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar esta compra?\n"
-                + "(Caso sim, TODOS os dados digitados serao limpos da tela)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                + "(Caso sim, TODOS os dados digitados serão limpos da tela)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             limpar.Limpar(jPanel1);
             limpar.Limpar(jPanel3);
             limpar.Limpar(jPanel4);
@@ -1404,7 +1404,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                 ClasseMvtoEstoque estoque = new ClasseMvtoEstoque();
                 estoque.getProduto().setCodigo(Integer.parseInt(TfCodProduto.getText()));
                 if (Float.parseFloat(TfQuantidade.getValue().toString()) > estoque.retornaestoqueatual()) {
-                    JOptionPane.showMessageDialog(null, "A quantidade digitada e maior que o estoque atual disponivel deste produto!\nEstoque atual: " + estoque.retornaestoqueatual(), "Estoque insuficiente", JOptionPane.OK_OPTION);
+                    JOptionPane.showMessageDialog(null, "A quantidade digitada é maior que o estoque atual disponível deste produto!\nEstoque atual: " + estoque.retornaestoqueatual(), "Estoque insuficiente", JOptionPane.OK_OPTION);
                     TfQuantidade.setValue(BigDecimal.valueOf(0));
                 } else {
                     estoqueok = true;
@@ -1426,7 +1426,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if (PnBotoes.isVisible() && BtGravar.isEnabled()) {
-            if (JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Você está prestes a fechar esta janela.\nAo fechar esta janela tudo que você digitou será esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 dispose();
             }
         } else {
@@ -1437,7 +1437,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private void TfCodFuncionarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodFuncionarioFocusLost
         if (TfFuncionario.getText().equals("")) {
             TfCodFuncionario.setText("");
-            msg.CampoNaoPreenchido(LbNotificacao, "Digite o codigo do funcionario corretamente!");
+            msg.CampoNaoPreenchido(LbNotificacao, "Digite o código do funcionário corretamente!");
         }else{
             prodcompravenda.getCompravenda().getFuncionario().setCodigo(Integer.parseInt(TfCodFuncionario.getText()));
         }
@@ -1446,7 +1446,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private void TfCodPessoaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodPessoaFocusLost
         if (TfPessoa.getText().equals("")) {
             TfCodPessoa.setText("");
-            msg.CampoNaoPreenchido(LbNotificacao, "Digite o codigo corretamente!");
+            msg.CampoNaoPreenchido(LbNotificacao, "Digite o código corretamente!");
         } else {
             if (CbPessoa.getSelectedItem().toString().equals("Fornecedor") && prodcompravenda.getCompravenda().getOperacao().getTpestoque().equals("E")) {
                 prodcompravenda.getForneproduto().getFornecedor().setCodigo(Integer.parseInt(TfCodPessoa.getText()));
@@ -1464,7 +1464,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                 }
                 contas.setCodigopessoa(cliente.retornacodigopessoacliente());
                 if (contas.epessoainadimplente()) {
-                    if (JOptionPane.showConfirmDialog(null, "Existem contas a receber em aberto ou vencidas desta pessoa, deseja continuar?", "Pessoa inadimplente", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+                    if (JOptionPane.showConfirmDialog(null, "Existem contas à receber em aberto ou vencidas desta pessoa, deseja continuar?", "Pessoa inadimplente", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
                         TfCodPessoa.setText("");
                         TfCodPessoaKeyReleased(null);
                     }
@@ -1477,7 +1477,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private void TfCodCondicaoPgtoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodCondicaoPgtoFocusLost
         if (TfCondicaoPgto.getText().equals("")) {
             TfCodCondicaoPgto.setText("");
-            msg.CampoNaoPreenchido(LbNotificacao, "Digite o codigo da condicao de pagamento corretamente!");
+            msg.CampoNaoPreenchido(LbNotificacao, "Digite o código da condição de pagamento corretamente!");
         }
     }//GEN-LAST:event_TfCodCondicaoPgtoFocusLost
 
@@ -1488,7 +1488,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                     TfQuantidadeKeyReleased(evt);
                 }else{
                     if(prodcompravenda.getCompravenda().getOperacao().getTpfinanceiro().equals("S")){
-                        msg.CampoNaoPreenchido(LbNotificacao, "Digite o Funcionario para permitir o desconto!");
+                        msg.CampoNaoPreenchido(LbNotificacao, "Digite o Funcionário para permitir o desconto!");
                         TfDesconto.setValue(BigDecimal.ZERO);
                         TfCodFuncionario.grabFocus();
                     }else{
@@ -1501,7 +1501,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                 TfQuantidade.grabFocus();
             }
         }else{
-            msg.CampoNaoPreenchido(LbNotificacao, "Insira o Valor Unitario do Produto!");
+            msg.CampoNaoPreenchido(LbNotificacao, "Insira o Valor Unitário do Produto!");
             TfDesconto.setValue(BigDecimal.ZERO);
             TfValorUnitario.grabFocus();
         }
@@ -1533,7 +1533,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                             TfValorServ.setText("");
                         }
                     }else{
-                        msg.CampoNaoPreenchido(LbNotificacao, "Digite o Fornecedor para que o sistema busque apenas os servicos deste Fornecedor!");
+                        msg.CampoNaoPreenchido(LbNotificacao, "Digite o Fornecedor para que o sistema busque apenas os serviços deste Fornecedor!");
                         limpar.Limpar(jPanel4);
                         TfCodPessoa.grabFocus();
                     }
@@ -1612,7 +1612,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                     TfQuantidadeServKeyReleased(evt);
                 }else{
                     if(prodcompravenda.getCompravenda().getOperacao().getTpfinanceiro().equals("S")){
-                        msg.CampoNaoPreenchido(LbNotificacao, "Digite o Funcionario para permitir o desconto!");
+                        msg.CampoNaoPreenchido(LbNotificacao, "Digite o Funcionário para permitir o desconto!");
                         TfDescontoServ.setValue(BigDecimal.ZERO);
                         TfCodFuncionario.grabFocus();
                     }else{
@@ -1620,12 +1620,12 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                     }
                 }
             }else{
-                msg.CampoNaoPreenchido(LbNotificacao, "Digite a quantidade do Servico!");
+                msg.CampoNaoPreenchido(LbNotificacao, "Digite a quantidade do Serviço!");
                 TfDescontoServ.setValue(BigDecimal.ZERO);
                 TfQuantidadeServ.grabFocus();
             }
         }else{
-            msg.CampoNaoPreenchido(LbNotificacao, "Insira o Valor Unitario do Servico!");
+            msg.CampoNaoPreenchido(LbNotificacao, "Insira o Valor Unitário do Serviço!");
             TfDescontoServ.setValue(BigDecimal.ZERO);
             TfValorUnitarioServ.grabFocus();
         }
@@ -1643,8 +1643,8 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                     for (int i = 0; i < TbServicos.getRowCount(); i++) {
                         if (Integer.parseInt(TbServicos.getValueAt(i, 1).toString()) == Integer.parseInt(TfCodServico.getText())) {
                             inclui = false;
-                            if (JOptionPane.showConfirmDialog(null, "Este servico ja foi adicionado a esta operacao!\n"
-                                    + "Deseja substituir a quantidade deste servico?", "Servico adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            if (JOptionPane.showConfirmDialog(null, "Este serviço já foi adicionado a esta operação!\n"
+                                    + "Deseja substituir a quantidade deste serviço?", "Serviço adicionado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                                 TbServicos.setValueAt(TfQuantidadeServ.getText(), i, 3);
                                 TbServicos.setValueAt(TfValorUnitarioServ.getText(), i, 4);
                                 TbServicos.setValueAt(TfDescontoServ.getText(), i, 5);
@@ -1682,10 +1682,10 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                     TfValorServ.setValue(BigDecimal.valueOf(0));
                     atualizavalortotalserv();
                 } else {
-                    msg.CampoNaoPreenchido(LbNotificacao, "Digite o valor unitario do servico e a quantidade corretamente!");
+                    msg.CampoNaoPreenchido(LbNotificacao, "Digite o valor unitário do serviço e a quantidade corretamente!");
                 }
             } else {
-                msg.CampoNaoPreenchido(LbNotificacao, "Informe o servico a ser adicionado nesta operacao!");
+                msg.CampoNaoPreenchido(LbNotificacao, "Informe o serviço a ser adicionado nesta operação!");
                 TfCodProduto.grabFocus();
             }
         
@@ -1694,13 +1694,17 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private void BtRemoverServTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtRemoverServTabelaActionPerformed
         int linha = TbServicos.getSelectedRow();
         if (linha > -1) {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover este servico da operacao?", "Deseja remover?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover este serviço da operação?", "Deseja remover?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 DefaultTableModel tabela = (DefaultTableModel) TbServicos.getModel();
                 tabela.removeRow(linha);
                 atualizavalortotalserv();
             }
         }
     }//GEN-LAST:event_BtRemoverServTabelaActionPerformed
+
+    private void CbPromocaoServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbPromocaoServActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CbPromocaoServActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1840,27 +1844,27 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
 
     public boolean camposobrigatoriospreenchidos() {
         if (TfDescOperacao.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a descricao desta operacao!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a descrição desta operação!");
             TfDescOperacao.grabFocus();
             return false;
         }
         if (TfCodFuncionario.getText().equals("") || TfFuncionario.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira o Funcionario que esta realizando o antendimento nesta operacao!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira o Funcionário que está realizando o antendimento nesta operação!");
             TfCodFuncionario.grabFocus();
             return false;
         }
         if (TfCodPessoa.getText().equals("") || TfPessoa.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira qual a pessoa envolvida nesta operacao!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira qual a pessoa envolvida nesta operação!");
             TfCodPessoa.grabFocus();
             return false;
         }
         if (TfCodCondicaoPgto.getText().equals("") || TfCondicaoPgto.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira a condicao de pagamento escolhida para esta operacao!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira a condição de pagamento escolhida para esta operação!");
             TfCodCondicaoPgto.grabFocus();
             return false;
         }
         if (TbProdutos.getRowCount() < 1 && TbServicos.getRowCount() < 1) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira os produtos ou servicos que fazem parte desta operacao!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Insira os produtos ou serviços que fazem parte desta operação!");
             
             return false;
         }

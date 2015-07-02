@@ -310,7 +310,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Descricao do Produto"/>
+                <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o do Produto"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="BtAjustar">
@@ -681,8 +681,8 @@
                         <Column editable="false" title="Data Mvto." type="java.lang.Object"/>
                         <Column editable="false" title="Qtde. Antes" type="java.lang.Object"/>
                         <Column editable="false" title="Qtde. Mvto." type="java.lang.Object"/>
-                        <Column editable="true" title="Qtde. Depois" type="java.lang.Object"/>
-                        <Column editable="false" title="Tipo Mvto" type="java.lang.Object"/>
+                        <Column editable="false" title="Qtde. Depois" type="java.lang.Object"/>
+                        <Column editable="false" title="Tipo Mvto." type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesFinanceiro;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
@@ -21,7 +16,7 @@ import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
 
@@ -167,7 +162,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
             }
         });
 
-        jLabel7.setText("Aplicar comissão com base nas vendas realizadas no perído do dia:");
+        jLabel7.setText("Aplicar comissão com base nas vendas realizadas no período do dia:");
 
         jLabel8.setText("a");
 
@@ -287,16 +282,16 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(TbPesquisa);
 
-        jLabel5.setText("Funcionários cadatrados:");
+        jLabel5.setText("Funcionários cadastrados:");
 
-        jLabel6.setText("Salarios ja pagos:");
+        jLabel6.setText("Salários já pagos:");
 
         TbPagamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Descrição", "Valor Pago ao Funcionário (R$)", "Data de Realizacao do Pagamento"
+                "Descrição", "Valor Pago ao Funcionário (R$)", "Data de Realização do Pagamento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -373,15 +368,15 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
     private void BtPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPagarActionPerformed
         mvtocaixa.getParcela().getConta().getCompravenda().getFuncionario().getPessoafis().setNome(TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString());
         if (!mvtocaixa.pagamentodomesrealizado(CbMes.getSelectedItem().toString() + "/" + CbAno.getSelectedItem().toString())) {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja realizar o pagamento deste funcionario?\n"
-                    + "Funcionario: " + TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString() + "\n"
-                    + "Salario: " + TfSalario.getText() + "\n"
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja realizar o pagamento deste funcionário?\n"
+                    + "Funcionário: " + TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString() + "\n"
+                    + "Salário: " + TfSalario.getText() + "\n"
                     + "Rerente a: " + CbMes.getSelectedItem().toString() + "/" + CbAno.getSelectedItem().toString(), "Realizar pagamento?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if(mvtocaixa.retornacaixaatual() >= Float.parseFloat(TfSalario.getValue().toString())){
                     mvtocaixa.getParcela().getConta().getCompravenda().setCodigo(0);
                     mvtocaixa.getParcela().getConta().getOperacao().setCodigo(4);
-                    mvtocaixa.getParcela().getConta().setDescricao("PAGAMENTO DE SALARIO AO FUNCIONARIO " + TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString() + ", REFERENTE AO MES " + CbMes.getSelectedItem().toString() + "/" + CbAno.getSelectedItem().toString());
-                    mvtocaixa.getParcela().getConta().setDtconta(datas.retornaratartual());
+                    mvtocaixa.getParcela().getConta().setDescricao("PAGAMENTO DE SALARIO AO FUNCIONARIO " + TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString() + ", REFERENTE AO MÊS " + CbMes.getSelectedItem().toString() + "/" + CbAno.getSelectedItem().toString());
+                    mvtocaixa.getParcela().getConta().setDtconta(datas.retornadataatual());
                     mvtocaixa.getParcela().getConta().setTotal(Float.parseFloat(TfSalario.getValue().toString()));
                     mvtocaixa.getParcela().getConta().setCodigopessoa(0);
                     mvtocaixa.getParcela().getConta().getCondicao().setCodigo(1);
@@ -389,7 +384,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                     mvtocaixa.getParcela().gerarparcelas();
                     mvtocaixa.getParcela().setCodigo(1);
                     mvtocaixa.getParcela().getFormapgto().setCodigo(1);
-                    mvtocaixa.getParcela().setDtpago(datas.retornaratartual());
+                    mvtocaixa.getParcela().setDtpago(datas.retornadataatual());
                     mvtocaixa.getParcela().setVlpago(Float.parseFloat(TfSalario.getValue().toString()));
                     mvtocaixa.getParcela().pagaparcela();
                     mvtocaixa.setTpmvto("S");
@@ -399,11 +394,11 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                     BtPagar.setEnabled(false);
                     TfSalario.setText("");
                 } else{
-                    JOptionPane.showMessageDialog(null, "Impossível realizar o pagamento deste funcionario.\nO saldo do caixa é menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Impossível realizar o pagamento deste funcionário.\nO saldo do caixa é menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }else{
-            JOptionPane.showMessageDialog(null, "O pagamento referente a este mes e ano ja foi realizado!", "Pagamento ja realizado", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O pagamento referente a este mês e ano já foi realizado!", "Pagamento já realizado", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_BtPagarActionPerformed
 

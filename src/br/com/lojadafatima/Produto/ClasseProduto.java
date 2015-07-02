@@ -2,15 +2,12 @@ package br.com.lojadafatima.Produto;
 
 import br.com.lojadafatima.ClassesFerramentas.GeraCodigos;
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
-import br.com.lojadafatima.Pessoa.ClasseFornecedor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class ClasseProduto {
 

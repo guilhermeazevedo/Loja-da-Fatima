@@ -1,17 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesUsuario;
 
 import br.com.lojadafatima.Usuario.ClasseUsuario;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceLogin extends javax.swing.JFrame {
 
@@ -165,14 +159,14 @@ public class InterfaceLogin extends javax.swing.JFrame {
                         }
                     });
                 } else{
-                    JOptionPane.showMessageDialog(rootPane, "Login ou Senha invalidos", "Tente novamente", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(rootPane, "Login ou Senha inválidos", "Tente novamente", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Digite sua Senha", "Campos Obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "Digite sua Senha", "Campos Obrigatórios", JOptionPane.INFORMATION_MESSAGE);
                 TfSenha.grabFocus();
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Digite seu Login", "Campos Obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Digite seu Login", "Campos Obrigatórios", JOptionPane.INFORMATION_MESSAGE);
             TfLogin.grabFocus();
         }
     }//GEN-LAST:event_BtEntrarActionPerformed
@@ -186,7 +180,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
             usuario.setLogin(TfLogin.getText());
             JOptionPane.showMessageDialog(rootPane, usuario.mostrardica(), "Dica de Senha", JOptionPane.INFORMATION_MESSAGE);
         } else{
-            JOptionPane.showMessageDialog(rootPane, "Digite seu Login", "Campos Obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Digite seu Login", "Campos Obrigatórios", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_LbDicaMouseClicked
 

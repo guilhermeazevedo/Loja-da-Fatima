@@ -76,8 +76,8 @@
         <Container class="javax.swing.JPanel" name="PnTabelas">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Caracteristicas">
-                <Property name="tabTitle" type="java.lang.String" value="Caracteristicas"/>
+              <JTabbedPaneConstraints tabName="Caracter&#xed;sticas">
+                <Property name="tabTitle" type="java.lang.String" value="Caracter&#xed;sticas"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -258,8 +258,8 @@
         <Container class="javax.swing.JPanel" name="PnValores">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Especificacoes">
-                <Property name="tabTitle" type="java.lang.String" value="Especificacoes"/>
+              <JTabbedPaneConstraints tabName="Especifica&#xe7;&#xf5;es">
+                <Property name="tabTitle" type="java.lang.String" value="Especifica&#xe7;&#xf5;es"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>

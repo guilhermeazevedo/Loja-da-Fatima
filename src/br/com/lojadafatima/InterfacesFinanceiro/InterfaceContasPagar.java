@@ -1,20 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesFinanceiro;
 
+import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.LimpaCamposTela;
+import br.com.lojadafatima.ClassesFerramentas.MensagensUsuario;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseProdutosCompraVenda;
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
+import br.com.lojadafatima.DadosPessoa.ClassePessoaFisica;
+import br.com.lojadafatima.DadosPessoa.ClassePessoaJuridica;
 import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
 import br.com.lojadafatima.Financeiro.ClasseParcelas;
+import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesCliente;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesDetalhesConta;
+import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesFornecedor;
+import br.com.lojadafatima.InterfacesPessoa.InterfaceCliente;
+import br.com.lojadafatima.InterfacesPessoa.InterfaceFornecedor;
+import br.com.lojadafatima.Pessoa.ClasseCliente;
+import br.com.lojadafatima.Pessoa.ClasseFornecedor;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
@@ -27,7 +35,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceContasPagar extends javax.swing.JDialog {
 
@@ -37,6 +45,11 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     ClasseParcelas parcelas = new ClasseParcelas();
     GerenciadorCamposBotoes valida = new GerenciadorCamposBotoes();
     private ClasseTelasUsuario telasusuario = new ClasseTelasUsuario();
+    ClasseCliente cliente = new ClasseCliente();
+    ClasseFornecedor fornecedor = new ClasseFornecedor();
+    ClasseDatas datas = new ClasseDatas();
+    MaskFormatter data;
+    MensagensUsuario msg = new MensagensUsuario();
 
     /**
      * Creates new form InterfaceContasPagar
@@ -68,8 +81,10 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         tam3[7] = 70;
         preenche.FormataJtable(TbParcelas, tam3);
         preenche.PreencheJComboBox(CbFormaPgto, parcelas.getFormapgto().retornaformapgtocombobox());
+        preenche.PreencheJComboBox(CbOperacao, parcelas.getConta().getOperacao().retornaoperacoescombobox(true));
         TbContas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TbParcelas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        RbClienteActionPerformed(null);
     }
 
     /**
@@ -86,8 +101,8 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         PopDetalhes = new javax.swing.JPopupMenu();
         ItMnDetalhes = new javax.swing.JMenuItem();
         ItMnCancelar = new javax.swing.JMenuItem();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbContas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -99,6 +114,45 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         CbFormaPgto = new javax.swing.JComboBox();
         BtCadFormaPgto = new javax.swing.JButton();
         BtPagar = new javax.swing.JButton();
+        CbBuscaEspecific = new javax.swing.JCheckBox();
+        RbCliente = new javax.swing.JRadioButton();
+        RbFornecedor = new javax.swing.JRadioButton();
+        LbCodPessoa = new javax.swing.JLabel();
+        TfCodPessoa = new javax.swing.JTextField();
+        BtPesqPessoa = new javax.swing.JButton();
+        TfPessoa = new javax.swing.JTextField();
+        LbNomePessoa = new javax.swing.JLabel();
+        BtCadPessoa = new javax.swing.JButton();
+        BtPesqPessoas = new javax.swing.JButton();
+        ChbCtaAbertas = new javax.swing.JCheckBox();
+        ChbCtaVencidas = new javax.swing.JCheckBox();
+        ChbCtaPagas = new javax.swing.JCheckBox();
+        ChbOperacao = new javax.swing.JCheckBox();
+        CbOperacao = new javax.swing.JComboBox();
+        ChbPeriodo = new javax.swing.JCheckBox();
+        try{
+            data = new MaskFormatter("##/##/####");
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Nao foi possivel localizar");
+        }
+        TfDtInicial = new JFormattedTextField(data);
+        jLabel4 = new javax.swing.JLabel();
+        try{
+            data = new MaskFormatter("##/##/####");
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Nao foi possivel localizar");
+        }
+        TfDtFinal = new JFormattedTextField(data);
+        jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        try{
+            data = new MaskFormatter("##/##/####");
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Nao foi possivel localizar");
+        }
+        TfDtPgto = new JFormattedTextField(data);
+        jPanel2 = new javax.swing.JPanel();
+        LbNotificacao = new javax.swing.JLabel();
 
         jMenuItem1.setText("Estornar parcela");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -127,8 +181,6 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Contas à Pagar - Software Loja da Fátima");
         setResizable(false);
-
-        jLabel7.setText("Buscar Contas:");
 
         TbContas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -207,6 +259,150 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
             }
         });
 
+        CbBuscaEspecific.setText("Buscar Cliente/Fornecedor Específico");
+        CbBuscaEspecific.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CbBuscaEspecificActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(RbCliente);
+        RbCliente.setSelected(true);
+        RbCliente.setText("Cliente");
+        RbCliente.setEnabled(false);
+        RbCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RbClienteActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(RbFornecedor);
+        RbFornecedor.setText("Fornecedor");
+        RbFornecedor.setEnabled(false);
+        RbFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RbFornecedorActionPerformed(evt);
+            }
+        });
+
+        LbCodPessoa.setText("Cód. Pessoa");
+
+        TfCodPessoa.setEnabled(false);
+        TfCodPessoa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfCodPessoaFocusLost(evt);
+            }
+        });
+        TfCodPessoa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TfCodPessoaKeyReleased(evt);
+            }
+        });
+
+        BtPesqPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
+        BtPesqPessoa.setEnabled(false);
+        BtPesqPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtPesqPessoaActionPerformed(evt);
+            }
+        });
+
+        TfPessoa.setEditable(false);
+
+        LbNomePessoa.setText("Nome/Nome Fantasia");
+
+        BtCadPessoa.setText("Cadastrar Cliente");
+        BtCadPessoa.setEnabled(false);
+        BtCadPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtCadPessoaActionPerformed(evt);
+            }
+        });
+
+        BtPesqPessoas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
+        BtPesqPessoas.setText("Buscar");
+        BtPesqPessoas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtPesqPessoasActionPerformed(evt);
+            }
+        });
+
+        ChbCtaAbertas.setSelected(true);
+        ChbCtaAbertas.setText("Contas Abertas");
+
+        ChbCtaVencidas.setSelected(true);
+        ChbCtaVencidas.setText("Contas Vencidas");
+
+        ChbCtaPagas.setSelected(true);
+        ChbCtaPagas.setText("Contas Pagas");
+
+        ChbOperacao.setText("Operação");
+        ChbOperacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChbOperacaoActionPerformed(evt);
+            }
+        });
+
+        CbOperacao.setEnabled(false);
+
+        ChbPeriodo.setText("No período");
+        ChbPeriodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChbPeriodoActionPerformed(evt);
+            }
+        });
+
+        TfDtInicial.setEditable(false);
+        TfDtInicial.setName("DT_NASC"); // NOI18N
+        TfDtInicial.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfDtInicialFocusLost(evt);
+            }
+        });
+
+        jLabel4.setText("a");
+
+        TfDtFinal.setEditable(false);
+        TfDtFinal.setName("DT_NASC"); // NOI18N
+        TfDtFinal.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfDtFinalFocusLost(evt);
+            }
+        });
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/imprimir.png"))); // NOI18N
+        jButton1.setText("Imprimir Parcelas");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Data do Pagamento");
+
+        TfDtPgto.setEnabled(false);
+        TfDtPgto.setName("DT_NASC"); // NOI18N
+        TfDtPgto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                TfDtPgtoFocusLost(evt);
+            }
+        });
+
+        LbNotificacao.setText(" ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(LbNotificacao)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LbNotificacao)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -214,50 +410,145 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ChbCtaAbertas)
+                        .addGap(18, 18, 18)
+                        .addComponent(ChbCtaVencidas)
+                        .addGap(18, 18, 18)
+                        .addComponent(ChbCtaPagas)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ChbOperacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CbOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(ChbPeriodo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel1)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(TfCodPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(BtPesqPessoa))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(LbCodPessoa)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(RbCliente)
+                                                .addGap(31, 31, 31)
+                                                .addComponent(RbFornecedor)))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(BtCadPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(LbNomePessoa)))
+                            .addComponent(jScrollPane2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1))
+                            .addComponent(CbBuscaEspecific)
+                            .addComponent(BtPesqPessoas)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(CbFormaPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtCadFormaPgto))
-                                    .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 121, Short.MAX_VALUE)))
-                .addContainerGap())
+                                        .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(TfDtPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(CbFormaPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(BtCadFormaPgto)))))))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7)
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                .addComponent(CbBuscaEspecific)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CbFormaPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtCadFormaPgto))
+                    .addComponent(RbCliente)
+                    .addComponent(RbFornecedor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LbCodPessoa)
+                    .addComponent(LbNomePessoa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtPesqPessoa)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TfCodPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtCadPessoa)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ChbCtaAbertas)
+                    .addComponent(ChbCtaVencidas)
+                    .addComponent(ChbCtaPagas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ChbOperacao)
+                    .addComponent(CbOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(ChbPeriodo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtPesqPessoas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CbFormaPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtCadFormaPgto))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtPagar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TfDtPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(8, 8, 8)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -270,7 +561,9 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 583, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -297,16 +590,22 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
             if (linha == 0) {
                 if (TbParcelas.getValueAt(linha, 6).toString().equals("PAGA")) {
                     TfValor.setEnabled(false);
+                    TfDtPgto.setEnabled(false);
                 } else {
                     TfValor.setEnabled(true);
+                    TfDtPgto.setEnabled(true);
                     TfValor.setText(TbParcelas.getValueAt(linha, 1).toString());
+                    TfDtPgto.setText(datas.retornadataatual());
                 }
             } else {
                 if (TbParcelas.getValueAt((linha - 1), 6).toString().equals("PAGA") && !TbParcelas.getValueAt(linha, 6).toString().equals("PAGA")) {
                     TfValor.setEnabled(true);
+                    TfDtPgto.setEnabled(true);
                     TfValor.setText(TbParcelas.getValueAt(linha, 1).toString());
+                    TfDtPgto.setText(datas.retornadataatual());
                 } else {
                     TfValor.setEnabled(false);
+                    TfDtPgto.setEnabled(false);
                 }
             }
         }
@@ -325,72 +624,83 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     private void BtPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPagarActionPerformed
         boolean pagou = false;
         if (TbParcelas.getSelectedRow() > -1 && TfValor.getValue() != BigDecimal.valueOf(0) && TfValor.isEnabled()) {
-            if (CbFormaPgto.getSelectedItem() != null) {
-                if (Float.parseFloat(TfValor.getValue().toString()) == Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString())) {
-                    if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja realizar o pagamento desta parcela?", "Deseja pagar esta parcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                        ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
-                        if (mvtocaixa.retornacaixaatual() > Float.parseFloat(TfValor.getValue().toString())) {
-                            parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
-                            parcelas.setVlpago(Float.parseFloat(TfValor.getValue().toString()));
-                            parcelas.getFormapgto().setFormapgto(CbFormaPgto.getSelectedItem().toString());
-                            parcelas.getFormapgto().setCodigo(parcelas.getFormapgto().retornacodigo());
-                            parcelas.pagaparcela();
-                            pagou = true;
-                            mvtocaixa.setParcela(parcelas);
-                            mvtocaixa.setTpmvto("S");
-                            mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
-                            mvtocaixa.setDsmvto("PAGAMENTO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " - " + parcelas.getConta().retornadescricaodaconta());
-                            mvtocaixa.incluir();
-                            TbContasMouseReleased(null);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Impossível realizar o pagamento desta parcela.\nO saldo do caixa e menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
+            if(datas.validadatas(TfDtPgto.getText())){
+                if (CbFormaPgto.getSelectedItem() != null) {
+                    if (Float.parseFloat(TfValor.getValue().toString()) == Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString())) {
+                        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja realizar o pagamento desta parcela?", "Deseja pagar esta parcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
+                            if (mvtocaixa.retornacaixaatual() > Float.parseFloat(TfValor.getValue().toString())) {
+                                parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
+                                parcelas.setVlpago(Float.parseFloat(TfValor.getValue().toString()));
+                                parcelas.getFormapgto().setFormapgto(CbFormaPgto.getSelectedItem().toString());
+                                parcelas.getFormapgto().setCodigo(parcelas.getFormapgto().retornacodigo());
+                                parcelas.setDtpago(TfDtPgto.getText());
+                                parcelas.pagaparcela();
+                                pagou = true;
+                                mvtocaixa.setParcela(parcelas);
+                                mvtocaixa.setTpmvto("S");
+                                mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
+                                mvtocaixa.setDsmvto("PAGAMENTO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " - " + parcelas.getConta().retornadescricaodaconta());
+                                mvtocaixa.incluir();
+                                parcelas.atualizaparcelasecontas();
+                                TbContasMouseReleased(null);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Impossível realizar o pagamento desta parcela.\nO saldo do caixa e menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
+                            }
                         }
-                    }
-                } else if (Float.parseFloat(TfValor.getValue().toString()) > Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString())) {
-                    if (JOptionPane.showConfirmDialog(null, "Este valor é maior que o valor da parcela.\nVocê alega ter recebido acréscimo no valor desta parcela e por isso está pagando um valor maior?", "Voce recebeu acréscimo no valor da parcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    } else if (Float.parseFloat(TfValor.getValue().toString()) > Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString())) {
+                        if (JOptionPane.showConfirmDialog(null, "Este valor é maior que o valor da parcela.\nVocê alega ter recebido acréscimo no valor desta parcela e por isso está pagando um valor maior?", "Voce recebeu acréscimo no valor da parcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
+                            if (mvtocaixa.retornacaixaatual() > Float.parseFloat(TfValor.getValue().toString())) {
+                                parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
+                                parcelas.setVlpago(Float.parseFloat(TfValor.getValue().toString()));
+                                parcelas.getFormapgto().setFormapgto(CbFormaPgto.getSelectedItem().toString());
+                                parcelas.getFormapgto().setCodigo(parcelas.getFormapgto().retornacodigo());
+                                parcelas.setDtpago(TfDtPgto.getText());
+                                parcelas.pagaparcela();
+                                pagou = true;
+                                mvtocaixa.setParcela(parcelas);
+                                mvtocaixa.setTpmvto("S");
+                                mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
+                                mvtocaixa.setDsmvto("PAGAMENTO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " COM ACRESCIMO NO VALOR DA PARCELA - " + parcelas.getConta().retornadescricaodaconta());
+                                mvtocaixa.incluir();
+                                parcelas.atualizaparcelasecontas();
+                                TbContasMouseReleased(null);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Impossível realizar o pagamento desta parcela.\nO saldo do caixa é menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        }
+                    } else if (JOptionPane.showConfirmDialog(null, "Este valor é menor que o valor da parcela.\nVocê alega ter recebido desconto nesta parcela e por isso está pagando um valor menor?", "Voce recebeu desconto nesta parcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
                         if (mvtocaixa.retornacaixaatual() > Float.parseFloat(TfValor.getValue().toString())) {
                             parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
                             parcelas.setVlpago(Float.parseFloat(TfValor.getValue().toString()));
                             parcelas.getFormapgto().setFormapgto(CbFormaPgto.getSelectedItem().toString());
                             parcelas.getFormapgto().setCodigo(parcelas.getFormapgto().retornacodigo());
+                            parcelas.setDtpago(TfDtPgto.getText());
                             parcelas.pagaparcela();
                             pagou = true;
                             mvtocaixa.setParcela(parcelas);
                             mvtocaixa.setTpmvto("S");
                             mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
-                            mvtocaixa.setDsmvto("PAGAMENTO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " COM ACRESCIMO NO VALOR DA PARCELA - " + parcelas.getConta().retornadescricaodaconta());
+                            mvtocaixa.setDsmvto("PAGAMENTO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " COM DESCONTO NO VALOR DA PARCELA - " + parcelas.getConta().retornadescricaodaconta());
                             mvtocaixa.incluir();
+                            parcelas.atualizaparcelasecontas();
                             TbContasMouseReleased(null);
                         } else {
                             JOptionPane.showMessageDialog(null, "Impossível realizar o pagamento desta parcela.\nO saldo do caixa é menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
-                } else if (JOptionPane.showConfirmDialog(null, "Este valor é menor que o valor da parcela.\nVocê alega ter recebido desconto nesta parcela e por isso está pagando um valor menor?", "Voce recebeu desconto nesta parcela?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
-                    if (mvtocaixa.retornacaixaatual() > Float.parseFloat(TfValor.getValue().toString())) {
-                        parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
-                        parcelas.setVlpago(Float.parseFloat(TfValor.getValue().toString()));
-                        parcelas.getFormapgto().setFormapgto(CbFormaPgto.getSelectedItem().toString());
-                        parcelas.getFormapgto().setCodigo(parcelas.getFormapgto().retornacodigo());
-                        parcelas.pagaparcela();
-                        pagou = true;
-                        mvtocaixa.setParcela(parcelas);
-                        mvtocaixa.setTpmvto("S");
-                        mvtocaixa.setVlmvto(Float.parseFloat(TfValor.getValue().toString()));
-                        mvtocaixa.setDsmvto("PAGAMENTO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " COM DESCONTO NO VALOR DA PARCELA - " + parcelas.getConta().retornadescricaodaconta());
-                        mvtocaixa.incluir();
-                        TbContasMouseReleased(null);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Impossível realizar o pagamento desta parcela.\nO saldo do caixa é menor que o valor a ser pago!", "Saldo do caixa insuficiente", JOptionPane.INFORMATION_MESSAGE);
-                    }
+                } else {
+                    msg.CampoNaoPreenchido(LbNotificacao, "Selecione ou insira a forma de pagamento escolhida pela pessoa!");
+                    CbFormaPgto.grabFocus();
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Selecione ou insira a forma de Pagamento escolhida pela pessoa!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
-                CbFormaPgto.grabFocus();
+            }else{
+                msg.CampoNaoPreenchido(LbNotificacao, "Digite a data de pagamento da parcela!");
+                TfDtPgto.grabFocus();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione a parcela que será paga e o valor correto a ser pago!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoNaoPreenchido(LbNotificacao, "Selecione a parcela que será paga e o valor correto a ser pago!");
             TfValor.grabFocus();
         }
         if (pagou){
@@ -415,22 +725,25 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     }//GEN-LAST:event_BtPagarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        boolean estornou = false;
         if (TbParcelas.getSelectedRow() > -1) {
             if (TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 6).toString().equals("PAGA")) {
                 if (Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()) != parcelas.retornanumeroultimaparcelavalida()) {
-                    if (!TbParcelas.getValueAt(TbParcelas.getSelectedRow() + 1, 5).toString().equals("PAGA")) {
+                    if (!TbParcelas.getValueAt(TbParcelas.getSelectedRow() + 1, 6).toString().equals("PAGA")) {
                         if (JOptionPane.showConfirmDialog(null, "Deseja realmente estornar esta parcela?\n"
                                 + "(Fazendo isso você estará retirando do caixa o valor pago nesta parcela)", "Deseja estornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
                             parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
                             parcelas.estornarparcela();
+                            estornou = true;
                             parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
                             ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
                             mvtocaixa.setParcela(parcelas);
                             mvtocaixa.setTpmvto("E");
                             mvtocaixa.setVlmvto(parcelas.getVlpagar());
                             mvtocaixa.setDsmvto("ESTORNO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " - " + parcelas.getConta().retornadescricaodaconta());
-                            mvtocaixa.incluir();
+                            mvtocaixa.incluir(); 
+                            parcelas.atualizaparcelasecontas();
                             TbContasMouseReleased(null);
                         }
                     }
@@ -440,6 +753,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                         parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
                         parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
                         parcelas.estornarparcela();
+                        estornou = true;
                         parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
                         ClasseMvtoCaixa mvtocaixa = new ClasseMvtoCaixa();
                         mvtocaixa.setParcela(parcelas);
@@ -447,9 +761,29 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                         mvtocaixa.setVlmvto(parcelas.getVlpagar());
                         mvtocaixa.setDsmvto("ESTORNO DA PARCELA NRO. " + mvtocaixa.getParcela().getCodigo() + " - " + parcelas.getConta().retornadescricaodaconta());
                         mvtocaixa.incluir();
+                        parcelas.atualizaparcelasecontas();
                         TbContasMouseReleased(null);
                     }
                 }
+            }
+        }
+        if (estornou){
+            HashMap filtro = new HashMap();
+            filtro.put("CD_OPERACAO", parcelas.getConta().getOperacao().getCodigo());
+            filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
+            filtro.put("DS_RELATORIO", "PAGAMENTO DE PARCELA");
+            ConexaoPostgre conexao = new ConexaoPostgre();
+            JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
+            dialog.setSize(1000, 700);
+            dialog.setLocationRelativeTo(null);
+            try {
+                JasperPrint print = JasperFillManager.fillReport("relatorios\\parcelapaga.jasper", filtro, conexao.conecta());
+                   
+                JasperViewer viewer = new JasperViewer(print, true);
+                dialog.getContentPane().add(viewer.getContentPane());
+                dialog.setVisible(true);
+            } catch (Exception ex) {
+                System.out.println(ex);
             }
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -468,7 +802,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
 
     private void ItMnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItMnCancelarActionPerformed
         if (!parcelapaga()) {
-            if (JOptionPane.showConfirmDialog(null, "Você está prestes a cancelar esta conta.\nCaso haja produtos envolvidos nessa operação, a situação do estoque sera revertido!\n\nTem certeza que deseja cancelar?", "Deseja cancelar operação?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Você está prestes a cancelar esta conta.\nCaso haja produtos envolvidos nessa operação, a situação do estoque será revertido!\n\nTem certeza que deseja cancelar?", "Deseja cancelar operação?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 parcelas.getConta().retornainformacoesconta();
                 if (parcelas.getConta().getCompravenda().getCodigo() != 0) {
                     parcelas.getConta().getCompravenda().getOperacao().retornaoperacao();
@@ -482,7 +816,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                             prodcompravenda.getCompravenda().cancelarcompravenda();
                             prodcompravenda.reverterestoqueprodutos();
                         } else {
-                            JOptionPane.showMessageDialog(null, "Não é possivel realizar o cancelamento desta operação!\nOs produtos dessa operacao tem estoque disponivel menor que a quantidade para devolucao.", "Cancelamento de operação não permitido", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Não é possivel realizar o cancelamento desta operação!\nOs produtos dessa operacao tem estoque disponivel menor que a quantidade para devolução.", "Cancelamento de operação não permitido", JOptionPane.INFORMATION_MESSAGE);
                         }
                     } else {
                         parcelas.getConta().cancelarconta();
@@ -494,27 +828,279 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Faça estorno de todas as parcelas desta conta para que o cancelamento seja realizado!", "Existem parcelas pagas", JOptionPane.INFORMATION_MESSAGE);
+            msg.CampoNaoPreenchido(LbNotificacao, "Faça estorno de todas as parcelas desta conta para que o cancelamento seja realizado!");
         }
     }//GEN-LAST:event_ItMnCancelarActionPerformed
+
+    private void CbBuscaEspecificActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbBuscaEspecificActionPerformed
+        RbCliente.setEnabled(CbBuscaEspecific.isSelected());
+        RbFornecedor.setEnabled(CbBuscaEspecific.isSelected());
+        TfCodPessoa.setEnabled(CbBuscaEspecific.isSelected());
+        BtPesqPessoa.setEnabled(CbBuscaEspecific.isSelected());
+        BtCadPessoa.setEnabled(CbBuscaEspecific.isSelected());
+    }//GEN-LAST:event_CbBuscaEspecificActionPerformed
+
+    private void RbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RbClienteActionPerformed
+        if (RbCliente.isSelected()) {
+            LbCodPessoa.setText("Cód. Cliente");
+            LbNomePessoa.setText("Cliente");
+            BtCadPessoa.setText("Cadastrar Cliente");
+        } else {
+            LbCodPessoa.setText("Cód. Fornecedor");
+            LbNomePessoa.setText("Fornecedor");
+            BtCadPessoa.setText("Cadastrar Fornecedor");
+        }
+        analisausuario();
+        TfCodPessoaKeyReleased(null);
+    }//GEN-LAST:event_RbClienteActionPerformed
+
+    private void RbFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RbFornecedorActionPerformed
+        if (RbCliente.isSelected()) {
+            LbCodPessoa.setText("Cód. Cliente");
+            LbNomePessoa.setText("Cliente");
+            BtCadPessoa.setText("Cadastrar Cliente");
+        } else {
+            LbCodPessoa.setText("Cód. Fornecedor");
+            LbNomePessoa.setText("Fornecedor");
+            BtCadPessoa.setText("Cadastrar Fornecedor");
+        }
+        analisausuario();
+        TfCodPessoaKeyReleased(null);
+    }//GEN-LAST:event_RbFornecedorActionPerformed
+
+    private void TfCodPessoaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfCodPessoaFocusLost
+
+    }//GEN-LAST:event_TfCodPessoaFocusLost
+
+    private void TfCodPessoaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TfCodPessoaKeyReleased
+        limpar.Limpar(TbContas);
+        limpar.Limpar(TbContas);
+        limpar.Limpar(TbParcelas);
+        if (RbCliente.isSelected()) {
+            if (!TfCodPessoa.getText().equals("")) {
+                cliente.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
+                if (cliente.eativo()) {
+                    TfPessoa.setText(cliente.retornanomecliente());
+                } else {
+                    TfPessoa.setText("");
+                }
+            } else {
+                TfPessoa.setText("");
+            }
+        } else {
+            if (!TfCodPessoa.getText().equals("")) {
+                fornecedor.setCodigo(Integer.parseInt(TfCodPessoa.getText()));
+                if (fornecedor.efornecedorativo()) {
+                    fornecedor.getPessoajur().getPessoa().setCodigo(fornecedor.retornacodigopessoafornecedor());
+                    TfPessoa.setText(fornecedor.getPessoajur().retornanomeporCodigo());
+                } else {
+                    TfPessoa.setText("");
+                }
+            } else {
+                TfPessoa.setText("");
+            }
+        }
+    }//GEN-LAST:event_TfCodPessoaKeyReleased
+
+    private void BtPesqPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqPessoaActionPerformed
+        if (RbCliente.isSelected()) {
+            final ConsulSimplesCliente tela = new ConsulSimplesCliente(getPrimeiratela(), true, cliente);
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+                    if (cliente.getCodigo() != 0) {
+                        TfCodPessoa.setText("" + cliente.getCodigo());
+                        TfCodPessoaKeyReleased(null);
+                    } else {
+                        TfCodPessoa.setText("");
+                        TfPessoa.setText("");
+                    }
+                }
+            });
+        } else {
+            final ConsulSimplesFornecedor tela = new ConsulSimplesFornecedor(getPrimeiratela(), true, fornecedor);
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+                    if (fornecedor.getCodigo() != 0) {
+                        TfCodPessoa.setText("" + fornecedor.getCodigo());
+                        TfCodPessoaKeyReleased(null);
+                    } else {
+                        TfCodPessoa.setText("");
+                        TfPessoa.setText("");
+                    }
+                }
+            });
+        }
+    }//GEN-LAST:event_BtPesqPessoaActionPerformed
+
+    private void BtCadPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCadPessoaActionPerformed
+        if (RbCliente.isSelected()) {
+            final InterfaceCliente tela = new InterfaceCliente(getPrimeiratela(), true, getTelasusuario());
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+
+                }
+            });
+        } else {
+            final InterfaceFornecedor tela = new InterfaceFornecedor(getPrimeiratela(), true, getTelasusuario());
+            tela.setVisible(true);
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosed(java.awt.event.WindowEvent evt) {
+
+                }
+            });
+        }
+    }//GEN-LAST:event_BtCadPessoaActionPerformed
+
+    private void BtPesqPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqPessoasActionPerformed
+        String tp1, tp2, tp3, data_ini, data_fim;
+        int cdoperacao;
+        if (ChbCtaAbertas.isSelected())  tp1 = "A"; else tp1 = "";
+        if (ChbCtaPagas.isSelected())    tp2 = "P"; else tp2 = "";
+        if (ChbCtaVencidas.isSelected()) tp3 = "V"; else tp3 = "";
+        if (ChbPeriodo.isSelected() && datascorretas()){
+            data_ini = TfDtInicial.getText();
+            data_fim = TfDtFinal.getText();
+        }else{
+            data_ini = "";
+            data_fim = "";
+        }
+        if (ChbOperacao.isSelected()){
+            parcelas.getConta().getOperacao().setDescricao(CbOperacao.getSelectedItem().toString());
+            cdoperacao = parcelas.getConta().getOperacao().retornacodigooperacao();
+        }else cdoperacao = 0;
+        if (!CbBuscaEspecific.isSelected()){
+            parcelas.getConta().setCodigopessoa(0);
+            preenche.PreencherJtable(TbContas, parcelas.getConta().retornacontas(tp1, tp2, tp3, data_ini, data_fim, cdoperacao, "S"));
+        }else{
+            if (!TfCodPessoa.getText().equals("") && !TfPessoa.getText().equals("")) {
+                limpar.Limpar(TbParcelas);
+                limpar.Limpar(TbContas);
+                if (RbCliente.isSelected()){
+                    ClassePessoaFisica fisica = new ClassePessoaFisica();
+                    fisica.setNome(TfPessoa.getText());
+                    if (fisica.epessoafisica()) {
+                        parcelas.getConta().setCodigopessoa(fisica.getPessoa().getCodigo());
+                    }
+                } else{
+                    ClassePessoaJuridica juridica = new ClassePessoaJuridica();
+                    juridica.setNomefantasia(TfPessoa.getText());
+                    if (juridica.epessoajuridica()) {
+                        parcelas.getConta().setCodigopessoa(juridica.getPessoa().getCodigo());
+                    }
+                }
+                preenche.PreencherJtable(TbContas, parcelas.getConta().retornacontas(tp1, tp2, tp3, data_ini, data_fim, cdoperacao, "S"));
+            }else{
+                limpar.Limpar(TbContas);
+                limpar.Limpar(TbParcelas);
+            }
+        }
+    }//GEN-LAST:event_BtPesqPessoasActionPerformed
+
+    private void ChbOperacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChbOperacaoActionPerformed
+        CbOperacao.setEnabled(ChbOperacao.isSelected());
+    }//GEN-LAST:event_ChbOperacaoActionPerformed
+
+    private void ChbPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChbPeriodoActionPerformed
+        TfDtInicial.setEditable(ChbPeriodo.isSelected());
+        TfDtFinal.setEditable(ChbPeriodo.isSelected());
+    }//GEN-LAST:event_ChbPeriodoActionPerformed
+
+    private void TfDtInicialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfDtInicialFocusLost
+        if (valida.CampoTotalmentePreenchido(TfDtInicial.getText())) {
+            if (datas.validadatas(TfDtInicial.getText())) {
+
+            } else {
+                TfDtInicial.setValue(null);
+            }
+        }
+    }//GEN-LAST:event_TfDtInicialFocusLost
+
+    private void TfDtFinalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfDtFinalFocusLost
+        if (valida.CampoTotalmentePreenchido(TfDtFinal.getText())) {
+            if (datas.validadatas(TfDtFinal.getText())) {
+
+            } else {
+                TfDtFinal.setValue(null);
+            }
+        }
+    }//GEN-LAST:event_TfDtFinalFocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(TbParcelas.getRowCount() > 0){    
+            HashMap filtro = new HashMap();
+            filtro.put("CD_OPERACAO", parcelas.getConta().getOperacao().getCodigo());
+            filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
+            filtro.put("DS_RELATORIO", "RELATORIO DAS PARCELAS");
+            ConexaoPostgre conexao = new ConexaoPostgre();
+            JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
+            dialog.setSize(1000, 700);
+            dialog.setLocationRelativeTo(null);
+            try {
+                JasperPrint print = JasperFillManager.fillReport("relatorios\\parcelapaga.jasper", filtro, conexao.conecta());
+                   
+                JasperViewer viewer = new JasperViewer(print, true);
+                dialog.getContentPane().add(viewer.getContentPane());
+                dialog.setVisible(true);
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TfDtPgtoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfDtPgtoFocusLost
+        if (valida.CampoTotalmentePreenchido(TfDtPgto.getText())) {
+            if (datas.validadatas(TfDtPgto.getText())) {
+
+            } else {
+                TfDtPgto.setValue(null);
+            }
+        }
+    }//GEN-LAST:event_TfDtPgtoFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadFormaPgto;
+    private javax.swing.JButton BtCadPessoa;
     private javax.swing.JButton BtPagar;
+    private javax.swing.JButton BtPesqPessoa;
+    private javax.swing.JButton BtPesqPessoas;
+    private javax.swing.JCheckBox CbBuscaEspecific;
     private javax.swing.JComboBox CbFormaPgto;
+    private javax.swing.JComboBox CbOperacao;
+    private javax.swing.JCheckBox ChbCtaAbertas;
+    private javax.swing.JCheckBox ChbCtaPagas;
+    private javax.swing.JCheckBox ChbCtaVencidas;
+    private javax.swing.JCheckBox ChbOperacao;
+    private javax.swing.JCheckBox ChbPeriodo;
     private javax.swing.JMenuItem ItMnCancelar;
     private javax.swing.JMenuItem ItMnDetalhes;
+    private javax.swing.JLabel LbCodPessoa;
+    private javax.swing.JLabel LbNomePessoa;
+    private javax.swing.JLabel LbNotificacao;
     private javax.swing.JPopupMenu PopDetalhes;
+    private javax.swing.JRadioButton RbCliente;
+    private javax.swing.JRadioButton RbFornecedor;
     private javax.swing.JTable TbContas;
     private javax.swing.JTable TbParcelas;
+    private javax.swing.JTextField TfCodPessoa;
+    private javax.swing.JFormattedTextField TfDtFinal;
+    private javax.swing.JFormattedTextField TfDtInicial;
+    private javax.swing.JFormattedTextField TfDtPgto;
+    private javax.swing.JTextField TfPessoa;
     private JNumberField.JNumberField TfValor;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -539,6 +1125,26 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
             }
         }
         return false;
+    }
+    
+    public boolean datascorretas() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        format.setLenient(false);
+        Date date1 = null, date2 = null;
+        String data1, data2;
+        data1 = TfDtInicial.getText();
+        data2 = TfDtFinal.getText();           
+        try {
+            date1 = format.parse(data1);
+            date2 = format.parse(data2);
+        } catch (ParseException ex) {
+            return false;
+        }
+        if (date1.after(date2)) {
+            return false;
+        }
+        
+        return true;
     }
     
     public java.awt.Frame getPrimeiratela() {

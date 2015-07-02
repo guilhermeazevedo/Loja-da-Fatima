@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author guilhermeazevedo
+ * @author Guilherme Azevedo
  */
 public class ConexaoPostgre {
 
@@ -63,9 +63,9 @@ public class ConexaoPostgre {
             retorno = 1;
         } catch (SQLException sqlex) {
             if (sqlex.getErrorCode() == 00001) {
-                JOptionPane.showMessageDialog(null, "Os dados não puderam ser incluidos pois já está cadastrado");
+                JOptionPane.showMessageDialog(null, "Os dados não puderam ser incluidos pois já estão cadastrados!", "As informações não foram gravadas", JOptionPane.YES_OPTION);
             } else {
-                JOptionPane.showMessageDialog(null, "Não foi possível executar o comando sql (" + sqlex + "), \nO comando SQL passado foi: " + sql);
+                JOptionPane.showMessageDialog(null, "Não foi possível executar o comando sql (" + sqlex + "), \nO comando SQL passado foi: " + sql, "O comando SQL retornou um erro!", JOptionPane.YES_OPTION);
             }
             retorno = 0;
         }
@@ -78,7 +78,7 @@ public class ConexaoPostgre {
             retorno = 1;
             metaData = resultset.getMetaData();
         } catch (SQLException sqlex) {
-            //System.out.println(sqlex +"\n"+sql);
+            System.out.println(sqlex +"\n"+sql);
         }
     }
 
@@ -89,9 +89,9 @@ public class ConexaoPostgre {
             retorno = statement.executeUpdate(sql);
         } catch (SQLException sqlex) {
             if (sqlex.getErrorCode() == 2292) {
-                JOptionPane.showMessageDialog(null, "O resgistro não pôde ser excluído porque ele está sendo utilizado em outro cadastro/movimento");
+                JOptionPane.showMessageDialog(null, "O resgistro não pôde ser excluído porque ele está sendo utilizado em outro cadastro/movimento", "Registro em uso", JOptionPane.YES_OPTION);
             } else {
-                JOptionPane.showMessageDialog(null, "Não foi possível executar o comando sql de exclusão (" + sqlex + ") \nO sql passado foi " + sql);
+                JOptionPane.showMessageDialog(null, "Não foi possível executar o comando sql de exclusão (" + sqlex + ") \nO sql passado foi " + sql, "O comando SQL retornou um erro!", JOptionPane.YES_OPTION);
             }
             retorno = 0;
         }
@@ -104,9 +104,9 @@ public class ConexaoPostgre {
             retorno = statement.executeUpdate(sql);
         } catch (SQLException sqlex) {
             if (sqlex.getErrorCode() == 2292) {
-                JOptionPane.showMessageDialog(null, "Os dados não puderam ser atualizados pois estão sendo utilizados");
+                JOptionPane.showMessageDialog(null, "Os dados não puderam ser atualizados pois estão sendo utilizados", "Dados em uso", JOptionPane.YES_OPTION);
             } else {
-                JOptionPane.showMessageDialog(null, "Não foi possivel executar o comando SQL de atualização (" + sqlex + ") \nO comando SQL passado foi " + sql);
+                JOptionPane.showMessageDialog(null, "Não foi possivel executar o comando SQL de atualização (" + sqlex + ") \nO comando SQL passado foi " + sql, "O comando SQL retornou um erro!", JOptionPane.YES_OPTION);
             }
             retorno = 0;
         }

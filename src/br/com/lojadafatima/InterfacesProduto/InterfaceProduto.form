@@ -342,7 +342,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel5">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o do Produto/Servico*"/>
+                        <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o do Produto/Servi&#xe7;o*"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel9">
@@ -376,7 +376,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel2">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Tipo de Produto/Servico*"/>
+                        <Property name="text" type="java.lang.String" value="Tipo de Produto/Servi&#xe7;o*"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -499,9 +499,9 @@
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="4" rowCount="0">
-                                <Column editable="false" title="Cod. Caracteristica" type="java.lang.Object"/>
-                                <Column editable="false" title="Caracteristica" type="java.lang.Object"/>
-                                <Column editable="false" title="Cod Especificacao" type="java.lang.Object"/>
+                                <Column editable="false" title="C&#xf3;d. Caracter&#xed;stica" type="java.lang.Object"/>
+                                <Column editable="false" title="Caracter&#xed;stica" type="java.lang.Object"/>
+                                <Column editable="false" title="C&#xf3;d. Especifica&#xe7;&#xe3;o" type="java.lang.Object"/>
                                 <Column editable="false" title="Especifica&#xe7;&#xe3;o" type="java.lang.Object"/>
                               </Table>
                             </Property>
@@ -517,7 +517,7 @@
                                   <Editor/>
                                   <Renderer/>
                                 </Column>
-                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                   <Title/>
                                   <Editor/>
                                   <Renderer/>
@@ -582,8 +582,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jScrollPane5" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jScrollPane5" pref="583" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Component id="BtAddFornecedor" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -601,15 +601,18 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="TfFornecedor" min="-2" pref="245" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="TfFornecedor" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
                                               <Component id="BtCadFornecedor" min="-2" pref="139" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="13" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -621,14 +624,12 @@
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="TfCodFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="BtPesqFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="TfFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="BtCadFornecedor" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="TfCodFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="BtPesqFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="TfFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="BtCadFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -636,7 +637,7 @@
                                   <Component id="BtDelFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                              <Component id="jScrollPane5" pref="343" max="32767" attributes="0"/>
+                              <Component id="jScrollPane5" pref="344" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -681,7 +682,7 @@
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="2" rowCount="0">
-                                <Column editable="false" title="Codigo" type="java.lang.Object"/>
+                                <Column editable="false" title="C&#xf3;digo" type="java.lang.Object"/>
                                 <Column editable="false" title="Fornecedor" type="java.lang.Object"/>
                               </Table>
                             </Property>
@@ -711,7 +712,6 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/br/com/lojadafatima/Icones/buscar.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Pesquisar"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtPesqFornecedorActionPerformed"/>
@@ -849,7 +849,7 @@
                     <StringItem index="0" value="Todos"/>
                     <StringItem index="1" value="C&#xf3;digo"/>
                     <StringItem index="2" value="Descri&#xe7;&#xe3;o"/>
-                    <StringItem index="3" value="C&#xf3;digo do Tipo de Produto/Servico"/>
+                    <StringItem index="3" value="C&#xf3;digo do Tipo de Produto/Servi&#xe7;o"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -886,13 +886,13 @@
                       <Table columnCount="4" rowCount="0">
                         <Column editable="false" title="C&#xf3;digo" type="java.lang.Object"/>
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
-                        <Column editable="false" title="Tipo de Produto/Servico" type="java.lang.Object"/>
-                        <Column editable="false" title="Estoque minimo" type="java.lang.Object"/>
+                        <Column editable="false" title="Tipo de Produto/Servi&#xe7;o" type="java.lang.Object"/>
+                        <Column editable="false" title="Estoque m&#xed;nimo" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -938,7 +938,7 @@
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroup1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Servico"/>
+                <Property name="text" type="java.lang.String" value="Servi&#xe7;o"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesProduto;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
@@ -27,7 +22,7 @@ import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceEstoque extends javax.swing.JDialog {
 
@@ -210,7 +205,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
 
         TfDsProduto.setEditable(false);
 
-        jLabel4.setText("Descricao do Produto");
+        jLabel4.setText("Descrição do Produto");
 
         BtAjustar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
         BtAjustar.setText("Ajustar");
@@ -405,11 +400,11 @@ public class InterfaceEstoque extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nro. Mvto.", "Nro. Operação", "Cód. Operação", "Data Mvto.", "Qtde. Antes", "Qtde. Mvto.", "Qtde. Depois", "Tipo Mvto"
+                "Nro. Mvto.", "Nro. Operação", "Cód. Operação", "Data Mvto.", "Qtde. Antes", "Qtde. Mvto.", "Qtde. Depois", "Tipo Mvto."
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -551,7 +546,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                     mvtoestoque.getProduto().setCodigo(Integer.parseInt(TfPesqProduto.getText()));
                     preenche.PreencherJtable(TbProdutos, mvtoestoque.consultaestoqueporcodigo());
                 } else {
-                    JOptionPane.showMessageDialog(null, "Digite o codigo do produto para consulta!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o código do produto para consulta!", "Digite o código", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
             }
@@ -560,7 +555,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                     mvtoestoque.getProduto().setDescricao(TfPesqProduto.getText().toUpperCase());
                     preenche.PreencherJtable(TbProdutos, mvtoestoque.consultaestoquepordescricao());
                 } else {
-                    JOptionPane.showMessageDialog(null, "Digite a descricao do produto para consulta!", "Digite a descricao", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite a descrição do produto para consulta!", "Digite a descrição", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
             }
@@ -699,7 +694,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                     mvtoestoque.getProduto().setCodigo(Integer.parseInt(TfPesqProdutoHist.getText()));
                     preenche.PreencherJtable(TbProdutosHist, mvtoestoque.consultaestoqueporcodigo());
                 } else {
-                    JOptionPane.showMessageDialog(null, "Digite o codigo do produto para consulta!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o código do produto para consulta!", "Digite o código", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
             }
@@ -708,7 +703,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                     mvtoestoque.getProduto().setDescricao(TfPesqProdutoHist.getText().toUpperCase());
                     preenche.PreencherJtable(TbProdutosHist, mvtoestoque.consultaestoquepordescricao());
                 } else {
-                    JOptionPane.showMessageDialog(null, "Digite a descricao do produto para consulta!", "Digite a descricao", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite a descrição do produto para consulta!", "Digite a descrição", JOptionPane.INFORMATION_MESSAGE);
                 }
                 break;
             }

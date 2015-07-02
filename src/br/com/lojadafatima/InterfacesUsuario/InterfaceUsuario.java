@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesUsuario;
 
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
@@ -20,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceUsuario extends javax.swing.JDialog {
 
@@ -275,7 +270,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Permitir", "Tela", "Cod. Tela"
+                "Permitir", "Tela", "Cód. Tela"
             }
         ) {
             Class[] types = new Class [] {
@@ -316,7 +311,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Acesso Total", "Tela", "Cod. Tela"
+                "Acesso Total", "Tela", "Cód. Tela"
             }
         ) {
             Class[] types = new Class [] {
@@ -419,7 +414,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Cod. Usuario", "Login Usuario"
+                "Cód. Usuário", "Login Usuário"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -451,8 +446,8 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             PnConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnConsultaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         TabbedMultas.addTab("Consulta", PnConsulta);
@@ -461,7 +456,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabbedMultas, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+            .addComponent(TabbedMultas)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -480,12 +475,12 @@ public class InterfaceUsuario extends javax.swing.JDialog {
         } else {
             valida.validacamposCadastrar(PnLogin, PnBotoes);
             valida.validacamposCadastrar(PnTelas, PnBotoes);
-            msg.StatusEditar(LbNotificacao, "Editando informaçoes...");
+            msg.StatusEditar(LbNotificacao, "Editando informações...");
         }
     }//GEN-LAST:event_BtAlterarActionPerformed
 
     private void BtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtCancelarActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar esta operacao?\n(Caso queira, TODOS os dados da tela serao limpos)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar esta operaçõo?\n(Caso queira, TODOS os dados da tela serão limpos)", "Deseja cancelar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             limpa.Limpar(PnLogin);
             limpa.Limpar(TbInterfaces);
             limpa.Limpar(TbPermitidas);
@@ -523,11 +518,11 @@ public class InterfaceUsuario extends javax.swing.JDialog {
 
     private void BtExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtExcluirActionPerformed
         if (TfCodigo.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Selecione um Usuario na aba \"Consulta\" e carregue os dados para que esta operacao seja realizada!");
+            JOptionPane.showMessageDialog(null, "Selecione um Usuário na aba \"Consulta\" e carregue os dados para que esta operação seja realizada!");
             TabbedMultas.setSelectedIndex(1);
             TbConsulta.grabFocus();
         } else {
-            if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir TODOS os dados deste usuario?", "Deseja excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir TODOS os dados deste usuário?", "Deseja excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 telasusuario.getUsuario().setCodigo(Integer.parseInt(TfCodigo.getText()));
                 telasusuario.deletartelasusuario();
                 if(telasusuario.getUsuario().excluir()){
@@ -545,7 +540,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
 
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
         if (camposobrigatoriospreenchidos()) {
-            if (JOptionPane.showConfirmDialog(null, "Deseja realmente gravar os dados deste usuario?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja realmente gravar os dados deste usuário?", "Deseja gravar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 enviardados();
                 if (TfCodigo.getText().equals("")) {
                     if(telasusuario.getUsuario().incluir()){
@@ -697,31 +692,31 @@ public class InterfaceUsuario extends javax.swing.JDialog {
     
     public boolean camposobrigatoriospreenchidos() {
         if (TfLogin.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Login que o usuario utilizara!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Login que o usuário utilizará!");
             TabbedCadastro.setSelectedIndex(0);
             TfLogin.grabFocus();
             return false;
         }
         if (TfSenha.getText().equals("") || TfSenha.getText().length() < 5) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "O campo Senha deve ter no minimo 4 caracteres!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "O campo Senha deve ter no mínimo 4 caracteres!");
             TabbedCadastro.setSelectedIndex(0);
             TfSenha.grabFocus();
             return false;
         }
         if (!TfSenha.getText().equals(TfConfirmSenha.getText())) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "A Confirmaacao de Senha esta diferente da Senha que voce digitou!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "A Confirmação de Senha esta diferente da Senha que voce digitou!");
             TabbedCadastro.setSelectedIndex(0);
             TfConfirmSenha.grabFocus();
             return false;
         }
         if (TfDica.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite uma dica de senha, para o caso do usuario esquece-la");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite uma dica de senha, para o caso do usuário esquece-la");
             TabbedCadastro.setSelectedIndex(0);
             TfDica.grabFocus();
             return false;
         }
         if (TbPermitidas.getRowCount() <= 0) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Inclua as tela do sistema permitidas ao usuario!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Inclua as telas do sistema permitidas ao usuário!");
             TabbedCadastro.setSelectedIndex(1);
             return false;
         }

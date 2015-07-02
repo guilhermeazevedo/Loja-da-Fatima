@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesPessoa;
 
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
@@ -15,24 +10,17 @@ import br.com.lojadafatima.ClassesFerramentas.PermiteNumerosPontoBarra;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.Pessoa.ClasseFuncionario;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
-import java.awt.Color;
 import java.math.BigDecimal;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfaceFuncionario extends javax.swing.JDialog {
 
@@ -944,25 +932,25 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         if (valida.CampoTotalmentePreenchido(funcionario.getPessoafis().getCpf())) {
             if (!funcionario.getPessoafis().CPFnumerosiguais()) {
                 if (funcionario.getPessoafis().CPFvalido()) {
-                    LbCPFValido.setText("Valido");
+                    LbCPFValido.setText("Válido");
                     LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png")));
                     if (funcionario.getPessoafis().CPFexistente()) {
                         if (funcionario.efuncionario()) {
                             if (!TfCodigo.getText().equals("") && (funcionario.getCodigo() == Integer.parseInt(TfCodigo.getText()))) {
                             } else if (funcionario.efuncionarioativo()) {
-                                JOptionPane.showMessageDialog(null, "Este CPF pertence a um funcionario ja cadastrado no sistema!\n"
-                                        + "Consulte os dados deste funcionario na aba \"Consulta\" e informe o codigo ao funcionario, caso ele tenha esquecido!", "CPF existente", JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Este CPF pertence a um funcionario já cadastrado no sistema!\n"
+                                        + "Consulte os dados deste funcionário na aba \"Consulta\" e informe o código ao funcionário, caso ele tenha esquecido!", "CPF existente", JOptionPane.INFORMATION_MESSAGE);
                                 TfNrCPF.setText("");
                                 TfNrCPFKeyReleased(null);
                             } else {
                                 int op = JOptionPane.showConfirmDialog(null, "Este CPF pertence a " + funcionario.getPessoafis().retornanomeporCPF() + ". "
-                                        + "Os dados desta pessoa foram excluidas do sistema!\n\n"
+                                        + "Os dados desta pessoa foram excluídas do sistema!\n\n"
                                         + "Deseja recuperar os dados desta pessoa?", "O que deseja fazer?", JOptionPane.YES_NO_OPTION);
                                 if (op == JOptionPane.YES_OPTION) {
                                     funcionario.getPessoafis().getPessoa().setCodigo(funcionario.retornacodigopessoafuncionario());
                                     funcionario.getPessoafis().getPessoa().recuperar();
-                                    JOptionPane.showMessageDialog(null, "Recuperacao realizada com sucesso!\nAs informacoes do funcionario permanecem iguais as que estavam cadastradas no momento da exclusao\n\n"
-                                            + "Codigo: " + funcionario.getCodigo() + "\nNome: " + funcionario.getPessoafis().retornanomeporCPF(), "Recuperacao realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(null, "Recuperação realizada com sucesso!\nAs informações do funcionário permanecem iguais as que estavam cadastradas no momento da exclusão\n\n"
+                                            + "Código: " + funcionario.getCodigo() + "\nNome: " + funcionario.getPessoafis().retornanomeporCPF(), "Recuperação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
                                     limpar.Limpar(PnCadastro);
                                     limpar.Limpar(TbTelefone);
                                     limpar.Limpar(TbEmail);
@@ -976,12 +964,12 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                             }
                         } else {
                             int op = JOptionPane.showConfirmDialog(null, "Este CPF pertence a " + funcionario.getPessoafis().retornanomeporCPF() + ". "
-                                    + "Os dados desta pessoa estao cadastrados no sistema!\n\n"
-                                    + "Deseja importar os dados desta pessoa para criar um novo funcionario?\n"
-                                    + "(Caso queira, o funcionario sera criado automaticamente com as informacoes contidas no sistema)", "O que deseja fazer?", JOptionPane.YES_NO_OPTION);
+                                    + "Os dados desta pessoa estão cadastrados no sistema!\n\n"
+                                    + "Deseja importar os dados desta pessoa para criar um novo funcionário?\n"
+                                    + "(Caso queira, o funcionário sera criado automaticamente com as informações contidas no sistema)", "O que deseja fazer?", JOptionPane.YES_NO_OPTION);
                             if (op == JOptionPane.YES_OPTION) {
                                 if (TfFuncao.getText().equals("") || TfSalario.getValue() == BigDecimal.valueOf(0) || TfComissao.getValue() == BigDecimal.valueOf(0)) {
-                                    JOptionPane.showMessageDialog(null, "Primeiro digite os dados especificos de funcionario, depois disso digite o CPF novamente!", "Campos obrigatorios", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(null, "Primeiro digite os dados específicos de funcionário, depois disso digite o CPF novamente!", "Campos obrigatórios", JOptionPane.INFORMATION_MESSAGE);
                                     TfNrCPF.setText("");
                                     TfNrCPFKeyReleased(null);
                                 } else {
@@ -989,10 +977,10 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                                     funcionario.setComissao(Float.parseFloat(TfComissao.getValue().toString()));
                                     funcionario.setSalario(Float.parseFloat(TfSalario.getValue().toString()));
                                     funcionario.importardadosnovofuncionario();
-                                    JOptionPane.showMessageDialog(null, "Importacao dos dados realizada com sucesso!\n"
-                                            + "Um novo funcionario esta gravado no sistema com as informacoes contidas no CPF da pessoa.\n"
-                                            + "Caso deseja conferir ou alterar os dados do funcionario, faca a busca na aba \"Consulta\".\n\n"
-                                            + "Codigo: " + funcionario.getCodigo() + "\nNome: " + funcionario.getPessoafis().retornanomeporCPF());
+                                    JOptionPane.showMessageDialog(null, "Importação dos dados realizada com sucesso!\n"
+                                            + "Um novo funcionário está gravado no sistema com as informações contidas no CPF da pessoa.\n"
+                                            + "Caso deseja conferir ou alterar os dados do funcionário, faça a busca na aba \"Consulta\".\n\n"
+                                            + "Código: " + funcionario.getCodigo() + "\nNome: " + funcionario.getPessoafis().retornanomeporCPF());
                                     limpar.Limpar(PnCadastro);
                                     limpar.Limpar(TbTelefone);
                                     limpar.Limpar(TbEmail);
@@ -1007,11 +995,11 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                         }
                     }
                 } else {
-                    LbCPFValido.setText("CPF Invalido");
+                    LbCPFValido.setText("CPF Inválido");
                     LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
                 }
             } else {
-                LbCPFValido.setText("Numeros Iguais");
+                LbCPFValido.setText("Números Iguais");
                 LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
             }
         } else {
@@ -1078,29 +1066,29 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         limpar.Limpar(TbTelefone);
         limpar.Limpar(TbEmail);
         preenche.PreencheJComboBox(CbEstado, funcionario.getPessoafis().getPessoa().getEndereco().getCidade().getEstado().buscarestadosjcombobox());
-        TfDtCadastro.setText(datas.retornaratartual());
+        TfDtCadastro.setText(datas.retornadataatual());
         TfNrCPFKeyReleased(null);
         msg.StatusNovo(LbNotificacao, "Insira os dados do novo Funcionario");
     }//GEN-LAST:event_BtIncluirActionPerformed
 
     private void BtAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtAlterarActionPerformed
         if (TfCodigo.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Busque por um Funcionario na Aba \"Consulta\" e selecione a opção \"Carregar Dados\" após selecionar e\nclicar com o botão direito sobre os dados do funcionario para que a opção de Alterar os Dados seja realizada!");
+            JOptionPane.showMessageDialog(null, "Busque por um Funcionário na Aba \"Consulta\" e selecione a opção \"Carregar Dados\" após selecionar e\nclicar com o botão direito sobre os dados do funcionário para que a opção de Alterar os Dados seja realizada!");
             TabbedPaneFuncionario.setSelectedIndex(1);
             CbPesquisa.grabFocus();
         } else {
             valida.validacamposCadastrar(PnCadastro, PnBotoes);
-            msg.StatusEditar(LbNotificacao, "Alterando dados do Funcionario...");
+            msg.StatusEditar(LbNotificacao, "Alterando dados do Funcionário...");
         }
     }//GEN-LAST:event_BtAlterarActionPerformed
 
     private void BtExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtExcluirActionPerformed
         if (TfCodigo.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Busque por um Funcionario na Aba \"Consulta\" e selecione a opção \"Carregar Dados\" após selecionar e\nclicar com o botão direito sobre os dados do funcionario para que a opção de Excluir os Dados seja realizada!");
+            JOptionPane.showMessageDialog(null, "Busque por um Funcionário na Aba \"Consulta\" e selecione a opção \"Carregar Dados\" após selecionar e\nclicar com o botão direito sobre os dados do funcionário para que a opção de Excluir os Dados seja realizada!");
             TabbedPaneFuncionario.setSelectedIndex(1);
             CbPesquisa.grabFocus();
         } else {
-            if (JOptionPane.showConfirmDialog(null, "Voce tem certeza que deseja EXCLUIR os dados deste Funcionario?", "Deseja excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Você tem certeza que deseja EXCLUIR os dados deste Funcionário?", "Deseja excluir?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 funcionario.setCodigo(Integer.parseInt(TfCodigo.getText()));
                 if(funcionario.excluir()) msg.StatusExcluido(LbNotificacao, "Funcionario excluido com sucesso!");
                 limpar.Limpar(PnCadastro);
@@ -1143,7 +1131,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             }
             case 1: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o Codigo do funcionario que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o Código do funcionário que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     funcionario.setCodigo(Integer.parseInt(TfPesquisa.getText()));
@@ -1153,7 +1141,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             }
             case 2: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o Nome do funcionario que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o Nome do funcionário que deseja consultar!", "Digite o nome", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     funcionario.getPessoafis().setNome(TfPesquisa.getText());
@@ -1163,7 +1151,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             }
             case 3: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite a funcao do funcionario que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite a função do funcionário que deseja consultar!", "Digite a função", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     funcionario.setFuncao(TfPesquisa.getText());
@@ -1173,7 +1161,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             }
             case 4: {
                 if (TfPesquisa.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Digite o CPF do funcionario que deseja consultar!", "Digite o codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Digite o CPF do funcionário que deseja consultar!", "Digite o CPF", JOptionPane.INFORMATION_MESSAGE);
                     TfPesquisa.grabFocus();
                 } else {
                     funcionario.getPessoafis().setCpf(TfPesquisa.getText());
@@ -1186,14 +1174,14 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
 
     private void BtGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtGravarActionPerformed
         if (camposobrigatoriospreenchidos()) {
-            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja realmente Gravar os dados deste funcionario?", "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja realmente Gravar os dados deste funcionário?", "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if (TfCodigo.getText().equals("")) {
                     enviardados();
-                    if (funcionario.incluir()) msg.Sucesso(LbNotificacao, "Dados do Funcionario gravados com sucesso!");
+                    if (funcionario.incluir()) msg.Sucesso(LbNotificacao, "Dados do Funcionário gravados com sucesso!");
                     funcionario.getPessoafis().getPessoa().getTelefone().setCodigopessoa(funcionario.getPessoafis().getPessoa().getCodigo());
                     funcionario.getPessoafis().getPessoa().getEmail().setCodigopessoa(funcionario.getPessoafis().getPessoa().getCodigo());
-                    JOptionPane.showMessageDialog(null, "Codigo: " + funcionario.getCodigo() + "\n"
-                            + "Funcionario: " + funcionario.getPessoafis().getNome().toUpperCase(), "Informe o Codigo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Código: " + funcionario.getCodigo() + "\n"
+                            + "Funcionário: " + funcionario.getPessoafis().getNome().toUpperCase(), "Informe o Código", JOptionPane.INFORMATION_MESSAGE);
                     for (int i = 0; i < TbTelefone.getRowCount(); i++) {
                         funcionario.getPessoafis().getPessoa().getTelefone().setCodigo(i + 1);
                         funcionario.getPessoafis().getPessoa().getTelefone().setNrtelefone(TbTelefone.getValueAt(i, 1).toString());
@@ -1215,7 +1203,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
                     funcionario.setCodigo(Integer.parseInt(TfCodigo.getText()));
                     funcionario.getPessoafis().getPessoa().setCodigo(funcionario.retornacodigopessoafuncionario());
                     enviardados();
-                    if(funcionario.alterar()) msg.Sucesso(LbNotificacao, "Dados do Funcionario alterados com sucesso!");
+                    if(funcionario.alterar()) msg.Sucesso(LbNotificacao, "Dados do Funcionário alterados com sucesso!");
                     funcionario.getPessoafis().getPessoa().getTelefone().setCodigopessoa(funcionario.getPessoafis().getPessoa().getCodigo());
                     funcionario.getPessoafis().getPessoa().getEmail().setCodigopessoa(funcionario.getPessoafis().getPessoa().getCodigo());
                     funcionario.getPessoafis().getPessoa().getTelefone().deletartelefones();
@@ -1310,7 +1298,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             CbCidade.setSelectedItem(funcionario.getPessoafis().getPessoa().getEndereco().getCidade().getCidade());
             TabbedPaneFuncionario.setSelectedIndex(0);
             valida.validacamposCancelar(PnCadastro, PnBotoes);
-            msg.StatusBusca(LbNotificacao, "Dados do Funcionario carregados na tela...");
+            msg.StatusBusca(LbNotificacao, "Dados do Funcionário carregados na tela...");
         }
     }//GEN-LAST:event_MnItRetornaActionPerformed
 
@@ -1320,14 +1308,14 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
         if (valida.CampoTotalmentePreenchido(funcionario.getPessoafis().getCpf())) {
             if (!funcionario.getPessoafis().CPFnumerosiguais()) {
                 if (funcionario.getPessoafis().CPFvalido()) {
-                    LbCPFValido.setText("Valido");
+                    LbCPFValido.setText("Válido");
                     LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png")));
                 } else {
-                    LbCPFValido.setText("CPF Invalido");
+                    LbCPFValido.setText("CPF Inválido");
                     LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
                 }
             } else {
-                LbCPFValido.setText("Numeros Iguais");
+                LbCPFValido.setText("Números Iguais");
                 LbCPFValido.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/erro.png")));
             }
         } else {
@@ -1346,7 +1334,7 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if(PnBotoes.isVisible() && BtGravar.isEnabled()){
-            if(JOptionPane.showConfirmDialog(null, "Voce esta prestes a fechar esta janela.\nAo fechar esta janela tudo que voce digitou sera esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(null, "Você esta prestes a fechar esta janela.\nAo fechar esta janela tudo que você digitou será esquecido!", "Tem certeza que deseja fechar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 dispose();
             }
         }else{
@@ -1460,14 +1448,14 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
 
         if (!TfNomeFisica.getText().equals("")) {
         } else {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Nome do Funcionario e obrigatorio");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Nome do Funcionário e obrigatório");
             TfNomeFisica.grabFocus();
             return false;
         }
 
-        if (LbCPFValido.getText().equals("Valido")) {
+        if (LbCPFValido.getText().equals("Válido")) {
         } else {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao,  "Digite um CPF valido");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao,  "Digite um CPF válido");
             TfNrCPF.grabFocus();
             return false;
         }
@@ -1478,32 +1466,32 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
             return false;
         }
         if (TfLogradouro.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a Rua/Avenida que o funcionario mora!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a Rua/Avenida que o funcionário mora!");
             TfLogradouro.grabFocus();
             return false;
         }
         if (TfNumero.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Numero da residencia do funcionario!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Número da residência do funcionário!");
             TfNumero.grabFocus();
             return false;
         }
         if (!valida.CampoTotalmentePreenchido(TfCEP.getText())) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o CEP de onde o funcionario mora!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o CEP de onde o funcionário mora!");
             TfCEP.grabFocus();
             return false;
         }
         if (TfBairro.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Bairro de onde o funcionario mora!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Bairro de onde o funcionário mora!");
             TfBairro.grabFocus();
             return false;
         }
         if (TfFuncao.getText().equals("")) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a Funcao que o funcionario tera!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite a Função que o funcionário tera!");
             TfFuncao.grabFocus();
             return false;
         }
         if (TfSalario.getValue() == BigDecimal.valueOf(0)) {
-            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Salario que o funcionario recebera!");
+            msg.CampoObrigatorioNaoPreenchido(LbNotificacao, "Digite o Salário que o funcionário receberá!");
             TfSalario.grabFocus();
             return false;
         }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.lojadafatima.InterfacesUsuario;
 
 import br.com.lojadafatima.InterfacesFinanceiro.InterfaceMultas;
@@ -28,19 +23,15 @@ import br.com.lojadafatima.InterfacesPessoa.InterfaceCidade;
 import br.com.lojadafatima.InterfacesPessoa.InterfaceEstado;
 import br.com.lojadafatima.InterfacesProduto.InterfaceEstoque;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
-import br.com.lojadafatima.Usuario.ClasseTelas;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import br.com.lojadafatima.Usuario.ClasseUsuario;
-import java.awt.Menu;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.ImageIcon;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class InterfacePrincipal extends javax.swing.JDialog {
 
@@ -187,7 +178,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         });
 
         BtPagamentoFuncionarios.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        BtPagamentoFuncionarios.setText("Pagamento de Funcionarios");
+        BtPagamentoFuncionarios.setText("Pagamento de Funcionários");
         BtPagamentoFuncionarios.setName("18"); // NOI18N
         BtPagamentoFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,7 +187,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Situacao:");
+        jLabel1.setText("Situação:");
 
         LbQtProdutosBaixos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbQtProdutosBaixos.setText("jLabel2");
@@ -954,7 +945,8 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             LbContasReceberAbertas.setText("Nenhuma Conta a Receber em Aberto");
             LbContasReceberAbertas.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_verde.png")));
         } else {
-            LbContasReceberAbertas.setText("Existem "+aux+" Contas a Receber em Aberto");
+            if (aux == 1) LbContasReceberAbertas.setText("Existe "+aux+" Conta a Receber em Aberto");
+            else          LbContasReceberAbertas.setText("Existem "+aux+" Contas a Receber em Aberto");
             LbContasReceberAbertas.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_amarela.png")));
         }
         
@@ -963,7 +955,8 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             LbContasReceberVencidas.setText("Nenhuma Conta a Receber Vencida");
             LbContasReceberVencidas.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_verde.png")));
         } else {
-            LbContasReceberVencidas.setText("Existem "+aux+" Contas a Receber Vencidas");
+            if(aux == 1) LbContasReceberVencidas.setText("Existe "+aux+" Conta a Receber Vencida");
+            else         LbContasReceberVencidas.setText("Existem "+aux+" Contas a Receber Vencidas");
             LbContasReceberVencidas.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_vermelha.png")));
         }
         
@@ -972,7 +965,8 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             LbContasPagarAbertas.setText("Nenhuma Conta a Pagar em Aberto");
             LbContasPagarAbertas.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_verde.png")));
         } else {
-            LbContasPagarAbertas.setText("Existem "+aux+" Contas a Pagar em Aberto");
+            if (aux == 1) LbContasPagarAbertas.setText("Existe "+aux+" Conta a Paga em Aberto");
+            else          LbContasPagarAbertas.setText("Existem "+aux+" Contas a Pagar em Aberto");
             LbContasPagarAbertas.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_amarela.png")));
         }
         
@@ -981,7 +975,8 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             LbContasPagarVencida.setText("Nenhuma Conta a Pagar Vencida");
             LbContasPagarVencida.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_verde.png")));
         } else {
-            LbContasPagarVencida.setText("Existem "+aux+" Contas a Pagar Vencidas");
+            if(aux == 1) LbContasPagarVencida.setText("Existe "+aux+" Conta a Pagar Vencida");
+            else         LbContasPagarVencida.setText("Existem "+aux+" Contas a Pagar Vencidas");
             LbContasPagarVencida.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_vermelha.png")));
         }
         
@@ -990,7 +985,8 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             LbQtProdutosBaixos.setText("Nenhum Produto com Estoque Baixo");
             LbQtProdutosBaixos.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_verde.png")));
         } else {
-            LbQtProdutosBaixos.setText("Existem "+aux+" Produtos com Estoque Baixo");
+            if (aux == 1) LbQtProdutosBaixos.setText("Existe "+aux+" Produto com Estoque Baixo");
+            else          LbQtProdutosBaixos.setText("Existem "+aux+" Produtos com Estoque Baixo");
             LbQtProdutosBaixos.setIcon(new ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/bandeira_vermelha.png")));
         }
     }

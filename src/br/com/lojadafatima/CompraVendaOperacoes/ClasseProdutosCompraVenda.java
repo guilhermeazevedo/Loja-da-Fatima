@@ -4,15 +4,12 @@ import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.Produto.ClasseFornecedoresProduto;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
-import br.com.lojadafatima.Produto.ClasseProduto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author hp
+ * @author Guilherme Azevedo
  */
 public class ClasseProdutosCompraVenda {
 

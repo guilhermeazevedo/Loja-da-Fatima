@@ -4,12 +4,10 @@ import br.com.lojadafatima.ClassesFerramentas.GeraCodigos;
 import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author guilhermeazevedo
+ * @author Guilherme Azevedo
  */
 public class ClasseEstado {
     
@@ -55,7 +53,6 @@ public class ClasseEstado {
             conn.resultset.first();
             return conn.resultset.getInt(1);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "ERRO: "+ex);
             return 0;
         }
     }
