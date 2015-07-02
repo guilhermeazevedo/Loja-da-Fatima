@@ -696,15 +696,15 @@ public class InterfaceTipoProduto extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-//        getTelasusuario().getTela().setCodigo(12);
-//        if(!getTelasusuario().eadmintela()){
-//            PnBotoes.setVisible(false);
-//        }
-//        
-//        getTelasusuario().getTela().setCodigo(13);
-//        if(!getTelasusuario().eadmintela()){
-//            BtCadTabela.setVisible(false);
-//        }
+        getTelasusuario().getTela().setCodigo(12);
+        if(!getTelasusuario().eadmintela()){
+            PnBotoes.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(13);
+        if(!getTelasusuario().eadmintela()){
+            BtCadTabela.setVisible(false);
+        }
     }
     
     public java.awt.Frame getPrimeiratela() {

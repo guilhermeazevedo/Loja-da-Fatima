@@ -491,10 +491,10 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario() {
-//        getTelasusuario().getTela().setCodigo(20);
-//        if (!getTelasusuario().eadmintela()) {
-//            BtPagar.setVisible(false);
-//        }
+        getTelasusuario().getTela().setCodigo(20);
+        if (!getTelasusuario().eadmintela()) {
+            BtPagar.setVisible(false);
+        }
     }
 
     public void preenchercomboanos() {

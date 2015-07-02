@@ -1276,15 +1276,15 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario() {
-//        getTelasusuario().getTela().setCodigo(18);
-//        if (!getTelasusuario().eadmintela()) {
-//            BtPagar.setVisible(false);
-//        }
-//
-//        getTelasusuario().getTela().setCodigo(7);
-//        if (!getTelasusuario().eadmintela()) {
-//            BtCadFormaPgto.setVisible(false);
-//        }
+        getTelasusuario().getTela().setCodigo(18);
+        if (!getTelasusuario().eadmintela()) {
+            BtPagar.setVisible(false);
+        }
+
+        getTelasusuario().getTela().setCodigo(7);
+        if (!getTelasusuario().eadmintela()) {
+            BtCadFormaPgto.setVisible(false);
+        }
     }
 
     public boolean parcelapaga() {

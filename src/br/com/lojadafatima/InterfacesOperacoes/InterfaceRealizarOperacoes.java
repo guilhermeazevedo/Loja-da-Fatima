@@ -136,10 +136,10 @@ public class InterfaceRealizarOperacoes extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-//        getTelasusuario().getTela().setCodigo(22);
-//        if(!getTelasusuario().eadmintela()){
-//            BtAbrir.setVisible(false);
-//        }
+        getTelasusuario().getTela().setCodigo(22);
+        if(!getTelasusuario().eadmintela()){
+            BtAbrir.setVisible(false);
+        }
     }
     
     public java.awt.Frame getPrimeiratela() {

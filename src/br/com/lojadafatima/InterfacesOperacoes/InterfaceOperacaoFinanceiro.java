@@ -661,26 +661,26 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-//        if(CbPessoa.getSelectedItem().toString().equals("Cliente")){
-//            getTelasusuario().getTela().setCodigo(1);
-//            if(!getTelasusuario().eadmintela()){
-//                BtCadPessoa.setVisible(false);
-//            }else{
-//                BtCadPessoa.setVisible(true);
-//            }
-//        }else{
-//            getTelasusuario().getTela().setCodigo(2);
-//            if(!getTelasusuario().eadmintela()){
-//                BtCadPessoa.setVisible(false);
-//            }else{
-//                BtCadPessoa.setVisible(true);
-//            }
-//        }
-//        
-//        getTelasusuario().getTela().setCodigo(6);
-//        if(!getTelasusuario().eadmintela()){
-//            BtCadCondicaoPgto.setVisible(false);
-//        }
+        if(CbPessoa.getSelectedItem().toString().equals("Cliente")){
+            getTelasusuario().getTela().setCodigo(1);
+            if(!getTelasusuario().eadmintela()){
+                BtCadPessoa.setVisible(false);
+            }else{
+                BtCadPessoa.setVisible(true);
+            }
+        }else{
+            getTelasusuario().getTela().setCodigo(2);
+            if(!getTelasusuario().eadmintela()){
+                BtCadPessoa.setVisible(false);
+            }else{
+                BtCadPessoa.setVisible(true);
+            }
+        }
+        
+        getTelasusuario().getTela().setCodigo(6);
+        if(!getTelasusuario().eadmintela()){
+            BtCadCondicaoPgto.setVisible(false);
+        }
     }
     
     public boolean camposobrigatoriospreenchidos(){

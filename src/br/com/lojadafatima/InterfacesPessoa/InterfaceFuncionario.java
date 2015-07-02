@@ -1428,20 +1428,20 @@ public class InterfaceFuncionario extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-//        getTelasusuario().getTela().setCodigo(3);
-//        if(!getTelasusuario().eadmintela()){
-//            PnBotoes.setVisible(false);
-//        }
-//        
-//        getTelasusuario().getTela().setCodigo(4);
-//        if(!getTelasusuario().eadmintela()){
-//            BtCadEstado.setVisible(false);
-//        }
-//        
-//        getTelasusuario().getTela().setCodigo(5);
-//        if(!getTelasusuario().eadmintela()){
-//            BtCadCidade.setVisible(false);
-//        }
+        getTelasusuario().getTela().setCodigo(3);
+        if(!getTelasusuario().eadmintela()){
+            PnBotoes.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(4);
+        if(!getTelasusuario().eadmintela()){
+            BtCadEstado.setVisible(false);
+        }
+        
+        getTelasusuario().getTela().setCodigo(5);
+        if(!getTelasusuario().eadmintela()){
+            BtCadCidade.setVisible(false);
+        }
     }
     
     public boolean camposobrigatoriospreenchidos() {

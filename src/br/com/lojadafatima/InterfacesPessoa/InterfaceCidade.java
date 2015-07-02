@@ -354,14 +354,14 @@ public class InterfaceCidade extends javax.swing.JDialog {
 
     
     public void analisausuario(){
-//        getTelasusuario().getTela().setCodigo(5);
-//        if(!getTelasusuario().eadmintela()){
-//            BtGravar.setVisible(false);
-//        }
-//        getTelasusuario().getTela().setCodigo(4);
-//        if(!getTelasusuario().eadmintela()){
-//            BtCadEstado.setVisible(false);
-//        }
+        getTelasusuario().getTela().setCodigo(5);
+        if(!getTelasusuario().eadmintela()){
+            BtGravar.setVisible(false);
+        }
+        getTelasusuario().getTela().setCodigo(4);
+        if(!getTelasusuario().eadmintela()){
+            BtCadEstado.setVisible(false);
+        }
     }
     
     public java.awt.Frame getPrimeiratela() {

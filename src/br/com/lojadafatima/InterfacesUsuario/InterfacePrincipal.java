@@ -44,7 +44,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         initComponents();
         getTelasusuario().setUsuario(usuario);
         LbNmUsuario.setText(getTelasusuario().getUsuario().getLogin());
-//        liberatelas();
+        liberatelas();
         atualizasituacao();
     }
 
@@ -103,6 +103,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtVenda.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtVenda.setText("Venda");
+        BtVenda.setEnabled(false);
         BtVenda.setName("16"); // NOI18N
         BtVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,6 +123,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtCompra.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtCompra.setText("Compra");
+        BtCompra.setEnabled(false);
         BtCompra.setName("17"); // NOI18N
         BtCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,6 +133,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtContasReceber.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtContasReceber.setText("Contas à Receber");
+        BtContasReceber.setEnabled(false);
         BtContasReceber.setName("9"); // NOI18N
         BtContasReceber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +143,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtContasPagar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtContasPagar.setText("Contas à Pagar");
+        BtContasPagar.setEnabled(false);
         BtContasPagar.setName("10"); // NOI18N
         BtContasPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,6 +153,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtMvtoCaixa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtMvtoCaixa.setText("Movimentação de Caixa");
+        BtMvtoCaixa.setEnabled(false);
         BtMvtoCaixa.setName("11"); // NOI18N
         BtMvtoCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,6 +163,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtEstoque.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtEstoque.setText("Estoque");
+        BtEstoque.setEnabled(false);
         BtEstoque.setName("15"); // NOI18N
         BtEstoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +176,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtRealizarOperacao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtRealizarOperacao.setText("Realizar Operação");
+        BtRealizarOperacao.setEnabled(false);
         BtRealizarOperacao.setName("18"); // NOI18N
         BtRealizarOperacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,6 +186,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtPagamentoFuncionarios.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtPagamentoFuncionarios.setText("Pagamento de Funcionários");
+        BtPagamentoFuncionarios.setEnabled(false);
         BtPagamentoFuncionarios.setName("18"); // NOI18N
         BtPagamentoFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,6 +200,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         LbQtProdutosBaixos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbQtProdutosBaixos.setText("jLabel2");
         LbQtProdutosBaixos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LbQtProdutosBaixos.setEnabled(false);
         LbQtProdutosBaixos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LbQtProdutosBaixosMouseClicked(evt);
@@ -201,6 +210,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         LbContasReceberVencidas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbContasReceberVencidas.setText("jLabel3");
         LbContasReceberVencidas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LbContasReceberVencidas.setEnabled(false);
         LbContasReceberVencidas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LbContasReceberVencidasMouseClicked(evt);
@@ -210,6 +220,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         LbContasReceberAbertas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbContasReceberAbertas.setText("jLabel4");
         LbContasReceberAbertas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LbContasReceberAbertas.setEnabled(false);
         LbContasReceberAbertas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LbContasReceberAbertasMouseClicked(evt);
@@ -219,6 +230,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         LbContasPagarVencida.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbContasPagarVencida.setText("jLabel5");
         LbContasPagarVencida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LbContasPagarVencida.setEnabled(false);
         LbContasPagarVencida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LbContasPagarVencidaMouseClicked(evt);
@@ -228,6 +240,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         LbContasPagarAbertas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbContasPagarAbertas.setText("jLabel6");
         LbContasPagarAbertas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LbContasPagarAbertas.setEnabled(false);
         LbContasPagarAbertas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LbContasPagarAbertasMouseClicked(evt);
@@ -236,6 +249,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         BtRelatorios.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtRelatorios.setText("Relatórios");
+        BtRelatorios.setEnabled(false);
         BtRelatorios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtRelatoriosActionPerformed(evt);
@@ -325,6 +339,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItCadCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItCadCliente.setText("Cliente");
+        MnItCadCliente.setEnabled(false);
         MnItCadCliente.setName("6"); // NOI18N
         MnItCadCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -335,6 +350,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItCadFornecedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItCadFornecedor.setText("Fornecedor");
+        MnItCadFornecedor.setEnabled(false);
         MnItCadFornecedor.setName("7"); // NOI18N
         MnItCadFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -345,6 +361,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItFuncionario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItFuncionario.setText("Funcionário");
+        MnItFuncionario.setEnabled(false);
         MnItFuncionario.setName("8"); // NOI18N
         MnItFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -354,6 +371,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         MnCadastros.add(MnItFuncionario);
 
         MnItCadCondicaoPagto.setText("Condição de Pagamento");
+        MnItCadCondicaoPagto.setEnabled(false);
         MnItCadCondicaoPagto.setName("3"); // NOI18N
         MnItCadCondicaoPagto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -363,6 +381,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         MnCadastros.add(MnItCadCondicaoPagto);
 
         MnItCadFormaPgto.setText("Forma de Pagamento");
+        MnItCadFormaPgto.setEnabled(false);
         MnItCadFormaPgto.setName("4"); // NOI18N
         MnItCadFormaPgto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -373,6 +392,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItCadUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItCadUsuario.setText("Usuário");
+        MnItCadUsuario.setEnabled(false);
         MnItCadUsuario.setName("5"); // NOI18N
         MnItCadUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -382,6 +402,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         MnCadastros.add(MnItCadUsuario);
 
         MnItCadEstado.setText("Estado");
+        MnItCadEstado.setEnabled(false);
         MnItCadEstado.setName("1"); // NOI18N
         MnItCadEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -391,6 +412,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         MnCadastros.add(MnItCadEstado);
 
         MnItCadCidade.setText("Cidade");
+        MnItCadCidade.setEnabled(false);
         MnItCadCidade.setName("2"); // NOI18N
         MnItCadCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -401,6 +423,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItCadMultas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItCadMultas.setText("Multas");
+        MnItCadMultas.setEnabled(false);
         MnItCadMultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnItCadMultasActionPerformed(evt);
@@ -409,6 +432,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         MnCadastros.add(MnItCadMultas);
 
         MnItCadOperacoes.setText("Operações");
+        MnItCadOperacoes.setEnabled(false);
         MnItCadOperacoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnItCadOperacoesActionPerformed(evt);
@@ -422,6 +446,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItContasReceber.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_MASK));
         MnItContasReceber.setText("Contas à Receber");
+        MnItContasReceber.setEnabled(false);
         MnItContasReceber.setName("9"); // NOI18N
         MnItContasReceber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -432,6 +457,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItContasPagar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
         MnItContasPagar.setText("Contas à Pagar");
+        MnItContasPagar.setEnabled(false);
         MnItContasPagar.setName("10"); // NOI18N
         MnItContasPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -442,6 +468,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItMovimentacaoCaixa.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_MASK));
         MnItMovimentacaoCaixa.setText("Movimentação de Caixa");
+        MnItMovimentacaoCaixa.setEnabled(false);
         MnItMovimentacaoCaixa.setName("11"); // NOI18N
         MnItMovimentacaoCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -456,6 +483,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItCadProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItCadProduto.setText("Produto");
+        MnItCadProduto.setEnabled(false);
         MnItCadProduto.setName("12"); // NOI18N
         MnItCadProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -466,6 +494,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItCadTipoProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         MnItCadTipoProduto.setText("Tipo de Produto");
+        MnItCadTipoProduto.setEnabled(false);
         MnItCadTipoProduto.setName("13"); // NOI18N
         MnItCadTipoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -475,6 +504,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         MnProduto.add(MnItCadTipoProduto);
 
         MnItCadTabelas.setText("Características e Especificações");
+        MnItCadTabelas.setEnabled(false);
         MnItCadTabelas.setName("14"); // NOI18N
         MnItCadTabelas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -485,6 +515,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
 
         MnItEstoque.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
         MnItEstoque.setText("Estoque");
+        MnItEstoque.setEnabled(false);
         MnItEstoque.setName("15"); // NOI18N
         MnItEstoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -895,6 +926,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             case 14:{
                 MnItEstoque.setEnabled(true);
                 BtEstoque.setEnabled(true);
+                LbQtProdutosBaixos.setEnabled(true);
                 break;
             }
             case 15:{
@@ -908,11 +940,15 @@ public class InterfacePrincipal extends javax.swing.JDialog {
             case 17:{
                 MnItContasReceber.setEnabled(true);
                 BtContasReceber.setEnabled(true);
+                LbContasReceberAbertas.setEnabled(true);
+                LbContasReceberVencidas.setEnabled(true);
                 break;
             }
             case 18:{
                 MnItContasPagar.setEnabled(true);
                 BtContasPagar.setEnabled(true);
+                LbContasPagarAbertas.setEnabled(true);
+                LbContasPagarVencida.setEnabled(true);
                 break;
             }
             case 19:{

@@ -1239,25 +1239,25 @@ public class InterfaceProduto extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-//        getTelausuario().getTela().setCodigo(11);
-//        if(!getTelausuario().eadmintela()){
-//            PnBotoes.setVisible(false);
-//        }
-//        
-//        getTelausuario().getTela().setCodigo(2);
-//        if(!getTelausuario().eadmintela()){
-//            BtCadFornecedor.setVisible(false);
-//        }
-//        
-//        getTelausuario().getTela().setCodigo(12);
-//        if(!getTelausuario().eadmintela()){
-//            BtCadTipoProduto.setVisible(false);
-//        }
-//        
-//        getTelausuario().getTela().setCodigo(13);
-//        if(!getTelausuario().eadmintela()){
-//            BtCadTabela2.setVisible(false);
-//        }
+        getTelausuario().getTela().setCodigo(11);
+        if(!getTelausuario().eadmintela()){
+            PnBotoes.setVisible(false);
+        }
+        
+        getTelausuario().getTela().setCodigo(2);
+        if(!getTelausuario().eadmintela()){
+            BtCadFornecedor.setVisible(false);
+        }
+        
+        getTelausuario().getTela().setCodigo(12);
+        if(!getTelausuario().eadmintela()){
+            BtCadTipoProduto.setVisible(false);
+        }
+        
+        getTelausuario().getTela().setCodigo(13);
+        if(!getTelausuario().eadmintela()){
+            BtCadTabela2.setVisible(false);
+        }
     }
     
     public boolean camposobrigatoriospreenchidos() {

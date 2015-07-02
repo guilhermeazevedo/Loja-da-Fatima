@@ -242,12 +242,12 @@ public class InterfaceMultas extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-//        getTelasusuario().getTela().setCodigo(9);
-//        if(!getTelasusuario().eadmintela()){
-//            BtAlterar.setVisible(false);
-//            BtCancelar.setVisible(false);
-//            BtGravar.setVisible(false);
-//        }
+        getTelasusuario().getTela().setCodigo(9);
+        if(!getTelasusuario().eadmintela()){
+            BtAlterar.setVisible(false);
+            BtCancelar.setVisible(false);
+            BtGravar.setVisible(false);
+        }
     }
     
     public boolean camposobrigatoriospreenchidos(){

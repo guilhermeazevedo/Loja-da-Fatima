@@ -399,10 +399,10 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void analisausuario(){
-//        getTelasusuario().getTela().setCodigo(10);
-//        if(!getTelasusuario().eadmintela()){
-//            BtGravar.setVisible(false);
-//        }
+        getTelasusuario().getTela().setCodigo(10);
+        if(!getTelasusuario().eadmintela()){
+            BtGravar.setVisible(false);
+        }
     }
     
     public void enviardados() {
