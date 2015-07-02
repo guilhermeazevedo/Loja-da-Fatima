@@ -80,17 +80,23 @@ public class InterfaceCidade extends javax.swing.JDialog {
         setTitle("Cidades - Software Loja da Fátima");
         setResizable(false);
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setText("Código");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         TfCodigo.setEditable(false);
+        jPanel1.add(TfCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 100, -1));
 
         jLabel2.setText("Cidade*");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 11, -1, -1));
 
         TfCidade.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TfCidadeKeyTyped(evt);
             }
         });
+        jPanel1.add(TfCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 31, 200, -1));
 
         BtGravar.setText("Gravar");
         BtGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +104,7 @@ public class InterfaceCidade extends javax.swing.JDialog {
                 BtGravarActionPerformed(evt);
             }
         });
+        jPanel1.add(BtGravar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 116, 89, -1));
 
         BtLimpar.setText("Limpar");
         BtLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +112,7 @@ public class InterfaceCidade extends javax.swing.JDialog {
                 BtLimparActionPerformed(evt);
             }
         });
+        jPanel1.add(BtLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 116, 85, -1));
 
         TbCidades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,7 +139,12 @@ public class InterfaceCidade extends javax.swing.JDialog {
             TbCidades.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 145, 318, 161));
+
         jLabel3.setText("Estado*");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 62, -1, -1));
+
+        jPanel1.add(CbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 83, 133, -1));
 
         BtCadEstado.setText("Adicionar Estado");
         BtCadEstado.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +152,7 @@ public class InterfaceCidade extends javax.swing.JDialog {
                 BtCadEstadoActionPerformed(evt);
             }
         });
+        jPanel1.add(BtCadEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 82, -1, -1));
 
         LbNotificacoes.setText(" ");
 
@@ -155,64 +169,7 @@ public class InterfaceCidade extends javax.swing.JDialog {
             .addComponent(LbNotificacoes)
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)))
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(BtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BtLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(CbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtCadEstado)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtCadEstado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtGravar)
-                    .addComponent(BtLimpar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel1.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 312, 318, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -294,28 +251,6 @@ public class InterfaceCidade extends javax.swing.JDialog {
     private javax.swing.JButton BtGravar;
     private javax.swing.JButton BtLimpar;
     private javax.swing.JComboBox CbEstado;
-    private javax.swing.JLabel LbNotificacao;
-    private javax.swing.JLabel LbNotificacao1;
-    private javax.swing.JLabel LbNotificacao10;
-    private javax.swing.JLabel LbNotificacao11;
-    private javax.swing.JLabel LbNotificacao12;
-    private javax.swing.JLabel LbNotificacao13;
-    private javax.swing.JLabel LbNotificacao14;
-    private javax.swing.JLabel LbNotificacao15;
-    private javax.swing.JLabel LbNotificacao16;
-    private javax.swing.JLabel LbNotificacao17;
-    private javax.swing.JLabel LbNotificacao18;
-    private javax.swing.JLabel LbNotificacao19;
-    private javax.swing.JLabel LbNotificacao2;
-    private javax.swing.JLabel LbNotificacao20;
-    private javax.swing.JLabel LbNotificacao21;
-    private javax.swing.JLabel LbNotificacao3;
-    private javax.swing.JLabel LbNotificacao4;
-    private javax.swing.JLabel LbNotificacao5;
-    private javax.swing.JLabel LbNotificacao6;
-    private javax.swing.JLabel LbNotificacao7;
-    private javax.swing.JLabel LbNotificacao8;
-    private javax.swing.JLabel LbNotificacao9;
     private javax.swing.JLabel LbNotificacoes;
     private javax.swing.JMenuItem MnItAlterar;
     private javax.swing.JTable TbCidades;
@@ -325,29 +260,7 @@ public class InterfaceCidade extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

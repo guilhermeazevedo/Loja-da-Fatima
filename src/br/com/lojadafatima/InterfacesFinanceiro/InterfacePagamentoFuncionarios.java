@@ -118,6 +118,8 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         setTitle("Pagamento de Salários a Funcionários - Software Loja da Fátima");
         setResizable(false);
 
+        PnRealizaPgto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         TbFuncionariosCad.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -142,9 +144,14 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(TbFuncionariosCad);
 
+        PnRealizaPgto.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 738, 251));
+
         jLabel1.setText("Funcionários cadastrados:");
+        PnRealizaPgto.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jLabel2.setText("Salário:");
+        PnRealizaPgto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 319, -1, -1));
+        PnRealizaPgto.add(TfSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 341, 133, -1));
 
         BtPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/dinheiro.png"))); // NOI18N
         BtPagar.setText("Pagar Salário");
@@ -154,12 +161,18 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                 BtPagarActionPerformed(evt);
             }
         });
+        PnRealizaPgto.add(BtPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 339, -1, -1));
 
         jLabel3.setText("Referente ao mês");
+        PnRealizaPgto.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 378, -1, -1));
 
         CbMes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        PnRealizaPgto.add(CbMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 375, 68, -1));
 
         jLabel4.setText("do ano");
+        PnRealizaPgto.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 378, -1, -1));
+
+        PnRealizaPgto.add(CbAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 375, 77, -1));
 
         TfDtInicial.setEditable(false);
         TfDtInicial.setName("DT_NASC"); // NOI18N
@@ -168,10 +181,13 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                 TfDtInicialFocusLost(evt);
             }
         });
+        PnRealizaPgto.add(TfDtInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 290, 116, -1));
 
         jLabel7.setText("Aplicar comissão com base nas vendas realizadas no período do dia:");
+        PnRealizaPgto.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 293, -1, -1));
 
         jLabel8.setText("a");
+        PnRealizaPgto.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(459, 293, -1, -1));
 
         TfDtFinal.setEditable(false);
         TfDtFinal.setName("DT_NASC"); // NOI18N
@@ -180,6 +196,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                 TfDtFinalFocusLost(evt);
             }
         });
+        PnRealizaPgto.add(TfDtFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(469, 290, 116, -1));
 
         BtCalcComissao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
         BtCalcComissao.setText("Calcular Comissão");
@@ -189,81 +206,11 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                 BtCalcComissaoActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout PnRealizaPgtoLayout = new javax.swing.GroupLayout(PnRealizaPgto);
-        PnRealizaPgto.setLayout(PnRealizaPgtoLayout);
-        PnRealizaPgtoLayout.setHorizontalGroup(
-            PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
-                        .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 612, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
-                        .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtCalcComissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
-                                .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(CbMes, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(CbAno, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel2)
-                                    .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
-                                        .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtPagar)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(10, 10, 10))))
-        );
-        PnRealizaPgtoLayout.setVerticalGroup(
-            PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnRealizaPgtoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(BtCalcComissao))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPagar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PnRealizaPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(CbMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(CbAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+        PnRealizaPgto.add(BtCalcComissao, new org.netbeans.lib.awtextra.AbsoluteConstraints(591, 288, 157, -1));
 
         jTabbedPane1.addTab("Realizar Pagamento", PnRealizaPgto);
+
+        PnPesqPgto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TbPesquisa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -289,9 +236,13 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(TbPesquisa);
 
+        PnPesqPgto.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 738, 147));
+
         jLabel5.setText("Funcionários cadastrados:");
+        PnPesqPgto.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jLabel6.setText("Salários já pagos:");
+        PnPesqPgto.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 189, -1, -1));
 
         TbPagamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -312,35 +263,7 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
         TbPagamentos.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(TbPagamentos);
 
-        javax.swing.GroupLayout PnPesqPgtoLayout = new javax.swing.GroupLayout(PnPesqPgto);
-        PnPesqPgto.setLayout(PnPesqPgtoLayout);
-        PnPesqPgtoLayout.setHorizontalGroup(
-            PnPesqPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnPesqPgtoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnPesqPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
-                    .addGroup(PnPesqPgtoLayout.createSequentialGroup()
-                        .addGroup(PnPesqPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3))
-                .addContainerGap())
-        );
-        PnPesqPgtoLayout.setVerticalGroup(
-            PnPesqPgtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnPesqPgtoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        PnPesqPgto.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 209, 738, 186));
 
         jTabbedPane1.addTab("Histórico de Pagamentos", PnPesqPgto);
 

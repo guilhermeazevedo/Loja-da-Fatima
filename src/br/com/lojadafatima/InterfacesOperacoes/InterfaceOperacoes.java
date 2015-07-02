@@ -83,17 +83,23 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setText("Código");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         TfCodigo.setEnabled(false);
+        jPanel1.add(TfCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 70, -1));
 
         jLabel2.setText("Operação");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 11, -1, -1));
 
         TfOperacao.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TfOperacaoKeyTyped(evt);
             }
         });
+        jPanel1.add(TfOperacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 31, 295, -1));
 
         ChkEstoque.setText("Modifica estoques de produtos");
         ChkEstoque.addActionListener(new java.awt.event.ActionListener() {
@@ -101,10 +107,12 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
                 ChkEstoqueActionPerformed(evt);
             }
         });
+        jPanel1.add(ChkEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 58, -1, -1));
 
         buttonGroup1.add(RbEntEstoque);
         RbEntEstoque.setSelected(true);
         RbEntEstoque.setText("Entrada no estoque");
+        jPanel1.add(RbEntEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 81, -1, -1));
 
         buttonGroup1.add(RbSaiEstoque);
         RbSaiEstoque.setText("Saída no estoque");
@@ -113,6 +121,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
                 RbSaiEstoqueActionPerformed(evt);
             }
         });
+        jPanel1.add(RbSaiEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 104, -1, -1));
 
         ChkFinanceiro.setText("Modifica valores financeiros");
         ChkFinanceiro.addActionListener(new java.awt.event.ActionListener() {
@@ -120,13 +129,16 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
                 ChkFinanceiroActionPerformed(evt);
             }
         });
+        jPanel1.add(ChkFinanceiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 58, -1, -1));
 
         buttonGroup2.add(RbEntFinanceiro);
         RbEntFinanceiro.setSelected(true);
         RbEntFinanceiro.setText("Entrada");
+        jPanel1.add(RbEntFinanceiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 81, -1, -1));
 
         buttonGroup2.add(RbSaiFinanceiro);
         RbSaiFinanceiro.setText("Saída");
+        jPanel1.add(RbSaiFinanceiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 104, -1, -1));
 
         BtGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
         BtGravar.setText("Gravar");
@@ -135,6 +147,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
                 BtGravarActionPerformed(evt);
             }
         });
+        jPanel1.add(BtGravar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 134, 96, 35));
 
         BtLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
         BtLimpar.setText("Limpar");
@@ -143,8 +156,10 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
                 BtLimparActionPerformed(evt);
             }
         });
+        jPanel1.add(BtLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 134, 90, 35));
 
         jLabel3.setText("Operações cadastradas:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         TbOperacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,6 +185,8 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
             TbOperacoes.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 383, 160));
+
         LbNotificacao.setText(" ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -185,81 +202,7 @@ public class InterfaceOperacoes extends javax.swing.JDialog {
             .addComponent(LbNotificacao)
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(TfOperacao))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ChkEstoque)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(RbSaiEstoque)
-                                    .addComponent(RbEntEstoque))))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ChkFinanceiro)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(RbSaiFinanceiro)
-                                    .addComponent(RbEntFinanceiro)))))
-                    .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ChkEstoque)
-                    .addComponent(ChkFinanceiro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RbEntEstoque)
-                    .addComponent(RbEntFinanceiro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RbSaiEstoque)
-                    .addComponent(RbSaiFinanceiro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 366, 383, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

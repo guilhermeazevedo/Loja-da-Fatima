@@ -110,6 +110,8 @@ public class InterfaceUsuario extends javax.swing.JDialog {
         setTitle("Usuário - Software Loja da Fátima");
         setResizable(false);
 
+        PnCadastro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         BtGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/salvar.png"))); // NOI18N
         BtGravar.setText("Gravar");
         BtGravar.setName("Gravar"); // NOI18N
@@ -179,91 +181,59 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             .addComponent(BtCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        PnCadastro.add(PnBotoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, -1, -1));
+
+        PnLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel6.setText("Código");
+        PnLogin.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         TfCodigo.setEditable(false);
+        PnLogin.add(TfCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 122, -1));
 
         TfLogin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TfLoginKeyTyped(evt);
             }
         });
+        PnLogin.add(TfLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 82, 428, -1));
 
         jLabel1.setText("Login*");
+        PnLogin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 62, -1, -1));
 
         jLabel2.setText("Senha* (máximo 15 caracteres)");
+        PnLogin.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 113, 184, -1));
 
         TfSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TfSenhaKeyTyped(evt);
             }
         });
+        PnLogin.add(TfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 133, 428, -1));
 
         TfConfirmSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TfConfirmSenhaKeyTyped(evt);
             }
         });
+        PnLogin.add(TfConfirmSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 184, 428, -1));
 
         jLabel3.setText("Confirmação de Senha*");
+        PnLogin.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 164, -1, -1));
 
         TfDica.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TfDicaKeyTyped(evt);
             }
         });
+        PnLogin.add(TfDica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 235, 428, -1));
 
         jLabel4.setText("Dica de Senha* (máximo 80 caracteres)");
-
-        javax.swing.GroupLayout PnLoginLayout = new javax.swing.GroupLayout(PnLogin);
-        PnLogin.setLayout(PnLoginLayout);
-        PnLoginLayout.setHorizontalGroup(
-            PnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnLoginLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TfDica)
-                    .addGroup(PnLoginLayout.createSequentialGroup()
-                        .addGroup(PnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1)
-                            .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 238, Short.MAX_VALUE))
-                    .addComponent(TfConfirmSenha)
-                    .addComponent(TfSenha)
-                    .addComponent(TfLogin))
-                .addContainerGap())
-        );
-        PnLoginLayout.setVerticalGroup(
-            PnLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnLoginLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TfConfirmSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TfDica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
-        );
+        PnLogin.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 215, -1, -1));
 
         TabbedCadastro.addTab("Login", PnLogin);
+
+        PnTelas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TbInterfaces.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -302,9 +272,13 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             TbInterfaces.getColumnModel().getColumn(0).setResizable(false);
         }
 
+        PnTelas.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 428, 145));
+
         jLabel7.setText("Telas existentes:");
+        PnTelas.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jLabel8.setText("Telas permitidas:");
+        PnTelas.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 187, -1, -1));
 
         TbPermitidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -335,37 +309,11 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             TbPermitidas.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        javax.swing.GroupLayout PnTelasLayout = new javax.swing.GroupLayout(PnTelas);
-        PnTelas.setLayout(PnTelasLayout);
-        PnTelasLayout.setHorizontalGroup(
-            PnTelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnTelasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnTelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(PnTelasLayout.createSequentialGroup()
-                        .addGroup(PnTelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        PnTelasLayout.setVerticalGroup(
-            PnTelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnTelasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
+        PnTelas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 207, 428, 138));
 
         TabbedCadastro.addTab("Telas e Interfaces", PnTelas);
+
+        PnCadastro.add(TabbedCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 453, -1));
 
         LbNotificacao.setText(" ");
 
@@ -382,31 +330,11 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             .addComponent(LbNotificacao)
         );
 
-        javax.swing.GroupLayout PnCadastroLayout = new javax.swing.GroupLayout(PnCadastro);
-        PnCadastro.setLayout(PnCadastroLayout);
-        PnCadastroLayout.setHorizontalGroup(
-            PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnCadastroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(TabbedCadastro, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PnBotoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        PnCadastroLayout.setVerticalGroup(
-            PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnCadastroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(TabbedCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PnBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        PnCadastro.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 434, 453, -1));
 
         TabbedMultas.addTab("Cadastro", PnCadastro);
+
+        PnConsulta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TbConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -432,22 +360,7 @@ public class InterfaceUsuario extends javax.swing.JDialog {
             TbConsulta.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        javax.swing.GroupLayout PnConsultaLayout = new javax.swing.GroupLayout(PnConsulta);
-        PnConsulta.setLayout(PnConsultaLayout);
-        PnConsultaLayout.setHorizontalGroup(
-            PnConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnConsultaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        PnConsultaLayout.setVerticalGroup(
-            PnConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnConsultaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        PnConsulta.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 453, 450));
 
         TabbedMultas.addTab("Consulta", PnConsulta);
 

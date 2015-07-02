@@ -61,6 +61,8 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Rápida de Produto - Software - Loja da Fátima");
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         BtSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
         BtSelecionar.setText("Selecionar");
         BtSelecionar.addActionListener(new java.awt.event.ActionListener() {
@@ -68,6 +70,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
                 BtSelecionarActionPerformed(evt);
             }
         });
+        jPanel1.add(BtSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 376, 107, 47));
 
         BtCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/cancelar.png"))); // NOI18N
         BtCancelar.setText("Cancelar");
@@ -76,6 +79,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
                 BtCancelarActionPerformed(evt);
             }
         });
+        jPanel1.add(BtCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 376, 103, 47));
 
         TbConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -101,12 +105,16 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
         });
         jScrollPane4.setViewportView(TbConsulta);
 
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 88, 577, 282));
+
         buttonGroup1.add(RbPesqServico);
         RbPesqServico.setText("Serviço");
+        jPanel1.add(RbPesqServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 63, -1, -1));
 
         buttonGroup1.add(RbPesqProduto);
         RbPesqProduto.setSelected(true);
         RbPesqProduto.setText("Produto");
+        jPanel1.add(RbPesqProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         CbPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Código", "Descrição", "Código do Tipo de Produto/Serviço" }));
         CbPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -114,8 +122,10 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
                 CbPesquisaActionPerformed(evt);
             }
         });
+        jPanel1.add(CbPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, 150, -1));
 
         TfPesquisa.setEnabled(false);
+        jPanel1.add(TfPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 13, 311, -1));
 
         BtPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
         BtPesquisar.setText("Pesquisar");
@@ -124,6 +134,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
                 BtPesquisarActionPerformed(evt);
             }
         });
+        jPanel1.add(BtPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(487, 11, 100, -1));
 
         LbNotificacao.setText(" ");
 
@@ -140,54 +151,7 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
             .addComponent(LbNotificacao)
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(CbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TfPesquisa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RbPesqServico)
-                            .addComponent(RbPesqProduto)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesquisar))
-                .addGap(4, 4, 4)
-                .addComponent(RbPesqProduto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RbPesqServico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BtCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 429, 577, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

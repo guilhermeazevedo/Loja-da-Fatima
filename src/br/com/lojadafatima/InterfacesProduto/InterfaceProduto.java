@@ -159,6 +159,8 @@ public class InterfaceProduto extends javax.swing.JDialog {
             }
         });
 
+        PnCadastro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         BtGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/salvar.png"))); // NOI18N
         BtGravar.setText("Gravar");
         BtGravar.setName("Gravar"); // NOI18N
@@ -229,21 +231,31 @@ public class InterfaceProduto extends javax.swing.JDialog {
             .addComponent(BtCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        PnCadastro.add(PnBotoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 507, 608, -1));
+
+        PnProduto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setText("Código");
+        PnProduto.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         TfCodigo.setEditable(false);
+        PnProduto.add(TfCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 80, -1));
 
         TfDescricao.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TfDescricaoKeyPressed(evt);
             }
         });
+        PnProduto.add(TfDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 31, 335, -1));
 
         jLabel5.setText("Descrição do Produto/Serviço*");
+        PnProduto.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 11, -1, -1));
 
         jLabel9.setText("Percentual de lucro");
+        PnProduto.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(441, 11, -1, -1));
 
         jLabel12.setText("Quantidade Mínima de Estoque*");
+        PnProduto.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(441, 57, -1, -1));
 
         BtCadTipoProduto.setText("Cadastrar Tipo");
         BtCadTipoProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -251,6 +263,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 BtCadTipoProdutoActionPerformed(evt);
             }
         });
+        PnProduto.add(BtCadTipoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 77, 139, -1));
 
         CbTipoProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -262,10 +275,13 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 CbTipoProdutoActionPerformed(evt);
             }
         });
+        PnProduto.add(CbTipoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 78, 256, -1));
 
         jLabel2.setText("Tipo de Produto/Serviço*");
+        PnProduto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 57, -1, -1));
 
         jLabel6.setText("Características do tipo do produto:");
+        PnProduto.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 106, -1, -1));
 
         TbCarcteristica.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -295,7 +311,10 @@ public class InterfaceProduto extends javax.swing.JDialog {
             TbCarcteristica.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        PnProduto.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 123, 256, 124));
+
         jLabel7.setText("Especificação:");
+        PnProduto.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 106, -1, -1));
 
         TbEspecificacao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -320,12 +339,15 @@ public class InterfaceProduto extends javax.swing.JDialog {
             TbEspecificacao.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        PnProduto.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 123, 316, 124));
+
         BtCadTabela2.setText("Cadastrar Característica");
         BtCadTabela2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtCadTabelaActionPerformed(evt);
             }
         });
+        PnProduto.add(BtCadTabela2, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 254, -1, -1));
 
         BtIncluirEspecific.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
         BtIncluirEspecific.setText("Incluir");
@@ -334,8 +356,10 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 BtIncluirEspecificActionPerformed(evt);
             }
         });
+        PnProduto.add(BtIncluirEspecific, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 253, 116, -1));
 
         jLabel8.setText("Produto*:");
+        PnProduto.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 284, -1, -1));
 
         TbProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -356,6 +380,8 @@ public class InterfaceProduto extends javax.swing.JDialog {
         TbProduto.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(TbProduto);
 
+        PnProduto.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 304, 578, 106));
+
         BtRemoverEspecific.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
         BtRemoverEspecific.setText("Remover");
         BtRemoverEspecific.addActionListener(new java.awt.event.ActionListener() {
@@ -363,6 +389,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 BtRemoverEspecificActionPerformed(evt);
             }
         });
+        PnProduto.add(BtRemoverEspecific, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 421, -1, -1));
 
         TfPercentLucro.setEditable(false);
         TfPercentLucro.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -370,109 +397,21 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 TfPercentLucroKeyTyped(evt);
             }
         });
+        PnProduto.add(TfPercentLucro, new org.netbeans.lib.awtextra.AbsoluteConstraints(441, 31, 92, -1));
 
         TfQtEstoqueMin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TfQtEstoqueMinKeyTyped(evt);
             }
         });
-
-        javax.swing.GroupLayout PnProdutoLayout = new javax.swing.GroupLayout(PnProduto);
-        PnProduto.setLayout(PnProdutoLayout);
-        PnProdutoLayout.setHorizontalGroup(
-            PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnProdutoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PnProdutoLayout.createSequentialGroup()
-                        .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel8)
-                            .addComponent(BtRemoverEspecific)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PnProdutoLayout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(PnProdutoLayout.createSequentialGroup()
-                                            .addComponent(BtIncluirEspecific, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(BtCadTabela2)
-                                            .addGap(11, 11, 11))
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(PnProdutoLayout.createSequentialGroup()
-                        .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PnProdutoLayout.createSequentialGroup()
-                                .addComponent(CbTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtCadTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6)
-                            .addGroup(PnProdutoLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(53, 53, 53)
-                                .addComponent(jLabel5))
-                            .addComponent(jLabel2)
-                            .addGroup(PnProdutoLayout.createSequentialGroup()
-                                .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(TfPercentLucro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(TfQtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        PnProdutoLayout.setVerticalGroup(
-            PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnProdutoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfPercentLucro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtCadTipoProduto)
-                    .addComponent(TfQtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addGap(3, 3, 3)
-                .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtCadTabela2)
-                    .addComponent(BtIncluirEspecific))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtRemoverEspecific)
-                .addContainerGap())
-        );
+        PnProduto.add(TfQtEstoqueMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(441, 78, 92, -1));
 
         TabbedPaneCadastro.addTab("Produto", PnProduto);
 
+        PnFornecedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel3.setText("Código do Fornecedor*");
+        PnFornecedor.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         TfCodFornecedor.setName("CD_FORNECEDOR"); // NOI18N
         TfCodFornecedor.addActionListener(new java.awt.event.ActionListener() {
@@ -491,6 +430,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 TfCodFornecedorKeyTyped(evt);
             }
         });
+        PnFornecedor.add(TfCodFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 33, 80, -1));
 
         BtAddFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
         BtAddFornecedor.setText("Adicionar Fornecedor");
@@ -499,6 +439,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 BtAddFornecedorActionPerformed(evt);
             }
         });
+        PnFornecedor.add(BtAddFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 68, -1, -1));
 
         TbFornecedoresProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -519,17 +460,22 @@ public class InterfaceProduto extends javax.swing.JDialog {
         TbFornecedoresProd.getTableHeader().setReorderingAllowed(false);
         jScrollPane5.setViewportView(TbFornecedoresProd);
 
+        PnFornecedor.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 102, 583, 344));
+
         BtPesqFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
         BtPesqFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtPesqFornecedorActionPerformed(evt);
             }
         });
+        PnFornecedor.add(BtPesqFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 32, -1, -1));
 
         TfFornecedor.setEditable(false);
         TfFornecedor.setName("NM_FANTASIA"); // NOI18N
+        PnFornecedor.add(TfFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 33, 297, -1));
 
         jLabel4.setText("Fornecedor");
+        PnFornecedor.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 11, -1, -1));
 
         BtCadFornecedor.setText("Cadastrar Fornecedor");
         BtCadFornecedor.addActionListener(new java.awt.event.ActionListener() {
@@ -537,6 +483,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 BtCadFornecedorActionPerformed(evt);
             }
         });
+        PnFornecedor.add(BtCadFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 32, -1, -1));
 
         BtDelFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
         BtDelFornecedor.setText("Remover Fornecedor");
@@ -545,60 +492,11 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 BtDelFornecedorActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout PnFornecedorLayout = new javax.swing.GroupLayout(PnFornecedor);
-        PnFornecedor.setLayout(PnFornecedorLayout);
-        PnFornecedorLayout.setHorizontalGroup(
-            PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnFornecedorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
-                    .addGroup(PnFornecedorLayout.createSequentialGroup()
-                        .addComponent(BtAddFornecedor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtDelFornecedor))
-                    .addGroup(PnFornecedorLayout.createSequentialGroup()
-                        .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PnFornecedorLayout.createSequentialGroup()
-                                .addComponent(TfCodFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtPesqFornecedor))
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PnFornecedorLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(PnFornecedorLayout.createSequentialGroup()
-                                .addComponent(TfFornecedor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtCadFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
-        );
-        PnFornecedorLayout.setVerticalGroup(
-            PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnFornecedorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(7, 7, 7)
-                .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfCodFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesqFornecedor)
-                    .addComponent(TfFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtCadFornecedor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PnFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtAddFornecedor)
-                    .addComponent(BtDelFornecedor))
-                .addGap(9, 9, 9)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        PnFornecedor.add(BtDelFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 68, -1, -1));
 
         TabbedPaneCadastro.addTab("Fornecedor", PnFornecedor);
+
+        PnCadastro.add(TabbedPaneCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 608, -1));
 
         LbNotificacao.setText(" ");
 
@@ -615,33 +513,14 @@ public class InterfaceProduto extends javax.swing.JDialog {
             .addComponent(LbNotificacao)
         );
 
-        javax.swing.GroupLayout PnCadastroLayout = new javax.swing.GroupLayout(PnCadastro);
-        PnCadastro.setLayout(PnCadastroLayout);
-        PnCadastroLayout.setHorizontalGroup(
-            PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnCadastroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TabbedPaneCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PnBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-        PnCadastroLayout.setVerticalGroup(
-            PnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnCadastroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(TabbedPaneCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PnBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        PnCadastro.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 551, 608, -1));
 
         TabbedPaneProduto.addTab("Cadastro", PnCadastro);
 
+        PnConsulta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel13.setText("Consulta por:");
+        PnConsulta.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         CbPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos", "Código", "Descrição", "Código do Tipo de Produto/Serviço" }));
         CbPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -649,8 +528,10 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 CbPesquisaActionPerformed(evt);
             }
         });
+        PnConsulta.add(CbPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 33, 150, -1));
 
         TfPesquisa.setEnabled(false);
+        PnConsulta.add(TfPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 33, 344, -1));
 
         BtPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
         BtPesquisar.setText("Pesquisar");
@@ -659,6 +540,7 @@ public class InterfaceProduto extends javax.swing.JDialog {
                 BtPesquisarActionPerformed(evt);
             }
         });
+        PnConsulta.add(BtPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 31, 100, -1));
 
         TbConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -680,53 +562,16 @@ public class InterfaceProduto extends javax.swing.JDialog {
         TbConsulta.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(TbConsulta);
 
+        PnConsulta.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 106, 610, 459));
+
         buttonGroup1.add(RbPesqProduto);
         RbPesqProduto.setSelected(true);
         RbPesqProduto.setText("Produto");
+        PnConsulta.add(RbPesqProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 58, -1, -1));
 
         buttonGroup1.add(RbPesqServico);
         RbPesqServico.setText("Serviço");
-
-        javax.swing.GroupLayout PnConsultaLayout = new javax.swing.GroupLayout(PnConsulta);
-        PnConsulta.setLayout(PnConsultaLayout);
-        PnConsultaLayout.setHorizontalGroup(
-            PnConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnConsultaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
-                    .addGroup(PnConsultaLayout.createSequentialGroup()
-                        .addComponent(CbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TfPesquisa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PnConsultaLayout.createSequentialGroup()
-                        .addGroup(PnConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RbPesqServico)
-                            .addComponent(jLabel13)
-                            .addComponent(RbPesqProduto))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        PnConsultaLayout.setVerticalGroup(
-            PnConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnConsultaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesquisar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RbPesqProduto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RbPesqServico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        PnConsulta.add(RbPesqServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 81, -1, -1));
 
         TabbedPaneProduto.addTab("Consulta", PnConsulta);
 

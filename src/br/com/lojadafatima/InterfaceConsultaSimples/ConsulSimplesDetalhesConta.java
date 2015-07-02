@@ -69,131 +69,65 @@ public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
         setTitle("Detalhes da Operação - Software Loja da Fátima");
         setResizable(false);
 
+        PnInformacoes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         TfSituacao.setEditable(false);
+        PnInformacoes.add(TfSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 261, 215, -1));
 
         jLabel8.setText("Situação");
+        PnInformacoes.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 241, -1, -1));
 
         jLabel9.setText("Valor Total");
+        PnInformacoes.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 241, -1, -1));
 
         TfValorTotal.setEditable(false);
+        PnInformacoes.add(TfValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 261, 138, -1));
 
         TfDescricao.setEditable(false);
+        PnInformacoes.add(TfDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 215, 667, -1));
 
         jLabel5.setText("Descrição");
+        PnInformacoes.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 195, -1, -1));
 
         TfCondicao.setEditable(false);
+        PnInformacoes.add(TfCondicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(333, 77, 344, -1));
 
         jLabel7.setText("Condição de Pagamento");
+        PnInformacoes.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(333, 57, -1, -1));
 
         TfPessoa.setEditable(false);
+        PnInformacoes.add(TfPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 169, 667, -1));
 
         jLabel3.setText("Pessoa");
+        PnInformacoes.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 149, -1, -1));
 
         TfFuncionario.setEditable(false);
+        PnInformacoes.add(TfFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 123, 667, -1));
 
         jLabel1.setText("Funcionário");
+        PnInformacoes.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 103, -1, -1));
 
         TfCodigo.setEditable(false);
+        PnInformacoes.add(TfCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 100, -1));
 
         jLabel6.setText("Código da Conta");
+        PnInformacoes.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         TfData.setEditable(false);
+        PnInformacoes.add(TfData, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 31, 100, -1));
 
         jLabel2.setText("Data");
+        PnInformacoes.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 11, -1, -1));
 
         TfDsOperacao.setEditable(false);
+        PnInformacoes.add(TfDsOperacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 77, 305, -1));
 
         jLabel4.setText("Operação");
-
-        javax.swing.GroupLayout PnInformacoesLayout = new javax.swing.GroupLayout(PnInformacoes);
-        PnInformacoes.setLayout(PnInformacoesLayout);
-        PnInformacoesLayout.setHorizontalGroup(
-            PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnInformacoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PnInformacoesLayout.createSequentialGroup()
-                        .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(TfDsOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PnInformacoesLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(0, 228, Short.MAX_VALUE))
-                            .addComponent(TfCondicao)))
-                    .addComponent(TfFuncionario)
-                    .addComponent(TfPessoa)
-                    .addComponent(TfDescricao)
-                    .addGroup(PnInformacoesLayout.createSequentialGroup()
-                        .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PnInformacoesLayout.createSequentialGroup()
-                                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6))
-                                .addGap(18, 18, 18)
-                                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addGroup(PnInformacoesLayout.createSequentialGroup()
-                                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TfSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
-                                .addGap(18, 18, 18)
-                                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        PnInformacoesLayout.setVerticalGroup(
-            PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnInformacoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PnInformacoesLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfDsOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PnInformacoesLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfCondicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TfDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        PnInformacoes.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 57, -1, -1));
 
         jTabbedPane1.addTab("Informações", PnInformacoes);
+
+        PnProdutos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TbProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -215,24 +149,11 @@ public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
         TbProdutos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TbProdutos);
 
-        javax.swing.GroupLayout PnProdutosLayout = new javax.swing.GroupLayout(PnProdutos);
-        PnProdutos.setLayout(PnProdutosLayout);
-        PnProdutosLayout.setHorizontalGroup(
-            PnProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnProdutosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        PnProdutosLayout.setVerticalGroup(
-            PnProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnProdutosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        PnProdutos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 667, 275));
 
         jTabbedPane1.addTab("Produtos", PnProdutos);
+
+        PnParcelas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TbParcelas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -254,22 +175,7 @@ public class ConsulSimplesDetalhesConta extends javax.swing.JDialog {
         TbParcelas.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(TbParcelas);
 
-        javax.swing.GroupLayout PnParcelasLayout = new javax.swing.GroupLayout(PnParcelas);
-        PnParcelas.setLayout(PnParcelasLayout);
-        PnParcelasLayout.setHorizontalGroup(
-            PnParcelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnParcelasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        PnParcelasLayout.setVerticalGroup(
-            PnParcelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnParcelasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        PnParcelas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 667, 278));
 
         jTabbedPane1.addTab("Parcelas", PnParcelas);
 

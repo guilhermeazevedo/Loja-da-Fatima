@@ -82,9 +82,13 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
         setTitle("Relatórios - Software Loja de Fátima");
         setResizable(false);
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setText("Clientes e número respectivo de compras feitas na loja.");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jLabel2.setText("Ordernar por:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 34, -1, -1));
 
         CbOrdenarClientes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Clientes que mais compram", "Clientes que menos compram" }));
         CbOrdenarClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +96,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
                 CbOrdenarClientesActionPerformed(evt);
             }
         });
+        jPanel1.add(CbOrdenarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 31, 195, -1));
 
         TbClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,37 +117,7 @@ public class InterfaceRelatorios extends javax.swing.JDialog {
         TbClientes.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TbClientes);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CbOrdenarClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(CbOrdenarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 57, 804, 390));
 
         jTabbedPane1.addTab("Clientes", jPanel1);
 

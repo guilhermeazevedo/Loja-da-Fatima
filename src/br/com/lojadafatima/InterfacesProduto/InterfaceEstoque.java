@@ -138,7 +138,10 @@ public class InterfaceEstoque extends javax.swing.JDialog {
             }
         });
 
+        PnPesqEstoque.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setText("Pesquisar por:");
+        PnPesqEstoque.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         CbPesqProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos os Produtos", "Código do Produto", "Descrição do Produto", "Produtos Abaixo da Quantidade Mínima", "Produtos Disponíveis" }));
         CbPesqProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +149,8 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 CbPesqProdutoActionPerformed(evt);
             }
         });
+        PnPesqEstoque.add(CbPesqProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 33, 240, -1));
+        PnPesqEstoque.add(TfPesqProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 33, 313, -1));
 
         BtPesqProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
         BtPesqProduto.setText("Pesquisar");
@@ -154,6 +159,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 BtPesqProdutoActionPerformed(evt);
             }
         });
+        PnPesqEstoque.add(BtPesqProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 31, -1, -1));
 
         TbProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,51 +180,29 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         TbProdutos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TbProdutos);
 
-        javax.swing.GroupLayout PnPesqEstoqueLayout = new javax.swing.GroupLayout(PnPesqEstoque);
-        PnPesqEstoque.setLayout(PnPesqEstoqueLayout);
-        PnPesqEstoqueLayout.setHorizontalGroup(
-            PnPesqEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnPesqEstoqueLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnPesqEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addGroup(PnPesqEstoqueLayout.createSequentialGroup()
-                        .addComponent(CbPesqProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfPesqProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtPesqProduto)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        PnPesqEstoqueLayout.setVerticalGroup(
-            PnPesqEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnPesqEstoqueLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnPesqEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbPesqProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfPesqProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesqProduto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        PnPesqEstoque.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 62, 767, 393));
 
         jTabbedPane1.addTab("Pesquisa de Estoque", PnPesqEstoque);
 
+        PnAjusteEstoque.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         TfQuantEstoqueSistema.setEditable(false);
+        PnAjusteEstoque.add(TfQuantEstoqueSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 432, 170, -1));
 
         jLabel2.setText("Quant. em Estoque no Sistema");
+        PnAjusteEstoque.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
 
         jLabel3.setText("Quant. em Estoque Fisicamente");
+        PnAjusteEstoque.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 410, -1, -1));
 
         TfQuantEstoqueFisico.setEditable(false);
+        PnAjusteEstoque.add(TfQuantEstoqueFisico, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 432, 180, -1));
 
         TfDsProduto.setEditable(false);
+        PnAjusteEstoque.add(TfDsProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 384, 494, -1));
 
         jLabel4.setText("Descrição do Produto");
+        PnAjusteEstoque.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 364, 767, -1));
 
         BtAjustar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
         BtAjustar.setText("Ajustar");
@@ -228,6 +212,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 BtAjustarActionPerformed(evt);
             }
         });
+        PnAjusteEstoque.add(BtAjustar, new org.netbeans.lib.awtextra.AbsoluteConstraints(393, 430, 111, -1));
 
         BtIniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
         BtIniciar.setText("Iniciar");
@@ -236,6 +221,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 BtIniciarActionPerformed(evt);
             }
         });
+        PnAjusteEstoque.add(BtIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 102, -1));
 
         TbAjuste.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -261,6 +247,8 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(TbAjuste);
 
+        PnAjusteEstoque.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 42, 767, 315));
+
         BtEncerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
         BtEncerrar.setText("Encerrar");
         BtEncerrar.setEnabled(false);
@@ -269,63 +257,11 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 BtEncerrarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout PnAjusteEstoqueLayout = new javax.swing.GroupLayout(PnAjusteEstoque);
-        PnAjusteEstoque.setLayout(PnAjusteEstoqueLayout);
-        PnAjusteEstoqueLayout.setHorizontalGroup(
-            PnAjusteEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnAjusteEstoqueLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnAjusteEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
-                    .addGroup(PnAjusteEstoqueLayout.createSequentialGroup()
-                        .addGroup(PnAjusteEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PnAjusteEstoqueLayout.createSequentialGroup()
-                                .addGroup(PnAjusteEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(TfQuantEstoqueSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(27, 27, 27)
-                                .addGroup(PnAjusteEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addGroup(PnAjusteEstoqueLayout.createSequentialGroup()
-                                        .addComponent(TfQuantEstoqueFisico, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtAjustar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(TfDsProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PnAjusteEstoqueLayout.createSequentialGroup()
-                                .addComponent(BtIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtEncerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
-                .addContainerGap())
-        );
-        PnAjusteEstoqueLayout.setVerticalGroup(
-            PnAjusteEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PnAjusteEstoqueLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PnAjusteEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtIniciar)
-                    .addComponent(BtEncerrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TfDsProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnAjusteEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PnAjusteEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfQuantEstoqueSistema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfQuantEstoqueFisico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtAjustar))
-                .addContainerGap())
-        );
+        PnAjusteEstoque.add(BtEncerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 11, 102, -1));
 
         jTabbedPane1.addTab("Ajuste de Estoque", PnAjusteEstoque);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         CbPesqProdutoHist.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todos os Produtos", "Código do Produto", "Descrição do Produto", "Produtos Abaixo da Quantidade Mínima", "Produtos Disponíveis" }));
         CbPesqProdutoHist.addActionListener(new java.awt.event.ActionListener() {
@@ -333,6 +269,8 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 CbPesqProdutoHistActionPerformed(evt);
             }
         });
+        jPanel1.add(CbPesqProdutoHist, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, 240, -1));
+        jPanel1.add(TfPesqProdutoHist, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 13, 313, -1));
 
         BtPesqProdutoHist.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
         BtPesqProdutoHist.setText("Pesquisar");
@@ -341,6 +279,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 BtPesqProdutoHistActionPerformed(evt);
             }
         });
+        jPanel1.add(BtPesqProdutoHist, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 11, -1, -1));
 
         TbProdutosHist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -366,6 +305,8 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         });
         jScrollPane3.setViewportView(TbProdutosHist);
 
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 767, 176));
+
         TfDtInicial.setEditable(false);
         TfDtInicial.setName("DT_NASC"); // NOI18N
         TfDtInicial.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -373,8 +314,10 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 TfDtInicialFocusLost(evt);
             }
         });
+        jPanel1.add(TfDtInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 226, 116, -1));
 
         jLabel6.setText("a");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 229, -1, -1));
 
         TfDtFinal.setEditable(false);
         TfDtFinal.setName("DT_NASC"); // NOI18N
@@ -383,6 +326,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 TfDtFinalFocusLost(evt);
             }
         });
+        jPanel1.add(TfDtFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 226, 116, -1));
 
         BtSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
         BtSelecionar.setText("Selecionar");
@@ -391,6 +335,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 BtSelecionarActionPerformed(evt);
             }
         });
+        jPanel1.add(BtSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 224, 110, -1));
 
         CbPeriodo.setText("Período:");
         CbPeriodo.addActionListener(new java.awt.event.ActionListener() {
@@ -398,15 +343,19 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 CbPeriodoActionPerformed(evt);
             }
         });
+        jPanel1.add(CbPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 225, -1, -1));
 
         CbEntradas.setSelected(true);
         CbEntradas.setText("Entradas");
+        jPanel1.add(CbEntradas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 251, -1, -1));
 
         CbSaidas.setSelected(true);
         CbSaidas.setText("Saídas");
+        jPanel1.add(CbSaidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 251, -1, -1));
 
         CbAjustes.setSelected(true);
         CbAjustes.setText("Ajustes");
+        jPanel1.add(CbAjustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 251, -1, -1));
 
         TbHistorico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -428,6 +377,8 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         TbHistorico.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(TbHistorico);
 
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 281, 767, 174));
+
         BtImprimirHistorico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/imprimir.png"))); // NOI18N
         BtImprimirHistorico.setText("Imprimir Histórico");
         BtImprimirHistorico.addActionListener(new java.awt.event.ActionListener() {
@@ -435,83 +386,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                 BtImprimirHistoricoActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(CbPeriodo)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(CbEntradas)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(CbSaidas)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(CbAjustes)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtImprimirHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(CbPesqProdutoHist, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TfPesqProdutoHist, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtPesqProdutoHist)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbPesqProdutoHist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfPesqProdutoHist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtPesqProdutoHist))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtSelecionar)
-                    .addComponent(jLabel6)
-                    .addComponent(CbPeriodo)
-                    .addComponent(BtImprimirHistorico))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CbEntradas)
-                    .addComponent(CbSaidas)
-                    .addComponent(CbAjustes))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(40, 40, 40)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(250, Short.MAX_VALUE)))
-        );
+        jPanel1.add(BtImprimirHistorico, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 224, 134, -1));
 
         jTabbedPane1.addTab("Histórico de Movimentação de Estoque", jPanel1);
 

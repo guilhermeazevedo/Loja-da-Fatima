@@ -40,12 +40,19 @@ public class InterfaceLogin extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         LbBemVindo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbBemVindo.setText("Bem-Vindo(a)! Digite seu Login e Senha");
+        jPanel1.add(LbBemVindo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         LbLogin.setText("Login:");
+        jPanel1.add(LbLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 49, -1, -1));
+        jPanel1.add(TfLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 46, 145, -1));
 
         LbSenha.setText("Senha:");
+        jPanel1.add(LbSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        jPanel1.add(TfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 77, 145, -1));
 
         BtEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/trocar_usuario.png"))); // NOI18N
         BtEntrar.setText("Entrar");
@@ -55,6 +62,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
                 BtEntrarActionPerformed(evt);
             }
         });
+        jPanel1.add(BtEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 132, 86, -1));
 
         BtFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/cancelar.png"))); // NOI18N
         BtFechar.setText("Fechar");
@@ -63,6 +71,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
                 BtFecharActionPerformed(evt);
             }
         });
+        jPanel1.add(BtFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 132, -1, -1));
 
         LbDica.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         LbDica.setForeground(javax.swing.UIManager.getDefaults().getColor("CheckBoxMenuItem.selectionBackground"));
@@ -73,51 +82,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
                 LbDicaMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LbBemVindo)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LbLogin)
-                            .addComponent(LbSenha))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(BtEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BtFechar))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(TfLogin)
-                                .addComponent(TfSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
-                            .addComponent(LbDica)))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LbBemVindo)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LbLogin)
-                    .addComponent(TfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LbSenha)
-                    .addComponent(TfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LbDica)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtEntrar)
-                    .addComponent(BtFechar))
-                .addContainerGap())
-        );
+        jPanel1.add(LbDica, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 103, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,7 +96,7 @@ public class InterfaceLogin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 29, Short.MAX_VALUE))
         );
 
         pack();

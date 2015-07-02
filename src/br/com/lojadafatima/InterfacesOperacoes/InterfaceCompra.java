@@ -174,15 +174,22 @@ public class InterfaceCompra extends javax.swing.JDialog {
             }
         });
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setText("Código");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         TfCodigo.setEditable(false);
+        jPanel1.add(TfCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 81, -1));
 
         jLabel2.setText("Data");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 11, -1, -1));
 
         TfData.setEditable(false);
+        jPanel1.add(TfData, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 31, 111, -1));
 
         jLabel3.setText("Cód. Funcionário");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 57, -1, -1));
 
         TfCodFuncionario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -194,6 +201,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 TfCodFuncionarioKeyReleased(evt);
             }
         });
+        jPanel1.add(TfCodFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 77, 115, -1));
 
         BtPesqFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
         BtPesqFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -201,10 +209,13 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtPesqFuncionarioActionPerformed(evt);
             }
         });
+        jPanel1.add(BtPesqFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 77, -1, -1));
 
         TfFuncionario.setEditable(false);
+        jPanel1.add(TfFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 78, 268, -1));
 
         jLabel4.setText("Funcionário");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 57, -1, -1));
 
         BtCadFuncionario.setText("Cadastrar Funcionário");
         BtCadFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -212,8 +223,10 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtCadFuncionarioActionPerformed(evt);
             }
         });
+        jPanel1.add(BtCadFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 77, 199, -1));
 
         jLabel5.setText("Cód. Fornecedor");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 108, -1, -1));
 
         TfCodFornecedor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -225,6 +238,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 TfCodFornecedorKeyReleased(evt);
             }
         });
+        jPanel1.add(TfCodFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 129, 115, -1));
 
         BtPesqFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
         BtPesqFornecedor.addActionListener(new java.awt.event.ActionListener() {
@@ -232,10 +246,13 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtPesqFornecedorActionPerformed(evt);
             }
         });
+        jPanel1.add(BtPesqFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 128, -1, -1));
 
         jLabel6.setText("Fornecedor");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 108, -1, -1));
 
         TfFornecedor.setEditable(false);
+        jPanel1.add(TfFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 129, 268, -1));
 
         BtCadFornecedor.setText("Cadastrar Fornecedor");
         BtCadFornecedor.addActionListener(new java.awt.event.ActionListener() {
@@ -243,8 +260,10 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtCadFornecedorActionPerformed(evt);
             }
         });
+        jPanel1.add(BtCadFornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 128, 199, -1));
 
         jLabel7.setText("Cód. Condicao de Pagamento");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 159, -1, -1));
 
         TfCodCondicaoPgto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -256,6 +275,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 TfCodCondicaoPgtoKeyReleased(evt);
             }
         });
+        jPanel1.add(TfCodCondicaoPgto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 115, -1));
 
         BtPesqFormaPgto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
         BtPesqFormaPgto.addActionListener(new java.awt.event.ActionListener() {
@@ -263,8 +283,10 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtPesqFormaPgtoActionPerformed(evt);
             }
         });
+        jPanel1.add(BtPesqFormaPgto, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 179, -1, -1));
 
         TfCondicaoPgto.setEditable(false);
+        jPanel1.add(TfCondicaoPgto, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 180, 268, -1));
 
         BtCadCondicaoPgto.setText("Cadastrar Condição de Pagamento");
         BtCadCondicaoPgto.addActionListener(new java.awt.event.ActionListener() {
@@ -272,6 +294,8 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtCadCondicaoPgtoActionPerformed(evt);
             }
         });
+        jPanel1.add(BtCadCondicaoPgto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 179, -1, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 215, 649, 10));
 
         BtGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/salvar.png"))); // NOI18N
         BtGravar.setText("Gravar");
@@ -318,15 +342,20 @@ public class InterfaceCompra extends javax.swing.JDialog {
             .addComponent(BtGravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jPanel1.add(PnBotoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 557, 649, -1));
+
         jLabel18.setText("Código da Nota do Fornecedor");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 11, -1, -1));
 
         TfDescNotaCompra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TfDescNotaCompraKeyTyped(evt);
             }
         });
+        jPanel1.add(TfDescNotaCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 31, 437, -1));
 
         jLabel13.setText("Condição de Pagamento");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 159, -1, -1));
 
         LbNotificacao.setText(" ");
 
@@ -343,13 +372,19 @@ public class InterfaceCompra extends javax.swing.JDialog {
             .addComponent(LbNotificacao)
         );
 
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 601, 649, -1));
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         TfCodProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfCodProdutoKeyReleased(evt);
             }
         });
+        jPanel3.add(TfCodProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 32, 116, -1));
 
         jLabel9.setText("Cód. Produto");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         BtPesqProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
         BtPesqProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -357,10 +392,13 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtPesqProdutoActionPerformed(evt);
             }
         });
+        jPanel3.add(BtPesqProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 31, -1, -1));
 
         TfProduto.setEditable(false);
+        jPanel3.add(TfProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 32, 273, -1));
 
         jLabel10.setText("Produto");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 11, -1, -1));
 
         BtCadProduto.setText("Cadastrar Produto");
         BtCadProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -368,6 +406,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtCadProdutoActionPerformed(evt);
             }
         });
+        jPanel3.add(BtCadProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 31, 167, -1));
 
         TfQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -377,8 +416,10 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 TfQuantidadeKeyTyped(evt);
             }
         });
+        jPanel3.add(TfQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 82, 91, -1));
 
         jLabel11.setText("Quantidade");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 62, -1, -1));
 
         TfValorUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -388,8 +429,10 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 TfValorUnitarioKeyTyped(evt);
             }
         });
+        jPanel3.add(TfValorUnitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 82, 92, -1));
 
         jLabel12.setText("Valor Unitário");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 62, -1, -1));
 
         TfDesconto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -399,14 +442,19 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 TfDescontoKeyTyped(evt);
             }
         });
+        jPanel3.add(TfDesconto, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 82, 96, -1));
 
         jLabel15.setText("Desconto");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 62, -1, -1));
 
         TfValorProduto.setEditable(false);
+        jPanel3.add(TfValorProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(353, 82, 96, -1));
 
         jLabel14.setText("Valor Total do Produto");
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(353, 62, -1, -1));
 
         CbPromocao.setText("Promoção");
+        jPanel3.add(CbPromocao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 104, -1, -1));
 
         BtIncluirProdutoCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
         BtIncluirProdutoCompra.setText("Incluir Produto na Compra");
@@ -415,6 +463,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtIncluirProdutoCompraActionPerformed(evt);
             }
         });
+        jPanel3.add(BtIncluirProdutoCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 129, -1, -1));
 
         BtRemoverProdutoCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
         BtRemoverProdutoCompra.setText("Remover Produto");
@@ -423,10 +472,13 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtRemoverProdutoCompraActionPerformed(evt);
             }
         });
+        jPanel3.add(BtRemoverProdutoCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 129, -1, -1));
 
         TfValorTotalCompra.setEditable(false);
+        jPanel3.add(TfValorTotalCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 134, 106, -1));
 
         jLabel16.setText("Valor Total da Compra");
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 114, -1, -1));
 
         TbCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -447,123 +499,24 @@ public class InterfaceCompra extends javax.swing.JDialog {
         TbCompra.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TbCompra);
 
-        jLabel25.setText("%");
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 624, 121));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(TfCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtPesqProduto)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TfProduto)
-                                    .addComponent(jLabel10)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(TfDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel25)))
-                                .addGap(11, 11, 11)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel14))))
-                        .addGap(7, 7, 7)
-                        .addComponent(BtCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CbPromocao)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(BtIncluirProdutoCompra)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtRemoverProdutoCompra)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TfValorTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtPesqProduto)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TfCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtCadProduto)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel14))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TfValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TfDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel25)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(CbPromocao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BtIncluirProdutoCompra)
-                            .addComponent(BtRemoverProdutoCompra)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfValorTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel25.setText("%");
+        jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 85, -1, -1));
 
         jTabbedPane1.addTab("Produtos", jPanel3);
 
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel17.setText("Cód. Serviço");
+        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         TfCodServico.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TfCodServicoKeyReleased(evt);
             }
         });
+        jPanel4.add(TfCodServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 32, 116, -1));
 
         BtPesqServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/buscar.png"))); // NOI18N
         BtPesqServico.addActionListener(new java.awt.event.ActionListener() {
@@ -571,10 +524,13 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtPesqServicoActionPerformed(evt);
             }
         });
+        jPanel4.add(BtPesqServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 31, -1, -1));
 
         TfServico.setEditable(false);
+        jPanel4.add(TfServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 32, 273, -1));
 
         jLabel19.setText("Serviço");
+        jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 11, -1, -1));
 
         BtCadServico.setText("Cadastrar Serviço");
         BtCadServico.addActionListener(new java.awt.event.ActionListener() {
@@ -582,6 +538,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtCadServicoActionPerformed(evt);
             }
         });
+        jPanel4.add(BtCadServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 31, 167, -1));
 
         TfQuantidadeServ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -591,10 +548,13 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 TfQuantidadeServKeyTyped(evt);
             }
         });
+        jPanel4.add(TfQuantidadeServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 82, 91, -1));
 
         jLabel20.setText("Quantidade");
+        jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 62, -1, -1));
 
         CbPromocaoServ.setText("Promoção");
+        jPanel4.add(CbPromocaoServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 104, -1, -1));
 
         BtIncluirServicoCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/adicionar.png"))); // NOI18N
         BtIncluirServicoCompra.setText("Incluir Serviço na Compra");
@@ -603,6 +563,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtIncluirServicoCompraActionPerformed(evt);
             }
         });
+        jPanel4.add(BtIncluirServicoCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 129, -1, -1));
 
         BtRemoverServicoCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/deletar.png"))); // NOI18N
         BtRemoverServicoCompra.setText("Remover Serviço");
@@ -611,6 +572,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 BtRemoverServicoCompraActionPerformed(evt);
             }
         });
+        jPanel4.add(BtRemoverServicoCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 129, -1, -1));
 
         TfValorUnitarioServ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -620,8 +582,10 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 TfValorUnitarioServKeyTyped(evt);
             }
         });
+        jPanel4.add(TfValorUnitarioServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 82, 92, -1));
 
         jLabel21.setText("Valor Unitário");
+        jPanel4.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 62, -1, -1));
 
         TfDescontoServ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -631,16 +595,22 @@ public class InterfaceCompra extends javax.swing.JDialog {
                 TfDescontoServKeyTyped(evt);
             }
         });
+        jPanel4.add(TfDescontoServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 82, 96, -1));
 
         jLabel22.setText("Desconto");
+        jPanel4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 62, -1, -1));
 
         TfValorProdutoServ.setEditable(false);
+        jPanel4.add(TfValorProdutoServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 82, 96, -1));
 
         jLabel23.setText("Valor Total do Serviço");
+        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 62, -1, -1));
 
         TfValorTotalCompraServ.setEditable(false);
+        jPanel4.add(TfValorTotalCompraServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 134, 106, -1));
 
         jLabel24.setText("Valor Total da Compra");
+        jPanel4.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 114, -1, -1));
 
         TbCompraServ.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -661,240 +631,14 @@ public class InterfaceCompra extends javax.swing.JDialog {
         TbCompraServ.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(TbCompraServ);
 
-        jLabel26.setText("%");
+        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 624, 121));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel17)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(TfCodServico, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BtPesqServico)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TfServico)
-                                    .addComponent(jLabel19)))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel20)
-                                    .addComponent(TfQuantidadeServ, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel21)
-                                    .addComponent(TfValorUnitarioServ, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel22)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(TfDescontoServ, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel26)))
-                                .addGap(11, 11, 11)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TfValorProdutoServ, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel23))))
-                        .addGap(7, 7, 7)
-                        .addComponent(BtCadServico, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CbPromocaoServ)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(BtIncluirServicoCompra)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtRemoverServicoCompra)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TfValorTotalCompraServ, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel19))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtPesqServico)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TfCodServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TfServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtCadServico)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel20)
-                            .addComponent(jLabel23))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TfQuantidadeServ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TfValorProdutoServ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TfDescontoServ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel26)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfValorUnitarioServ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(CbPromocaoServ)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BtIncluirServicoCompra)
-                            .addComponent(BtRemoverServicoCompra)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfValorTotalCompraServ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel26.setText("%");
+        jPanel4.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(334, 85, -1, -1));
 
         jTabbedPane1.addTab("Serviços", jPanel4);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(TfCodCondicaoPgto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                                .addComponent(TfCodFornecedor, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TfDescNotaCompra))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PnBotoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(BtPesqFornecedor)
-                                    .addComponent(BtPesqFormaPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel2))
-                                    .addComponent(TfCodFuncionario))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtPesqFuncionario)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TfCondicaoPgto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtCadCondicaoPgto))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TfFornecedor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtCadFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtCadFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6)))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(34, 34, 34)
-                                .addComponent(jLabel13))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(179, 179, 179)
-                                .addComponent(jLabel18)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfDescNotaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtPesqFuncionario, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TfCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TfFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtCadFuncionario)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtPesqFornecedor)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TfCodFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TfFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtCadFornecedor)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtPesqFormaPgto)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TfCodCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TfCondicaoPgto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtCadCondicaoPgto)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PnBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 231, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

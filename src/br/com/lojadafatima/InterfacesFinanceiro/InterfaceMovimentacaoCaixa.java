@@ -92,6 +92,8 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
         setTitle("Movimento de Caixa - Software Loja da Fátima");
         setResizable(false);
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         BtGerarRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/imprimir.png"))); // NOI18N
         BtGerarRelatorio.setText("Gerar Relatório");
         BtGerarRelatorio.setEnabled(false);
@@ -100,6 +102,7 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
                 BtGerarRelatorioActionPerformed(evt);
             }
         });
+        jPanel1.add(BtGerarRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 11, -1, -1));
 
         TbMvtoCaixa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,7 +123,10 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
         TbMvtoCaixa.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TbMvtoCaixa);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 109, 1055, 327));
+
         jLabel2.setText("Período:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 16, -1, -1));
 
         TfDtInicial.setName("DT_NASC"); // NOI18N
         TfDtInicial.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -128,6 +134,7 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
                 TfDtInicialFocusLost(evt);
             }
         });
+        jPanel1.add(TfDtInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 13, 116, -1));
 
         TfDtFinal.setName("DT_NASC"); // NOI18N
         TfDtFinal.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -135,18 +142,23 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
                 TfDtFinalFocusLost(evt);
             }
         });
+        jPanel1.add(TfDtFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 13, 116, -1));
 
         jLabel3.setText("a");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 16, -1, -1));
 
         buttonGroup1.add(RbEntSai);
         RbEntSai.setSelected(true);
         RbEntSai.setText("Entradas e Saídas");
+        jPanel1.add(RbEntSai, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, -1, -1));
 
         buttonGroup1.add(RbEntradas);
         RbEntradas.setText("Entradas");
+        jPanel1.add(RbEntradas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 61, -1, -1));
 
         buttonGroup1.add(RbSaidas);
         RbSaidas.setText("Saídas");
+        jPanel1.add(RbSaidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 84, -1, -1));
 
         BtSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sucesso2.png"))); // NOI18N
         BtSelecionar.setText("Selecionar");
@@ -155,52 +167,7 @@ public class InterfaceMovimentacaoCaixa extends javax.swing.JDialog {
                 BtSelecionarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtGerarRelatorio))
-                    .addComponent(RbEntSai)
-                    .addComponent(RbEntradas)
-                    .addComponent(RbSaidas)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1055, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(TfDtInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtSelecionar)
-                    .addComponent(BtGerarRelatorio)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RbEntSai)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RbEntradas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RbSaidas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel1.add(BtSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 11, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

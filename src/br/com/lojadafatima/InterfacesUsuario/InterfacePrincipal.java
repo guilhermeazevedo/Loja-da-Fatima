@@ -101,6 +101,8 @@ public class InterfacePrincipal extends javax.swing.JDialog {
         setTitle("Menu Principal - Software Loja da Fátima");
         setResizable(false);
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         BtVenda.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtVenda.setText("Venda");
         BtVenda.setEnabled(false);
@@ -110,6 +112,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 BtVendaActionPerformed(evt);
             }
         });
+        jPanel1.add(BtVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 22, 250, 67));
 
         LbSair.setForeground(javax.swing.UIManager.getDefaults().getColor("CheckBoxMenuItem.selectionBackground"));
         LbSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/sair.png"))); // NOI18N
@@ -120,6 +123,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 LbSairMouseClicked(evt);
             }
         });
+        jPanel1.add(LbSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(706, 0, -1, -1));
 
         BtCompra.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtCompra.setText("Compra");
@@ -130,6 +134,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 BtCompraActionPerformed(evt);
             }
         });
+        jPanel1.add(BtCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 22, 250, 67));
 
         BtContasReceber.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtContasReceber.setText("Contas à Receber");
@@ -140,6 +145,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 BtContasReceberActionPerformed(evt);
             }
         });
+        jPanel1.add(BtContasReceber, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 107, 250, 67));
 
         BtContasPagar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtContasPagar.setText("Contas à Pagar");
@@ -150,6 +156,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 BtContasPagarActionPerformed(evt);
             }
         });
+        jPanel1.add(BtContasPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 107, 250, 67));
 
         BtMvtoCaixa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtMvtoCaixa.setText("Movimentação de Caixa");
@@ -160,6 +167,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 BtMvtoCaixaActionPerformed(evt);
             }
         });
+        jPanel1.add(BtMvtoCaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 107, 250, 67));
 
         BtEstoque.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtEstoque.setText("Estoque");
@@ -170,9 +178,11 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 BtEstoqueActionPerformed(evt);
             }
         });
+        jPanel1.add(BtEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 22, 250, 67));
 
         LbNmUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/boneco.png"))); // NOI18N
         LbNmUsuario.setText("admin");
+        jPanel1.add(LbNmUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 0, 56, -1));
 
         BtRealizarOperacao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtRealizarOperacao.setText("Realizar Operação");
@@ -183,6 +193,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 BtRealizarOperacaoActionPerformed(evt);
             }
         });
+        jPanel1.add(BtRealizarOperacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 185, 250, 67));
 
         BtPagamentoFuncionarios.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtPagamentoFuncionarios.setText("Pagamento de Funcionários");
@@ -193,9 +204,11 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 BtPagamentoFuncionariosActionPerformed(evt);
             }
         });
+        jPanel1.add(BtPagamentoFuncionarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 185, 250, 67));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Situação:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         LbQtProdutosBaixos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbQtProdutosBaixos.setText("jLabel2");
@@ -206,6 +219,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 LbQtProdutosBaixosMouseClicked(evt);
             }
         });
+        jPanel1.add(LbQtProdutosBaixos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 293, -1, -1));
 
         LbContasReceberVencidas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbContasReceberVencidas.setText("jLabel3");
@@ -216,6 +230,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 LbContasReceberVencidasMouseClicked(evt);
             }
         });
+        jPanel1.add(LbContasReceberVencidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 316, -1, -1));
 
         LbContasReceberAbertas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbContasReceberAbertas.setText("jLabel4");
@@ -226,6 +241,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 LbContasReceberAbertasMouseClicked(evt);
             }
         });
+        jPanel1.add(LbContasReceberAbertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 339, -1, -1));
 
         LbContasPagarVencida.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbContasPagarVencida.setText("jLabel5");
@@ -236,6 +252,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 LbContasPagarVencidaMouseClicked(evt);
             }
         });
+        jPanel1.add(LbContasPagarVencida, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 362, -1, -1));
 
         LbContasPagarAbertas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LbContasPagarAbertas.setText("jLabel6");
@@ -246,6 +263,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 LbContasPagarAbertasMouseClicked(evt);
             }
         });
+        jPanel1.add(LbContasPagarAbertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 385, -1, -1));
 
         BtRelatorios.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BtRelatorios.setText("Relatórios");
@@ -255,85 +273,7 @@ public class InterfacePrincipal extends javax.swing.JDialog {
                 BtRelatoriosActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(LbNmUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(LbSair))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(BtContasReceber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(BtVenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(BtContasPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BtCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(BtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BtMvtoCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(BtPagamentoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(BtRelatorios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(LbQtProdutosBaixos)
-                            .addComponent(LbContasPagarVencida)
-                            .addComponent(LbContasPagarAbertas)
-                            .addComponent(LbContasReceberVencidas)
-                            .addComponent(LbContasReceberAbertas))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LbSair)
-                    .addComponent(LbNmUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BtContasReceber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtContasPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtMvtoCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtRealizarOperacao, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                    .addComponent(BtPagamentoFuncionarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtRelatorios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LbQtProdutosBaixos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LbContasReceberVencidas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LbContasReceberAbertas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LbContasPagarVencida)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LbContasPagarAbertas)
-                .addContainerGap())
-        );
+        jPanel1.add(BtRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 185, 250, 67));
 
         MnCadastros.setText("Telas/Cadastros");
 
