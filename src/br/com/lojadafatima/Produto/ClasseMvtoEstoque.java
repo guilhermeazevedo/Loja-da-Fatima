@@ -64,69 +64,84 @@ public class ClasseMvtoEstoque {
     }
     
     public ResultSet consultaestoquetodososprodutos() {
-        conn.executeSQL("SELECT \"E\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\", \"E\".\"QT_ATUAL\",\n"
-                + "       CASE WHEN \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" THEN 'ESTOQUE BAIXO'\n"
-                + "                                                       ELSE 'DISPONÍVEL' END AS \"SITUACAO\"\n"
-                + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
-                + "JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n"
-                + "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n"
-                + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"E\".\"CD_PRODUTO\" IN ((SELECT \"CD_PRODUTO\" FROM bancoloja.\"CAD_PRODUTO\"))\n"
-                + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
-                + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) AND \"P\".\"CD_TIPO_SERVICO\" IS NULL ORDER BY \"P\".\"DS_PRODUTO\"");
+        conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\", COALESCE(\"E\".\"QT_ATUAL\", 0.00),\n" +
+                        "       CASE WHEN \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" OR \"E\".\"QT_ATUAL\" IS NULL THEN 'ESTOQUE BAIXO'\n" +
+                        "                                                                         ELSE 'DISPONÍVEL' END AS \"SITUACAO\"\n" +
+                        "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n" +
+                        "LEFT JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n" +
+                        "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n" +
+                        "WHERE \"P\".\"SITUACAO\" = 'A'\n" +
+                        "AND (\"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n" +
+                        "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) AND \"P\".\"CD_TIPO_SERVICO\" IS NULL\n" +
+                        "OR ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n" +
+                        "      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) IS NULL)\n" +
+                        "ORDER BY \"P\".\"DS_PRODUTO\"");
         return conn.resultset;
     }
     
     public ResultSet consultaestoqueporcodigo() {
-        conn.executeSQL("SELECT \"E\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\", \"E\".\"QT_ATUAL\",\n"
-                + "       CASE WHEN \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" THEN 'ESTOQUE BAIXO'\n"
-                + "                                                       ELSE 'DISPONÍVEL' END AS \"SITUACAO\"\n"
-                + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
-                + "JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n"
-                + "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n"
-                + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"E\".\"CD_PRODUTO\" = " + getProduto().getCodigo() + "\n"
-                + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
-                + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) AND \"P\".\"CD_TIPO_SERVICO\" IS NULL ORDER BY \"P\".\"DS_PRODUTO\"");
+        conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\", COALESCE(\"E\".\"QT_ATUAL\", 0.00),\n" +
+                        "       CASE WHEN \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" OR \"E\".\"QT_ATUAL\" IS NULL THEN 'ESTOQUE BAIXO'\n" +
+                        "                                                                         ELSE 'DISPONÍVEL' END AS \"SITUACAO\"\n" +
+                        "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n" +
+                        "LEFT JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n" +
+                        "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n" +
+                        "WHERE \"P\".\"CD_PRODUTO\" = "+getProduto().getCodigo()+" AND \"P\".\"SITUACAO\" = 'A'\n" +
+                        "AND (\"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n" +
+                        "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) AND \"P\".\"CD_TIPO_SERVICO\" IS NULL\n" +
+                        "OR ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n" +
+                        "      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) IS NULL)\n" +
+                        "ORDER BY \"P\".\"DS_PRODUTO\"");
         return conn.resultset;
     }
     
     public ResultSet consultaestoquepordescricao() {
-        conn.executeSQL("SELECT \"E\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\", \"E\".\"QT_ATUAL\",\n"
-                + "       CASE WHEN \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" THEN 'ESTOQUE BAIXO'\n"
-                + "                                                       ELSE 'DISPONÍVEL' END AS \"SITUACAO\"\n"
-                + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
-                + "JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n"
-                + "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n"
-                + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"P\".\"DS_PRODUTO\" LIKE '%" + getProduto().getDescricao() + "%' \n"
-                + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
-                + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) AND \"P\".\"CD_TIPO_SERVICO\" IS NULL ORDER BY \"P\".\"DS_PRODUTO\"");
+        conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\", COALESCE(\"E\".\"QT_ATUAL\", 0.00),\n" +
+                        "       CASE WHEN \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" OR \"E\".\"QT_ATUAL\" IS NULL THEN 'ESTOQUE BAIXO'\n" +
+                        "                                                                         ELSE 'DISPONÍVEL' END AS \"SITUACAO\"\n" +
+                        "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n" +
+                        "LEFT JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n" +
+                        "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n" +
+                        "WHERE \"P\".\"DS_PRODUTO\" LIKE '%"+getProduto().getDescricao()+"%' AND \"P\".\"SITUACAO\" = 'A'\n" +
+                        "AND (\"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n" +
+                        "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) AND \"P\".\"CD_TIPO_SERVICO\" IS NULL\n" +
+                        "OR ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n" +
+                                                "      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) IS NULL)\n" +
+                        "ORDER BY \"P\".\"DS_PRODUTO\"");
         return conn.resultset;
     }
     
     public ResultSet consultaestoquebaixo() {
-        conn.executeSQL("SELECT \"E\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\", \"E\".\"QT_ATUAL\",\n"
-                + "       CASE WHEN \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" THEN 'ESTOQUE BAIXO'\n"
-                + "                                                       ELSE 'DISPONÍVEL' END AS \"SITUACAO\"\n"
-                + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
-                + "JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n"
-                + "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n"
-                + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"E\".\"CD_PRODUTO\" IN ((SELECT \"CD_PRODUTO\" FROM bancoloja.\"CAD_PRODUTO\"))\n"
-                + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
-                + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"))\n"
-                + "AND \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" AND \"P\".\"CD_TIPO_SERVICO\" IS NULL ORDER BY \"P\".\"DS_PRODUTO\"");
+        conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\", COALESCE(\"E\".\"QT_ATUAL\", 0.00),\n" +
+                        "       CASE WHEN \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" OR \"E\".\"QT_ATUAL\" IS NULL THEN 'ESTOQUE BAIXO'\n" +
+                        "                                                                         ELSE 'DISPONÍVEL' END AS \"SITUACAO\"\n" +
+                        "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n" +
+                        "LEFT JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n" +
+                        "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n" +
+                        "WHERE \"P\".\"SITUACAO\" = 'A'\n" +
+                        "AND (\"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n" +
+                        "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) AND \"P\".\"CD_TIPO_SERVICO\" IS NULL\n" +
+                        "OR ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n" +
+                        "      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) IS NULL)\n" +
+                        "AND \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" OR \"E\".\"QT_ATUAL\" IS NULL\n" +
+                        "ORDER BY \"P\".\"DS_PRODUTO\"");
         return conn.resultset;
     }
     
     public ResultSet consultaestoquedisponivel() {
-        conn.executeSQL("SELECT \"E\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\", \"E\".\"QT_ATUAL\",\n"
-                + "       CASE WHEN \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" THEN 'ESTOQUE BAIXO'\n"
-                + "                                                       ELSE 'DISPONÍVEL' END AS \"SITUACAO\"\n"
-                + "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n"
-                + "JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n"
-                + "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n"
-                + "WHERE \"P\".\"SITUACAO\" = 'A' AND \"E\".\"CD_PRODUTO\" IN ((SELECT \"CD_PRODUTO\" FROM bancoloja.\"CAD_PRODUTO\"))\n"
-                + "AND \"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n"
-                + "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"))\n"
-                + "AND \"E\".\"QT_ATUAL\" >= \"P\".\"QT_ESTOQUE_MIN\" AND \"P\".\"CD_TIPO_SERVICO\" IS NULL ORDER BY \"P\".\"DS_PRODUTO\"");
+        conn.executeSQL("SELECT \"P\".\"CD_PRODUTO\", \"P\".\"DS_PRODUTO\", \"P\".\"QT_ESTOQUE_MIN\", COALESCE(\"E\".\"QT_ATUAL\", 0.00),\n" +
+                        "       CASE WHEN \"E\".\"QT_ATUAL\" < \"P\".\"QT_ESTOQUE_MIN\" OR \"E\".\"QT_ATUAL\" IS NULL THEN 'ESTOQUE BAIXO'\n" +
+                        "                                                                         ELSE 'DISPONÍVEL' END AS \"SITUACAO\"\n" +
+                        "FROM bancoloja.\"CAD_PRODUTO\" \"P\"\n" +
+                        "LEFT JOIN bancoloja.\"MOV_ESTOQUE\" \"E\"\n" +
+                        "ON \"P\".\"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\"\n" +
+                        "WHERE \"P\".\"SITUACAO\" = 'A'\n" +
+                        "AND (\"E\".\"CD_MVTO\" = ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n" +
+                        "                      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) AND \"P\".\"CD_TIPO_SERVICO\" IS NULL\n" +
+                        "OR ((SELECT MAX(\"CD_MVTO\") FROM bancoloja.\"MOV_ESTOQUE\"\n" +
+                        "      WHERE \"CD_PRODUTO\" = \"E\".\"CD_PRODUTO\")) IS NULL)\n" +
+                        "AND \"E\".\"QT_ATUAL\" >= \"P\".\"QT_ESTOQUE_MIN\"\n" +
+                        "ORDER BY \"P\".\"DS_PRODUTO\"");
         return conn.resultset;
     }
     
@@ -151,7 +166,7 @@ public class ClasseMvtoEstoque {
         if(!data_ini.equals("") && !data_fim.equals("")){
             sql = sql + " AND DATE(\"DT_MVTO\") BETWEEN '"+data_ini+"' AND '"+data_fim+"' ";
         }
-        sql = sql + " ORDER BY \"DT_MVTO\"";
+        sql = sql + " ORDER BY \"DT_MVTO\" DESC";
         conn.executeSQL(sql);
         return conn.resultset;
     }

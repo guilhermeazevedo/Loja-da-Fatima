@@ -117,36 +117,51 @@ public class ClasseContasPagarReceber {
     }
 
     public ResultSet retornacontas(String tp1, String tp2, String tp3, String data_ini, String data_fim, int operacao, String tpconta){
-        String sql = "SELECT \"C\".\"CD_CONTA\" AS \"CONTA\",\n" +
-                     "      (SELECT \"DS_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
-                     "       WHERE \"CD_OPERACAO\" = \"C\".\"CD_OPERACAO\"),\n" +
-                     "      CASE WHEN \"P\".\"TP_PESSOA\" = 'F'\n" +
-                     "           THEN (SELECT \"NM_PESSOA\" FROM bancoloja.\"CAD_PESSOA_FISICA\" WHERE \"CD_PESSOA_FIS\" = \"C\".\"CD_PESSOA\")\n" +
-                     "           ELSE (SELECT \"NM_FANTASIA\" FROM bancoloja.\"CAD_PESSOA_JURIDICA\" WHERE \"CD_PESSOA_JUR\" = \"C\".\"CD_PESSOA\") END AS \"NOME\",\n" +
-                     "      (SELECT \"DS_CONDICAO_PGTO\" FROM bancoloja.\"CAD_CONDICAO_PGTO\"\n" +
-                     "       WHERE \"CD_CONDICAO_PGTO\" = \"C\".\"CD_CONDICAO_PGTO\") AS \"CONDICAO\",\n" +
-                     "     TO_CHAR(\"C\".\"DT_CONTA\", 'DD/MM/YYYY'),\n" +
-                     "      \"C\".\"VL_TOTAL\",\n" +
-                     "      CASE WHEN \"C\".\"SITUACAO\" = 'A'\n" +
-                     "           THEN 'ABERTA'\n" +
-                     "           ELSE CASE WHEN \"C\".\"SITUACAO\" = 'V'\n" +
-                     "                     THEN 'VENCIDA'\n" +
-                     "                     ELSE 'PAGA' END END AS \"SITUACAO\"\n" +
-                     "      FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n" +
-                     "      JOIN bancoloja.\"CAD_PESSOA\" \"P\"\n" +
-                     "      ON \"C\".\"CD_PESSOA\" = \"P\".\"CD_PESSOA\""+
-                     "WHERE \"C\".\"SITUACAO\" <> 'C' " + 
-                     "    AND  ((\"C\".\"SITUACAO\" = '"+tp1+"') OR (\"C\".\"SITUACAO\" = '"+tp2+"') OR (\"C\".\"SITUACAO\" = '"+tp3+"'))";
+        String sql = "SELECT \"C\".\"CD_CONTA\", \"O\".\"DS_OPERACAO\",\n" +
+                     "CASE WHEN \"C\".\"CD_PESSOA\" = 0 THEN ''\n" +
+                     "                              ELSE CASE WHEN \"P\".\"TP_PESSOA\" = 'F' THEN \"PF\".\"NM_PESSOA\"\n" +
+                     "                                                                   ELSE \"PJ\".\"NM_FANTASIA\"\n" +
+                     "                                   END\n" +
+                     "END AS \"PESSOA\",\n" +
+                     "\"CONDICAO\".\"DS_CONDICAO_PGTO\",\n" +
+                     "TO_CHAR(\"C\".\"DT_CONTA\", 'DD/MM/YYYY'),\n" +
+                     "\"C\".\"VL_TOTAL\",\n" +
+                     "CASE WHEN \"C\".\"SITUACAO\" = 'P' THEN 'PAGA'\n" +
+                     "                               ELSE CASE WHEN \"C\".\"SITUACAO\" = 'A' THEN 'ABERTA'\n" +
+                     "                                                                   ELSE 'VENCIDA'\n" +
+                     "                               END\n" +
+                     "END AS \"SITUACAO\"\n" +
+                     "FROM bancoloja.\"CONTAS_PAGAR_RECEBER\" \"C\"\n" +
+                     "JOIN bancoloja.\"CAD_OPERACOES\" \"O\" ON \"C\".\"CD_OPERACAO\" = \"O\".\"CD_OPERACAO\"\n" +
+                     "LEFT JOIN bancoloja.\"CAD_PESSOA\" \"P\" ON \"C\".\"CD_PESSOA\" = \"P\".\"CD_PESSOA\"\n" +
+                     "LEFT JOIN bancoloja.\"CAD_PESSOA_FISICA\" \"PF\" ON \"P\".\"CD_PESSOA\" = \"PF\".\"CD_PESSOA_FIS\"\n" +
+                     "LEFT JOIN bancoloja.\"CAD_PESSOA_JURIDICA\" \"PJ\" ON \"P\".\"CD_PESSOA\" = \"PJ\".\"CD_PESSOA_JUR\"\n" +
+                     "JOIN bancoloja.\"CAD_CONDICAO_PGTO\" \"CONDICAO\" ON \"CONDICAO\".\"CD_CONDICAO_PGTO\" = \"C\".\"CD_CONDICAO_PGTO\"\n" +
+                     "JOIN bancoloja.\"PARCELAS\" \"PAR\" ON \"PAR\".\"CD_CONTA\" = \"C\".\"CD_CONTA\" AND \"PAR\".\"CD_OPERACAO\" = \"C\".\"CD_OPERACAO\"\n" +
+                     "WHERE     \"C\".\"SITUACAO\" <> 'C'\n" +
+                     "      AND \"C\".\"SITUACAO\" IN ('"+tp1+"', '"+tp2+"', '"+tp3+"')\n" +
+                     "      AND \"C\".\"CD_OPERACAO\" IN (SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\" WHERE \"TP_FINANCEIRO\" = '"+tpconta+"')";
         if (!data_ini.equals("") && !data_fim.equals("")){
-            sql = sql + " AND (('"+data_ini+"' <= ANY(SELECT \"P\".\"DT_PAGAR\" FROM bancoloja.\"PARCELAS\" \"P\" WHERE \"P\".\"DT_PAGAR\" IS NOT NULL AND \"P\".\"CD_CONTA\" = \"C\".\"CD_CONTA\" AND \"P\".\"CD_OPERACAO\" = \"C\".\"CD_OPERACAO\" AND \"P\".\"DT_PAGAR\" IS NOT NULL)) AND\n" +
-                        "           ('"+data_fim+"' >= ANY(SELECT \"P\".\"DT_PAGAR\" FROM bancoloja.\"PARCELAS\" \"P\" WHERE \"P\".\"DT_PAGAR\" IS NOT NULL AND \"P\".\"CD_CONTA\" = \"C\".\"CD_CONTA\" AND \"P\".\"CD_OPERACAO\" = \"C\".\"CD_OPERACAO\" AND \"P\".\"DT_PAGAR\" IS NOT NULL))) ";
+            sql = sql + " AND \"PAR\".\"DT_PAGAR\" BETWEEN '"+data_ini+"' AND '"+data_fim+"'";
         }
         if (operacao != 0) sql = sql + " AND \"C\".\"CD_OPERACAO\" = "+ operacao;
         if (getCodigopessoa() != 0) sql = sql + " AND \"C\".\"CD_PESSOA\" = "+getCodigopessoa();
-        sql = sql + " AND \"C\".\"SITUACAO\" != 'C' AND "+
-                    " \"C\".\"CD_OPERACAO\" IN ((SELECT \"CD_OPERACAO\" FROM bancoloja.\"CAD_OPERACOES\"\n" +
-                    " WHERE \"TP_FINANCEIRO\" = '"+tpconta+"'))\n" +
-                    " ORDER BY \"CONTA\" DESC";
+        sql = sql + " GROUP BY\n" +
+                    "       \"C\".\"CD_CONTA\", \"O\".\"DS_OPERACAO\",\n" +
+                    "CASE WHEN \"C\".\"CD_PESSOA\" = 0 THEN ''\n" +
+                    "                              ELSE CASE WHEN \"P\".\"TP_PESSOA\" = 'F' THEN \"PF\".\"NM_PESSOA\"\n" +
+                    "                                                                   ELSE \"PJ\".\"NM_FANTASIA\"\n" +
+                    "                                   END\n" +
+                    "END,\n" +
+                    "\"CONDICAO\".\"DS_CONDICAO_PGTO\",\n" +
+                    "\"C\".\"DT_CONTA\",\n" +
+                    "\"C\".\"VL_TOTAL\",\n" +
+                    "CASE WHEN \"C\".\"SITUACAO\" = 'P' THEN 'PAGA'\n" +
+                    "                               ELSE CASE WHEN \"C\".\"SITUACAO\" = 'A' THEN 'ABERTA'\n" +
+                    "                                                                   ELSE 'VENCIDA'\n" +
+                    "                               END\n" +
+                    "END\n" +
+                    "ORDER BY \"C\".\"DT_CONTA\" DESC, \"C\".\"CD_CONTA\" DESC";
         conn.executeSQL(sql);
         return conn.resultset;
     }

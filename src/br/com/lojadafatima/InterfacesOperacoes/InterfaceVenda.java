@@ -1001,7 +1001,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
     }//GEN-LAST:event_TfCodProdutoKeyReleased
 
     private void BtPesqProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqProdutoActionPerformed
-        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto());
+        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto(), "P");
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -1030,6 +1030,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
         boolean inclui = true;
         TfQuantidadeFocusLost(null);
         limpar.Limpar(TbVendaServ);
+        TfValorTotalVendaServ.setValue(BigDecimal.ZERO);
         if (estoqueok) {
             if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
                 if (TfValorProduto.getValue() != BigDecimal.valueOf(0)) {
@@ -1195,7 +1196,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
                         filtro.put("CD_COMPRA_VENDA", prodcompravenda.getCompravenda().getCodigo());
                         filtro.put("CD_OPERACAO", prodcompravenda.getCompravenda().getOperacao().getCodigo());
                         filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
-                        filtro.put("DS_NOTA", "NOTA DE VENDA");
+                        filtro.put("DS_NOTA", "EXTRATO DE VENDA");
                         filtro.put("TP_PESSOA", "Cliente:");
                         ConexaoPostgre conexao = new ConexaoPostgre();
                         JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
@@ -1385,6 +1386,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
         boolean inclui = true;
         TfQuantidadeServFocusLost(null);
         limpar.Limpar(TbVenda);
+        TfValorTotalVenda.setValue(BigDecimal.ZERO);
         if (estoqueok) {
             if (!TfCodServico.getText().equals("") && !TfServico.getText().equals("")) {
                 if (TfValorServ.getValue() != BigDecimal.valueOf(0)) {
@@ -1454,7 +1456,7 @@ public class InterfaceVenda extends javax.swing.JDialog {
     }//GEN-LAST:event_TfValorUnitarioServKeyTyped
 
     private void BtPesqServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqServicoActionPerformed
-       final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto());
+       final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto(), "S");
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {

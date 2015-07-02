@@ -843,6 +843,8 @@ public class InterfaceProduto extends javax.swing.JDialog {
         TfPercentLucro.setValue(BigDecimal.valueOf(especproduto.getTipoproduto().retornapercentuallucro()));
         if (especproduto.getTipoproduto().retornatiposervico().equals("S")){
             TfQtEstoqueMin.setEnabled(false);
+        }else{
+            TfQtEstoqueMin.setEditable(true);
         }
         preenche.PreencherJtable(TbCarcteristica, especproduto.getTipoproduto().buscartabelasdotipoproduto());
     }//GEN-LAST:event_CbTipoProdutoActionPerformed

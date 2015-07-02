@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatoriohistoricomvtocaixacomdata" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5e05edaa-9d93-4e2f-a086-07fc0f5d3158">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="TP1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TP2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TP3" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CD_PRODUTO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DS_RELATORIO" class="java.lang.String"/>
+	<parameter name="DT_INICIAL" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DT_FINAL" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT "E"."CD_MVTO",
+       "E"."CD_COMPRA_VENDA",
+       "O"."DS_OPERACAO",
+       "P"."DS_PRODUTO",
+       TO_CHAR("E"."DT_MVTO", 'DD/MM/YYYY - HH24:MI:SS'),
+       "E"."QT_ANTES",
+       "E"."QT_MVTO",
+       "E"."QT_ATUAL",
+       CASE WHEN "E"."TP_MVTO" = 'S'
+            THEN 'SAÍDA'
+            ELSE CASE WHEN "E"."TP_MVTO" = 'E'
+                      THEN 'ENTRADA'
+                      ELSE 'AJUSTE'
+                      END
+            END
+FROM bancoloja."MOV_ESTOQUE" "E"
+JOIN bancoloja."CAD_OPERACOES" "O" ON "O"."CD_OPERACAO" = "E"."CD_OPERACAO"
+JOIN bancoloja."CAD_PRODUTO" "P" ON "P"."CD_PRODUTO" = "E"."CD_PRODUTO"
+WHERE "E"."CD_PRODUTO" = $P{CD_PRODUTO}
+AND ("E"."TP_MVTO" = $P{TP1} OR "E"."TP_MVTO" = $P{TP2} OR "E"."TP_MVTO" = $P{TP3})
+AND ("E"."DT_MVTO" BETWEEN $P{DT_INICIAL} AND $P{DT_FINAL}
+OR "E"."DT_MVTO" = $P{DT_INICIAL})
+ORDER BY "E"."DT_MVTO" DESC]]>
+	</queryString>
+	<field name="CD_MVTO" class="java.lang.Integer"/>
+	<field name="CD_COMPRA_VENDA" class="java.lang.Integer"/>
+	<field name="DS_OPERACAO" class="java.lang.String"/>
+	<field name="DS_PRODUTO" class="java.lang.String"/>
+	<field name="to_char" class="java.lang.String"/>
+	<field name="QT_ANTES" class="java.math.BigDecimal"/>
+	<field name="QT_MVTO" class="java.math.BigDecimal"/>
+	<field name="QT_ATUAL" class="java.math.BigDecimal"/>
+	<field name="case" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="171" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="66e42223-17ff-41c4-af72-4a3531a7f038" x="0" y="11" width="173" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Loja da Fátima]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40bcaddd-38c0-40b4-8b52-9467a502863f" x="83" y="42" width="422" height="25"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Relatório de Histórico de Movimentação de Estoque]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0536f8bc-9298-4a21-905d-fd9a208b46c9" x="8" y="115" width="124" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Código do Produto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="38d2b02c-66dc-4b90-af4c-e2c252321f49" x="8" y="135" width="124" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Descrição do Produto:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="8f27a768-de16-42f0-8fbb-13297b832dc4" x="142" y="115" width="410" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CD_PRODUTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c4c995d2-71ac-4874-bb77-025e2da70b9a" x="142" y="135" width="410" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DS_PRODUTO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="bdcf1ad9-fa4e-4345-b2f1-a0eb0adf62f8" x="8" y="77" width="544" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_RELATORIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="13" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9507e3c1-c53b-4696-be34-2766918814ad" x="0" y="0" width="53" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cód. Mvto.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3234bdc5-492f-4ec8-8154-d28eb6275c47" x="57" y="0" width="72" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro. Operação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ada37606-28ab-4213-9666-b34df3e93bb3" x="133" y="0" width="83" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Operação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cdeea3af-61b6-4429-87c7-8fbc2db1c2d9" x="250" y="0" width="57" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Mvto.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="807b55ac-7287-48f2-9d60-47eec9b2bdeb" x="310" y="0" width="58" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtde. Antes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="46ff2723-e335-4b0d-8a9b-83e43137974e" x="373" y="0" width="58" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtde. Mvto.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0508891f-5755-4189-a995-703b09a8db42" x="435" y="0" width="54" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtde. Após]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ca17423b-4307-4c04-81b4-59102a9d1eda" x="497" y="0" width="55" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Mvto.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e45e5bcc-a30c-4f34-83f1-02806ae19cb7" x="0" y="0" width="48" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{CD_MVTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d9c20c8d-4504-4dc6-a5b6-695b5c3e7ba1" x="55" y="0" width="69" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{CD_COMPRA_VENDA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="87af7e9d-e771-45e2-9c50-cbb32fa5281f" x="133" y="0" width="110" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DS_OPERACAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2ef8edcc-b009-4bcf-acf9-418d5645e844" x="250" y="1" width="216" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{to_char}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement uuid="30c3f191-4e9d-4070-a9e2-69bb303b09c6" x="310" y="14" width="58" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{QT_ANTES}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement uuid="bcc2ef11-f2c3-492c-bfeb-539d0a5f2128" x="373" y="14" width="55" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{QT_MVTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement uuid="f0e4f92d-9bc0-4634-95fb-58f37e7225b5" x="435" y="14" width="54" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{QT_ATUAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2b2de97d-11f6-459a-a415-4e42f9c26747" x="497" y="13" width="55" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{case}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement uuid="bf16a37a-29c8-48dd-88c2-bee4abb8321e" x="435" y="10" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy - HH:mm:ss">
+				<reportElement uuid="9be99eb4-539e-472a-8d0a-8364588b4e59" x="0" y="12" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="739cad12-abe5-4ef0-be3a-ba01e124e66d" x="515" y="10" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

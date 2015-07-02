@@ -61,7 +61,7 @@ public class ClasseMvtoCaixa {
     public boolean pagamentodomesrealizado(String mesano){
         conn.executeSQL("SELECT \"DS_MVTO\"\n" +
                         "FROM bancoloja.\"MOV_CAIXA\"\n" +
-                        "WHERE \"DS_MVTO\" LIKE '%"+ getParcela().getConta().getCompravenda().getFuncionario().getPessoafis().getNome() +", REFERENTE AO TRABALHO DO MES "+mesano+"'");
+                        "WHERE \"DS_MVTO\" LIKE '%"+ getParcela().getConta().getCompravenda().getFuncionario().getPessoafis().getNome() +", REFERENTE AO MÊS "+mesano+"'");
         try {
             conn.resultset.first();
             conn.resultset.getString(1);

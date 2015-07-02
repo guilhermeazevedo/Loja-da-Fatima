@@ -8,6 +8,7 @@ import br.com.lojadafatima.ClassesFerramentas.NaoPermiteAspasSimples;
 import br.com.lojadafatima.ClassesFerramentas.PermiteApenasNumeros;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
 import br.com.lojadafatima.CompraVendaOperacoes.ClasseProdutosCompraVenda;
+import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.InterfaceConsultaSimples.ConsulSimplesDetalhesOperacao;
 import br.com.lojadafatima.Produto.ClasseMvtoEstoque;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
@@ -15,10 +16,15 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.text.MaskFormatter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -41,6 +47,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         setTelasusuario(usuario);
         analisausuario();
         CbPesqProdutoActionPerformed(null);
+        setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         int[] tam = new int[5];
         tam[0] = 80;
         tam[1] = 200;
@@ -112,6 +119,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         CbAjustes = new javax.swing.JCheckBox();
         jScrollPane4 = new javax.swing.JScrollPane();
         TbHistorico = new javax.swing.JTable();
+        BtImprimirHistorico = new javax.swing.JButton();
 
         jMenuItem1.setText("Detalhes...");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +132,11 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Estoque de Produtos - Software Loja da Fátima");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Pesquisar por:");
 
@@ -415,6 +428,14 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         TbHistorico.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(TbHistorico);
 
+        BtImprimirHistorico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/imprimir.png"))); // NOI18N
+        BtImprimirHistorico.setText("Imprimir Histórico");
+        BtImprimirHistorico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtImprimirHistoricoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -444,7 +465,9 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(BtSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtImprimirHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(CbPesqProdutoHist, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -473,7 +496,8 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                     .addComponent(TfDtFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtSelecionar)
                     .addComponent(jLabel6)
-                    .addComponent(CbPeriodo))
+                    .addComponent(CbPeriodo)
+                    .addComponent(BtImprimirHistorico))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CbEntradas)
@@ -589,6 +613,8 @@ public class InterfaceEstoque extends javax.swing.JDialog {
                     BtEncerrar.setEnabled(true);
                     BtIniciar.setEnabled(false);
                     TfQuantEstoqueFisico.setEditable(true);
+                    jTabbedPane1.setEnabledAt(0, false);
+                    jTabbedPane1.setEnabledAt(2, false);
                 }
             }
         });
@@ -607,6 +633,11 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         BtEncerrar.setEnabled(false);
         BtIniciar.setEnabled(true);
         TfQuantEstoqueFisico.setEditable(false);
+        jTabbedPane1.setEnabledAt(0, true);
+        jTabbedPane1.setEnabledAt(2, true);
+        TfDsProduto.setText("");
+        TfQuantEstoqueSistema.setValue(BigDecimal.ZERO);
+        TfQuantEstoqueFisico.setValue(BigDecimal.ZERO);
         LimpaCamposTela limpa = new LimpaCamposTela();
         limpa.Limpar(TbAjuste);
         if (TbProdutos.getRowCount() > 0) {
@@ -748,6 +779,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
             }else{
                 data_ini = "";
                 data_fim = "";
+                if(CbPeriodo.isSelected()) JOptionPane.showMessageDialog(null, "Digite as datas corretamente!", "Datas incorretas", JOptionPane.INFORMATION_MESSAGE);
             }
             if(CbEntradas.isSelected()) pesq1 = "E";
             else pesq1 = "";
@@ -792,10 +824,67 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         if(TfDtInicial.isEditable()) TfDtInicial.grabFocus();
     }//GEN-LAST:event_CbPeriodoActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(BtEncerrar.isEnabled()){
+            JOptionPane.showMessageDialog(null, "Encerre o ajuste de estoque antes de fechar a janela!", "Ajuste de estoque não encerrado", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            dispose();
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void BtImprimirHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtImprimirHistoricoActionPerformed
+        if(TbHistorico.getRowCount() > 0){
+            HashMap par = new HashMap();
+            String relatorio, desc = "";
+            
+            if(CbPeriodo.isSelected()){
+                relatorio = "relatorios\\relatoriohistoricomvtocaixacomdata.jasper";
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    par.put("DT_INICIAL", format.parse(TfDtInicial.getText()));
+                    par.put("DT_FINAL", format.parse(TfDtFinal.getText()));
+                } catch (ParseException ex) {
+                
+                }
+                if(TfDtInicial.getText().equals(TfDtFinal.getText())){
+                    par.put("DS_RELATORIO", "Movimentações ocorridas no dia "+TfDtInicial.getText());
+                }else{
+                    par.put("DS_RELATORIO", "Movimentaçções ocorridas entre os dias "+TfDtInicial.getText() +" e "+TfDtFinal.getText());
+                }
+            }else{
+                relatorio = "relatorios\\relatoriohistoricomvtocaixasemdata.jasper";
+            }
+            
+            if(CbEntradas.isSelected()) par.put("TP1", "E");
+            else par.put("TP1", "");
+            
+            if(CbSaidas.isSelected()) par.put("TP2", "S");
+            else par.put("TP2", "");
+            
+            if(CbAjustes.isSelected()) par.put("TP3", "A");
+            else par.put("TP3", "");
+            par.put("CD_PRODUTO", Integer.parseInt(TbProdutosHist.getValueAt(TbProdutosHist.getSelectedRow(), 0).toString()));
+            ConexaoPostgre conexao = new ConexaoPostgre();
+            JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
+                        dialog.setSize(1000, 700);
+            dialog.setLocationRelativeTo(null);
+            try {
+                JasperPrint print = JasperFillManager.fillReport(relatorio, par, conexao.conecta());
+                            
+                JasperViewer viewer = new JasperViewer(print, true);
+                dialog.getContentPane().add(viewer.getContentPane());
+                dialog.setVisible(true);
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        }
+    }//GEN-LAST:event_BtImprimirHistoricoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtAjustar;
     private javax.swing.JButton BtEncerrar;
+    private javax.swing.JButton BtImprimirHistorico;
     private javax.swing.JButton BtIniciar;
     private javax.swing.JButton BtPesqProduto;
     private javax.swing.JButton BtPesqProdutoHist;
@@ -856,6 +945,7 @@ public class InterfaceEstoque extends javax.swing.JDialog {
         } catch (ParseException ex) {
             return false;
         }
+        if(date1.equals(date2)) return false;
         if (date1.after(date2)) {
             return false;
         }

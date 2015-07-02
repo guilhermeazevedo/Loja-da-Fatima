@@ -448,7 +448,7 @@ public class InterfaceOperacaoFinanceiro extends javax.swing.JDialog {
                         HashMap filtro = new HashMap();
                         filtro.put("CD_OPERACAO", parcelas.getConta().getOperacao().getCodigo());
                         filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
-                        filtro.put("DS_NOTA", "NOTA DE COMPRA");
+                        filtro.put("DS_NOTA", "EXTRATO DE COMPRA");
                         if(CbPessoa.getSelectedItem().toString().equals("Fornecedor")) filtro.put("TP_PESSOA", "Fornecedor:");
                         else                                                           filtro.put("TP_PESSOA", "Cliente:");
                         ConexaoPostgre conexao = new ConexaoPostgre();

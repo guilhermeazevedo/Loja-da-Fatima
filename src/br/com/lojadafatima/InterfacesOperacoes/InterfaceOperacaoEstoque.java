@@ -843,6 +843,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                         }else{
                             TfProduto.setText("");
                             TfQuantidade.setValue(BigDecimal.valueOf(0));
+                            msg.CampoNaoPreenchido(LbNotificacao, "Este produto não pode ser adquirido com este fornecedor!");
                         }
                     }else{
                         msg.CampoNaoPreenchido(LbNotificacao, "Digite o Fornecedor para que o sistema busque os produtos apenas deste Fornecedor!");
@@ -864,7 +865,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     }//GEN-LAST:event_TfCodProdutoKeyReleased
 
     private void BtPesqProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqProdutoActionPerformed
-        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto());
+        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto(), "P");
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -977,7 +978,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                 HashMap filtro = new HashMap();
                 filtro.put("CD_COMPRA_VENDA", prodcompravenda.getCompravenda().getCodigo());
                 filtro.put("CD_OPERACAO", prodcompravenda.getCompravenda().getOperacao().getCodigo());
-                filtro.put("DS_NOTA", "NOTA DE "+prodcompravenda.getCompravenda().getOperacao().getDescricao());
+                filtro.put("DS_NOTA", "EXTRATO DE "+prodcompravenda.getCompravenda().getOperacao().getDescricao());
                 if(CbPessoa.getSelectedItem().toString().equals("Fornecedor:")) filtro.put("TP_PESSOA", "Fornecedor:");
                 else                                                            filtro.put("TP_PESSOA", "Cliente:");
                 ConexaoPostgre conexao = new ConexaoPostgre();
@@ -1088,6 +1089,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
                         }else{
                             TfServico.setText("");
                             TfQuantidadeServ.setValue(BigDecimal.valueOf(0));
+                            msg.CampoNaoPreenchido(LbNotificacao, "Este serviço não pode ser adquirido com este fornecedor!");
                         }
                     } else{
                         msg.CampoNaoPreenchido(LbNotificacao, "Digite o Fornecedor para que o sistema busque os serviços apenas deste Fornecedor!");
@@ -1109,7 +1111,7 @@ public class InterfaceOperacaoEstoque extends javax.swing.JDialog {
     }//GEN-LAST:event_TfCodServicoKeyReleased
 
     private void BtPesqServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqServicoActionPerformed
-        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto());
+        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto(), "S");
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {

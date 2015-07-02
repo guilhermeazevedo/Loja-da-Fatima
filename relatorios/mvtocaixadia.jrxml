@@ -49,7 +49,7 @@ WHERE DATE("DT_MVTO") BETWEEN $P{DT_INICIAL} AND $P{DT_FINAL} AND
 				<textElement>
 					<font size="14"/>
 				</textElement>
-				<text><![CDATA[Software Loja da Fátima]]></text>
+				<text><![CDATA[Loja da Fátima]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="0d9b95dd-efc2-4a71-afa4-5f802745bbed" x="127" y="35" width="300" height="25"/>
@@ -67,9 +67,6 @@ WHERE DATE("DT_MVTO") BETWEEN $P{DT_INICIAL} AND $P{DT_FINAL} AND
 			</textField>
 		</band>
 	</title>
-	<pageHeader>
-		<band splitType="Stretch"/>
-	</pageHeader>
 	<columnHeader>
 		<band height="15" splitType="Stretch">
 			<staticText>

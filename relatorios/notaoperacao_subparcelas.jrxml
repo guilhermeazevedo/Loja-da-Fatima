@@ -13,8 +13,8 @@
 		<![CDATA[SELECT "P"."CD_PARCELA", "P"."VL_PAGAR",
 TO_CHAR("P"."DT_PAGAR", 'DD/MM/YYYY')
 FROM bancoloja."PARCELAS" "P"
-WHERE "CD_CONTA" = $P{CD_CONTA} AND "CD_OPERACAO" = $P{CD_OPERACAO}
-ORDER BY "CD_PARCELA"]]>
+WHERE "CD_CONTA" = $P{CD_CONTA} AND "CD_OPERACAO" = $P{CD_OPERACAO} AND "P"."VL_PAGAR" IS NOT NULL
+ORDER BY "P"."DT_PAGAR"]]>
 	</queryString>
 	<field name="CD_PARCELA" class="java.lang.Integer"/>
 	<field name="VL_PAGAR" class="java.math.BigDecimal"/>

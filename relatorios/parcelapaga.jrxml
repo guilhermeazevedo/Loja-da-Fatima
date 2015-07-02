@@ -46,7 +46,7 @@
 FROM bancoloja."CONTAS_PAGAR_RECEBER" "C"
 JOIN bancoloja."PARCELAS" "PAR" ON "PAR"."CD_CONTA" = "C"."CD_CONTA" AND "PAR"."CD_OPERACAO" = "C"."CD_OPERACAO"
 WHERE "C"."CD_CONTA" = $P{CD_CONTA} AND "C"."CD_OPERACAO" = $P{CD_OPERACAO} AND "PAR"."VL_PAGAR" IS NOT NULL
-ORDER BY "PAR"."CD_PARCELA"]]>
+ORDER BY "PAR"."DT_PAGAR", "PAR"."CD_PARCELA"]]>
 	</queryString>
 	<field name="CD_CONTA" class="java.lang.Integer"/>
 	<field name="OPERACAO" class="java.lang.String"/>
@@ -73,7 +73,7 @@ ORDER BY "PAR"."CD_PARCELA"]]>
 				<textElement>
 					<font size="14"/>
 				</textElement>
-				<text><![CDATA[Software Loja da Fátima]]></text>
+				<text><![CDATA[Loja da Fátima]]></text>
 			</staticText>
 			<textField>
 				<reportElement uuid="00dd9581-ff16-4888-8038-a2667fa5cba5" x="28" y="31" width="527" height="25"/>

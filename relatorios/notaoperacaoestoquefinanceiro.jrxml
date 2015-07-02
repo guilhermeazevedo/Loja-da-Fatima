@@ -53,7 +53,7 @@ WHERE "CV"."CD_COMPRA_VENDA" = $P{CD_COMPRA_VENDA} AND "CV"."CD_OPERACAO" = $P{C
 				<textElement>
 					<font size="14"/>
 				</textElement>
-				<text><![CDATA[Software Loja da Fátima]]></text>
+				<text><![CDATA[Loja da Fátima]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement uuid="0625a114-10c2-4384-bd34-b1c875e35818" x="13" y="33" width="529" height="26"/>

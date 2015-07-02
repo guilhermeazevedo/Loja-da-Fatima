@@ -1048,6 +1048,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                             TfValorUnitario.setValue(BigDecimal.valueOf(0));
                             TfQuantidade.setValue(BigDecimal.valueOf(0));
                             TfValorProduto.setText("");
+                            msg.CampoNaoPreenchido(LbNotificacao, "Este produto não pode ser adquirido por este fornecedor!");
                         }
                     }else{
                         msg.CampoNaoPreenchido(LbNotificacao, "Digite o Fornecedor para que o sistema busque apenas os produtos deste Fornecedor!");
@@ -1079,7 +1080,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     }//GEN-LAST:event_TfCodProdutoKeyReleased
 
     private void BtPesqProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqProdutoActionPerformed
-        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto());
+        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto(), "P");
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -1107,6 +1108,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private void BtIncluirProdutoTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirProdutoTabelaActionPerformed
         boolean inclui = true;
         limpar.Limpar(TbServicos);
+        TfValorTotalOperacaoServ.setValue(BigDecimal.ZERO);
         if (estoqueok) {
             if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
                 if (TfValorProduto.getValue() != BigDecimal.valueOf(0) || TfQuantidade.getValue() != BigDecimal.ZERO) {
@@ -1233,7 +1235,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                         filtro.put("CD_COMPRA_VENDA", prodcompravenda.getCompravenda().getCodigo());
                         filtro.put("CD_OPERACAO", prodcompravenda.getCompravenda().getOperacao().getCodigo());
                         filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
-                        filtro.put("DS_NOTA", "NOTA DE "+prodcompravenda.getCompravenda().getOperacao().getDescricao());
+                        filtro.put("DS_NOTA", "EXTRATO DE "+prodcompravenda.getCompravenda().getOperacao().getDescricao());
                         if(CbPessoa.getSelectedItem().toString().equals("Fornecedor")) filtro.put("TP_PESSOA", "Fornecedor:");
                         else                                                           filtro.put("TP_PESSOA", "Cliente:");
                         ConexaoPostgre conexao = new ConexaoPostgre();
@@ -1531,6 +1533,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
                             TfValorUnitarioServ.setValue(BigDecimal.valueOf(0));
                             TfQuantidadeServ.setValue(BigDecimal.valueOf(0));
                             TfValorServ.setText("");
+                            msg.CampoNaoPreenchido(LbNotificacao, "Este serviço não pode ser adquirido com este fornecedor!");
                         }
                     }else{
                         msg.CampoNaoPreenchido(LbNotificacao, "Digite o Fornecedor para que o sistema busque apenas os serviços deste Fornecedor!");
@@ -1562,7 +1565,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     }//GEN-LAST:event_TfCodServicoKeyReleased
 
     private void BtPesqServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqServicoActionPerformed
-        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto());
+        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto(), "S");
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -1638,6 +1641,7 @@ public class InterfaceOperacaoEstoqueFinanceiro extends javax.swing.JDialog {
     private void BtIncluirServTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtIncluirServTabelaActionPerformed
         boolean inclui = true;
         limpar.Limpar(TbProdutos);
+        TfValorTotalOperacao.setValue(BigDecimal.ZERO);
             if (!TfCodServico.getText().equals("") && !TfServico.getText().equals("")) {
                 if (TfValorServ.getValue() != BigDecimal.valueOf(0) || TfQuantidadeServ.getValue() != BigDecimal.ZERO) {
                     for (int i = 0; i < TbServicos.getRowCount(); i++) {

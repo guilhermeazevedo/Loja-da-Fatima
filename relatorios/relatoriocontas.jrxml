@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatoriocontas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b3dd9d81-5b66-474f-8642-3bad0242c2fd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="TP1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TP2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TP3" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TP_CONTA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DS_RELATORIO" class="java.lang.String"/>
+	<parameter name="DS_RELATORIO2" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT "C"."CD_CONTA", "O"."DS_OPERACAO",
+CASE WHEN "C"."CD_PESSOA" = 0 THEN ''
+                              ELSE CASE WHEN "P"."TP_PESSOA" = 'F' THEN "PF"."NM_PESSOA"
+                                                                   ELSE "PJ"."NM_FANTASIA"
+                                   END
+END AS "PESSOA",
+SUM(
+CASE
+WHEN "PAR"."VL_PAGO" IS NOT NULL THEN "PAR"."VL_PAGO"
+ELSE 0
+END
+) AS VALOR_PAGO,
+SUM(
+CASE
+WHEN "PAR"."IN_APLICACAO_MULTA" = 'S' THEN "PAR"."VL_PAGAR"
+ELSE 0
+END
+) AS VALOR_VENCIDO ,
+SUM(
+CASE
+WHEN "PAR"."VL_PAGO" IS NULL AND "PAR"."IN_APLICACAO_MULTA" IS NULL THEN "PAR"."VL_PAGAR"
+ELSE 0
+END
+) AS VALOR_ABERTO
+FROM bancoloja."CONTAS_PAGAR_RECEBER" "C"
+JOIN bancoloja."CAD_OPERACOES" "O" ON "C"."CD_OPERACAO" = "O"."CD_OPERACAO"
+LEFT JOIN bancoloja."CAD_PESSOA" "P" ON "C"."CD_PESSOA" = "P"."CD_PESSOA"
+LEFT JOIN bancoloja."CAD_PESSOA_FISICA" "PF" ON "P"."CD_PESSOA" = "PF"."CD_PESSOA_FIS"
+LEFT JOIN bancoloja."CAD_PESSOA_JURIDICA" "PJ" ON "P"."CD_PESSOA" = "PJ"."CD_PESSOA_JUR"
+JOIN bancoloja."CAD_CONDICAO_PGTO" "CONDICAO" ON "CONDICAO"."CD_CONDICAO_PGTO" = "C"."CD_CONDICAO_PGTO"
+JOIN bancoloja."PARCELAS" "PAR" ON "PAR"."CD_CONTA" = "C"."CD_CONTA" AND "PAR"."CD_OPERACAO" = "C"."CD_OPERACAO"
+WHERE     "C"."SITUACAO" <> 'C'
+      AND "C"."SITUACAO" IN ($P{TP1}, $P{TP2}, $P{TP3})
+      AND "C"."CD_OPERACAO" IN (SELECT "CD_OPERACAO" FROM bancoloja."CAD_OPERACOES" WHERE "TP_FINANCEIRO" = $P{TP_CONTA})
+GROUP BY
+       "C"."CD_CONTA", "O"."DS_OPERACAO",
+CASE WHEN "C"."CD_PESSOA" = 0 THEN ''
+                              ELSE CASE WHEN "P"."TP_PESSOA" = 'F' THEN "PF"."NM_PESSOA"
+                                                                   ELSE "PJ"."NM_FANTASIA"
+                                   END
+END,
+"C"."DT_CONTA"
+ORDER BY "C"."DT_CONTA" DESC, "C"."CD_CONTA" DESC]]>
+	</queryString>
+	<field name="CD_CONTA" class="java.lang.Integer"/>
+	<field name="DS_OPERACAO" class="java.lang.String"/>
+	<field name="PESSOA" class="java.lang.String"/>
+	<field name="valor_pago" class="java.math.BigDecimal"/>
+	<field name="valor_vencido" class="java.math.BigDecimal"/>
+	<field name="valor_aberto" class="java.math.BigDecimal"/>
+	<variable name="valor_pago_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_pago}]]></variableExpression>
+	</variable>
+	<variable name="valor_vencido_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_vencido}]]></variableExpression>
+	</variable>
+	<variable name="valor_aberto_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_aberto}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d5ce2020-eac4-4eb1-8e84-e2e24bf5b04e" x="1" y="6" width="217" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Loja da Fátima]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f634df84-8049-4ad1-8967-c977a2c22a53" x="38" y="35" width="504" height="24"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_RELATORIO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="156da345-5b1f-4faa-890d-04817d547d85" x="11" y="69" width="531" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DS_RELATORIO2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0ebf90f5-e0ba-452a-96b4-58a056dc2ed7" x="0" y="2" width="52" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro. Conta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="16af3d11-bdfd-4784-9dfe-b93238353f6a" x="55" y="2" width="76" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Operação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c9a2956f-8abf-4482-ac37-29287df2633f" x="135" y="2" width="106" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente/Fornecedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="088e9341-16cb-4d3c-aff5-1c4c7da3c570" x="252" y="2" width="64" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="10e78015-c103-404b-a1bd-3afb2122b808" x="336" y="2" width="79" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Vencido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="071a31a9-cf87-41d5-8ff7-df7b91be58fc" x="433" y="2" width="83" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Aberto]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement uuid="326fe2e0-0fb6-4762-b2ca-3c82f27f3bca" x="1" y="0" width="49" height="13"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{CD_CONTA}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="219b7ef5-52a8-4f3c-9e9c-a0a5756627e2" x="55" y="0" width="76" height="27"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DS_OPERACAO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="71fe2db6-bb42-4117-8447-de6a4f15bded" x="135" y="0" width="420" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PESSOA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="0dfb8971-1b9e-4202-8d60-0d2af680fe23" x="252" y="14" width="64" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{valor_pago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="44ee2d16-9f4d-4b34-b259-6411f0554b97" x="336" y="14" width="79" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{valor_vencido}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="4d95cdbd-3c4e-41ae-9f29-898f2ced967b" x="433" y="14" width="83" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{valor_aberto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="36">
+			<textField pattern="dd/MM/yyyy - HH:mm:ss">
+				<reportElement uuid="0a7ed0a6-6c63-4452-9933-b4ddc5582380" x="1" y="12" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="ee4a917a-d7ea-43dc-9ad3-d753ba3330c2" x="516" y="10" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2a916a6b-521f-408d-afa4-7ac3d23c5b53" x="436" y="10" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="32" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="3391a602-f366-49c0-9e1f-7efb9144fd81" x="252" y="15" width="64" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{valor_pago_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b4598d86-5d7c-425c-b14a-8e09efa48739" x="180" y="15" width="38" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="bccae0a9-120b-48ff-ab66-91691c94c101" x="336" y="15" width="79" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{valor_vencido_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="aef02a9b-042a-45e4-a58c-b1917943854a" x="433" y="15" width="83" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{valor_aberto_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

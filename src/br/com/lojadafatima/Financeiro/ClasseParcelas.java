@@ -105,7 +105,7 @@ public class ClasseParcelas {
                 + "\"P\".\"CD_PARCELA_REPARCELA\"\n"
                 + "FROM bancoloja.\"PARCELAS\" \"P\"\n"
                 + "WHERE \"VL_PAGAR\" IS NOT NULL AND \"CD_CONTA\" = "+getConta().getCodigo()+" AND \"CD_OPERACAO\" = "+getConta().getOperacao().getCodigo()+"\n"
-                + "ORDER BY \"DT_PAGAR\"");
+                + "ORDER BY \"DT_PAGAR\", \"P\".\"CD_PARCELA\"");
         return conn.resultset;
     }
 

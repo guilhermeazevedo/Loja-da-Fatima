@@ -3,16 +3,23 @@ package br.com.lojadafatima.InterfacesFinanceiro;
 import br.com.lojadafatima.ClassesFerramentas.ClasseDatas;
 import br.com.lojadafatima.ClassesFerramentas.GerenciadorCamposBotoes;
 import br.com.lojadafatima.ClassesFerramentas.Preenche;
+import br.com.lojadafatima.ConexaoBDpostgre.ConexaoPostgre;
 import br.com.lojadafatima.Financeiro.ClasseMvtoCaixa;
+import br.com.lojadafatima.Pessoa.ClasseFuncionario;
 import br.com.lojadafatima.Usuario.ClasseTelasUsuario;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.text.MaskFormatter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -373,12 +380,14 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                     + "Salário: " + TfSalario.getText() + "\n"
                     + "Rerente a: " + CbMes.getSelectedItem().toString() + "/" + CbAno.getSelectedItem().toString(), "Realizar pagamento?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if(mvtocaixa.retornacaixaatual() >= Float.parseFloat(TfSalario.getValue().toString())){
+                    ClasseFuncionario func = new ClasseFuncionario();
+                    func.getPessoafis().setNome(TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString());
+                    if(func.getPessoafis().epessoafisica()) mvtocaixa.getParcela().getConta().setCodigopessoa(func.getPessoafis().getPessoa().getCodigo());
                     mvtocaixa.getParcela().getConta().getCompravenda().setCodigo(0);
                     mvtocaixa.getParcela().getConta().getOperacao().setCodigo(4);
                     mvtocaixa.getParcela().getConta().setDescricao("PAGAMENTO DE SALARIO AO FUNCIONARIO " + TbFuncionariosCad.getValueAt(TbFuncionariosCad.getSelectedRow(), 1).toString() + ", REFERENTE AO MÊS " + CbMes.getSelectedItem().toString() + "/" + CbAno.getSelectedItem().toString());
                     mvtocaixa.getParcela().getConta().setDtconta(datas.retornadataatual());
                     mvtocaixa.getParcela().getConta().setTotal(Float.parseFloat(TfSalario.getValue().toString()));
-                    mvtocaixa.getParcela().getConta().setCodigopessoa(0);
                     mvtocaixa.getParcela().getConta().getCondicao().setCodigo(1);
                     mvtocaixa.getParcela().getConta().incluir();
                     mvtocaixa.getParcela().gerarparcelas();
@@ -391,6 +400,23 @@ public class InterfacePagamentoFuncionarios extends javax.swing.JDialog {
                     mvtocaixa.setVlmvto(Float.parseFloat(TfSalario.getValue().toString()));
                     mvtocaixa.setDsmvto(mvtocaixa.getParcela().getConta().getDescricao());
                     mvtocaixa.incluir();
+                    HashMap filtro = new HashMap();
+                    filtro.put("CD_OPERACAO", mvtocaixa.getParcela().getConta().getOperacao().getCodigo());
+                    filtro.put("CD_CONTA", mvtocaixa.getParcela().getConta().getCodigo());
+                    filtro.put("DS_RELATORIO", "PAGAMENTO DE FUNCIONÁRIO");
+                    ConexaoPostgre conexao = new ConexaoPostgre();
+                    JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
+                    dialog.setSize(1000, 700);
+                    dialog.setLocationRelativeTo(null);
+                    try {
+                        JasperPrint print = JasperFillManager.fillReport("relatorios\\parcelapaga.jasper", filtro, conexao.conecta());
+
+                        JasperViewer viewer = new JasperViewer(print, true);
+                        dialog.getContentPane().add(viewer.getContentPane());
+                        dialog.setVisible(true);
+                    } catch (Exception ex) {
+                        System.out.println(ex);
+                    }
                     BtPagar.setEnabled(false);
                     TfSalario.setText("");
                 } else{

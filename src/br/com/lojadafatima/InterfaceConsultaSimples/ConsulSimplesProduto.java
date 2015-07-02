@@ -20,12 +20,19 @@ public class ConsulSimplesProduto extends javax.swing.JDialog {
     private java.awt.Frame primeiratela;
     MensagensUsuario msg = new MensagensUsuario();
     
-    public ConsulSimplesProduto(java.awt.Frame telaorigem, boolean modal, ClasseProduto prod) {
+    public ConsulSimplesProduto(java.awt.Frame telaorigem, boolean modal, ClasseProduto prod, String tpbusca) {
         super(telaorigem, modal);
         setPrimeiratela(telaorigem);
         initComponents();
         getEspecproduto().setProduto(prod);
         TbConsulta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        if (tpbusca.equals("P")){
+            RbPesqProduto.setSelected(true);
+            RbPesqServico.setEnabled(false);
+        } else if (tpbusca.equals("S")){
+            RbPesqServico.setSelected(true);
+            RbPesqProduto.setEnabled(false);
+        }
     }
 
     /**

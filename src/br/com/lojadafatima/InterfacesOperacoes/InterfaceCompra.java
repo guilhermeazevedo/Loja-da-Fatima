@@ -63,7 +63,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
         TfCodFuncionario.setDocument(new PermiteApenasNumeros());
         TfCodServico.setDocument(new PermiteApenasNumeros());
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-        TfDescNotaCompra.setDocument(new NaoPermiteAspasSimples());
+        TfDescNotaCompra.setDocument(new PermiteApenasNumeros());
         valida.validacamposCancelar(jPanel1, PnBotoes);
         valida.validacamposCancelar(jPanel3, PnBotoes);
         valida.validacamposCancelar(jPanel4, PnBotoes);
@@ -1047,6 +1047,9 @@ public class InterfaceCompra extends javax.swing.JDialog {
                     TfValorUnitario.setValue(BigDecimal.valueOf(0));
                     TfQuantidade.setValue(BigDecimal.valueOf(0));
                     TfValorProduto.setValue(BigDecimal.valueOf(0));
+                    if(!prodcompravenda.getForneproduto().produtodestefornecedor() && prodcompravenda.getForneproduto().getProduto().eprodutoativo() && !prodcompravenda.getForneproduto().getProduto().eservico()){
+                        msg.CampoNaoPreenchido(LbNotificacao, "Este produto não pode ser comprado com este fornecedor");
+                    }
                 }
             } else {
                 msg.CampoNaoPreenchido(LbNotificacao, "Insira o Fornecedor da Compra para que o sistema faça a busca dos Produtos!");
@@ -1061,7 +1064,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
     }//GEN-LAST:event_TfCodProdutoKeyReleased
 
     private void BtPesqProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqProdutoActionPerformed
-        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto());
+        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto(), "P");
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -1080,6 +1083,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
         boolean inclui = true;
         limpar.Limpar(TbCompraServ);
         TfQuantidadeKeyReleased(null);
+        TfValorTotalCompraServ.setValue(BigDecimal.ZERO);
         if (!TfCodProduto.getText().equals("") && !TfProduto.getText().equals("")) {
             if (TfValorProduto.getValue() != BigDecimal.valueOf(0)) {
                 for (int i = 0; i < TbCompra.getRowCount(); i++) {
@@ -1230,7 +1234,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
                         filtro.put("CD_COMPRA_VENDA", prodcompravenda.getCompravenda().getCodigo());
                         filtro.put("CD_OPERACAO", prodcompravenda.getCompravenda().getOperacao().getCodigo());
                         filtro.put("CD_CONTA", parcelas.getConta().getCodigo());
-                        filtro.put("DS_NOTA", "NOTA DE COMPRA");
+                        filtro.put("DS_NOTA", "EXTRATO DE COMPRA");
                         filtro.put("TP_PESSOA", "Fornecedor:");
                         ConexaoPostgre conexao = new ConexaoPostgre();
                         JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
@@ -1357,6 +1361,9 @@ public class InterfaceCompra extends javax.swing.JDialog {
                     TfValorUnitarioServ.setValue(BigDecimal.valueOf(0));
                     TfQuantidadeServ.setValue(BigDecimal.valueOf(0));
                     TfValorProdutoServ.setValue(BigDecimal.valueOf(0));
+                    if(prodcompravenda.getForneproduto().getProduto().eprodutoativo() && !prodcompravenda.getForneproduto().produtodestefornecedor() && prodcompravenda.getForneproduto().getProduto().eservico()){
+                        msg.CampoNaoPreenchido(LbNotificacao, "Este serviço não pode ser adquirido com este fornecedor!");
+                    }
                 }
             } else {
                 msg.CampoNaoPreenchido(LbNotificacao, "Insira o Fornecedor da Compra para que o sistema faça a busca dos Serviços!");
@@ -1371,7 +1378,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
     }//GEN-LAST:event_TfCodServicoKeyReleased
 
     private void BtPesqServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesqServicoActionPerformed
-        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto());
+        final ConsulSimplesProduto tela = new ConsulSimplesProduto(getPrimeiratela(), true, prodcompravenda.getForneproduto().getProduto(), "S");
         tela.setVisible(true);
         tela.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -1406,6 +1413,7 @@ public class InterfaceCompra extends javax.swing.JDialog {
         boolean inclui = true;
         limpar.Limpar(TbCompra);
         TfQuantidadeServKeyReleased(null);
+        TfValorTotalCompra.setValue(BigDecimal.ZERO);
         if (!TfCodServico.getText().equals("") && !TfServico.getText().equals("")) {
             if (TfValorProdutoServ.getValue() != BigDecimal.valueOf(0)) {
                 for (int i = 0; i < TbCompraServ.getRowCount(); i++) {

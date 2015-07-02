@@ -153,6 +153,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         TfDtPgto = new JFormattedTextField(data);
         jPanel2 = new javax.swing.JPanel();
         LbNotificacao = new javax.swing.JLabel();
+        BtImprimirContas = new javax.swing.JButton();
 
         jMenuItem1.setText("Estornar parcela");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -403,6 +404,14 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
             .addComponent(LbNotificacao)
         );
 
+        BtImprimirContas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/lojadafatima/Icones/imprimir.png"))); // NOI18N
+        BtImprimirContas.setText("Imprimir Contas");
+        BtImprimirContas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtImprimirContasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -461,9 +470,9 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtImprimirContas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton1))
-                            .addComponent(CbBuscaEspecific)
-                            .addComponent(BtPesqPessoas)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -483,7 +492,12 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(CbFormaPgto, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(BtCadFormaPgto)))))))
+                                                .addComponent(BtCadFormaPgto))))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CbBuscaEspecific)
+                                    .addComponent(BtPesqPessoas))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -526,7 +540,9 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(BtImprimirContas)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -733,7 +749,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
                         if (JOptionPane.showConfirmDialog(null, "Deseja realmente estornar esta parcela?\n"
                                 + "(Fazendo isso você estará retirando do caixa o valor pago nesta parcela)", "Deseja estornar?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             parcelas.setCodigo(Integer.parseInt(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 0).toString()));
-                            parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
+                            parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 1).toString()));
                             parcelas.estornarparcela();
                             estornou = true;
                             parcelas.setVlpagar(Float.parseFloat(TbParcelas.getValueAt(TbParcelas.getSelectedRow(), 2).toString()));
@@ -838,6 +854,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         TfCodPessoa.setEnabled(CbBuscaEspecific.isSelected());
         BtPesqPessoa.setEnabled(CbBuscaEspecific.isSelected());
         BtCadPessoa.setEnabled(CbBuscaEspecific.isSelected());
+        RbClienteActionPerformed(evt);
     }//GEN-LAST:event_CbBuscaEspecificActionPerformed
 
     private void RbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RbClienteActionPerformed
@@ -960,7 +977,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         if (ChbCtaAbertas.isSelected())  tp1 = "A"; else tp1 = "";
         if (ChbCtaPagas.isSelected())    tp2 = "P"; else tp2 = "";
         if (ChbCtaVencidas.isSelected()) tp3 = "V"; else tp3 = "";
-        if (ChbPeriodo.isSelected() && datascorretas()){
+        if (ChbPeriodo.isSelected() && datascorretas(TfDtInicial.getText(), TfDtFinal.getText(), false)){
             data_ini = TfDtInicial.getText();
             data_fim = TfDtFinal.getText();
         }else{
@@ -1052,7 +1069,7 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
 
     private void TfDtPgtoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TfDtPgtoFocusLost
         if (valida.CampoTotalmentePreenchido(TfDtPgto.getText())) {
-            if (datas.validadatas(TfDtPgto.getText())) {
+            if (datas.validadatas(TfDtPgto.getText()) && datascorretas(TfDtPgto.getText(), datas.retornadataatual(), true)) {
 
             } else {
                 TfDtPgto.setValue(null);
@@ -1060,10 +1077,162 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_TfDtPgtoFocusLost
 
+    private void BtImprimirContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtImprimirContasActionPerformed
+        if (TbContas.getRowCount() > 0){
+            if (!CbBuscaEspecific.isSelected()){
+            parcelas.getConta().setCodigopessoa(0);
+        }else{
+            if (!TfCodPessoa.getText().equals("") && !TfPessoa.getText().equals("")) {
+                if (RbCliente.isSelected()){
+                    ClassePessoaFisica fisica = new ClassePessoaFisica();
+                    fisica.setNome(TfPessoa.getText());
+                    if (fisica.epessoafisica()) {
+                        parcelas.getConta().setCodigopessoa(fisica.getPessoa().getCodigo());
+                    }
+                } else{
+                    ClassePessoaJuridica juridica = new ClassePessoaJuridica();
+                    juridica.setNomefantasia(TfPessoa.getText());
+                    if (juridica.epessoajuridica()) {
+                        parcelas.getConta().setCodigopessoa(juridica.getPessoa().getCodigo());
+                    }
+                }
+            }
+        }
+            String relatorio = "relatorios\\relatoriocontas.jasper", descricao2 = "";
+            HashMap filtro = new HashMap();
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            if(!ChbPeriodo.isSelected() && !ChbOperacao.isSelected() && parcelas.getConta().getCodigopessoa() == 0){
+                relatorio = "relatorios\\relatoriocontas.jasper";
+            }
+            if(ChbPeriodo.isSelected() && !ChbOperacao.isSelected() && parcelas.getConta().getCodigopessoa() == 0){
+                relatorio = "relatorios\\relatoriocontasdata.jasper";
+                try {
+                    filtro.put("DT_INICIAL", format.parse(TfDtInicial.getText()));
+                    filtro.put("DT_FINAL", format.parse(TfDtFinal.getText()));
+                } catch (ParseException ex) {
+                }
+            }
+            if(!ChbPeriodo.isSelected() && ChbOperacao.isSelected() && parcelas.getConta().getCodigopessoa() == 0){
+                relatorio = "relatorios\\relatoriocontasoperacao.jasper";
+                parcelas.getConta().getOperacao().setDescricao(CbOperacao.getSelectedItem().toString());
+                filtro.put("CD_OPERACAO", parcelas.getConta().getOperacao().retornacodigooperacao());
+            }
+            if(!ChbPeriodo.isSelected() && !ChbOperacao.isSelected() && parcelas.getConta().getCodigopessoa() != 0){
+                relatorio = "relatorios\\relatoriocontaspessoa.jasper";
+                filtro.put("CD_PESSOA", parcelas.getConta().getCodigopessoa());
+            }
+            if(ChbPeriodo.isSelected() && ChbOperacao.isSelected() && parcelas.getConta().getCodigopessoa() == 0){
+                relatorio = "relatorios\\relatoriocontasdataoperacao.jasper";
+                parcelas.getConta().getOperacao().setDescricao(CbOperacao.getSelectedItem().toString());
+                filtro.put("CD_OPERACAO", parcelas.getConta().getOperacao().retornacodigooperacao());
+                try {
+                    filtro.put("DT_INICIAL", format.parse(TfDtInicial.getText()));
+                    filtro.put("DT_FINAL", format.parse(TfDtFinal.getText()));
+                } catch (ParseException ex) {
+                }
+            }
+            if(ChbPeriodo.isSelected() && !ChbOperacao.isSelected() && parcelas.getConta().getCodigopessoa() != 0){
+                relatorio = "relatorios\\relatoriocontasdatapessoa.jasper";
+                filtro.put("CD_PESSOA", parcelas.getConta().getCodigopessoa());
+                try {
+                    filtro.put("DT_INICIAL", format.parse(TfDtInicial.getText()));
+                    filtro.put("DT_FINAL", format.parse(TfDtFinal.getText()));
+                } catch (ParseException ex) {
+                }
+            }
+            if(!ChbPeriodo.isSelected() && ChbOperacao.isSelected() && parcelas.getConta().getCodigopessoa() != 0){
+                relatorio = "relatorios\\relatoriocontasoperacaopessoa.jasper";
+                filtro.put("CD_PESSOA", parcelas.getConta().getCodigopessoa());
+                parcelas.getConta().getOperacao().setDescricao(CbOperacao.getSelectedItem().toString());
+                filtro.put("CD_OPERACAO", parcelas.getConta().getOperacao().retornacodigooperacao());
+            }
+            if(ChbPeriodo.isSelected() && ChbOperacao.isSelected() && parcelas.getConta().getCodigopessoa() != 0){
+                relatorio = "relatorios\\relatoriocontasdatapessoaoperacao.jasper";
+                filtro.put("CD_PESSOA", parcelas.getConta().getCodigopessoa());
+                parcelas.getConta().getOperacao().setDescricao(CbOperacao.getSelectedItem().toString());
+                filtro.put("CD_OPERACAO", parcelas.getConta().getOperacao().retornacodigooperacao());
+                try {
+                    filtro.put("DT_INICIAL", format.parse(TfDtInicial.getText()));
+                    filtro.put("DT_FINAL", format.parse(TfDtFinal.getText()));
+                } catch (ParseException ex) {
+                }
+            }
+            
+            if (ChbCtaAbertas.isSelected()) {
+                filtro.put("TP1", "A");
+            } else {
+                filtro.put("TP1", "");
+            }
+            if (ChbCtaPagas.isSelected()) {
+                filtro.put("TP2", "P");
+            } else {
+                filtro.put("TP2", "");
+            }
+            if (ChbCtaVencidas.isSelected()) {
+                filtro.put("TP3", "V");
+            } else {
+                filtro.put("TP3", "");
+            }
+            
+            if(!ChbCtaAbertas.isSelected() && !ChbCtaPagas.isSelected() && ChbCtaVencidas.isSelected()){
+                descricao2 = "Contas Vencidas";
+            }
+            if(!ChbCtaAbertas.isSelected() && ChbCtaPagas.isSelected() && !ChbCtaVencidas.isSelected()){
+                descricao2 = "Contas Pagas";
+            }
+            if(ChbCtaAbertas.isSelected() && !ChbCtaPagas.isSelected() && !ChbCtaVencidas.isSelected()){
+                descricao2 = "Contas Abertas";
+            }
+            if(ChbCtaAbertas.isSelected() && ChbCtaPagas.isSelected() && !ChbCtaVencidas.isSelected()){
+                descricao2 = "Contas Abertas e Pagas";
+            }
+            if(ChbCtaAbertas.isSelected() && !ChbCtaPagas.isSelected() && ChbCtaVencidas.isSelected()){
+                descricao2 = "Contas Abertas e Vencidas";
+            }
+            if(!ChbCtaAbertas.isSelected() && ChbCtaPagas.isSelected() && ChbCtaVencidas.isSelected()){
+                descricao2 = "Contas Pagas e Vencidas";
+            }
+            if(ChbCtaAbertas.isSelected() && ChbCtaPagas.isSelected() && ChbCtaVencidas.isSelected()){
+                descricao2 = "Contas Abertas, Pagas e Vencidas";
+            }
+            
+            if(ChbPeriodo.isSelected()){
+                if(TfDtInicial.getText().equals(TfDtFinal.getText())){
+                    descricao2 += " de parcelas com vencimento dia "+TfDtInicial.getText();
+                } else{
+                    descricao2 += " de parcelas com vencimento do dia "+TfDtInicial.getText()+" ao "+TfDtFinal.getText();
+                }
+            }
+            
+            if(parcelas.getConta().getCodigopessoa() != 0){
+                descricao2 += " de "+TfPessoa.getText();
+            }
+            
+            filtro.put("DS_RELATORIO2", descricao2);
+            filtro.put("TP_CONTA", "S");
+            filtro.put("DS_RELATORIO", "Relatório das Contas à Pagar");
+            
+            ConexaoPostgre conexao = new ConexaoPostgre();
+            JDialog dialog = new JDialog(new javax.swing.JFrame(), "Visualização - Software Loja da Fátima", true);
+            dialog.setSize(1000, 700);
+            dialog.setLocationRelativeTo(null);
+            try {
+                JasperPrint print = JasperFillManager.fillReport(relatorio, filtro, conexao.conecta());
+
+                JasperViewer viewer = new JasperViewer(print, true);
+                dialog.getContentPane().add(viewer.getContentPane());
+                dialog.setVisible(true);
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        }
+    }//GEN-LAST:event_BtImprimirContasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtCadFormaPgto;
     private javax.swing.JButton BtCadPessoa;
+    private javax.swing.JButton BtImprimirContas;
     private javax.swing.JButton BtPagar;
     private javax.swing.JButton BtPesqPessoa;
     private javax.swing.JButton BtPesqPessoas;
@@ -1127,23 +1296,21 @@ public class InterfaceContasPagar extends javax.swing.JDialog {
         return false;
     }
     
-    public boolean datascorretas() {
+    public boolean datascorretas(String data1, String data2, boolean analisa) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         format.setLenient(false);
         Date date1 = null, date2 = null;
-        String data1, data2;
-        data1 = TfDtInicial.getText();
-        data2 = TfDtFinal.getText();           
         try {
             date1 = format.parse(data1);
             date2 = format.parse(data2);
         } catch (ParseException ex) {
             return false;
         }
+        if(analisa && date1.equals(date2)) return true;
         if (date1.after(date2)) {
             return false;
         }
-        
+
         return true;
     }
     
